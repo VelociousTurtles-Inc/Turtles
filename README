@@ -1,3 +1,7 @@
 TODO:
 
 fill up TODO
+
+---
+
+Czysty java.net wygląda całkiem nieźle, więcej chyba nie potrzebujemy, sama gra na 2 portach, dane przez TCP z jakimś pingowaniem przez UDP (jak nie będziemy mieli co robić, można zrobić wszystko przez UDP), wyszukiwanie serwerów lokalnych przez UDP. Jakiś oddzielny wątek, który utrzymuje połączenie i gada z GUI udostępniając znośny interfejs i jesteśmy w domu.
