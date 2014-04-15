@@ -1,14 +1,14 @@
-TODO:
+GBQB:
 
-cały projekt
-
----
-
-Czysty java.net wygląda całkiem nieźle, więcej chyba nie potrzebujemy, sama gra na 2 portach, dane przez TCP z jakimś pingowaniem przez UDP (jak nie będziemy mieli co robić, można zrobić wszystko przez UDP), wyszukiwanie serwerów lokalnych przez UDP. Jakiś oddzielny wątek, który utrzymuje połączenie i gada z GUI udostępniając znośny interfejs i jesteśmy w domu. (Larhard)
+pnłl cebwrxg
 
 ---
-Dodałem jakąś strukturę folderów. 
-Model odpowiada zasobom i danym, takim jak karty. Jest wspólny dla serwera i klienta.
-Controller jest warstwą logiki, kodu właściwego. Otrzymuje on żądania (w przypadku klienta z GUI, a w przypadku serwera sieciowo) i wykonuje stosowne operacje na klasach z modelu.
-Views odpowiada widokom. Klasy te nie powinny robić nic prócz wyświetlania GUI i przekazywania jego żądań do kontrollera.
-Katalog Server zawiera tylko kontrolery, ponieważ nie istnieje warstwa graficzna na serwerze. (MaciekW)
+
+Pmlfgl wnin.arg jltyąqn pnłxvrz avrźyr, jvęprw pulon avr cbgemrohwrzl, fnzn ten an 2 cbegnpu, qnar cemrm GPC m wnxvzś cvatbjnavrz cemrm HQC (wnx avr oęqmvrzl zvryv pb ebovć, zbżan mebovć jfmlfgxb cemrm HQC), jlfmhxvjnavr frejreój ybxnyalpu cemrm HQC. Wnxvś bqqmvryal jągrx, xgóel hgemlzhwr cbłąpmravr v tnqn m THV hqbfgęcavnwąp mabśal vagresrwf v wrfgrśzl j qbzh. (Yneuneq)
+
+---
+Qbqnłrz wnxąś fgehxgheę sbyqreój. 
+Zbqry bqcbjvnqn mnfbobz v qnalz, gnxvz wnx xnegl. Wrfg jfcóyal qyn frejren v xyvragn.
+Pbagebyyre wrfg jnefgją ybtvxv, xbqh jłnśpvjrtb. Bgemlzhwr ba żąqnavn (j cemlcnqxh xyvragn m THV, n j cemlcnqxh frejren fvrpvbjb) v jlxbahwr fgbfbjar bcrenpwr an xynfnpu m zbqryh.
+Ivrjf bqcbjvnqn jvqbxbz. Xynfl gr avr cbjvaal ebovć avp ceópm jlśjvrgynavn THV v cemrxnmljnavn wrtb żąqnń qb xbagebyyren.
+Xngnybt Freire mnjvren glyxb xbagebyrel, cbavrjnż avr vfgavrwr jnefgjn tensvpman an frejremr. (ZnpvrxJ)
