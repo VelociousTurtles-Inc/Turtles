@@ -23,3 +23,7 @@ Dane do vps'a:
     login: turtles
     hasło (kodowane ulubionym szyfrem Śliwy): GhEgyrfRR
 w razie chcęci instalacji czegokolwiek, prawo ma tylko root (Larhard)
+
+
+--- 
+Możecie mieć problem z konfiguracją uruchamiania tego. Mogę wrzucać łącznie z plikami projektowymi, ale na razie wstawiłem do wglądu jako branch.
