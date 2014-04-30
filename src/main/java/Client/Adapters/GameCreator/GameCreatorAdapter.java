@@ -2,7 +2,7 @@ package Client.Adapters.GameCreator;
 
 import Models.GameSelect.GameData;
 
-public interface GameCreator {
+public interface GameCreatorAdapter {
     public void setTitle(String title);
     public void setMaxPlayers(int max_players);
 

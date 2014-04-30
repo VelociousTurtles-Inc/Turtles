@@ -1,5 +1,7 @@
 package Models.Game;
 
+import Models.Cards.GameCard;
+
 /**
  * Model Gry
  */

@@ -1,7 +1,7 @@
 package Client.Adapters.Game;
 
+import Models.Cards.GameCard;
 import Models.Game.GameBoard;
-import Models.Game.GameCard;
 import Models.Game.TurtlesList;
 
 public interface GameAdapter {
@@ -13,6 +13,11 @@ public interface GameAdapter {
      * @return old_hash != new_hash ? TurtlesList : null
      */
     public TurtlesList getTurtlesList(int old_hash);
-    public void playCard(GameCard card);
+
+    /**
+     * @param card karta do zagrania
+     * @return czy się powiodło
+     */
+    public boolean playCard(GameCard card); // do ustalenia
     public void surrender();
 }
