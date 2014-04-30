@@ -23,3 +23,29 @@ Dane do vps'a:
     login: turtles
     hasło (kodowane ulubionym szyfrem Śliwy): GhEgyrfRR
 w razie chcęci instalacji czegokolwiek, prawo ma tylko root (Larhard)
+
+---
+Dodałem interfejsy, jak ja to widzę.
+
+Idea:
+    [ Model ] - [ Adapter ] - [ View ]
+
+    Adapter:
+        łączy View z Modelem, sygnalizuje zmiany do View'a
+
+    Model:
+        przechowuje dane o grze, podstawowe struktury, prowadzi całą grę
+
+    View:
+        odpytuje o tylko to, co jest mu potrzebne Model, sygnalizuje chęć
+        zmiany stanu gry
+        rzeczy, typu tekstury itp. wrzućmy gdzieś indziej, NIE na gita
+        (tak tylko przypominam), ale najpierw proponuję popracować nad
+        uproszczoną reprezentacją gry
+
+    Serwer (żeby nie było, że zapomniałem) extends Adapter:
+        szczególny adapter obsługujący połączenie sieciowe
+
+Tyle powinno usystematyzować pracę na początek i pozwolić na pracę offline
+Teraz trzeba by to pouzupełniać
+// Larhard

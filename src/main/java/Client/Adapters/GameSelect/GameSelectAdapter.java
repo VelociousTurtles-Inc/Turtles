@@ -6,5 +6,9 @@ import java.util.List;
 
 public interface GameSelectAdapter {
     public List<? extends GameData> getGames();
-    public void chooseGame(int game_id);
+
+    /**
+     * @return czy się powiodło
+     */
+    public boolean chooseGame(int game_id);
 }
