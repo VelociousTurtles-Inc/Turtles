@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewController implements VCInterface {
+public class GameViewController implements GVCInterface {
 
     public class Point {
         public Point(int x, int y) {
@@ -19,6 +19,22 @@ public class ViewController implements VCInterface {
         }
         int x;
         int y;
+    }
+
+    List<ImageView> turtles = new ArrayList<ImageView>();
+
+    @FXML private ImageView firstTurtle;
+    @FXML private ImageView secondTurtle;
+    @FXML private ImageView thirdTurtle;
+    @FXML private ImageView fourthTurtle;
+    @FXML private ImageView fifthTurtle;
+
+    {
+        turtles.add(firstTurtle);
+        turtles.add(secondTurtle);
+        turtles.add(thirdTurtle);
+        turtles.add(fourthTurtle);
+        turtles.add(fifthTurtle);
     }
 
     private int size;
@@ -40,7 +56,7 @@ public class ViewController implements VCInterface {
     public void updateBoard(List<List<Integer>> updateForBoard) {
         for(int i = 0; i<=size; i++) {
             if(updateForBoard.get(i) != null && updateForBoard.get(i).size() != 0) {
-                //tu następuje narysowanie epickiego stosiku żółwików
+                double diff = 5*
             }
         }
     }
@@ -48,8 +64,6 @@ public class ViewController implements VCInterface {
     public void updateCard(int numberOfCard, int typeOfCard) {
         // tu następuje zamiana wybranej karty na inną
     }
-
-    @FXML private ImageView firstTurtle;
 
     @FXML protected void showIt(ActionEvent event) {
         Stage wind1 = new Stage();
