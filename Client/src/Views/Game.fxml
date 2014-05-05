@@ -26,15 +26,36 @@
         <Image url="@Heroes/plytak.png" />
       </image>
     </ImageView>
-    <ImageView fx:id="firstTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="74.0" layoutY="229.0" pickOnBounds="true" preserveRatio="false">
-      <image>
-        <Image url="@Turtles/turtle1.jpg" />
-      </image>
-    </ImageView>
+
     <Button fx:id="fifthCard" layoutX="871.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseFifth" prefHeight="70.0" prefWidth="76.0" text="5" />
     <Button fx:id="fourthCard" layoutX="787.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseFourth" prefHeight="70.0" prefWidth="76.0" text="4" />
     <Button fx:id="thirdCard" layoutX="702.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseThird" prefHeight="70.0" prefWidth="76.0" text="3" />
     <Button fx:id="secondCard" layoutX="617.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseSecond" prefHeight="70.0" prefWidth="76.0" text="2" />
     <Button fx:id="firstCard" layoutX="531.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseFirst" prefHeight="70.0" prefWidth="76.0" text="1" />
+      <ImageView fx:id="firstTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
+          <image>
+              <Image url="@Turtles/turtle1.jpg" />
+          </image>
+    </ImageView>
+    <ImageView fx:id="secondTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
+      <image>
+        <Image url="@Turtles/turtle1.jpg" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="thirdTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
+      <image>
+        <Image url="@Turtles/turtle1.jpg" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="fourthTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
+      <image>
+        <Image url="@Turtles/turtle1.jpg" />
+      </image>
+    </ImageView>
+  <ImageView fx:id="fifthTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
+    <image>
+      <Image url="@Turtles/turtle1.jpg" />
+    </image>
+  </ImageView>
   </children>
 </AnchorPane>
