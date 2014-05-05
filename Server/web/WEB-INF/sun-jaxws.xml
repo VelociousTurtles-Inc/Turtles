@@ -3,11 +3,7 @@
 <endpoints xmlns='http://java.sun.com/xml/ns/jax-ws/ri/runtime' version='2.0'>
 
     <endpoint
-            name='ExampleService'
-            implementation='Controller.ExampleService'
-            url-pattern='/services/ExampleService'/>
-    <endpoint
             name='GameService'
-            implementation='Controller.GameService'
+            implementation='Services.GameService'
             url-pattern='/services/GameService'/>
 </endpoints>

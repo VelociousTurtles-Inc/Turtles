@@ -26,4 +26,4 @@ w razie chcęci instalacji czegokolwiek, prawo ma tylko root (Larhard)
 
 
 --- 
-Możecie mieć problem z konfiguracją uruchamiania tego. Mogę wrzucać łącznie z plikami projektowymi, ale na razie wstawiłem do wglądu jako branch.
+Jak na razie Service jest tworzony bezpośrednio, żeby było jak i z czym pracować po stronie klienta.
