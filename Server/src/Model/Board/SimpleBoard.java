@@ -5,7 +5,7 @@ package Model.Board;
  */
 public class SimpleBoard extends Board{
 
-    SimpleBoard()
+    public SimpleBoard()
     {
         BoardGraph.Field F = graph.start;
         for (int i = 0; i < 10; i++)
