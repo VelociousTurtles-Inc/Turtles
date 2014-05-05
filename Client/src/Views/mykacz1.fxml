@@ -16,19 +16,19 @@
         <InnerShadow />
       </effect>
       <image>
-        <Image url="@Img/Turtles/www.png" preserveRatio="true" smooth="true" />
+        <Image url="@Boards/www.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
     <Button layoutX="825.0" layoutY="659.0" mnemonicParsing="false" onAction="#showIt" prefHeight="29.0" prefWidth="122.0" text="Use card" />
     <Button fx:id="myButOne" layoutX="28.0" layoutY="659.0" mnemonicParsing="false" onAction="#surrIt" prefHeight="29.0" prefWidth="122.0" text="Surrender" />
     <ImageView fitHeight="83.75" fitWidth="83.0" layoutX="28.0" layoutY="548.0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@Img/Turtles/plytak.png" />
+        <Image url="@Heroes/plytak.png" />
       </image>
     </ImageView>
     <ImageView fx:id="firstTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="74.0" layoutY="229.0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@Img/Turtles/turtle1.jpg" />
+        <Image url="@Turtles/turtle1.jpg" />
       </image>
     </ImageView>
     <Button fx:id="fifthCard" layoutX="871.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseFifth" prefHeight="70.0" prefWidth="76.0" text="5" />

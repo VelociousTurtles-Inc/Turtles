@@ -16,7 +16,11 @@ public class Main extends Application {
     static ImageView t1;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("mykacz1.fxml"));
+        FXMLLoader myLoader = new FXMLLoader();
+        Parent root = myLoader.load(getClass().getResource("mykacz1.fxml"));
+
+        ViewController myController = myLoader.getController();
+
         Scene sc1 = new Scene(root);
 
         stage.setScene(sc1);

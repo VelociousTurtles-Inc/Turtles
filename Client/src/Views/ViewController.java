@@ -7,10 +7,47 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ViewController {
+import java.util.ArrayList;
+import java.util.List;
 
+public class ViewController implements VCInterface {
+
+    public class Point {
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+        int x;
+        int y;
+    }
+
+    private int size;
+    private List<Point> myBoard = new ArrayList<Point>();
     private int chosenCard = 1;
+    private boolean initialized = false;
 
+    ControllerInterface myController;
+
+    public void init(int numberOfBoard, ControllerInterface myController) {
+        if(!initialized) {
+
+            this.myController = myController;
+
+            //tu będzie następować wczytanie rysunku, współrzędnych poszczególnych pól itd.
+        }
+    }
+
+    public void updateBoard(List<List<Integer>> updateForBoard) {
+        for(int i = 0; i<=size; i++) {
+            if(updateForBoard.get(i) != null && updateForBoard.get(i).size() != 0) {
+                //tu następuje narysowanie epickiego stosiku żółwików
+            }
+        }
+    }
+
+    public void updateCard(int numberOfCard, int typeOfCard) {
+        // tu następuje zamiana wybranej karty na inną
+    }
 
     @FXML private ImageView firstTurtle;
 
