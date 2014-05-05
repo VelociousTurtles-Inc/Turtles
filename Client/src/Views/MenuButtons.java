@@ -1,6 +1,8 @@
 package Views;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,13 +18,32 @@ import java.io.IOException;
 public class MenuButtons {
     @FXML private void startGame(ActionEvent event) throws IOException {
         Stage GameStage = new Stage();
+
         FXMLLoader myLoader = new FXMLLoader();
-        Parent game = myLoader.load(getClass().getResource("Game.fxml"));
+        myLoader.setLocation(getClass().getResource("Game.fxml"));
+        Parent game = (Parent) myLoader.load((getClass().getResource("Game.fxml")).openStream());
+
+
+
 
         GameStage.setScene(new Scene(game));
         GameStage.setResizable(false);
 
         GameStage.show();
+        final GameViewController myOwnGameController = myLoader.getController();
+
+
+            Platform.runLater(new Runnable() {
+                final GameViewController myCont = myOwnGameController;
+                @Override
+                public void run() {
+                   if(Platform.isFxApplicationThread()) myCont.setOnStartPositions();
+                    else System.out.println("Nie ten wątek :(");
+                }
+            }
+            );
+
+
     }
     @FXML private void exit(ActionEvent event) {
         System.exit(0);
