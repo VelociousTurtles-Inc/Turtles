@@ -19,8 +19,8 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
         return new Iterator<Field>() {
             Queue<Field> q;
             {
-                q = new LinkedList<>();
-                Queue<Field> tmp = new LinkedList<>();
+                q = new LinkedList<Field>();
+                Queue<Field> tmp = new LinkedList<Field>();
                 {
                     Field ref = start;
                     q.add(start);
