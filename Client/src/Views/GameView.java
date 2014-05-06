@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameViewController implements GVCInterface {
+public class GameView implements GVCInterface {
 
     public class Point {
         public Point(int x, int y) {

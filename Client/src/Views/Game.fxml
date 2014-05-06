@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?scenebuilder-background-color 0x606060ff?>
 
-<AnchorPane id="AnchorPane" depthTest="INHERIT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="false" pickOnBounds="true" prefHeight="716.0" prefWidth="976.0000999999975" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.GameViewController">
+<AnchorPane id="AnchorPane" depthTest="INHERIT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="false" pickOnBounds="true" prefHeight="716.0" prefWidth="976.0000999999975" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.GameView">
   <children>
     <ImageView id="parkietk1.jpg" cache="true" cacheHint="DEFAULT" disable="false" fitHeight="501.0" fitWidth="933.0" focusTraversable="false" layoutX="14.0" layoutY="14.0" mouseTransparent="false" preserveRatio="false">
       <effect>
