@@ -1,4 +1,5 @@
 package Views;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -58,6 +59,7 @@ public class GameViewController implements GVCInterface {
         myBoard.add(new Point(610, 150));
         myBoard.add(new Point(720, 200));
         myBoard.add(new Point(840, 220));
+        size = myBoard.size();
 
     }
 
@@ -65,26 +67,27 @@ public class GameViewController implements GVCInterface {
     private int chosenCard = 1;
     private boolean initialized = false;
 
-    List<ImageView> turtles = new ArrayList<ImageView>();
-    {
+@FXML    List<ImageView> turtles = new ArrayList<ImageView>();
+
+    @FXML public void setOnStartPositions() {
+        turtles.add(null);
+
         turtles.add(firstTurtle);
         turtles.add(secondTurtle);
         turtles.add(thirdTurtle);
         turtles.add(fourthTurtle);
         turtles.add(fifthTurtle);
-    }
 
-    @FXML public void setOnStartPositions() {
-            firstTurtle.setX(startPositions.get(1).x);
-            firstTurtle.setY(startPositions.get(1).y);
-            secondTurtle.setX(startPositions.get(2).x);
-            secondTurtle.setY(startPositions.get(2).y);
-            thirdTurtle.setX(startPositions.get(3).x);
-            thirdTurtle.setY(startPositions.get(3).y);
-            fourthTurtle.setX(startPositions.get(4).x);
-            fourthTurtle.setY(startPositions.get(4).y);
-            fifthTurtle.setX(startPositions.get(5).x);
-            fifthTurtle.setY(startPositions.get(5).y);
+        firstTurtle.setX(startPositions.get(1).x);
+        firstTurtle.setY(startPositions.get(1).y);
+        secondTurtle.setX(startPositions.get(2).x);
+        secondTurtle.setY(startPositions.get(2).y);
+        thirdTurtle.setX(startPositions.get(3).x);
+        thirdTurtle.setY(startPositions.get(3).y);
+        fourthTurtle.setX(startPositions.get(4).x);
+        fourthTurtle.setY(startPositions.get(4).y);
+        fifthTurtle.setX(startPositions.get(5).x);
+        fifthTurtle.setY(startPositions.get(5).y);
     }
 
 
@@ -101,11 +104,18 @@ public class GameViewController implements GVCInterface {
     public void updateBoard(List<List<Integer>> updateForBoard) {
         for(int i = 0; i<size; i++) {
             if(updateForBoard.get(i) != null && updateForBoard.get(i).size() != 0) {
+                if(i == 0) {
+                    for(int j = 0; j<updateForBoard.get(i).size(); j++) {
+                        turtles.get(updateForBoard.get(i).get(j)).setY(startPositions.get(updateForBoard.get(i).get(j)).y);
+                        turtles.get(updateForBoard.get(i).get(j)).setX(startPositions.get(updateForBoard.get(i).get(j)).x);
+                        turtles.get(updateForBoard.get(i).get(j)).toBack();
+                    }
+                }
                 int diff = (updateForBoard.get(i).size() - 1)*5;
-                for(int j = 0; j<updateForBoard.get(i).size(); j++) {
+                for(int j = updateForBoard.get(i).size()-1; j>=0; j--) {
                     turtles.get(updateForBoard.get(i).get(j)).setY(myBoard.get(i).y - diff + j*10);
                     turtles.get(updateForBoard.get(i).get(j)).setX(myBoard.get(i).x);
-                    turtles.get(updateForBoard.get(i).get(j)).toBack();
+                    turtles.get(updateForBoard.get(i).get(j)).toFront();
                 }
             }
         }
@@ -129,10 +139,21 @@ public class GameViewController implements GVCInterface {
         wind1.show();
     }
     @FXML protected void surrIt(ActionEvent event) {
-        firstTurtle.setX(120);
-        firstTurtle.setY(-100);
-        secondTurtle.setX(120);
-        secondTurtle.setY(-100);
+        final List<List<Integer>> myList = new ArrayList<List<Integer>>();
+        for(int i = 1; i<=8; i++) {
+            myList.add(new ArrayList<Integer>());
+        }
+        myList.get(1).add(3);
+        myList.get(1).add(2);
+
+        Platform.runLater(new Runnable() {
+
+              @Override
+              public void run() {
+                  if (Platform.isFxApplicationThread()) updateBoard(myList);
+              }
+          }
+        );
     }
 
     @FXML protected void chooseFirst(ActionEvent event) {

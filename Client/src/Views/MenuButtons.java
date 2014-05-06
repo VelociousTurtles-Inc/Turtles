@@ -2,7 +2,6 @@ package Views;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,9 +22,6 @@ public class MenuButtons {
         myLoader.setLocation(getClass().getResource("Game.fxml"));
         Parent game = (Parent) myLoader.load((getClass().getResource("Game.fxml")).openStream());
 
-
-
-
         GameStage.setScene(new Scene(game));
         GameStage.setResizable(false);
 
@@ -43,8 +39,7 @@ public class MenuButtons {
             }
             );
 
-
-    }
+        }
     @FXML private void exit(ActionEvent event) {
         System.exit(0);
     }
