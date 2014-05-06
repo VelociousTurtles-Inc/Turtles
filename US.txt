@@ -1,0 +1,48 @@
+Użytkownik ma możliwość:
+1. stworzenia konta.
+2. zalogowania się.
+3. zmiana hasła i danych powiązanych z kontem
+4. stworzenia nowej gry.
+5. wglądu do listy gier.
+6. wejście do lobby zadanej gry
+7. sprawdzenia swoich statystyk 
+- liczba wygranych
+- liczba przegranych
+- aktualna pozycja ligowa
+8. Wybrać adres serwera do którego chce sie łączyć
+9. Dodać innego użytkownika na swoją listę przyjaciół
+
+Tworzenie gry
+1. ustawienia liczby graczy  
+2. wybór planszy do gry 
+3. zapraszanie przyjaciół
+4. opatrzenie gry hasłem
+5. wypraszanie osób od stolika
+
+W grze, użytkownik ma możliwość:
+
+0. Otrzymania informacji o zakończeniu gry
+1. Otrzymanie informacji o zmianie statystyk użytkownika po grze
+2. wyrażenia chęci zagrania w najbliższej rozgrywce (lub rezygnacja).
+3. wglądu do widoku planszy, żółwi i własnych kart.
+- wglądu do widoku graczy (w tym grających) w danej grze.
+4. wglądu do historii zagranych kart
+5. Pobrania kart leżących w ręce gracza
+6. Zagrania wybraną kartą.
+7. Wskazania pola/żółwia, gdy zagranie karty tego wymaga
+8. Poddanie gry
+9. Przesłanie wiadomości do innych uczestników gry [chat]
+10. Otrzymywanie wiadomości [chat]
+
+
+Core/mechaniki gry
+1. Karty (podstawowe)
+- przesuwanie żółwia do przodu, tyłu
+- wybór żółwia ostatniego
+- wybór żółwia o zadanym kolorze
+
+Operator serwera:
+
+1. dodawanie nowych użytkowników
+2. usuwanie nowych użytkowników
+3. wyświetlenie użytkownikom wiadomośc systemowej, na przykład o planowanym restarcie
