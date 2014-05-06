@@ -16,7 +16,7 @@ public class GameLoggerView implements GVCInterface {
         System.out.println("New game with board No." + numberOfBoard
             + "and " + myCont + "as a controller.");
     }
-    
+
     public void updateBoard(List<List<Integer>> updateForBoard) {
         System.out.println("New board state:");
         for(int i = 0; i < updateForBoard.size(); i++) {
