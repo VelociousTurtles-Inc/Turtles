@@ -1,9 +1,8 @@
 package Model.Board;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import Model.Turtle;
+
+import java.util.*;
 
 /**
  * Created by Maciej on 2014-05-05.
@@ -59,7 +58,8 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
     public static class Field {
 
         public final int id;
-        Collection<Field> successors;
+        public List<Field> successors = new LinkedList<>();
+        public List<Turtle> turtles = new LinkedList<>();
         public final FieldType type;
         public Field ()
         {
