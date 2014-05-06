@@ -13,5 +13,5 @@ public interface GameAdapter {
 
     public void addUpdateCardHandler(UpdateHandler<? extends Card> handler);
 
-    public void playCard(Card card);
+    public void playCard(int card);
 }

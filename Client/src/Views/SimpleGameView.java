@@ -4,6 +4,7 @@ import Adapters.GameAdapter;
 import Handlers.UpdateHandler;
 import Model.Cards.Card;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,12 +51,27 @@ public class SimpleGameView extends Application implements GameView {
     @Override
     public void start(Stage stage) throws Exception {
         Stage GameStage = new Stage();
+
         FXMLLoader myLoader = new FXMLLoader();
-        Parent game = myLoader.load(getClass().getResource("Game.fxml"));
+        myLoader.setLocation(getClass().getResource("Game.fxml"));
+        Parent game = (Parent) myLoader.load((getClass().getResource("Game.fxml")).openStream());
 
         GameStage.setScene(new Scene(game));
         GameStage.setResizable(false);
 
         GameStage.show();
+        final GameViewController myOwnGameController = myLoader.getController();
+
+
+        Platform.runLater(new Runnable() {
+                              final GameViewController myCont = myOwnGameController;
+
+                              @Override
+                              public void run() {
+                                  myCont.setOnStartPositions();
+                                  myCont.init(0, adapter);
+                              }
+                          }
+        );
     }
 }

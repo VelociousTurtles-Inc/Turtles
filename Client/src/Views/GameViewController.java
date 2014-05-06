@@ -1,4 +1,5 @@
 package Views;
+import Adapters.GameAdapter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -63,7 +64,7 @@ public class GameViewController implements GVCInterface {
 
     }
 
-    ControllerInterface myController;
+    GameAdapter myController;
     private int chosenCard = 1;
     private boolean initialized = false;
 
@@ -92,7 +93,7 @@ public class GameViewController implements GVCInterface {
 
 
 
-    public void init(int numberOfBoard, ControllerInterface myController) {
+    public void init(int numberOfBoard, GameAdapter myController) {
         if(!initialized) {
 
             this.myController = myController;
@@ -126,7 +127,7 @@ public class GameViewController implements GVCInterface {
     }
 
     @FXML protected void showIt(ActionEvent event) {
-        //myController.playCard(chosenCard);
+        myController.playCard(chosenCard);
 
         Stage wind1 = new Stage();
         StackPane innerPane = new StackPane();

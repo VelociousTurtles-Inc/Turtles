@@ -45,7 +45,7 @@ public class SimpleGameAdapter implements GameAdapter {
     }
 
     @Override
-    public void playCard(Card card) {
-
+    public void playCard(int card) {
+        System.out.println("Card no " + card + " played");
     }
 }
