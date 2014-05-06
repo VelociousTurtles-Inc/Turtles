@@ -7,7 +7,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,37 @@ public class GameViewController implements GVCInterface {
 
     private List<Point> startPositions = new ArrayList<Point>();
     private List<Point> myBoard = new ArrayList<Point>();
-    private int size;
+    private int size;                                        //UNINITIALIZED VARIABLE
+
+    {
+        /*
+        the first position is not used because the GUI designer counts from 1
+         */
+        startPositions.add(new Point(42, 42));
+
+        startPositions.add(new Point(60, 120));
+        startPositions.add(new Point(45, 170));
+        startPositions.add(new Point(60, 220));
+        startPositions.add(new Point(45, 270));
+        startPositions.add(new Point(60, 320));
+
+    }
+
+    {
+        /*
+        the first position is not used because the GUI designer counts from 1
+         */
+        myBoard.add(new Point(42, 42));
+
+        myBoard.add(new Point(170, 340));
+        myBoard.add(new Point(280, 290));
+        myBoard.add(new Point(380, 190));
+        myBoard.add(new Point(500, 130));
+        myBoard.add(new Point(610, 150));
+        myBoard.add(new Point(720, 200));
+        myBoard.add(new Point(840, 220));
+
+    }
 
     ControllerInterface myController;
     private int chosenCard = 1;
@@ -108,7 +137,6 @@ public class GameViewController implements GVCInterface {
 
     @FXML protected void chooseFirst(ActionEvent event) {
         chosenCard = 1;
-
     }
     @FXML protected void chooseSecond(ActionEvent event) {
         chosenCard = 2;
