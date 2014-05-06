@@ -39,22 +39,22 @@
     </ImageView>
     <ImageView fx:id="secondTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@Turtles/turtle1.png" />
+        <Image url="@Turtles/turtle2.png" />
       </image>
     </ImageView>
     <ImageView fx:id="thirdTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@Turtles/turtle1.png" />
+        <Image url="@Turtles/turtle3.png" />
       </image>
     </ImageView>
     <ImageView fx:id="fourthTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@Turtles/turtle1.png" />
+        <Image url="@Turtles/turtle4.png" />
       </image>
     </ImageView>
   <ImageView fx:id="fifthTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
     <image>
-      <Image url="@Turtles/turtle1.png" />
+      <Image url="@Turtles/turtle5.png" />
     </image>
   </ImageView>
   </children>
