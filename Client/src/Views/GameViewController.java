@@ -1,4 +1,5 @@
 package Views;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -125,7 +126,7 @@ public class GameViewController implements GVCInterface {
         // tu następuje zamiana wybranej karty na inną
     }
 
-    @FXML protected void showIt(ActionEvent event) {
+    @FXML protected void playIt(ActionEvent event) {
         //myController.playCard(chosenCard);
 
         Stage wind1 = new Stage();
@@ -143,8 +144,10 @@ public class GameViewController implements GVCInterface {
         for(int i = 1; i<=8; i++) {
             myList.add(new ArrayList<Integer>());
         }
-        myList.get(1).add(3);
-        myList.get(1).add(2);
+        myList.get(4).add(3);
+        myList.get(4).add(2);
+        myList.get(3).add(1);
+        myList.get(3).add(2);
 
         Platform.runLater(new Runnable() {
 

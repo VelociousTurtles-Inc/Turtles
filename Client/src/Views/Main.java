@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -13,7 +12,6 @@ import javafx.stage.WindowEvent;
  * Created by michaziobro on 01.05.2014.
  */
 public class Main extends Application {
-    static ImageView t1;
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));

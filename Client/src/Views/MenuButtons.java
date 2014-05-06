@@ -1,5 +1,6 @@
 package Views;
 
+import Adapters.GameAdapter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,8 +34,8 @@ public class MenuButtons {
                 final GameViewController myCont = myOwnGameController;
                 @Override
                 public void run() {
-                   if(Platform.isFxApplicationThread()) myCont.setOnStartPositions();
-                    else System.out.println("Nie ten wątek :(");
+                    myCont.setOnStartPositions();
+                    myCont.init(0, new GameAdapter());
                 }
             }
             );
