@@ -127,7 +127,7 @@ public class GameViewController implements GVCInterface {
     }
 
     @FXML protected void showIt(ActionEvent event) {
-        myController.playCard(chosenCard);
+//        myController.playCard(chosenCard);
 
         Stage wind1 = new Stage();
         StackPane innerPane = new StackPane();

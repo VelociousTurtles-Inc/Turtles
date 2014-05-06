@@ -1,6 +1,7 @@
 package Adapters;
 
 import Handlers.UpdateHandler;
+import Model.Board.BoardGraph;
 import Model.Cards.Card;
 
 import java.util.List;
@@ -9,9 +10,11 @@ import java.util.List;
  * Created by larhard on 05.05.14.
  */
 public interface GameAdapter {
-    public void addUpdateBoardHandler(UpdateHandler<? extends List<? extends List<Integer>>> handler);
+    public void addUpdateBoardHandler(UpdateHandler<BoardGraph> handler);
 
-    public void addUpdateCardHandler(UpdateHandler<? extends Card> handler);
+    public void addUpdatePlayerCardHandler(UpdateHandler<List<? extends Card>> handler);
 
-    public void playCard(int card);
+    public void playCard(Card card);
+
+    public void close(); // clear
 }

@@ -26,21 +26,6 @@ public class SimpleGameView extends Application implements GameView {
     public void init(GameAdapter adapter, String[] args) {
         this.adapter = adapter;
         launch(args);
-
-        adapter.addUpdateBoardHandler(new UpdateHandler<List<? extends List<Integer>>>() {
-            @Override
-            public synchronized void update(List<? extends List<Integer>> gameBoard) {
-                SimpleGameView.this.gameBoard = gameBoard;
-                // update view
-            }
-        });
-
-        adapter.addUpdateCardHandler(new UpdateHandler<Card> () {
-            @Override
-            public synchronized void update(Card data) {
-                // update view
-            }
-        });
     }
 
     @Override
