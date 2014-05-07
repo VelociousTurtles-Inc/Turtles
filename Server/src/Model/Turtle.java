@@ -16,4 +16,13 @@ public class Turtle {
     public Turtle(int color) {
         this.color = color;
     }
+
+    public int getColor() {
+        return color;
+    }
+
+    @Override
+    public String toString() {
+        return "Turtle " + getColor();
+    }
 }

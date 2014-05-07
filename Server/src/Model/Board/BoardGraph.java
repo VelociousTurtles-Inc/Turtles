@@ -70,6 +70,35 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
             id = counter++;
             this.type = type;
         }
+
+        @Override
+        public String toString() {
+            StringBuilder result = new StringBuilder("[");
+            boolean c = false;
+            for (Turtle turtle : turtles) {
+                if (c) {
+                    result.append(", ");
+                }
+                c = true;
+                result.append(turtle);
+            }
+            result.append("]");
+            return result.toString();
+        }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        boolean c = false;
+        for (Field field : this) {
+            if (c) {
+                result.append(", ");
+            }
+            c = true;
+            result.append(field);
+        }
+        result.append("]");
+        return result.toString();
+    }
 }
