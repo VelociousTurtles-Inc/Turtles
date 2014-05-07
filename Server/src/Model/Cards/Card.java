@@ -44,4 +44,9 @@ public class Card {
         assert false;
         return new ArrayList<>();
     }
+
+    @Override
+    public String toString() {
+        return "Card : " + getType() + " of color " + getColor();
+    }
 }

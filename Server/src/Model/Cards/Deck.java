@@ -39,10 +39,11 @@ public class Deck implements Iterable<Card>{
 
             @Override
             public Card next() {
+                // TODO fix it
                 if (inner.hasNext())
                 {
                     Card tmp = inner.next();
-                    lockCard(tmp);
+//                    lockCard(tmp);
                     return tmp;
                 }
                 else
