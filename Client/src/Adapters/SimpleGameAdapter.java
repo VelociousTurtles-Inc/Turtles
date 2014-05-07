@@ -26,10 +26,14 @@ public class SimpleGameAdapter extends Thread implements GameAdapter {
         this.gameViews = gameViews;
         this.args = args;
 
-        for (GameView view : gameViews) {
-            view.init(this, args);
+        if (gameViews != null) {
+            for (GameView view : gameViews) {
+                view.init(this, args);
+            }
         }
     }
+
+    // TODO online view connecting
 
     @Override
     public void close() {
