@@ -1,5 +1,7 @@
 package Views;
 
+import Adapters.GameAdapter;
+
 import java.util.List;
 
 /**
@@ -7,10 +9,10 @@ import java.util.List;
  */
 public class GameLoggerView implements GVCInterface {
     int numberOfBoard;
-    ControllerInterface myCont;
+    GameAdapter myCont;
 
 
-    public void init(int numberOfBoard, ControllerInterface myCont) {
+    public void init(int numberOfBoard, GameAdapter myCont) {
         this.numberOfBoard = numberOfBoard;
         this.myCont = myCont;
         System.out.println("New game with board No." + numberOfBoard

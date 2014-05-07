@@ -1,20 +1,21 @@
 package Adapters;
 
-// For now instantiating directly
-import Services.GameService;
-import Views.ControllerInterface;
+import Handlers.UpdateHandler;
+import Model.Board.BoardGraph;
+import Model.Cards.Card;
+
+import java.util.List;
 
 /**
- * Created by Maciej on 2014-05-05.
+ * Created by larhard on 05.05.14.
  */
-public class GameAdapter implements ControllerInterface {
-    GameService game;
-    public GameAdapter() {
-       GameService game = new GameService();
-    }
 
-    @Override
-    public void playCard(int numberOfCard) {
-        game.playCard(game.getPlayerCards().get(numberOfCard));
-    }
+public interface GameAdapter {
+    public void addUpdateBoardHandler(UpdateHandler<BoardGraph> handler);
+
+    public void addUpdatePlayerCardHandler(UpdateHandler<List<? extends Card>> handler);
+
+    public void playCard(Card card);
+
+    public void close(); // clear
 }

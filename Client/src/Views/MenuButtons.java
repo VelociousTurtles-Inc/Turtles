@@ -27,15 +27,15 @@ public class MenuButtons {
         GameStage.setResizable(false);
 
         GameStage.show();
-        final GameView myOwnGameController = myLoader.getController();
+        final GraphicGameView myOwnGameController = myLoader.getController();
 
 
             Platform.runLater(new Runnable() {
-                final GameView myCont = myOwnGameController;
+                final GraphicGameView myCont = myOwnGameController;
                 @Override
                 public void run() {
                     myCont.setOnStartPositions();
-                    myCont.init(0, new GameAdapter());
+                    //myCont.init(0, new GameAdapter());
                 }
             }
             );
