@@ -74,27 +74,6 @@ public class GameService{
             throw new WebServiceException("Zadany gracz nie posiada zadanej karty");
         hand.remove(card);
         deck.buryCard(card);
-        switch (card.getType())
-        {
-            case SimpleForward:
-                outer: for (BoardGraph.Field field : board.graph)
-                {
-                    for (Iterator<Turtle> it = field.turtles.iterator(); it.hasNext();)
-                    {
-                        Turtle turtle = it.next();
-                        if (field.successors.size() != 1)throw new IllegalArgumentException();
-                        if (turtle.color == card.getColor())
-                        {
-                            do {
-                                field.successors.get(0).turtles.add(turtle);
-                                if (it.hasNext())turtle = it.next();
-                                else turtle = null;
-                            }while(turtle != null);
-                            break outer;
-                        }
-
-                    }
-                }
-        }
+        card.play(board);
     }
 }

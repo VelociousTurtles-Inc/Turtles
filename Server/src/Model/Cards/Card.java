@@ -1,5 +1,7 @@
 package Model.Cards;
 
+import Model.Board.Board;
+
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,29 +13,22 @@ import java.util.List;
  * It's though highly possible that above disclaimer will be a subject to many changes due to WebResult/Parameter character od this class.
  **/
 
-public class Card {
+public abstract class Card {
 
     final int color;
-    final CardType type;
 
     public Card()
     {
         color = 0;
-        type = CardType.SimpleForward;
     }
 
-    protected Card(int color, CardType type) {
+    protected Card(int color) {
         this.color = color;
-        this.type = type;
     }
 
     public int getColor()
     {
         return color;
-    }
-    public CardType getType()
-    {
-        return type;
     }
     /*
         Gets all possible Deck variants of the Card.
@@ -45,8 +40,10 @@ public class Card {
         return new ArrayList<>();
     }
 
+    public abstract void play(Board board);
+
     @Override
     public String toString() {
-        return "Card : " + getType() + " of color " + getColor();
+        return "Card : " + getClass().toString() + " of color " + getColor();
     }
 }
