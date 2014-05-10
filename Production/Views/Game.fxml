@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?scenebuilder-background-color 0x606060ff?>
+
+<AnchorPane id="AnchorPane" depthTest="INHERIT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="false" pickOnBounds="true" prefHeight="716.0" prefWidth="976.0000999999975" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.GraphicGameView">
+  <children>
+    <ImageView id="parkietk1.jpg" cache="true" cacheHint="DEFAULT" disable="false" fitHeight="501.0" fitWidth="933.0" focusTraversable="false" layoutX="14.0" layoutY="14.0" mouseTransparent="false" preserveRatio="false">
+      <effect>
+        <InnerShadow />
+      </effect>
+      <image>
+        <Image preserveRatio="true" smooth="true" url="@Boards/board.png" />
+      </image>
+    </ImageView>
+    <Button layoutX="825.0" layoutY="659.0" mnemonicParsing="false" onAction="#playIt" prefHeight="29.0" prefWidth="122.0" text="Use card" />
+    <Button fx:id="myButOne" layoutX="28.0" layoutY="659.0" mnemonicParsing="false" onAction="#surrIt" prefHeight="29.0" prefWidth="122.0" text="Surrender" />
+    <ImageView fitHeight="83.75" fitWidth="83.0" layoutX="28.0" layoutY="548.0" pickOnBounds="true" preserveRatio="false">
+      <image>
+        <Image url="@Heroes/plytak.png" />
+      </image>
+    </ImageView>
+
+    <Button fx:id="fifthCard" layoutX="871.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseFifth" prefHeight="70.0" prefWidth="76.0" />
+    <Button fx:id="fourthCard" layoutX="787.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseFourth" prefHeight="70.0" prefWidth="76.0" />
+    <Button fx:id="thirdCard" layoutX="702.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseThird" prefHeight="70.0" prefWidth="76.0" />
+    <Button fx:id="secondCard" layoutX="617.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseSecond" prefHeight="70.0" prefWidth="76.0" />
+    <Button fx:id="firstCard" layoutX="531.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseFirst" prefHeight="70.0" prefWidth="76.0" />
+      <ImageView fx:id="firstTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
+          <image>
+              <Image url="@Turtles/turtle1.png" />
+          </image>
+    </ImageView>
+    <ImageView fx:id="secondTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
+      <image>
+        <Image url="@Turtles/turtle2.png" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="thirdTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
+      <image>
+        <Image url="@Turtles/turtle3.png" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="fourthTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
+      <image>
+        <Image url="@Turtles/turtle4.png" />
+      </image>
+    </ImageView>
+  <ImageView fx:id="fifthTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
+    <image>
+      <Image url="@Turtles/turtle5.png" />
+    </image>
+  </ImageView><ImageView fx:id="fifthCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="881.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+<image>
+<Image url="@Cards/NormalBlue.png" />
+</image></ImageView><ImageView fx:id="fourthCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="797.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+<image>
+<Image url="@Cards/NormalGreen.png" />
+</image></ImageView><ImageView fx:id="thirdCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="712.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+<image>
+<Image url="@Cards/NormalYellow.png" />
+</image>
+</ImageView><ImageView fx:id="secondCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="627.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+<image>
+<Image url="@Cards/NormalOrange.png" />
+</image>
+</ImageView><ImageView fx:id="firstCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="541.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+<image>
+<Image url="@Cards/NormalRed.png" />
+</image>
+</ImageView>
+  </children>
+</AnchorPane>
