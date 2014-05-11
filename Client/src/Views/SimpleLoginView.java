@@ -12,7 +12,7 @@ import javafx.stage.WindowEvent;
 /**
  * Created by michaziobro on 01.05.2014.
  */
-public class Main extends Application {
+public class SimpleLoginView extends Application {
     static ImageView t1;
     @Override
     public void start(Stage stage) throws Exception {
@@ -29,7 +29,6 @@ public class Main extends Application {
                 System.exit(0);
             }
         });
-
     }
 
     public static void main(String[] args) {
