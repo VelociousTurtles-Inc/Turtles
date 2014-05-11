@@ -42,6 +42,11 @@ public class Card {
     public static List<Card> populate()
     {
         assert false;
-        return new ArrayList<>();
+        return new ArrayList<Card>();
+    }
+
+    @Override
+    public String toString() {
+        return "Card : " + getType() + " of color " + getColor();
     }
 }

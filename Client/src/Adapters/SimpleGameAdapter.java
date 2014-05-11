@@ -48,8 +48,8 @@ public class SimpleGameAdapter extends Thread implements GameController {
         gameViews.clear();
     }*/
 
-    private Collection<Event> updateBoardEvents = new ArrayList<>();
-    private Collection<Event> updateCardEvents = new ArrayList<>();
+    private Collection<Event> updateBoardEvents = new ArrayList<Event>();
+    private Collection<Event> updateCardEvents = new ArrayList<Event>();
 
     /*@Override
     public void addUpdateBoardHandler(Event handler) {
@@ -105,7 +105,6 @@ public class SimpleGameAdapter extends Thread implements GameController {
         synchronized (updateBoardEvents) {
             updateBoardEvents.add(updateBoardEvent);
         }
-        //updateBoardEvent.call();
     }
 
     @Override
@@ -113,7 +112,6 @@ public class SimpleGameAdapter extends Thread implements GameController {
         synchronized (updateCardEvents) {
             updateCardEvents.add(updateCardEvent);
         }
-        //updateCardEvent.call();
     }
 
     @Override
@@ -125,7 +123,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
     public List<List<Integer>> getBoard() {
         BoardGraph myBoard = gameService.getGameBoardGraph();
 
-        List<List<Integer>> resultList = new LinkedList<>();
+        List<List<Integer>> resultList = new LinkedList<List<Integer>>();
 
         for(BoardGraph.Field actualField : myBoard) {
             resultList.add(new LinkedList<Integer>());

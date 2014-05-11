@@ -35,7 +35,7 @@ public class StandardMenuView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader myLoader = new FXMLLoader();
-        Parent root = myLoader.load(getClass().getResource("Menu.fxml").openStream());
+        Parent root = (Parent) myLoader.load(getClass().getResource("Menu.fxml").openStream());
 
         myMenuButtons = myLoader.getController();
         myMenuButtons.setMyMenuController(myMenuController);

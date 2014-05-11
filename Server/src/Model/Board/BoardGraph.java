@@ -1,9 +1,8 @@
 package Model.Board;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import Model.Turtle;
+
+import java.util.*;
 
 /**
  * Created by Maciej on 2014-05-05.
@@ -59,7 +58,8 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
     public static class Field {
 
         public final int id;
-        Collection<Field> successors;
+        public List<Field> successors = new LinkedList<Field>();
+        public List<Turtle> turtles = new LinkedList<Turtle>();
         public final FieldType type;
         public Field ()
         {
@@ -70,6 +70,35 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
             id = counter++;
             this.type = type;
         }
+
+        @Override
+        public String toString() {
+            StringBuilder result = new StringBuilder("[");
+            boolean c = false;
+            for (Turtle turtle : turtles) {
+                if (c) {
+                    result.append(", ");
+                }
+                c = true;
+                result.append(turtle);
+            }
+            result.append("]");
+            return result.toString();
+        }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        boolean c = false;
+        for (Field field : this) {
+            if (c) {
+                result.append(", ");
+            }
+            c = true;
+            result.append(field);
+        }
+        result.append("]");
+        return result.toString();
+    }
 }
