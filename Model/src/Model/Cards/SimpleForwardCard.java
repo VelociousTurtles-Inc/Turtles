@@ -1,7 +1,8 @@
 package Model.Cards;
 
-import Model.Board.Board;
+
 import Model.Board.BoardGraph;
+import Model.Board.Board;
 import Model.Turtle;
 
 import java.util.ArrayList;

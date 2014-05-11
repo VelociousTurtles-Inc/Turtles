@@ -1,9 +1,9 @@
 package Adapters;
 
-import Handlers.UpdateHandler;
-import Model.Board.BoardGraph;
 import Model.Cards.Card;
-import Services.GameService;
+import Handlers.UpdateHandler;
+import ServicesTypes.BoardGraph;
+import ServicesTypes.GameService;
 import Views.GameView;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class SimpleGameAdapter extends Thread implements GameAdapter {
     }
 
     private Collection<UpdateHandler<BoardGraph>> updateBoardHandlers = new ArrayList<>();
-    private Collection<UpdateHandler<List<? extends Card>>> updateCardHandlers = new ArrayList<>();
+    private Collection<UpdateHandler<List<Integer>>> updateCardHandlers = new ArrayList<>();
 
     @Override
     public void addUpdateBoardHandler(UpdateHandler<BoardGraph> handler) {
@@ -55,14 +55,14 @@ public class SimpleGameAdapter extends Thread implements GameAdapter {
     }
 
     public void updateBoard() {
-        BoardGraph boardGraph = gameService.getGameBoardGraph();
+        ServicesTypes.BoardGraph boardGraph = gameService.getGameBoardGraph();
         for (UpdateHandler<BoardGraph> handler : updateBoardHandlers) {
             handler.update(boardGraph);
         }
     }
 
     @Override
-    public void addUpdatePlayerCardHandler(UpdateHandler<List<? extends Card>> handler) {
+    public void addUpdatePlayerCardHandler(UpdateHandler<List<Integer>> handler) {
         synchronized (updateCardHandlers) {
             updateCardHandlers.add(handler);
         }
@@ -70,8 +70,8 @@ public class SimpleGameAdapter extends Thread implements GameAdapter {
     }
 
     public void updatePlayerCards() {
-        List<? extends Card> cards = gameService.getPlayerCards();
-        for (UpdateHandler<List<? extends Card>> handler : updateCardHandlers) {
+        List<Integer> cards = gameService.getPlayerCards();
+        for (UpdateHandler<List<Integer>> handler : updateCardHandlers) {
             handler.update(cards);
         }
     }
@@ -79,10 +79,10 @@ public class SimpleGameAdapter extends Thread implements GameAdapter {
     private Lock playCardLock = new ReentrantLock();
 
     @Override
-    public void playCard(Card card) {
+    public void playCard(Integer cardID) {
         playCardLock.lock();
-        gameService.playCard(card);
-        System.out.println("Card " + card + " played");
+        gameService.playCard(cardID);
+        System.out.println("Card " + cardID + " played");
         playCardLock.unlock();
     }
 }

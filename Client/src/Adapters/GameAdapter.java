@@ -1,8 +1,8 @@
 package Adapters;
 
 import Handlers.UpdateHandler;
-import Model.Board.BoardGraph;
-import Model.Cards.Card;
+import ServicesTypes.BoardGraph;
+
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import java.util.List;
 public interface GameAdapter {
     public void addUpdateBoardHandler(UpdateHandler<BoardGraph> handler);
 
-    public void addUpdatePlayerCardHandler(UpdateHandler<List<? extends Card>> handler);
+    public void addUpdatePlayerCardHandler(UpdateHandler<List<Integer>> handler);
 
-    public void playCard(Card card);
+    public void playCard(Integer card);
 
     public void close(); // clear
 }

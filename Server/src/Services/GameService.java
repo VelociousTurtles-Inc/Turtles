@@ -1,20 +1,17 @@
 package Services;
 
-import Model.Board.Board;
-import Model.Board.BoardGraph;
-import Model.Board.SimpleBoard;
-import Model.Cards.Card;
-import Model.Cards.Deck;
-import Model.GameInfo;
-import Model.Turtle;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import Model.*;
+import Model.Board.*;
+import Model.Cards.*;
 
 /**
  * Main model class for interacting with specific game.
@@ -37,6 +34,13 @@ public class GameService{
 
     }
 
+    public void getDeckList()
+    {
+        //TODO: Change Signature to a value-type resembling CardInfo which will be possible for client to parse
+        //TODO: Method should return a complete collection of CardInfo sygnatures
+        return ;
+    }
+
     @WebMethod
     public BoardGraph getGameBoardGraph()
     {
@@ -48,10 +52,10 @@ public class GameService{
         return info;
     }
     // TODO: Move to Player class
-    List<Card> hand = new ArrayList<>();
+    List<Integer> hand = new ArrayList<>();
 
     @WebMethod
-    public List<Card> getPlayerCards()
+    public List<Integer> getPlayerCards()
     {
         if (hand.size() < 5)drawCards();
         return hand;
@@ -61,19 +65,22 @@ public class GameService{
         assert (hand.size() < 5);
         for (Card c: deck)
         {
-            hand.add(c);
+            hand.add(c.getID());
             if (hand.size() >= 5)
                 break;
         }
     }
 
     @WebMethod
-    public void playCard(Card card)
+    public void playCard(int cardID)
     {
-        if (!hand.contains(card))
+        // I changed signature to more WebService Friendly
+        // TODO: Make it work again.
+        throw new WebServiceException();
+        /*if (!hand.contains(card))
             throw new WebServiceException("Zadany gracz nie posiada zadanej karty");
         hand.remove(card);
         deck.buryCard(card);
-        card.play(board);
+        card.play(board);*/
     }
 }

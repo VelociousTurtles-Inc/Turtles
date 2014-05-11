@@ -2,7 +2,6 @@ package Model.Cards;
 
 import Model.Board.Board;
 
-import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +15,23 @@ import java.util.List;
 public abstract class Card {
 
     final int color;
+    final int id;
+    static int counter;
 
     public Card()
     {
         color = 0;
+        id = counter++;
     }
 
     protected Card(int color) {
+        id = counter++;
         this.color = color;
     }
-
+    public int getID()
+    {
+        return id;
+    }
     public int getColor()
     {
         return color;

@@ -2,9 +2,8 @@ package Views.SimpleGameTextView;
 
 import Adapters.GameAdapter;
 import Handlers.UpdateHandler;
-import Model.Board.BoardGraph;
-import Model.Cards.Card;
 import Views.GameView;
+import ServicesTypes.BoardGraph;
 
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +15,7 @@ public class SimpleGameTextView implements GameView {
     private GameAdapter adapter;
     private String[] args;
 
-    private List<? extends Card> cards;
+    private List<Integer> cards;
     private BoardGraph boardGraph;
 
     @Override
@@ -33,9 +32,9 @@ public class SimpleGameTextView implements GameView {
         });
         assert boardGraph != null;
 
-        this.adapter.addUpdatePlayerCardHandler(new UpdateHandler<List<? extends Card>>() {
+        this.adapter.addUpdatePlayerCardHandler(new UpdateHandler<List<Integer>>() {
             @Override
-            public synchronized void update(List<? extends Card> data) {
+            public synchronized void update(List<Integer> data) {
                 System.out.println(" ::: Player Hand updated :::\n" + data);
                 cards = data;
             }

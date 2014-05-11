@@ -1,5 +1,7 @@
-package Model.Cards;
+package Model;
 
+import Model.Cards.Card;
+import Model.Cards.SimpleForwardCard;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;

@@ -1,16 +1,15 @@
 package Adapters;
 
-import Services.GameService;
 import Views.SimpleGameTextView.SimpleGameTextView;
 
 import java.util.Arrays;
-
+import ServicesTypes.*;
 /**
  * Created by larhard on 05.05.14.
  */
 public class MainAdapter {
     public static void main(String[] args) {
-        final GameService gameService = new GameService();
+        final GameService gameService = new ServicesTypes.GameServiceService().getGameServicePort();
         final String[] finalArgs = args;
 
         // TODO player data
