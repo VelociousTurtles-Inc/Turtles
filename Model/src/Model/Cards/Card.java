@@ -46,10 +46,10 @@ public abstract class Card {
         return new ArrayList<Card>();
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Card : " + getType() + " of color " + getColor();
-    }
+    }*/
 
     public abstract void play(Board board);
 

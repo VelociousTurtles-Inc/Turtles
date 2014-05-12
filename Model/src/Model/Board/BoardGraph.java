@@ -58,13 +58,10 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
     public static class Field {
 
         public final int id;
-<<<<<<< HEAD:Server/src/Model/Board/BoardGraph.java
+
         public List<Field> successors = new LinkedList<Field>();
         public List<Turtle> turtles = new LinkedList<Turtle>();
-=======
-        public List<Field> successors = new LinkedList<>();
-        public List<Turtle> turtles = new LinkedList<>();
->>>>>>> origin/DangerouslyManyChangesToCheck:Model/src/Model/Board/BoardGraph.java
+
         public final FieldType type;
         public Field ()
         {

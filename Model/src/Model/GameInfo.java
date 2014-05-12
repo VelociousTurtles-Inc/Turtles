@@ -10,7 +10,7 @@ public class GameInfo {
     static int counter;
     public int id;
 
-    public List<Turtle> turtles = new ArrayList<>();
+    public List<Turtle> turtles = new ArrayList<Turtle>();
 
     public GameInfo() {
         id = counter++;

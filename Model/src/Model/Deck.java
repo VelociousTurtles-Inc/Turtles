@@ -19,9 +19,9 @@ public class Deck implements Iterable<Card>{
     }
     public Deck()
     {
-        deckContainer = new LinkedList<>();
-        lockContainer = new LinkedList<>();
-        graveContainer = new LinkedList<>();
+        deckContainer = new LinkedList<Card>();
+        lockContainer = new LinkedList<Card>();
+        graveContainer = new LinkedList<Card>();
         deckContainer.addAll(SimpleForwardCard.populate());
         /*
             ...

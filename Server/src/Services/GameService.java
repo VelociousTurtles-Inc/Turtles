@@ -1,38 +1,25 @@
 package Services;
 
-<<<<<<< HEAD
 import Model.Board.Board;
 import Model.Board.BoardGraph;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
-import Model.Cards.Deck;
+import Model.Deck;
 import Model.GameInfo;
 import Model.Turtle;
-=======
->>>>>>> origin/DangerouslyManyChangesToCheck
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceException;
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.Iterator;
-=======
-import java.util.HashMap;
->>>>>>> origin/DangerouslyManyChangesToCheck
 import java.util.List;
-import java.util.Map;
-
-import Model.*;
-import Model.Board.*;
-import Model.Cards.*;
 
 /**
  * Main model class for interacting with specific game.
  * For now there's only one game.
  */
 @WebService
-public class GameService{
+public class GameService {
 
     Deck deck = new Deck();
 
@@ -47,8 +34,6 @@ public class GameService{
         board.graph.start.turtles.addAll(info.turtles);
 
     }
-<<<<<<< HEAD
-=======
 
     public void getDeckList()
     {
@@ -56,7 +41,6 @@ public class GameService{
         //TODO: Method should return a complete collection of CardInfo sygnatures
         return ;
     }
->>>>>>> origin/DangerouslyManyChangesToCheck
 
     @WebMethod
     public BoardGraph getGameBoardGraph()
@@ -69,11 +53,8 @@ public class GameService{
         return info;
     }
     // TODO: Move to Player class
-<<<<<<< HEAD
-    List<Card> hand = new ArrayList<Card>();
-=======
-    List<Integer> hand = new ArrayList<>();
->>>>>>> origin/DangerouslyManyChangesToCheck
+
+    List<Integer> hand = new ArrayList<Integer>();
 
     @WebMethod
     public List<Integer> getPlayerCards()
@@ -82,47 +63,7 @@ public class GameService{
         return hand;
     }
     private void drawCards()
-<<<<<<< HEAD
-    {
-        assert (hand.size() < 5);
-        for (Card c: deck)
-        {
-            hand.add(c);
-            if (hand.size() >= 5)
-                break;
-        }
-    }
 
-    @WebMethod
-    public void playCard(Card card)
-    {
-        if (!hand.contains(card))
-            throw new WebServiceException("Zadany gracz nie posiada zadanej karty");
-        hand.remove(card);
-        deck.buryCard(card);
-        switch (card.getType())
-        {
-            case SimpleForward:
-                outer: for (BoardGraph.Field field : board.graph)
-                {
-                    for (Iterator<Turtle> it = field.turtles.iterator(); it.hasNext();)
-                    {
-                        Turtle turtle = it.next();
-                        if (field.successors.size() != 1)throw new IllegalArgumentException();
-                        if (turtle.color == card.getColor())
-                        {
-                            do {
-                                field.successors.get(0).turtles.add(turtle);
-                                if (it.hasNext())turtle = it.next();
-                                else turtle = null;
-                            }while(turtle != null);
-                            break outer;
-                        }
-
-                    }
-                }
-        }
-=======
     {
         assert (hand.size() < 5);
         for (Card c: deck)
@@ -144,6 +85,5 @@ public class GameService{
         hand.remove(card);
         deck.buryCard(card);
         card.play(board);*/
->>>>>>> origin/DangerouslyManyChangesToCheck
     }
 }
