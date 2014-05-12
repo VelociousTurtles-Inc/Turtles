@@ -14,10 +14,6 @@ public class Deck implements Iterable<Integer>{
     List<Integer> deckContainer;
     Set<Integer> lockContainer;
     Set<Integer> graveContainer;
-    public Collection<Integer> getCards()
-    {
-        return deckContainer;
-    }
     public Deck()
     {
         deckContainer = new LinkedList<Integer>();
