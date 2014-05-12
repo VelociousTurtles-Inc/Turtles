@@ -2,6 +2,7 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import ServicesTypes.CardInfo;
 import Views.Standard.Point;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +48,7 @@ public class StandardGameView {
         }
     }
 
-    private void updateCards(List<Card> cardsUpdate) {
+    private void updateCards(List<CardInfo> cardsUpdate) {
 
     }
 

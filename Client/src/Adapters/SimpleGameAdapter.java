@@ -5,10 +5,7 @@ import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Model.Cards.Card;
 import ModelHelpers.ServicesHelper;
-import ServicesTypes.BoardGraph;
-import ServicesTypes.Field;
-import ServicesTypes.GameService;
-import ServicesTypes.Turtle;
+import ServicesTypes.*;
 import Views.Standard.Game.StandardGameView;
 
 import java.util.LinkedList;
@@ -21,7 +18,7 @@ import java.util.Map;
 
 public class SimpleGameAdapter extends Thread implements GameController {
 
-    Map<Integer, Card> normalCardsMap;
+    Map<Integer, CardInfo> normalCardsMap;
     GameService gameService;
 
     //List of events for Board updates
@@ -34,12 +31,16 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
 
     public SimpleGameAdapter() {
-        normalCardsMap = ServicesHelper.createCardMap();
+        //normalCardsMap = ServicesHelper.createCardMap();
 
         boardUpdates = new LinkedList<Event>();
         cardsUpdates = new LinkedList<Event>();
 
         gameService = new ServicesTypes.GameServiceService().getGameServicePort();
+        for(CardInfoPair myPair : gameService.getDeckList()) {
+            normalCardsMap.put(myPair.getKey(), myPair.getValue());
+        }
+
         StandardGameView myGameView = new StandardGameView(this);
     }
 
@@ -78,9 +79,9 @@ public class SimpleGameAdapter extends Thread implements GameController {
     }
 
     @Override
-    public List<Card> getCards() {
+    public List<CardInfo> getCards() {
         List<Integer> myCards = gameService.getPlayerCards();
-        List<Card> resultCards = new LinkedList<Card>();
+        List<CardInfo> resultCards = new LinkedList<CardInfo>();
         for(Integer i : myCards) {
             resultCards.add(normalCardsMap.get(i));
         }

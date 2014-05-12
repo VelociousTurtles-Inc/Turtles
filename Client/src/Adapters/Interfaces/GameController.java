@@ -1,5 +1,7 @@
 package Adapters.Interfaces;
 
+import ServicesTypes.CardInfo;
+
 import java.util.List;
 
 /**
@@ -12,6 +14,6 @@ public interface GameController {
     void registerUpdateBoardEvent(Event updateBoardEvent);
     void registerUpdateCardsEvent(Event updateCardEvent);
 
-    List<Card> getCards();
+    List<CardInfo> getCards();
     List<List<Integer>> getBoard();
 }

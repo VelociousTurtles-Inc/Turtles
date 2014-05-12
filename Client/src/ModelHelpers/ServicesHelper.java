@@ -59,7 +59,7 @@ public class ServicesHelper {
             }
         };
     }
-    public static Map<Integer, CardInfo> createCardMap() {
+    /*public static Map<Integer, CardInfo> createCardMap() {
         Map<Integer, CardInfo> resultMap = new TreeMap<Integer, CardInfo>();
         for(int i = 1; i<=5; i++) {
             for(int j = 1; j<=3; j++) {
@@ -68,5 +68,5 @@ public class ServicesHelper {
         }
 
         return resultMap;
-    }
+    }*/
 }
