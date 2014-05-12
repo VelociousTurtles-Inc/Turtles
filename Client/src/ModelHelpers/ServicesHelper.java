@@ -1,13 +1,11 @@
 package ModelHelpers;
 
 import Model.Cards.Card;
+import Model.Cards.SimpleForwardCard;
 import ServicesTypes.BoardGraph;
 import ServicesTypes.Field;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by mz18 on 12/05/14.
@@ -60,6 +58,13 @@ public class ServicesHelper {
         };
     }
     public static Map<Integer, Card> createCardMap() {
-        return null;
+        Map<Integer, Card> resultMap = new TreeMap<Integer, Card>();
+        for(int i = 1; i<=5; i++) {
+            for(int j = 1; j<=3; j++) {
+                resultMap.put((3*(i-1)+j), new SimpleForwardCard(i));
+            }
+        }
+
+        return resultMap;
     }
 }

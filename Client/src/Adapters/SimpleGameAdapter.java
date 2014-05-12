@@ -39,13 +39,27 @@ public class SimpleGameAdapter extends Thread implements GameController {
         boardUpdates = new LinkedList<Event>();
         cardsUpdates = new LinkedList<Event>();
 
-        //gameService = new ServicesTypes.GameServiceService().getGameServicePort();
+        gameService = new ServicesTypes.GameServiceService().getGameServicePort();
         StandardGameView myGameView = new StandardGameView(this);
+    }
+
+    public void updateCards() {
+        for(Event up : cardsUpdates) {
+            up.call();
+        }
+    }
+
+    public void updateBoards() {
+        for(Event up : boardUpdates) {
+            up.call();
+        }
     }
 
     @Override
     public void playCard(int card) {
         gameService.playCard(card);
+        updateCards();
+        updateBoards();
     }
 
     @Override
@@ -65,11 +79,12 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
     @Override
     public List<Card> getCards() {
-
         List<Integer> myCards = gameService.getPlayerCards();
-
-
-        return null;
+        List<Card> resultCards = new LinkedList<Card>();
+        for(Integer i : myCards) {
+            resultCards.add(normalCardsMap.get(i));
+        }
+        return resultCards;
     }
 
     @Override
