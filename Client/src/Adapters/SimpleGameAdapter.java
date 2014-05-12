@@ -3,11 +3,11 @@ package Adapters;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
-import Model.Cards.Card;
 import ModelHelpers.ServicesHelper;
 import ServicesTypes.*;
 import Views.Standard.Game.StandardGameView;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
 
     public SimpleGameAdapter() {
-        //normalCardsMap = ServicesHelper.createCardMap();
+        normalCardsMap = new HashMap<>();
 
         boardUpdates = new LinkedList<Event>();
         cardsUpdates = new LinkedList<Event>();

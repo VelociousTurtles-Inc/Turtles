@@ -1,10 +1,7 @@
 package ModelHelpers;
 
-import Model.Cards.Card;
-import Model.Cards.SimpleForwardCard;
+
 import ServicesTypes.BoardGraph;
-import ServicesTypes.CardInfo;
-import ServicesTypes.CardInfoPair;
 import ServicesTypes.Field;
 
 import java.util.*;
