@@ -8,6 +8,8 @@ import Model.Cards.CardInfoPair;
 import Model.Deck;
 import Model.GameInfo;
 import Model.Turtle;
+import com.sun.xml.ws.developer.Stateful;
+import com.sun.xml.ws.developer.servlet.HttpSessionScope;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -20,7 +22,8 @@ import java.util.Map;
  * Main model class for interacting with specific game.
  * For now there's only one game.
  */
-@WebService
+@WebService @Stateful
+@HttpSessionScope
 public class GameService {
 
     Deck deck = new Deck();
