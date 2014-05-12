@@ -1,88 +1,103 @@
 package Adapters;
 
-import Model.Cards.Card;
-import Handlers.UpdateHandler;
-import ServicesTypes.BoardGraph;
-import ServicesTypes.GameService;
-import Views.GameView;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import Adapters.Interfaces.Event;
+import Adapters.Interfaces.GameController;
+import Model.Cards.Card;
+import ModelHelpers.ServicesHelper;
+import ServicesTypes.BoardGraph;
+import ServicesTypes.Field;
+import ServicesTypes.GameService;
+import ServicesTypes.Turtle;
+import Views.Standard.Game.StandardGameView;
+
+import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.Map;
 
 /**
  * Created by larhard on 05.05.14.
  */
-public class SimpleGameAdapter extends Thread implements GameAdapter {
 
-    private final GameService gameService;
-    private Collection<? extends GameView> gameViews;
-    private final String[] args;
+public class SimpleGameAdapter extends Thread implements GameController {
 
-    public SimpleGameAdapter(Collection<? extends GameView> gameViews, GameService gameService, String[] args) {
-        this.gameService = gameService;
-        this.gameViews = gameViews;
-        this.args = args;
+    Map<Integer, Card> normalCardsMap;
+    GameService gameService;
 
-        if (gameViews != null) {
-            for (GameView view : gameViews) {
-                view.init(this, args);
+    //List of events for Board updates
+
+    List<Event> boardUpdates;
+
+    //List of events for Cards updates
+
+    List<Event> cardsUpdates;
+
+
+    public SimpleGameAdapter() {
+        normalCardsMap = ServicesHelper.createCardMap();
+
+        boardUpdates = new LinkedList<Event>();
+        cardsUpdates = new LinkedList<Event>();
+
+        gameService = new ServicesTypes.GameServiceService().getGameServicePort();
+        StandardGameView myGameView = new StandardGameView(this);
+    }
+
+    public void updateCards() {
+        for(Event up : cardsUpdates) {
+            up.call();
+        }
+    }
+
+    public void updateBoards() {
+        for(Event up : boardUpdates) {
+            up.call();
+        }
+    }
+
+    @Override
+    public void playCard(int card) {
+        gameService.playCard(card);
+        updateCards();
+        updateBoards();
+    }
+
+    @Override
+    public void surrender() {
+        System.out.println("I surended!");
+    }
+
+    @Override
+    public void registerUpdateBoardEvent(Event updateBoardEvent) {
+        boardUpdates.add(updateBoardEvent);
+    }
+
+    @Override
+    public void registerUpdateCardsEvent(Event updateCardEvent) {
+        cardsUpdates.add(updateCardEvent);
+    }
+
+    @Override
+    public List<Card> getCards() {
+        List<Integer> myCards = gameService.getPlayerCards();
+        List<Card> resultCards = new LinkedList<Card>();
+        for(Integer i : myCards) {
+            resultCards.add(normalCardsMap.get(i));
+        }
+        return resultCards;
+    }
+
+    @Override
+    public List<List<Integer>> getBoard() {
+        List<List<Integer>> result = new LinkedList<List<Integer>>();
+        BoardGraph myBoard = gameService.getGameBoardGraph();
+
+        for(Field f : ServicesHelper.getIterableBoard(myBoard)) {
+            result.add(new LinkedList<Integer>());
+            for(Turtle turtle : f.getTurtles()) {
+                result.get(result.size()-1).add(turtle.getColor());
             }
         }
-    }
-
-    // TODO online view connecting
-
-    @Override
-    public void close() {
-        for (GameView view : gameViews) {
-            view.close();
-        }
-        gameViews.clear();
-    }
-
-    private Collection<UpdateHandler<BoardGraph>> updateBoardHandlers = new ArrayList<>();
-    private Collection<UpdateHandler<List<Integer>>> updateCardHandlers = new ArrayList<>();
-
-    @Override
-    public void addUpdateBoardHandler(UpdateHandler<BoardGraph> handler) {
-        synchronized (updateBoardHandlers) {
-            updateBoardHandlers.add(handler);
-        }
-        handler.update(gameService.getGameBoardGraph());
-    }
-
-    public void updateBoard() {
-        ServicesTypes.BoardGraph boardGraph = gameService.getGameBoardGraph();
-        for (UpdateHandler<BoardGraph> handler : updateBoardHandlers) {
-            handler.update(boardGraph);
-        }
-    }
-
-    @Override
-    public void addUpdatePlayerCardHandler(UpdateHandler<List<Integer>> handler) {
-        synchronized (updateCardHandlers) {
-            updateCardHandlers.add(handler);
-        }
-        handler.update(gameService.getPlayerCards());
-    }
-
-    public void updatePlayerCards() {
-        List<Integer> cards = gameService.getPlayerCards();
-        for (UpdateHandler<List<Integer>> handler : updateCardHandlers) {
-            handler.update(cards);
-        }
-    }
-
-    private Lock playCardLock = new ReentrantLock();
-
-    @Override
-    public void playCard(Integer cardID) {
-        playCardLock.lock();
-        gameService.playCard(cardID);
-        System.out.println("Card " + cardID + " played");
-        playCardLock.unlock();
+        return result;
     }
 }

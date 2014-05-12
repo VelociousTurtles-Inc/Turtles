@@ -1,8 +1,5 @@
 package Views.SimpleGameTextView;
 
-import Adapters.GameAdapter;
-import Handlers.UpdateHandler;
-import Views.GameView;
 import ServicesTypes.BoardGraph;
 
 import java.util.List;
@@ -11,14 +8,16 @@ import java.util.Scanner;
 /**
  * Created by larhard on 06.05.14.
  */
-public class SimpleGameTextView implements GameView {
-    private GameAdapter adapter;
+public class SimpleGameTextView  {
+    //private GameAdapter adapter;
     private String[] args;
 
+
     private List<Integer> cards;
+
     private BoardGraph boardGraph;
 
-    @Override
+   /* @Override
     public void init(GameAdapter adapter, String[] args) {
         this.adapter = adapter;
         this.args = args;
@@ -40,11 +39,11 @@ public class SimpleGameTextView implements GameView {
             }
         });
         assert cards != null;
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void close() {
-    }
+    }*/
 
     class InputThread extends Thread {
         Scanner scanner = new Scanner(System.in);
@@ -54,7 +53,7 @@ public class SimpleGameTextView implements GameView {
             while (!Thread.interrupted()) {
                 System.out.println("Play Card");
                 int card = scanner.nextInt();
-                adapter.playCard(cards.get(card));
+                //adapter.playCard(cards.get(card));
             }
         }
     }

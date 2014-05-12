@@ -1,24 +1,25 @@
 package Services;
 
+import Model.Board.Board;
+import Model.Board.BoardGraph;
+import Model.Board.SimpleBoard;
+import Model.Cards.Card;
+import Model.Deck;
+import Model.GameInfo;
+import Model.Turtle;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import Model.*;
-import Model.Board.*;
-import Model.Cards.*;
 
 /**
  * Main model class for interacting with specific game.
  * For now there's only one game.
  */
 @WebService
-public class GameService{
+public class GameService {
 
     Deck deck = new Deck();
 
@@ -52,7 +53,8 @@ public class GameService{
         return info;
     }
     // TODO: Move to Player class
-    List<Integer> hand = new ArrayList<>();
+
+    List<Integer> hand = new ArrayList<Integer>();
 
     @WebMethod
     public List<Integer> getPlayerCards()
@@ -61,6 +63,7 @@ public class GameService{
         return hand;
     }
     private void drawCards()
+
     {
         assert (hand.size() < 5);
         for (Card c: deck)
