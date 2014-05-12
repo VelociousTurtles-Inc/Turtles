@@ -9,44 +9,46 @@ import java.util.*;
 /**
  * Created by Maciej on 2014-05-05.
  */
-public class Deck implements Iterable<Card>{
-    LinkedList<Card> deckContainer;
-    LinkedList<Card> lockContainer;
-    LinkedList<Card> graveContainer;
-    public Collection<Card> getCards()
+public class Deck implements Iterable<Integer>{
+    Map<Integer, Card> cardsMap;
+    List<Integer> deckContainer;
+    Set<Integer> lockContainer;
+    Set<Integer> graveContainer;
+    public Collection<Integer> getCards()
     {
         return deckContainer;
     }
     public Deck()
     {
-        deckContainer = new LinkedList<>();
-        lockContainer = new LinkedList<>();
-        graveContainer = new LinkedList<>();
-        deckContainer.addAll(SimpleForwardCard.populate());
-        /*
-            ...
-            all card types here
-        */
+        deckContainer = new LinkedList<Integer>();
+        lockContainer = new HashSet<Integer>();
+        graveContainer = new HashSet<Integer>();
+        cardsMap = new HashMap<Integer, Card>();
+        for(Card temp : SimpleForwardCard.populate()){
+            cardsMap.put(temp.getID(), temp);
+            deckContainer.add(temp.getID());
+        }
+
         Collections.shuffle(deckContainer);
     }
 
     @Override
-    public Iterator<Card> iterator() {
-        return new Iterator<Card>() {
-            Iterator<Card> inner = deckContainer.iterator();
+    public Iterator<Integer> iterator() {
+        return new Iterator<Integer>() {
+            Iterator<Integer> inner = deckContainer.iterator();
             @Override
             public boolean hasNext() {
                 return true;
             }
 
             @Override
-            public Card next() {
-                // TODO fix it
+            public Integer next() {
                 if (inner.hasNext())
                 {
-                    Card tmp = inner.next();
-//                    lockCard(tmp);
-                    return tmp;
+                    Integer temp = inner.next();
+                    inner.remove();
+                    lockContainer.add(temp);
+                    return temp;
                 }
                 else
                 {
@@ -65,23 +67,23 @@ public class Deck implements Iterable<Card>{
             }
         };
     }
-    private void moveCard(Card card, LinkedList<Card> A, LinkedList<Card> B)
+    private void moveCard(Integer cardID, Collection<Integer> A, Collection<Integer> B)
     {
-        if (A.remove(card))
-            B.add(card);
+        if (A.remove(cardID))
+            B.add(cardID);
         else
             throw new MissingFormatArgumentException("Karta nie należy do tego stosu");
     }
-    public void lockCard(Card card)
+    public void lockCard(Integer cardID)
     {
-        moveCard(card,deckContainer,lockContainer);
+        moveCard(cardID, deckContainer,lockContainer);
     }
-    public void buryCard(Card card)
+    public void buryCard(Integer cardID)
     {
-        moveCard(card,lockContainer,graveContainer);
+        moveCard(cardID, lockContainer,graveContainer);
     }
-    public void ressurectCard(Card card)
+    public void ressurectCard(Integer cardID)
     {
-        moveCard(card,lockContainer,graveContainer);
+        moveCard(cardID, lockContainer,graveContainer);
     }
 }

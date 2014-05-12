@@ -34,7 +34,7 @@ public class GameService{
 
     }
 
-    public void getDeckList()
+    public List<Pair<Integer,CardInfo>> getDeckList()
     {
         //TODO: Change Signature to a value-type resembling CardInfo which will be possible for client to parse
         //TODO: Method should return a complete collection of CardInfo sygnatures
