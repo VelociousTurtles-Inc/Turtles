@@ -2,7 +2,6 @@ package Adapters;
 
 import Adapters.Interfaces.GameController;
 import Adapters.Interfaces.MenuController;
-import Services.GameService;
 import Views.Standard.Menu.StandardMenuView;
 
 /**
@@ -16,7 +15,7 @@ public class StandardMenuController implements MenuController {
 
     @Override
     public void startGame() {
-        GameController myGame = new SimpleGameAdapter(new GameService());
+        GameController myGame = new SimpleGameAdapter();
     }
 
     @Override
