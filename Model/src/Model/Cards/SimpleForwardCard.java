@@ -18,7 +18,7 @@ public class SimpleForwardCard extends Card {
 
     public static List<Card> populate()
     {
-        ArrayList<Card> result = new ArrayList<>();
+        ArrayList<Card> result = new ArrayList<Card>();
         for (int j = 0; j < 3; j++)
         for (int i = 0; i < 4; i++)
         result.add(new SimpleForwardCard(i));

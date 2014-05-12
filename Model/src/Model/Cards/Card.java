@@ -43,7 +43,7 @@ public abstract class Card {
     public static List<Card> populate()
     {
         assert false;
-        return new ArrayList<>();
+        return new ArrayList<Card>();
     }
 
     public abstract void play(Board board);
