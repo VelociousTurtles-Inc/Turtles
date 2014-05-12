@@ -123,11 +123,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Pair }
+     * Create an instance of {@link CardInfo }
      * 
      */
-    public Pair createPair() {
-        return new Pair();
+    public CardInfo createCardInfo() {
+        return new CardInfo();
     }
 
     /**
@@ -152,6 +152,14 @@ public class ObjectFactory {
      */
     public Field createField() {
         return new Field();
+    }
+
+    /**
+     * Create an instance of {@link CardInfoPair }
+     * 
+     */
+    public CardInfoPair createCardInfoPair() {
+        return new CardInfoPair();
     }
 
     /**

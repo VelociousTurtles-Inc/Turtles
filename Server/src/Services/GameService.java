@@ -3,8 +3,8 @@ package Services;
 import Model.Board.Board;
 import Model.Board.BoardGraph;
 import Model.Board.SimpleBoard;
-import Model.Cards.CardInfo;
 import Model.Cards.Card;
+import Model.Cards.CardInfoPair;
 import Model.Deck;
 import Model.GameInfo;
 import Model.Turtle;
@@ -37,14 +37,14 @@ public class GameService {
 
     }
 
-    public List<Pair<Integer, CardInfo>> getDeckList()
+    public List<CardInfoPair> getDeckList()
     {
         //TODO: Change Signature to a value-type resembling CardInfo which will be possible for client to parse
         //TODO: Method should return a complete collection of CardInfo sygnatures
-        List<Pair<Integer, CardInfo>>result = new ArrayList<>();
+        List<CardInfoPair>result = new ArrayList<>();
         for (Map.Entry<Integer,Card> entry:deck.getCards().entrySet())
         {
-            result.add(new Pair<Integer, CardInfo>(entry.getKey(),entry.getValue().getCardInfo()));
+            result.add(new CardInfoPair(entry.getKey(),entry.getValue().getCardInfo()));
         }
         return result;
     }

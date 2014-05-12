@@ -4,17 +4,11 @@
 <xsd:import namespace="http://Services/" schemaLocation="http://localhost:8080/Turtles/services/GameService?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="getGameBoardGraph">
-<part name="parameters" element="tns:getGameBoardGraph"/>
+<message name="getDeckList">
+<part name="parameters" element="tns:getDeckList"/>
 </message>
-<message name="getGameBoardGraphResponse">
-<part name="parameters" element="tns:getGameBoardGraphResponse"/>
-</message>
-<message name="getPlayerCards">
-<part name="parameters" element="tns:getPlayerCards"/>
-</message>
-<message name="getPlayerCardsResponse">
-<part name="parameters" element="tns:getPlayerCardsResponse"/>
+<message name="getDeckListResponse">
+<part name="parameters" element="tns:getDeckListResponse"/>
 </message>
 <message name="playCard">
 <part name="parameters" element="tns:playCard"/>
@@ -22,52 +16,49 @@
 <message name="playCardResponse">
 <part name="parameters" element="tns:playCardResponse"/>
 </message>
-<message name="getDeckList">
-<part name="parameters" element="tns:getDeckList"/>
-</message>
-<message name="getDeckListResponse">
-<part name="parameters" element="tns:getDeckListResponse"/>
-</message>
 <message name="getGameState">
 <part name="parameters" element="tns:getGameState"/>
 </message>
 <message name="getGameStateResponse">
 <part name="parameters" element="tns:getGameStateResponse"/>
 </message>
+<message name="getPlayerCards">
+<part name="parameters" element="tns:getPlayerCards"/>
+</message>
+<message name="getPlayerCardsResponse">
+<part name="parameters" element="tns:getPlayerCardsResponse"/>
+</message>
+<message name="getGameBoardGraph">
+<part name="parameters" element="tns:getGameBoardGraph"/>
+</message>
+<message name="getGameBoardGraphResponse">
+<part name="parameters" element="tns:getGameBoardGraphResponse"/>
+</message>
 <portType name="GameService">
-<operation name="getGameBoardGraph">
-<input wsam:Action="http://Services/GameService/getGameBoardGraphRequest" message="tns:getGameBoardGraph"/>
-<output wsam:Action="http://Services/GameService/getGameBoardGraphResponse" message="tns:getGameBoardGraphResponse"/>
-</operation>
-<operation name="getPlayerCards">
-<input wsam:Action="http://Services/GameService/getPlayerCardsRequest" message="tns:getPlayerCards"/>
-<output wsam:Action="http://Services/GameService/getPlayerCardsResponse" message="tns:getPlayerCardsResponse"/>
+<operation name="getDeckList">
+<input wsam:Action="http://Services/GameService/getDeckListRequest" message="tns:getDeckList"/>
+<output wsam:Action="http://Services/GameService/getDeckListResponse" message="tns:getDeckListResponse"/>
 </operation>
 <operation name="playCard">
 <input wsam:Action="http://Services/GameService/playCardRequest" message="tns:playCard"/>
 <output wsam:Action="http://Services/GameService/playCardResponse" message="tns:playCardResponse"/>
 </operation>
-<operation name="getDeckList">
-<input wsam:Action="http://Services/GameService/getDeckListRequest" message="tns:getDeckList"/>
-<output wsam:Action="http://Services/GameService/getDeckListResponse" message="tns:getDeckListResponse"/>
-</operation>
 <operation name="getGameState">
 <input wsam:Action="http://Services/GameService/getGameStateRequest" message="tns:getGameState"/>
 <output wsam:Action="http://Services/GameService/getGameStateResponse" message="tns:getGameStateResponse"/>
 </operation>
+<operation name="getPlayerCards">
+<input wsam:Action="http://Services/GameService/getPlayerCardsRequest" message="tns:getPlayerCards"/>
+<output wsam:Action="http://Services/GameService/getPlayerCardsResponse" message="tns:getPlayerCardsResponse"/>
+</operation>
+<operation name="getGameBoardGraph">
+<input wsam:Action="http://Services/GameService/getGameBoardGraphRequest" message="tns:getGameBoardGraph"/>
+<output wsam:Action="http://Services/GameService/getGameBoardGraphResponse" message="tns:getGameBoardGraphResponse"/>
+</operation>
 </portType>
 <binding name="GameServicePortBinding" type="tns:GameService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="getGameBoardGraph">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getPlayerCards">
+<operation name="getDeckList">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -85,7 +76,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getDeckList">
+<operation name="getGameState">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -94,7 +85,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getGameState">
+<operation name="getPlayerCards">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getGameBoardGraph">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

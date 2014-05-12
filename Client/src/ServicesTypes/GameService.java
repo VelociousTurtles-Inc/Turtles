@@ -28,26 +28,14 @@ public interface GameService {
     /**
      * 
      * @return
-     *     returns ServicesTypes.BoardGraph
+     *     returns java.util.List<ServicesTypes.CardInfoPair>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getGameBoardGraph", targetNamespace = "http://Services/", className = "ServicesTypes.GetGameBoardGraph")
-    @ResponseWrapper(localName = "getGameBoardGraphResponse", targetNamespace = "http://Services/", className = "ServicesTypes.GetGameBoardGraphResponse")
-    @Action(input = "http://Services/GameService/getGameBoardGraphRequest", output = "http://Services/GameService/getGameBoardGraphResponse")
-    public BoardGraph getGameBoardGraph();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<java.lang.Integer>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getPlayerCards", targetNamespace = "http://Services/", className = "ServicesTypes.GetPlayerCards")
-    @ResponseWrapper(localName = "getPlayerCardsResponse", targetNamespace = "http://Services/", className = "ServicesTypes.GetPlayerCardsResponse")
-    @Action(input = "http://Services/GameService/getPlayerCardsRequest", output = "http://Services/GameService/getPlayerCardsResponse")
-    public List<Integer> getPlayerCards();
+    @RequestWrapper(localName = "getDeckList", targetNamespace = "http://Services/", className = "ServicesTypes.GetDeckList")
+    @ResponseWrapper(localName = "getDeckListResponse", targetNamespace = "http://Services/", className = "ServicesTypes.GetDeckListResponse")
+    @Action(input = "http://Services/GameService/getDeckListRequest", output = "http://Services/GameService/getDeckListResponse")
+    public List<CardInfoPair> getDeckList();
 
     /**
      * 
@@ -64,18 +52,6 @@ public interface GameService {
     /**
      * 
      * @return
-     *     returns java.util.List<ServicesTypes.Pair>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getDeckList", targetNamespace = "http://Services/", className = "ServicesTypes.GetDeckList")
-    @ResponseWrapper(localName = "getDeckListResponse", targetNamespace = "http://Services/", className = "ServicesTypes.GetDeckListResponse")
-    @Action(input = "http://Services/GameService/getDeckListRequest", output = "http://Services/GameService/getDeckListResponse")
-    public List<Pair> getDeckList();
-
-    /**
-     * 
-     * @return
      *     returns ServicesTypes.GameInfo
      */
     @WebMethod
@@ -84,5 +60,29 @@ public interface GameService {
     @ResponseWrapper(localName = "getGameStateResponse", targetNamespace = "http://Services/", className = "ServicesTypes.GetGameStateResponse")
     @Action(input = "http://Services/GameService/getGameStateRequest", output = "http://Services/GameService/getGameStateResponse")
     public GameInfo getGameState();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<java.lang.Integer>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getPlayerCards", targetNamespace = "http://Services/", className = "ServicesTypes.GetPlayerCards")
+    @ResponseWrapper(localName = "getPlayerCardsResponse", targetNamespace = "http://Services/", className = "ServicesTypes.GetPlayerCardsResponse")
+    @Action(input = "http://Services/GameService/getPlayerCardsRequest", output = "http://Services/GameService/getPlayerCardsResponse")
+    public List<Integer> getPlayerCards();
+
+    /**
+     * 
+     * @return
+     *     returns ServicesTypes.BoardGraph
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getGameBoardGraph", targetNamespace = "http://Services/", className = "ServicesTypes.GetGameBoardGraph")
+    @ResponseWrapper(localName = "getGameBoardGraphResponse", targetNamespace = "http://Services/", className = "ServicesTypes.GetGameBoardGraphResponse")
+    @Action(input = "http://Services/GameService/getGameBoardGraphRequest", output = "http://Services/GameService/getGameBoardGraphResponse")
+    public BoardGraph getGameBoardGraph();
 
 }

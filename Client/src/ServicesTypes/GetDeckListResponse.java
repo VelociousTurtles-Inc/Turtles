@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://Services/}pair" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://Services/}cardInfoPair" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 public class GetDeckListResponse {
 
     @XmlElement(name = "return")
-    protected List<Pair> _return;
+    protected List<CardInfoPair> _return;
 
     /**
      * Gets the value of the return property.
@@ -55,13 +55,13 @@ public class GetDeckListResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Pair }
+     * {@link CardInfoPair }
      * 
      * 
      */
-    public List<Pair> getReturn() {
+    public List<CardInfoPair> getReturn() {
         if (_return == null) {
-            _return = new ArrayList<Pair>();
+            _return = new ArrayList<CardInfoPair>();
         }
         return this._return;
     }
