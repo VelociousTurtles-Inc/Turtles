@@ -57,8 +57,8 @@ public class ServicesHelper {
             }
         };
     }
-    public static Map<Integer, Card> createCardMap() {
-        Map<Integer, Card> resultMap = new TreeMap<Integer, Card>();
+    public static Map<Integer, CardInfo> createCardMap() {
+        Map<Integer, CardInfo> resultMap = new TreeMap<Integer, CardInfo>();
         for(int i = 1; i<=5; i++) {
             for(int j = 1; j<=3; j++) {
                 resultMap.put((3*(i-1)+j), new SimpleForwardCard(i));

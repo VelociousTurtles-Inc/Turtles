@@ -52,6 +52,7 @@ public abstract class Card {
     }*/
 
     public abstract void play(Board board);
+    public abstract CardInfo getCardInfo();
 
     @Override
     public String toString() {

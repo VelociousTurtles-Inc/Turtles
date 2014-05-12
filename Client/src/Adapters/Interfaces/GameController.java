@@ -1,7 +1,5 @@
 package Adapters.Interfaces;
 
-import Model.Cards.Card;
-
 import java.util.List;
 
 /**

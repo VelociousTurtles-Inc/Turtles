@@ -2,7 +2,6 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
-import Model.Cards.Card;
 import Views.Standard.Point;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

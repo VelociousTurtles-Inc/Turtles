@@ -48,6 +48,11 @@ public class SimpleForwardCard extends Card {
         }
     }
 
+    @Override
+    public CardInfo getCardInfo() {
+        return new CardInfo("SimpleForwardCard",this.id,this.color);
+    }
+
     public String toString()
     {
         return "Idz do przodu";
