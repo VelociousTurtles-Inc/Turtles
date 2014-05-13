@@ -2,10 +2,10 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
-import Model.Cards.SimpleForwardCard;
 import ModelHelpers.DebugWriter;
 import ServicesTypes.CardInfo;
 import Views.Board;
+import Views.BoardBootstrap;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +18,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mz18 on 8/05/14.
@@ -27,7 +30,7 @@ public class StandardGameView {
 
     private List<ImageView> cards = new ArrayList<ImageView>();
     private List<ImageView> turtles = new ArrayList<ImageView>();
-    private Board myBoard = Board.readBoard("sample board");
+    private Board myBoard = BoardBootstrap.createSampleBoard();
     private GameController myGameController;
     private Map<String, Image> cardImages;
 
@@ -72,7 +75,7 @@ public class StandardGameView {
 
         for (int i = 1; i <= 5; i++) {
             CardInfo cardInfo = cardsUpdate.get(i-1);
-            cards.get(i).setImage(cardImages.get(cardInfo.getType()+cardInfo.getColor()+".png"));
+            cards.get(i).setImage(cardImages.get(cardInfo.getType() + cardInfo.getColor() + ".png"));
         }
     }
 

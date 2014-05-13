@@ -5,7 +5,7 @@ package Views;
  */
 public class BoardBootstrap {
 
-    public static void createSampleBoard() {
+    public static Board createSampleBoard() {
         Board temp = new Board();
 
         //the first position is not used because the GUI designer counts from 1
@@ -32,7 +32,7 @@ public class BoardBootstrap {
 
         temp.name = "sample board";
 
-        temp.saveBoard();
+        return temp;
     }
 
 }
