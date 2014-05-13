@@ -10,13 +10,13 @@ import java.util.*;
  * Created by Maciej on 2014-05-05.
  */
 public class Deck implements Iterable<Integer>{
-    Map<Integer, Card> cardsMap;
+    public Map<Integer, Card> cardsMap;
     List<Integer> deckContainer;
     Set<Integer> lockContainer;
     Set<Integer> graveContainer;
-    public Map<Integer,Card> getCards()
+    public Collection<Integer> getCards()
     {
-        return cardsMap;
+        return deckContainer;
     }
     public Deck()
     {

@@ -87,13 +87,10 @@ public class GameService {
     @WebMethod
     public void playCard(int cardID)
     {
-        // I changed signature to more WebService Friendly
-        // TODO: Make it work again.
-        throw new WebServiceException();
-        /*if (!hand.contains(card))
+        if (!hand.contains(cardID))
             throw new WebServiceException("Zadany gracz nie posiada zadanej karty");
-        hand.remove(card);
-        deck.buryCard(card);
-        card.play(board);*/
+        hand.remove(cardID);
+        deck.buryCard(cardID);
+        deck.cardsMap.get(cardID).play(board);
     }
 }
