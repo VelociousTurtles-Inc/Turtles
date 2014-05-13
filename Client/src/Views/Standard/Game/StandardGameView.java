@@ -2,6 +2,7 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import ModelHelpers.DebugWriter;
 import ServicesTypes.CardInfo;
 import Views.Board;
 import javafx.application.Platform;
@@ -26,6 +27,7 @@ public class StandardGameView {
     private GameController myGameController;
 
     private void updateBoard(List<List<Integer>> updateForBoard) {
+        assert DebugWriter.write("Real Updating Board", updateForBoard.toArray());
         for(int i = 0; i<myBoard.size; i++) {
             if(updateForBoard.get(i) != null && updateForBoard.get(i).size() != 0) {
                 if(i == 0) {
@@ -46,6 +48,8 @@ public class StandardGameView {
     }
 
     private void updateCards(List<CardInfo> cardsUpdate) {
+        assert DebugWriter.write("Real Updating Cards", cardsUpdate);
+
 
     }
 
@@ -55,6 +59,7 @@ public class StandardGameView {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
+                    assert DebugWriter.write("Board Updating");
                     updateBoard(myGameController.getBoard());
                 }
             });
@@ -64,11 +69,13 @@ public class StandardGameView {
     private class CardsUpdater implements Event {
         @Override
         public void call() {
+            assert DebugWriter.write("Cards Updating");
             updateCards(myGameController.getCards());
         }
     }
 
     public StandardGameView(final GameController myGameController) {
+        assert DebugWriter.write("Create new StandardGameView", myGameController);
 
         this.myGameController = myGameController;
 
@@ -78,6 +85,7 @@ public class StandardGameView {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                assert DebugWriter.write("Launching StandardGameView");
                 Stage GameStage = new Stage();
 
                 FXMLLoader myLoader = new FXMLLoader();

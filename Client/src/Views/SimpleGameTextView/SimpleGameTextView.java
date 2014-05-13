@@ -1,5 +1,6 @@
 package Views.SimpleGameTextView;
 
+import ModelHelpers.DebugWriter;
 import ServicesTypes.BoardGraph;
 
 import java.util.List;
@@ -50,11 +51,13 @@ public class SimpleGameTextView  {
 
         @Override
         public void run() {
+            assert DebugWriter.write("Launching InputThread");
             while (!Thread.interrupted()) {
                 System.out.println("Play Card");
                 int card = scanner.nextInt();
                 //adapter.playCard(cards.get(card));
             }
+            assert DebugWriter.write("InputThread interrupted");
         }
     }
 }

@@ -1,6 +1,7 @@
 package Views.Standard.Menu;
 
 import Adapters.Interfaces.MenuController;
+import ModelHelpers.DebugWriter;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ public class StandardMenuView extends Application {
     }
 
     public StandardMenuView(MenuController myMenuController) {
+        assert DebugWriter.write("Create new StandardMenuView", myMenuController);
         StandardMenuView.myMenuController = myMenuController;
         Thread myRun = new Thread() {
             @Override
@@ -34,6 +36,7 @@ public class StandardMenuView extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        assert DebugWriter.write("Launching StandardMenuView " + this);
         FXMLLoader myLoader = new FXMLLoader();
         Parent root = (Parent) myLoader.load(getClass().getResource("Menu.fxml").openStream());
 
@@ -48,6 +51,7 @@ public class StandardMenuView extends Application {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent windowEvent) {
+                assert DebugWriter.write("handled CloseRequest from " + this);
                 System.exit(0);
             }
         });

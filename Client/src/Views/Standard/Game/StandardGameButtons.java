@@ -1,6 +1,7 @@
 package Views.Standard.Game;
 
 import Adapters.Interfaces.GameController;
+import ModelHelpers.DebugWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -60,26 +61,33 @@ public class StandardGameButtons {
     }
 
     @FXML protected void surrIt(ActionEvent event) {
+        assert DebugWriter.write("Surrender");
         myGameController.surrender();
     }
 
     @FXML protected void playIt(ActionEvent event) {
+        assert DebugWriter.write("Play Card " + chosenCard);
         myGameController.playCard(chosenCard);
     }
 
     @FXML protected void chooseFirst(ActionEvent event) {
+        assert DebugWriter.write("Chosed 1st Card");
         chosenCard = 1;
     }
     @FXML protected void chooseSecond(ActionEvent event) {
+        assert DebugWriter.write("Chosed 2nd Card");
         chosenCard = 2;
     }
     @FXML protected void chooseThird(ActionEvent event) {
+        assert DebugWriter.write("Chosed 3rd Card");
         chosenCard = 3;
     }
     @FXML protected void chooseFourth(ActionEvent event) {
+        assert DebugWriter.write("Chosed 4th Card");
         chosenCard = 4;
     }
     @FXML protected void chooseFifth(ActionEvent event) {
+        assert DebugWriter.write("Chosed 5th Card");
         chosenCard = 5;
     }
 

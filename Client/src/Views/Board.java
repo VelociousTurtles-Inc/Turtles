@@ -1,5 +1,7 @@
 package Views;
 
+import ModelHelpers.DebugWriter;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ public class Board implements Serializable {
 
 
     public static Board readBoard(String nname) {
+        assert DebugWriter.write("Reading Board \"" + nname + "\"");
         Board temp = new Board();
         try {
             FileInputStream fileIn = new FileInputStream(System.getProperty("user.dir")+"/Client/src/Views/Boards/"+nname);
@@ -40,6 +43,7 @@ public class Board implements Serializable {
 
 
     public void saveBoard() {
+        assert DebugWriter.write("Saving Board \"" + name + "\"");
         System.out.println(System.getProperty("user.dir"));
 
         try {
