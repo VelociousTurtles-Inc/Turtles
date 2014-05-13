@@ -104,11 +104,7 @@ public class GameService {
     {
         if (!hand.contains(cardID))
             throw new WebServiceException("Zadany gracz nie posiada zadanej karty: "+cardID+" "+hand.toString());
-        for (Iterator<Integer> it = hand.iterator();it.hasNext();)
-        {
-            int i = it.next();
-            if (i == cardID)it.remove();
-        }
+        hand.remove((Object)cardID);
         deck.buryCard(cardID);
         deck.cardsMap.get(cardID).play(board);
     }

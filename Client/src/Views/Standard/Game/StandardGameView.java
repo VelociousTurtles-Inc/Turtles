@@ -2,7 +2,6 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
-import Model.Cards.SimpleForwardCard;
 import ModelHelpers.DebugWriter;
 import ServicesTypes.CardInfo;
 import Views.Board;

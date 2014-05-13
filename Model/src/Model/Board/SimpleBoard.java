@@ -13,7 +13,7 @@ public class SimpleBoard extends Board{
     public SimpleBoard()
     {
         BoardGraph.Field F = graph.start = new BoardGraph.Field();
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 6; i++)
         {
             BoardGraph.Field S = new BoardGraph.Field();
             F.successors.add(S);
