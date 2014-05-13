@@ -24,18 +24,19 @@ public class ServicesHelper {
                     {
                         q = new LinkedList<Field>();
                         Queue<Field> tmp = new LinkedList<Field>();
-                        {
-                            Field ref = board.getStart();
-                            q.add(board.getStart());
-                            tmp.add(ref);
-                            while (!tmp.isEmpty())
-                                ref = tmp.remove();
+
+                        Field ref = board.getStart();
+                        q.add(board.getStart());
+                        tmp.add(ref);
+                        while (!tmp.isEmpty()) {
+                            ref = tmp.remove();
                             for (Field it : ref.getSuccessors()) {
                                 q.add(it);
                                 tmp.add(it);
                             }
-
                         }
+
+
                     }
 
                     @Override

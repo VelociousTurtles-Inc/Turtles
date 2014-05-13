@@ -8,6 +8,7 @@ import Model.Cards.CardInfoPair;
 import Model.Deck;
 import Model.GameInfo;
 import Model.Turtle;
+import Model.Utility.Utility;
 import com.sun.xml.ws.developer.Stateful;
 import com.sun.xml.ws.developer.servlet.HttpSessionScope;
 
@@ -19,7 +20,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * Main model class for interacting with specific game.
  * For now there's only one game.
@@ -40,7 +42,7 @@ public class GameService {
 
     static
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             info.turtles.add(new Turtle(i));
         }
@@ -67,6 +69,7 @@ public class GameService {
     @WebMethod
     public BoardGraph getGameBoardGraph()
     {
+           Utility.Debug.log(Level.INFO,"[getGameBoard DEBUG] board>>"+board.graph.toString());
         return board.graph;
     }
     @WebMethod

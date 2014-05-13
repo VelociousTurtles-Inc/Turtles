@@ -64,7 +64,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
     @Override
     public void playCard(int card) {
         if (playerHand == null)getCards();
-        int cardID = playerHand.get(card);
+        int cardID = playerHand.get(card-1);
         gameService.playCard(cardID);
         updateCards();
         updateBoards();

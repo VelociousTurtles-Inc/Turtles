@@ -38,6 +38,7 @@ public class SimpleForwardCard extends Card {
                 {
                     do {
                         field.successors.get(0).turtles.add(turtle);
+                        it.remove();
                         if (it.hasNext())turtle = it.next();
                         else turtle = null;
                     }while(turtle != null);
