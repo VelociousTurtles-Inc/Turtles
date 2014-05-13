@@ -21,6 +21,25 @@ public class StandardGameButtons {
     @FXML private ImageView fourthTurtle;
     @FXML private ImageView fifthTurtle;
 
+    @FXML private ImageView firstCardImage;
+    @FXML private ImageView secondCardImage;
+    @FXML private ImageView thirdCardImage;
+    @FXML private ImageView fourthCardImage;
+    @FXML private ImageView fifthCardImage;
+
+    List<ImageView> getCards() {
+        List<ImageView> cards = new ArrayList<ImageView>();
+
+        cards.add(null);
+        cards.add(fifthCardImage);
+        cards.add(secondCardImage);
+        cards.add(thirdCardImage);
+        cards.add(fourthCardImage);
+        cards.add(fifthCardImage);
+
+        return cards;
+    }
+
     List<ImageView> getTurtles() {
         List<ImageView> turtles = new ArrayList<ImageView>();
 
