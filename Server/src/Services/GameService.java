@@ -38,12 +38,16 @@ public class GameService {
     static Board board = new SimpleBoard();
     static GameInfo info = new GameInfo();
 
-    public GameService() {
+    static
+    {
         for (int i = 0; i < 4; i++)
         {
             info.turtles.add(new Turtle(i));
         }
         board.graph.start.turtles.addAll(info.turtles);
+
+    }
+    public GameService() {
         drawCards();
 
     }
