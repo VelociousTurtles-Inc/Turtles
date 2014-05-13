@@ -58,21 +58,21 @@
     </image>
   </ImageView><ImageView fx:id="fifthCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="881.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image url="@../../Images/Cards/NormalBlue.png" />
+<Image fx:id="Card1" url="@../../Images/Cards/Backwards5.png" />
 </image></ImageView><ImageView fx:id="fourthCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="797.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image url="@../../Images/Cards/NormalGreen.png" />
+<Image fx:id="Card2" url="@../../Images/Cards/Backwards5.png" />
 </image></ImageView><ImageView fx:id="thirdCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="712.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image url="@../../Images/Cards/NormalYellow.png" />
+<Image fx:id="Card3" url="@../../Images/Cards/Backwards5.png" />
 </image>
 </ImageView><ImageView fx:id="secondCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="627.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image url="@../../Images/Cards/NormalOrange.png" />
+<Image fx:id="Card4" url="@../../Images/Cards/Backwards5.png" />
 </image>
 </ImageView><ImageView fx:id="firstCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="541.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image url="@../../Images/Cards/NormalRed.png" />
+<Image fx:id="Card5" url="@../../Images/Cards/Backwards5.png" />
 
 </image>
 </ImageView>

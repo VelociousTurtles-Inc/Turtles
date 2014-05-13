@@ -29,10 +29,10 @@ public class StandardGameButtons {
     @FXML private ImageView fifthCardImage;
 
     List<ImageView> getCards() {
-        List<ImageView> cards = new ArrayList<ImageView>();
+        List<ImageView> cards = new ArrayList<>();
 
         cards.add(null);
-        cards.add(fifthCardImage);
+        cards.add(firstCardImage);
         cards.add(secondCardImage);
         cards.add(thirdCardImage);
         cards.add(fourthCardImage);
@@ -42,7 +42,7 @@ public class StandardGameButtons {
     }
 
     List<ImageView> getTurtles() {
-        List<ImageView> turtles = new ArrayList<ImageView>();
+        List<ImageView> turtles = new ArrayList<>();
 
         turtles.add(null);
         turtles.add(firstTurtle);

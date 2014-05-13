@@ -9,12 +9,15 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by mz18 on 8/05/14.
@@ -25,6 +28,7 @@ public class StandardGameView {
     private List<ImageView> turtles = new ArrayList<ImageView>();
     private Board myBoard = Board.readBoard("sample board");
     private GameController myGameController;
+    private Map<String, Image> cardImages;
 
     private void updateBoard(List<List<Integer>> updateForBoard) {
         assert DebugWriter.write("Real Updating Board", updateForBoard.toArray());
@@ -47,10 +51,28 @@ public class StandardGameView {
         }
     }
 
+    private Map<String, Image> loadCardImages(String dir) {
+        assert DebugWriter.write("Loading Card Images from " + dir);
+        Map<String, Image> result = new HashMap<>();
+        for (File file : new File(dir).listFiles()) {
+            assert DebugWriter.write("loading " + file.getName());
+            try {
+                result.put(file.getName(), new Image(new FileInputStream(file)));
+            } catch (FileNotFoundException e) {
+                assert DebugWriter.write("failed to load " + file.getName());
+            }
+        }
+        return result;
+    }
+
     private void updateCards(List<CardInfo> cardsUpdate) {
         assert DebugWriter.write("Real Updating Cards", cardsUpdate);
 
 
+        for (int i = 1; i <= 5; i++) {
+            CardInfo cardInfo = cardsUpdate.get(i);
+            cards.get(i).setImage(cardImages.get(cardInfo.getType()+cardInfo.getColor()+".png"));
+        }
     }
 
     private class BoardUpdater implements Event {
@@ -81,6 +103,10 @@ public class StandardGameView {
 
         myGameController.registerUpdateBoardEvent(new BoardUpdater());
         myGameController.registerUpdateCardsEvent(new CardsUpdater());
+
+        System.out.println(Arrays.toString(new File(".").listFiles()));
+        cardImages = loadCardImages("./Client/src/Views/Images/Cards/");
+        assert cardImages != null;
 
         Platform.runLater(new Runnable() {
             @Override
