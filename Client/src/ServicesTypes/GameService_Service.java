@@ -17,14 +17,14 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "GameServiceService", targetNamespace = "http://Services/", wsdlLocation = "http://localhost:8080/Turtles/services/GameService?wsdl")
-public class GameServiceService
+@WebServiceClient(name = "GameService", targetNamespace = "http://Services/", wsdlLocation = "http://localhost:8080/Turtles/services/GameService?wsdl")
+public class GameService_Service
     extends Service
 {
 
-    private final static URL GAMESERVICESERVICE_WSDL_LOCATION;
-    private final static WebServiceException GAMESERVICESERVICE_EXCEPTION;
-    private final static QName GAMESERVICESERVICE_QNAME = new QName("http://Services/", "GameServiceService");
+    private final static URL GAMESERVICE_WSDL_LOCATION;
+    private final static WebServiceException GAMESERVICE_EXCEPTION;
+    private final static QName GAMESERVICE_QNAME = new QName("http://Services/", "GameService");
 
     static {
         URL url = null;
@@ -34,31 +34,31 @@ public class GameServiceService
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
-        GAMESERVICESERVICE_WSDL_LOCATION = url;
-        GAMESERVICESERVICE_EXCEPTION = e;
+        GAMESERVICE_WSDL_LOCATION = url;
+        GAMESERVICE_EXCEPTION = e;
     }
 
-    public GameServiceService() {
-        super(__getWsdlLocation(), GAMESERVICESERVICE_QNAME);
+    public GameService_Service() {
+        super(__getWsdlLocation(), GAMESERVICE_QNAME);
     }
 
-    public GameServiceService(WebServiceFeature... features) {
-        super(__getWsdlLocation(), GAMESERVICESERVICE_QNAME, features);
+    public GameService_Service(WebServiceFeature... features) {
+        super(__getWsdlLocation(), GAMESERVICE_QNAME, features);
     }
 
-    public GameServiceService(URL wsdlLocation) {
-        super(wsdlLocation, GAMESERVICESERVICE_QNAME);
+    public GameService_Service(URL wsdlLocation) {
+        super(wsdlLocation, GAMESERVICE_QNAME);
     }
 
-    public GameServiceService(URL wsdlLocation, WebServiceFeature... features) {
-        super(wsdlLocation, GAMESERVICESERVICE_QNAME, features);
+    public GameService_Service(URL wsdlLocation, WebServiceFeature... features) {
+        super(wsdlLocation, GAMESERVICE_QNAME, features);
     }
 
-    public GameServiceService(URL wsdlLocation, QName serviceName) {
+    public GameService_Service(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
 
-    public GameServiceService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
+    public GameService_Service(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
         super(wsdlLocation, serviceName, features);
     }
 
@@ -85,10 +85,10 @@ public class GameServiceService
     }
 
     private static URL __getWsdlLocation() {
-        if (GAMESERVICESERVICE_EXCEPTION!= null) {
-            throw GAMESERVICESERVICE_EXCEPTION;
+        if (GAMESERVICE_EXCEPTION!= null) {
+            throw GAMESERVICE_EXCEPTION;
         }
-        return GAMESERVICESERVICE_WSDL_LOCATION;
+        return GAMESERVICE_WSDL_LOCATION;
     }
 
 }

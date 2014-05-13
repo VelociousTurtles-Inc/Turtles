@@ -7,6 +7,8 @@ import ModelHelpers.ServicesHelper;
 import ServicesTypes.*;
 import Views.Standard.Game.StandardGameView;
 
+import javax.xml.ws.WebServiceFeature;
+import javax.xml.ws.soap.AddressingFeature;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
     List<Event> cardsUpdates;
 
+    List<Integer> playerHand;
 
     public SimpleGameAdapter() {
         normalCardsMap = new HashMap<>();
@@ -36,7 +39,9 @@ public class SimpleGameAdapter extends Thread implements GameController {
         boardUpdates = new LinkedList<Event>();
         cardsUpdates = new LinkedList<Event>();
 
-        gameService = new ServicesTypes.GameServiceService().getGameServicePort();
+        //WebServiceFeature[] enabledRequiredwsf = {new AddressingFeature(true, true)};
+
+        gameService = new ServicesTypes.GameService_Service().getGameServicePort();//new ServicesTypes.GameService_Service().getPort(GameService.class,enabledRequiredwsf);
         for(CardInfoPair myPair : gameService.getDeckList()) {
             normalCardsMap.put(myPair.getKey(), myPair.getValue());
         }
@@ -58,7 +63,9 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
     @Override
     public void playCard(int card) {
-        gameService.playCard(card);
+        if (playerHand == null)getCards();
+        int cardID = playerHand.get(card);
+        gameService.playCard(cardID);
         updateCards();
         updateBoards();
     }
@@ -80,9 +87,9 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
     @Override
     public List<CardInfo> getCards() {
-        List<Integer> myCards = gameService.getPlayerCards();
+        playerHand = gameService.getPlayerCards();
         List<CardInfo> resultCards = new LinkedList<CardInfo>();
-        for(Integer i : myCards) {
+        for(Integer i : playerHand) {
             resultCards.add(normalCardsMap.get(i));
         }
         return resultCards;

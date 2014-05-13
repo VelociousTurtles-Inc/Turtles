@@ -33,7 +33,7 @@ public class SimpleForwardCard extends Card {
             for (Iterator<Turtle> it = field.turtles.iterator(); it.hasNext();)
             {
                 Turtle turtle = it.next();
-                if (field.successors.size() != 1)throw new IllegalArgumentException();
+                if (field.successors.size() != 1)throw new IllegalArgumentException("<"+(String.valueOf(field.successors.size()))+">");
                 if (turtle.color == this.getColor())
                 {
                     do {

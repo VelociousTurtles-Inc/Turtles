@@ -14,7 +14,9 @@ import com.sun.xml.ws.developer.servlet.HttpSessionScope;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceException;
+import javax.xml.ws.soap.Addressing;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -22,14 +24,19 @@ import java.util.Map;
  * Main model class for interacting with specific game.
  * For now there's only one game.
  */
-@WebService @Stateful
+/*@Stateful
 @HttpSessionScope
+@WebService(serviceName = "GameService")
+
+        //portName = "TestPort", endpointInterface = "ServicesTypes.GameService",wsdlLocation = "WEB-INF/services/GameService?wsdl")
+@Addressing(enabled=true, required=true)*/
+@WebService(serviceName = "GameService")
 public class GameService {
 
-    Deck deck = new Deck();
+    static Deck deck = new Deck();
 
-    Board board = new SimpleBoard();
-    GameInfo info = new GameInfo();
+    static Board board = new SimpleBoard();
+    static GameInfo info = new GameInfo();
 
     public GameService() {
         for (int i = 0; i < 4; i++)
@@ -37,6 +44,7 @@ public class GameService {
             info.turtles.add(new Turtle(i));
         }
         board.graph.start.turtles.addAll(info.turtles);
+        drawCards();
 
     }
 
@@ -75,7 +83,7 @@ public class GameService {
     private void drawCards()
 
     {
-        assert (hand.size() < 5);
+        if (hand.size() >= 5)return;
         for (Integer c: deck)
         {
             hand.add(c);
@@ -88,8 +96,12 @@ public class GameService {
     public void playCard(int cardID)
     {
         if (!hand.contains(cardID))
-            throw new WebServiceException("Zadany gracz nie posiada zadanej karty");
-        hand.remove(cardID);
+            throw new WebServiceException("Zadany gracz nie posiada zadanej karty: "+cardID+" "+hand.toString());
+        for (Iterator<Integer> it = hand.iterator();it.hasNext();)
+        {
+            int i = it.next();
+            if (i == cardID)it.remove();
+        }
         deck.buryCard(cardID);
         deck.cardsMap.get(cardID).play(board);
     }
