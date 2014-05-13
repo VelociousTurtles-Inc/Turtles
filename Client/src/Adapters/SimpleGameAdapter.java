@@ -107,7 +107,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
         for(Field f : ServicesHelper.getIterableBoard(myBoard)) {
             result.add(new LinkedList<Integer>());
             for(Turtle turtle : f.getTurtles()) {
-                result.get(result.size()-1).add(turtle.getColor());
+                result.get(result.size()-1).add(turtle.getColor()+1);
             }
         }
         return result;
