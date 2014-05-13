@@ -3,7 +3,7 @@ package Views.Standard.Game;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import ServicesTypes.CardInfo;
-import Views.Standard.Point;
+import Views.Board;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,28 +20,25 @@ import java.util.List;
  */
 public class StandardGameView {
 
+    private List<ImageView> cards = new ArrayList<ImageView>();
     private List<ImageView> turtles = new ArrayList<ImageView>();
-    private List<Point> startPositions = new ArrayList<Point>();
-    private List<Point> myBoard = new ArrayList<Point>();
-    private int size;
-
+    private Board myBoard = Board.readBoard("sample board");
     private GameController myGameController;
 
-
     private void updateBoard(List<List<Integer>> updateForBoard) {
-        for(int i = 0; i<size; i++) {
+        for(int i = 0; i<myBoard.size; i++) {
             if(updateForBoard.get(i) != null && updateForBoard.get(i).size() != 0) {
                 if(i == 0) {
                     for(int j = 0; j<updateForBoard.get(i).size(); j++) {
-                        turtles.get(updateForBoard.get(i).get(j)).setY(startPositions.get(updateForBoard.get(i).get(j)).y);
-                        turtles.get(updateForBoard.get(i).get(j)).setX(startPositions.get(updateForBoard.get(i).get(j)).x);
+                        turtles.get(updateForBoard.get(i).get(j)).setY(myBoard.startPositions.get(updateForBoard.get(i).get(j)).y);
+                        turtles.get(updateForBoard.get(i).get(j)).setX(myBoard.startPositions.get(updateForBoard.get(i).get(j)).x);
                         turtles.get(updateForBoard.get(i).get(j)).toBack();
                     }
                 }
                 int diff = (updateForBoard.get(i).size() - 1)*5;
                 for(int j = updateForBoard.get(i).size()-1; j>=0; j--) {
-                    turtles.get(updateForBoard.get(i).get(j)).setY(myBoard.get(i).y - diff + j*10);
-                    turtles.get(updateForBoard.get(i).get(j)).setX(myBoard.get(i).x);
+                    turtles.get(updateForBoard.get(i).get(j)).setY(myBoard.positions.get(i).y - diff + j*10);
+                    turtles.get(updateForBoard.get(i).get(j)).setX(myBoard.positions.get(i).x);
                     turtles.get(updateForBoard.get(i).get(j)).toFront();
                 }
             }
@@ -101,30 +98,11 @@ public class StandardGameView {
                 myOwnGameButtons.init(myGameController);
 
                 turtles = myOwnGameButtons.getTurtles();
-
-                startPositions.add(new Point(42, 42));
-
-                startPositions.add(new Point(60, 120));
-                startPositions.add(new Point(45, 170));
-                startPositions.add(new Point(60, 220));
-                startPositions.add(new Point(45, 270));
-                startPositions.add(new Point(60, 320));
-
-                myBoard.add(new Point(42, 42));
-
-                myBoard.add(new Point(170, 340));
-                myBoard.add(new Point(280, 290));
-                myBoard.add(new Point(380, 190));
-                myBoard.add(new Point(500, 130));
-                myBoard.add(new Point(610, 150));
-                myBoard.add(new Point(720, 200));
-                myBoard.add(new Point(840, 220));
-
-                size = myBoard.size();
+                cards = myOwnGameButtons.getCards();
 
                 for(int i = 1; i<=5; i++) {
-                    turtles.get(i).setX(startPositions.get(i).x);
-                    turtles.get(i).setY(startPositions.get(i).y);
+                    turtles.get(i).setX(myBoard.startPositions.get(i).x);
+                    turtles.get(i).setY(myBoard.startPositions.get(i).y);
                 }
             }
         });

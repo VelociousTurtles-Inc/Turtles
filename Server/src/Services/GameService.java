@@ -44,7 +44,7 @@ public class GameService {
     {
         //TODO: Change Signature to a value-type resembling CardInfo which will be possible for client to parse
         //TODO: Method should return a complete collection of CardInfo sygnatures
-        List<CardInfoPair>result = new ArrayList<>();
+        List<CardInfoPair>result = new ArrayList<CardInfoPair>();
         for (Map.Entry<Integer,Card> entry:deck.cardsMap.entrySet())
         {
             result.add(new CardInfoPair(entry.getKey(),entry.getValue().getCardInfo()));

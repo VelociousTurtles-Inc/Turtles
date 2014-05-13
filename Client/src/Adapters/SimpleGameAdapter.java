@@ -3,7 +3,6 @@ package Adapters;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
-import Model.Cards.Card;
 import ModelHelpers.ServicesHelper;
 import ServicesTypes.*;
 import Views.Standard.Game.StandardGameView;
