@@ -1,6 +1,5 @@
 package Tests;
 
-import Adapters.GameAdapterTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -10,7 +9,7 @@ import junit.framework.TestSuite;
 public class RunAllTests extends TestSuite {
     public static Test suite() {
         final TestSuite suite = new TestSuite();
-        suite.addTestSuite(GameAdapterTest.class);
+        //suite.addTestSuite(Test.class);
         return suite;
     }
 }
