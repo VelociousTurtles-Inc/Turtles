@@ -2,6 +2,7 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import Model.Cards.SimpleForwardCard;
 import ModelHelpers.DebugWriter;
 import ServicesTypes.CardInfo;
 import Views.Board;
@@ -70,7 +71,7 @@ public class StandardGameView {
 
 
         for (int i = 1; i <= 5; i++) {
-            CardInfo cardInfo = cardsUpdate.get(i);
+            CardInfo cardInfo = cardsUpdate.get(i-1);
             cards.get(i).setImage(cardImages.get(cardInfo.getType()+cardInfo.getColor()+".png"));
         }
     }
@@ -92,7 +93,13 @@ public class StandardGameView {
         @Override
         public void call() {
             assert DebugWriter.write("Cards Updating");
-            updateCards(myGameController.getCards());
+            final List<CardInfo> cardInfos = myGameController.getCards();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    updateCards(cardInfos);
+                }
+            });
         }
     }
 
@@ -101,10 +108,6 @@ public class StandardGameView {
 
         this.myGameController = myGameController;
 
-        myGameController.registerUpdateBoardEvent(new BoardUpdater());
-        myGameController.registerUpdateCardsEvent(new CardsUpdater());
-
-        System.out.println(Arrays.toString(new File(".").listFiles()));
         cardImages = loadCardImages("./Client/src/Views/Images/Cards/");
         assert cardImages != null;
 
@@ -140,5 +143,8 @@ public class StandardGameView {
                 }
             }
         });
+
+        myGameController.registerUpdateBoardEvent(new BoardUpdater());
+        myGameController.registerUpdateCardsEvent(new CardsUpdater());
     }
 }

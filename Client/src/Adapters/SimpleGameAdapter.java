@@ -3,6 +3,7 @@ package Adapters;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import ModelHelpers.DebugWriter;
 import ModelHelpers.ServicesHelper;
 import ServicesTypes.*;
 import Views.Standard.Game.StandardGameView;
@@ -77,12 +78,15 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
     @Override
     public void registerUpdateBoardEvent(Event updateBoardEvent) {
+        assert DebugWriter.write("Registering new Update Board Event");
         boardUpdates.add(updateBoardEvent);
     }
 
     @Override
     public void registerUpdateCardsEvent(Event updateCardEvent) {
+        assert DebugWriter.write("Registering new Update Cards Event");
         cardsUpdates.add(updateCardEvent);
+        updateCardEvent.call();
     }
 
     @Override
