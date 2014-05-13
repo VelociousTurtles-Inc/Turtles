@@ -12,7 +12,7 @@ public class SimpleBoard extends Board{
         {
             BoardGraph.Field S = new BoardGraph.Field();
             F.successors.add(S);
-            S=F;
+            F=S;
         }
         BoardGraph.Field End = new BoardGraph.Field(BoardGraph.FieldType.FINAL);
         F.successors.add(End);
