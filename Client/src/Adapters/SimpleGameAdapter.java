@@ -9,6 +9,7 @@ import Model.Cards.CardInfoPair;
 import Model.Turtles.Turtle;
 import ModelHelpers.DebugWriter;
 import ModelHelpers.ServicesHelper;
+import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameService;
 import Views.Standard.Game.StandardGameView;
 import org.cojen.dirmi.Environment;
@@ -51,7 +52,12 @@ public class SimpleGameAdapter extends Thread implements GameController {
         //gameService = new ServicesTypes.GameService_Service().getGameServicePort();//new ServicesTypes.GameService_Service().getPort(GameService.class,enabledRequiredwsf);
         Environment environment = new Environment();
         Session session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
-        gameService = (GameService) session.receive();
+        GameDispenser gameDispenser = (GameDispenser) session.receive();
+        Integer gameId = gameDispenser.createNewGame();
+        if (gameId == null) {
+            throw new NullPointerException();
+        }
+        gameService = gameDispenser.connectToGame(gameId);
         for(CardInfoPair myPair : gameService.getDeckList()) {
             normalCardsMap.put(myPair.getKey(), myPair.getValue());
         }

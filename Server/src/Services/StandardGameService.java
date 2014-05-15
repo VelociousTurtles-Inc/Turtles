@@ -24,12 +24,11 @@ import java.util.logging.Level;
 
 public class StandardGameService implements GameService {
 
-    static Deck deck = new Deck();
+    private Deck deck = new Deck();
 
-    static Board board = new SimpleBoard();
-    static GameInfo info = new GameInfo();
+    private Board board = new SimpleBoard();
+    private GameInfo info = new GameInfo();
 
-    static
     {
         for (int i = 0; i < 5; i++)
         {
