@@ -1,11 +1,10 @@
-package Adapters;
-
+import Adapters.StandardMenuController;
 import ModelHelpers.DebugWriter;
 
 /**
  * Created by michaziobro on 01.05.2014.
  */
-public class Main {
+public class Client {
 
     public static void main(String[] args) {
         assert DebugWriter.write("Starting application", args);

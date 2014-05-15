@@ -1,4 +1,4 @@
-package Model;
+package Model.Turtles;
 
 import Model.Board.BoardGraph;
 

@@ -1,6 +1,6 @@
 package Model.Board;
 
-import Model.Turtle;
+import Model.Turtles.Turtle;
 
 import java.util.*;
 
@@ -59,8 +59,8 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
 
         public final int id;
 
-        public List<Field> successors = new LinkedList<Field>();
-        public List<Turtle> turtles = new LinkedList<Turtle>();
+        public List<Field> successors = new LinkedList<>();
+        public List<Turtle> turtles = new LinkedList<>();
 
         public final FieldType type;
         public Field ()

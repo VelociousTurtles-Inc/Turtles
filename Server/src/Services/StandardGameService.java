@@ -6,34 +6,23 @@ import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Cards.CardInfoPair;
 import Model.Deck;
-import Model.GameInfo;
-import Model.Turtle;
+import Model.Game.GameInfo;
+import Model.Turtles.Turtle;
 import Model.Utility.Utility;
-import com.sun.xml.ws.developer.Stateful;
-import com.sun.xml.ws.developer.servlet.HttpSessionScope;
+import Server.Interfaces.GameService;
 
-import javax.jws.WebMethod;
-import javax.jws.WebService;
-import javax.xml.ws.WebServiceException;
-import javax.xml.ws.soap.Addressing;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  * Main model class for interacting with specific game.
  * For now there's only one game.
  */
-/*@Stateful
-@HttpSessionScope
-@WebService(serviceName = "GameService")
 
-        //portName = "TestPort", endpointInterface = "ServicesTypes.GameService",wsdlLocation = "WEB-INF/services/GameService?wsdl")
-@Addressing(enabled=true, required=true)*/
-@WebService(serviceName = "GameService")
-public class GameService {
+public class StandardGameService implements GameService {
 
     static Deck deck = new Deck();
 
@@ -49,7 +38,7 @@ public class GameService {
         board.graph.start.turtles.addAll(info.turtles);
 
     }
-    public GameService() {
+    public StandardGameService() {
         drawCards();
 
     }
@@ -66,14 +55,15 @@ public class GameService {
         return result;
     }
 
-    @WebMethod
-    public BoardGraph getGameBoardGraph()
+    @Override
+    public BoardGraph getGameBoardGraph() throws Exception
     {
            Utility.Debug.log(Level.INFO,"[getGameBoard DEBUG] board>>"+board.graph.toString());
         return board.graph;
     }
-    @WebMethod
-    public GameInfo getGameState()
+
+    @Override
+    public GameInfo getGameState() throws Exception
     {
         return info;
     }
@@ -81,8 +71,8 @@ public class GameService {
 
     List<Integer> hand = new ArrayList<Integer>();
 
-    @WebMethod
-    public List<Integer> getPlayerCards()
+    @Override
+    public List<Integer> getPlayerCards() throws Exception
     {
         if (hand.size() < 5)drawCards();
         return hand;
@@ -99,11 +89,11 @@ public class GameService {
         }
     }
 
-    @WebMethod
-    public void playCard(int cardID)
+    @Override
+    public void playCard(int cardID) throws Exception
     {
         if (!hand.contains(cardID))
-            throw new WebServiceException("Zadany gracz nie posiada zadanej karty: "+cardID+" "+hand.toString());
+            throw new RemoteException("No player has card: "+cardID+" "+hand.toString());
         hand.remove((Object)cardID);
         deck.buryCard(cardID);
         deck.cardsMap.get(cardID).play(board);

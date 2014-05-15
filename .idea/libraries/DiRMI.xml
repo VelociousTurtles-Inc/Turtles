@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="DiRMI">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/DiRMI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,4 +1,6 @@
-package Model;
+package Model.Game;
+
+import Model.Turtles.Turtle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ public class GameInfo {
     static int counter;
     public int id;
 
-    public List<Turtle> turtles = new ArrayList<Turtle>();
+    public List<Turtle> turtles = new ArrayList<>();
 
     public GameInfo() {
         id = counter++;

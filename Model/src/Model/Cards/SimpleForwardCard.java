@@ -3,7 +3,7 @@ package Model.Cards;
 
 import Model.Board.BoardGraph;
 import Model.Board.Board;
-import Model.Turtle;
+import Model.Turtles.Turtle;
 
 import java.util.ArrayList;
 import java.util.Iterator;
