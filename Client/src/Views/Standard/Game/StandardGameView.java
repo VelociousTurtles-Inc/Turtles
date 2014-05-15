@@ -56,6 +56,10 @@ public class StandardGameView {
     }
 
     private Map<String, Image> loadCardImages(String dir) {
+        // TODO load files from jar
+        // InputStream stream = Client.class.getClassLoader().getResource("Views/Images/Cards/Backwards0.png").openStream();
+        // new Image(stream);
+        // stream.close();
         assert DebugWriter.write("Loading Card Images from " + dir);
         Map<String, Image> result = new HashMap<>();
         for (File file : new File(dir).listFiles()) {
@@ -120,7 +124,7 @@ public class StandardGameView {
 
         this.myGameController = myGameController;
 
-        cardImages = loadCardImages("./Client/src/Views/Images/Cards/");
+        cardImages = loadCardImages("Client/src/Views/Images/Cards/");
         assert cardImages != null;
 
         Platform.runLater(new Runnable() {
