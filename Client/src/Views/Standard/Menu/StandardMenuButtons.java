@@ -19,7 +19,11 @@ public class StandardMenuButtons {
     }
 
     @FXML private void startGame(ActionEvent event) throws IOException {
-        myMenuController.startGame();
+        try {
+            myMenuController.startGame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @FXML private void exit(ActionEvent event) {
         myMenuController.exitProgram();

@@ -67,7 +67,11 @@ public class StandardGameButtons {
 
     @FXML protected void playIt(ActionEvent event) {
         assert DebugWriter.write("Play Card " + chosenCard);
-        myGameController.playCard(chosenCard);
+        try {
+            myGameController.playCard(chosenCard);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML protected void chooseFirst(ActionEvent event) {

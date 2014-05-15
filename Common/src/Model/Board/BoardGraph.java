@@ -12,6 +12,9 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
     static int counter;
     public Field start;
 
+    public Field getStart() {
+        return start;
+    }
 
 
     @Override
@@ -60,6 +63,10 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
         public final int id;
 
         public List<Field> successors = new LinkedList<>();
+        public List<Field> getSuccessors() {
+            return successors;
+        }
+
         public List<Turtle> turtles = new LinkedList<>();
 
         public final FieldType type;
@@ -71,6 +78,10 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
         {
             id = counter++;
             this.type = type;
+        }
+
+        public List<Turtle> getTurtles() {
+            return turtles;
         }
 
         @Override

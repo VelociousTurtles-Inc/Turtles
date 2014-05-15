@@ -1,7 +1,7 @@
 package ModelHelpers;
 
-import ServicesTypes.BoardGraph;
-import ServicesTypes.Field;
+
+import Model.Board.BoardGraph;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,26 +11,26 @@ import java.util.Queue;
  * Created by mz18 on 12/05/14.
  */
 public class ServicesHelper {
-    public static Iterable<Field> getIterableBoard(final BoardGraph board)
+    public static Iterable<BoardGraph.Field> getIterableBoard(final BoardGraph board)
     {
-        return new Iterable<Field>()
+        return new Iterable<BoardGraph.Field>()
         {
             @Override
-            public Iterator<Field> iterator() {
+            public Iterator<BoardGraph.Field> iterator() {
                 int position = 0;
-                return new Iterator<Field>() {
-                    Queue<Field> q;
+                return new Iterator<BoardGraph.Field>() {
+                    Queue<BoardGraph.Field> q;
 
                     {
-                        q = new LinkedList<Field>();
-                        Queue<Field> tmp = new LinkedList<Field>();
+                        q = new LinkedList<BoardGraph.Field>();
+                        Queue<BoardGraph.Field> tmp = new LinkedList<BoardGraph.Field>();
 
-                        Field ref = board.getStart();
+                        BoardGraph.Field ref = board.getStart();
                         q.add(board.getStart());
                         tmp.add(ref);
                         while (!tmp.isEmpty()) {
                             ref = tmp.remove();
-                            for (Field it : ref.getSuccessors()) {
+                            for (BoardGraph.Field it : ref.getSuccessors()) {
                                 q.add(it);
                                 tmp.add(it);
                             }
@@ -45,7 +45,7 @@ public class ServicesHelper {
                     }
 
                     @Override
-                    public Field next() {
+                    public BoardGraph.Field next() {
                         return q.remove();
                     }
 

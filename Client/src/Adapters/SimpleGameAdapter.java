@@ -3,17 +3,22 @@ package Adapters;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import Model.Board.BoardGraph;
+import Model.Cards.CardInfo;
+import Model.Cards.CardInfoPair;
+import Model.Turtles.Turtle;
 import ModelHelpers.DebugWriter;
 import ModelHelpers.ServicesHelper;
-import ServicesTypes.*;
+import Server.Interfaces.GameService;
 import Views.Standard.Game.StandardGameView;
+import org.cojen.dirmi.Environment;
+import org.cojen.dirmi.Session;
 
-import javax.xml.ws.WebServiceFeature;
-import javax.xml.ws.soap.AddressingFeature;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import Main.Client;
 
 /**
  * Created by larhard on 05.05.14.
@@ -34,7 +39,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
     List<Integer> playerHand;
 
-    public SimpleGameAdapter() {
+    public SimpleGameAdapter() throws Exception {
         normalCardsMap = new HashMap<>();
 
         boardUpdates = new LinkedList<Event>();
@@ -42,7 +47,11 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
         //WebServiceFeature[] enabledRequiredwsf = {new AddressingFeature(true, true)};
 
-        gameService = new ServicesTypes.GameService_Service().getGameServicePort();//new ServicesTypes.GameService_Service().getPort(GameService.class,enabledRequiredwsf);
+        // TODO achieving gameService
+        //gameService = new ServicesTypes.GameService_Service().getGameServicePort();//new ServicesTypes.GameService_Service().getPort(GameService.class,enabledRequiredwsf);
+        Environment environment = new Environment();
+        Session session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
+        gameService = (GameService) session.receive();
         for(CardInfoPair myPair : gameService.getDeckList()) {
             normalCardsMap.put(myPair.getKey(), myPair.getValue());
         }
@@ -63,7 +72,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
     }
 
     @Override
-    public void playCard(int card) {
+    public void playCard(int card) throws Exception {
         if (playerHand == null)getCards();
         int cardID = playerHand.get(card-1);
         gameService.playCard(cardID);
@@ -90,7 +99,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
     }
 
     @Override
-    public List<CardInfo> getCards() {
+    public List<CardInfo> getCards() throws Exception {
         playerHand = gameService.getPlayerCards();
         List<CardInfo> resultCards = new LinkedList<CardInfo>();
         for(Integer i : playerHand) {
@@ -100,11 +109,11 @@ public class SimpleGameAdapter extends Thread implements GameController {
     }
 
     @Override
-    public List<List<Integer>> getBoard() {
+    public List<List<Integer>> getBoard() throws Exception {
         List<List<Integer>> result = new LinkedList<List<Integer>>();
         BoardGraph myBoard = gameService.getGameBoardGraph();
 
-        for(Field f : ServicesHelper.getIterableBoard(myBoard)) {
+        for(BoardGraph.Field f : ServicesHelper.getIterableBoard(myBoard)) {
             result.add(new LinkedList<Integer>());
             for(Turtle turtle : f.getTurtles()) {
                 result.get(result.size()-1).add(turtle.getColor()+1);

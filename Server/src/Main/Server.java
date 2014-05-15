@@ -1,6 +1,7 @@
-package Services;
+package Main;
 
 import Server.Interfaces.GameService;
+import Services.StandardGameService;
 import org.cojen.dirmi.Environment;
 
 import java.util.Scanner;

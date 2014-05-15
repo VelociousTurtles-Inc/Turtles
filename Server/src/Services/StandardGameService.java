@@ -43,7 +43,8 @@ public class StandardGameService implements GameService {
 
     }
 
-    public List<CardInfoPair> getDeckList()
+    @Override
+    public List<CardInfoPair> getDeckList() throws Exception
     {
         //TODO: Change Signature to a value-type resembling CardInfo which will be possible for client to parse
         //TODO: Method should return a complete collection of CardInfo sygnatures

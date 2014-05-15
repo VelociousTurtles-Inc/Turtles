@@ -1,7 +1,7 @@
 package Views.SimpleGameTextView;
 
+import Model.Board.BoardGraph;
 import ModelHelpers.DebugWriter;
-import ServicesTypes.BoardGraph;
 
 import java.util.List;
 import java.util.Scanner;

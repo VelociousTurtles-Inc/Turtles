@@ -2,8 +2,8 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import Model.Cards.CardInfo;
 import ModelHelpers.DebugWriter;
-import ServicesTypes.CardInfo;
 import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;
@@ -86,7 +86,11 @@ public class StandardGameView {
                 @Override
                 public void run() {
                     assert DebugWriter.write("Board Updating");
-                    updateBoard(myGameController.getBoard());
+                    try {
+                        updateBoard(myGameController.getBoard());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }
@@ -96,13 +100,18 @@ public class StandardGameView {
         @Override
         public void call() {
             assert DebugWriter.write("Cards Updating");
-            final List<CardInfo> cardInfos = myGameController.getCards();
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    updateCards(cardInfos);
-                }
-            });
+            final List<CardInfo> cardInfos;
+            try {
+                cardInfos = myGameController.getCards();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateCards(cardInfos);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
