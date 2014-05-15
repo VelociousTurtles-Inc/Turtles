@@ -2,6 +2,7 @@ package Model.Cards;
 
 import Model.Board.Board;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,8 @@ import java.util.List;
  * It's though highly possible that above disclaimer will be a subject to many changes due to WebResult/Parameter character od this class.
  **/
 
-public abstract class Card {
+public abstract class Card implements Serializable {
+    private static final long serialVersionUID = 4650075470587092743L;
 
     final int color;
     final int id;

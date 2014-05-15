@@ -1,6 +1,10 @@
 package Model.Cards;
 
-public class CardInfoPair {
+import java.io.Serializable;
+
+public class CardInfoPair implements Serializable {
+    private static final long serialVersionUID = 1417800739846920137L;
+
     public final Integer key;
     public final CardInfo value;
 

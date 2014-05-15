@@ -2,13 +2,16 @@ package Model.Board;
 
 import Model.Turtles.Turtle;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by Maciej on 2014-05-05.
  */
-public class BoardGraph implements Iterable<BoardGraph.Field>
+public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable
 {
+    private static final long serialVersionUID = -2995046707046230025L;
+
     static int counter;
     public Field start;
 
@@ -58,7 +61,8 @@ public class BoardGraph implements Iterable<BoardGraph.Field>
     {
         FINAL, NORMAL
     }
-    public static class Field {
+    public static class Field implements Serializable {
+        private static final long serialVersionUID = -5406846425764941114L;
 
         public final int id;
 
