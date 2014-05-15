@@ -30,3 +30,9 @@ Jak na razie Service jest tworzony bezpośrednio, żeby było jak i z czym praco
 
 ---
 SimplerController istnieje, tyle, że model się... nie działa. Views.Main i Adapters.MainAdapter istnieją równolegle. Views.Main bez zmian, Adapters.MainAdapter ma podłączony tylko scenariusz gry na Views.SimpleGameTextView
+
+---
+
+Zrotowałem branche, bo nie chciało mi się czytać kodu Ziobera do ładowania kart. Jeśli tam było coś wartościowego, to powiedzcie.
+Zmieniamy framework (taka oddolna inicjatywa) na DiRMI. Już się z nią zaprzyjaźniłem. Daje nam to, co JAX-WS + to samo w drugą stronę + duże szanse, że pójdzie u wszystkich bez problemów.
+Będzie to jedyny jar na gicie, ale musiałem go dodać, bo nie mogłem nigdzie znaleźć do pobrania gotowego, więc zrobiłem go sam.
