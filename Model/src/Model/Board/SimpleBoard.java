@@ -1,31 +1,29 @@
 package Model.Board;
 
+import Interfaces.IBoard;
 import Model.Utility.Utility;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Created by Maciej on 2014-05-05.
  */
-public class SimpleBoard extends Board{
-
+public class SimpleBoard implements IBoard {
+    List<List<Integer>> myFields;
     public SimpleBoard()
     {
-        BoardGraph.Field F = graph.start = new BoardGraph.Field();
-        for (int i = 0; i < 6; i++)
-        {
-            BoardGraph.Field S = new BoardGraph.Field();
-            F.successors.add(S);
-            F=S;
+        myFields = new LinkedList<>();
+        for(int i = 0; i <= 7; i++) {
+            myFields.add(new LinkedList<Integer>());
         }
-        BoardGraph.Field End = new BoardGraph.Field(BoardGraph.FieldType.FINAL);
-        F.successors.add(End);
-
-        for (BoardGraph.Field field : graph)
-            Utility.Debug.log(Level.INFO,"[BOARD CONSTRUCTOR DEBUG]graph>>"+graph.toString());
-
+        for(int i = 1; i<=5; i++) {
+            myFields.get(0).add(i);
+        }
     }
-
-
+    public List<List<Integer>> asSimpleList() {
+        return myFields;
+    }
 }

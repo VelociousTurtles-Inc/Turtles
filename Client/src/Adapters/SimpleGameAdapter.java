@@ -3,7 +3,9 @@ package Adapters;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import Interfaces.IBoard;
 import Model.Board.BoardGraph;
+import Model.Cards.Card;
 import Model.Cards.CardInfo;
 import Model.Cards.CardInfoPair;
 import Model.Turtles.Turtle;
@@ -26,15 +28,10 @@ import Main.Client;
 
 public class SimpleGameAdapter extends Thread implements GameController {
 
-    Map<Integer, CardInfo> normalCardsMap;
+    Map<Integer, Card> normalCardsMap;
     GameService gameService;
 
-    //List of events for Board updates
-
     List<Event> boardUpdates;
-
-    //List of events for Cards updates
-
     List<Event> cardsUpdates;
 
     List<Integer> playerHand;
@@ -52,9 +49,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
         Environment environment = new Environment();
         Session session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
         gameService = (GameService) session.receive();
-        for(CardInfoPair myPair : gameService.getDeckList()) {
-            normalCardsMap.put(myPair.getKey(), myPair.getValue());
-        }
+        normalCardsMap = gameService.getDeckMap(0);
 
         StandardGameView myGameView = new StandardGameView(this);
     }
@@ -75,7 +70,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
     public void playCard(int card) throws Exception {
         if (playerHand == null)getCards();
         int cardID = playerHand.get(card-1);
-        gameService.playCard(cardID);
+        gameService.playCard(cardID, 0, 0);
         updateCards();
         updateBoards();
     }
@@ -99,9 +94,9 @@ public class SimpleGameAdapter extends Thread implements GameController {
     }
 
     @Override
-    public List<CardInfo> getCards() throws Exception {
-        playerHand = gameService.getPlayerCards();
-        List<CardInfo> resultCards = new LinkedList<CardInfo>();
+    public List<Card> getCards() throws Exception {
+        playerHand = gameService.getPlayerCards(0, 0);
+        List<Card> resultCards = new LinkedList<Card>();
         for(Integer i : playerHand) {
             resultCards.add(normalCardsMap.get(i));
         }
@@ -110,15 +105,6 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
     @Override
     public List<List<Integer>> getBoard() throws Exception {
-        List<List<Integer>> result = new LinkedList<List<Integer>>();
-        BoardGraph myBoard = gameService.getGameBoardGraph();
-
-        for(BoardGraph.Field f : ServicesHelper.getIterableBoard(myBoard)) {
-            result.add(new LinkedList<Integer>());
-            for(Turtle turtle : f.getTurtles()) {
-                result.get(result.size()-1).add(turtle.getColor()+1);
-            }
-        }
-        return result;
+        return gameService.getGameBoard(0).asSimpleList();
     }
 }

@@ -1,4 +1,4 @@
-package Model.Game;
+package Model;
 
 import Model.Turtles.Turtle;
 

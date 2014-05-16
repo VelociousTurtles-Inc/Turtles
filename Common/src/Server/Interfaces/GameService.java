@@ -1,19 +1,21 @@
 package Server.Interfaces;
 
-import Model.Board.BoardGraph;
-import Model.Cards.CardInfoPair;
-import Model.Game.GameInfo;
+import Model.Cards.Card;
 
 import java.rmi.Remote;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by larhard on 15.05.14.
  */
 public interface GameService extends Remote {
-    public List<CardInfoPair> getDeckList() throws Exception;
-    public BoardGraph getGameBoardGraph() throws Exception;
-    public GameInfo getGameState() throws Exception;
-    public List<Integer> getPlayerCards() throws Exception;
-    public void playCard(int cardID) throws Exception;
+    public Map<Integer, Card> getDeckMap(int gameID) throws Exception;
+    public Interfaces.IBoard getGameBoard(int gameID) throws Exception;
+    //public GameInfo getGameState(int gameID) throws Exception;
+    public List<Integer> getPlayerCards(int gameID, int playerID) throws Exception;
+    public void playCard(int cardID, int gameID, int playerID) throws Exception;
+    public int newGame();
+    public void joinGame(int gameID);
+    public void startGame(int gameID);
 }

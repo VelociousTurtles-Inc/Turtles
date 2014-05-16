@@ -2,6 +2,7 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import Model.Cards.Card;
 import Model.Cards.CardInfo;
 import ModelHelpers.DebugWriter;
 import Views.Board;
@@ -58,7 +59,12 @@ public class StandardGameView {
     private Map<String, Image> loadCardImages(String dir) {
         assert DebugWriter.write("Loading Card Images from " + dir);
         Map<String, Image> result = new HashMap<>();
-        for (File file : new File(dir).listFiles()) {
+        File directory  = new File(dir);
+        File[] myListOfFiles = directory.listFiles();
+        File[] a = new File(".").listFiles();
+        System.out.println(directory.exists());
+        System.out.println(directory.getAbsolutePath());
+        for (File file : myListOfFiles) {
             assert DebugWriter.write("loading " + file.getName());
             try {
                 result.put(file.getName(), new Image(new FileInputStream(file)));
@@ -69,12 +75,11 @@ public class StandardGameView {
         return result;
     }
 
-    private void updateCards(List<CardInfo> cardsUpdate) {
+    private void updateCards(List<Card> cardsUpdate) {
         assert DebugWriter.write("Real Updating Cards", cardsUpdate);
 
-
         for (int i = 1; i <= 5; i++) {
-            CardInfo cardInfo = cardsUpdate.get(i-1);
+            Card cardInfo = cardsUpdate.get(i-1);
             cards.get(i).setImage(cardImages.get(cardInfo.getType() + cardInfo.getColor() + ".png"));
         }
     }
@@ -100,7 +105,7 @@ public class StandardGameView {
         @Override
         public void call() {
             assert DebugWriter.write("Cards Updating");
-            final List<CardInfo> cardInfos;
+            final List<Card> cardInfos;
             try {
                 cardInfos = myGameController.getCards();
                 Platform.runLater(new Runnable() {
@@ -120,7 +125,7 @@ public class StandardGameView {
 
         this.myGameController = myGameController;
 
-        cardImages = loadCardImages("./Client/src/Views/Images/Cards/");
+        cardImages = loadCardImages("./Turtles/Client/src/Views/Images/Cards/");
         assert cardImages != null;
 
         Platform.runLater(new Runnable() {

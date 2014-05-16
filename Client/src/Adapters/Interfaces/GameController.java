@@ -1,6 +1,7 @@
 package Adapters.Interfaces;
 
 
+import Model.Cards.Card;
 import Model.Cards.CardInfo;
 
 import java.util.List;
@@ -15,6 +16,6 @@ public interface GameController {
     void registerUpdateBoardEvent(Event updateBoardEvent);
     void registerUpdateCardsEvent(Event updateCardEvent);
 
-    List<CardInfo> getCards() throws Exception;
+    List<Card> getCards() throws Exception;
     List<List<Integer>> getBoard() throws Exception;
 }
