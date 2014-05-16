@@ -1,15 +1,18 @@
 package Services;
 
+import Client.Interfaces.GameClient;
 import Model.Board.Board;
 import Model.Board.BoardGraph;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Cards.CardInfoPair;
+import Model.Cards.PlayedCard;
 import Model.Deck;
 import Model.Game.GameInfo;
 import Model.Turtles.Turtle;
 import Model.Utility.Utility;
 import Server.Interfaces.GameService;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -37,9 +40,17 @@ public class StandardGameService implements GameService {
         board.graph.start.turtles.addAll(info.turtles);
 
     }
+
+    private GameClient gameClient;
+
     public StandardGameService() {
         drawCards();
 
+    }
+
+    @Override
+    public void registerClient(GameClient gameClient) throws Exception {
+        this.gameClient = gameClient;
     }
 
     @Override
@@ -47,7 +58,7 @@ public class StandardGameService implements GameService {
     {
         //TODO: Change Signature to a value-type resembling CardInfo which will be possible for client to parse
         //TODO: Method should return a complete collection of CardInfo sygnatures
-        List<CardInfoPair>result = new ArrayList<CardInfoPair>();
+        List<CardInfoPair>result = new ArrayList<>();
         for (Map.Entry<Integer,Card> entry:deck.cardsMap.entrySet())
         {
             result.add(new CardInfoPair(entry.getKey(),entry.getValue().getCardInfo()));
@@ -69,7 +80,7 @@ public class StandardGameService implements GameService {
     }
     // TODO: Move to Player class
 
-    List<Integer> hand = new ArrayList<Integer>();
+    List<Integer> hand = new ArrayList<>();
 
     @Override
     public List<Integer> getPlayerCards() throws Exception
@@ -97,5 +108,10 @@ public class StandardGameService implements GameService {
         hand.remove((Object)cardID);
         deck.buryCard(cardID);
         deck.cardsMap.get(cardID).play(board);
+    }
+
+    @Override
+    public List<PlayedCard> getPlayedCards() throws Exception {
+        throw new NotImplementedException();
     }
 }

@@ -3,6 +3,7 @@ package Adapters;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import Client.Interfaces.GameClient;
 import Model.Board.BoardGraph;
 import Model.Cards.CardInfo;
 import Model.Cards.CardInfoPair;
@@ -12,9 +13,11 @@ import ModelHelpers.ServicesHelper;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameService;
 import Views.Standard.Game.StandardGameView;
+import org.cojen.dirmi.Asynchronous;
 import org.cojen.dirmi.Environment;
 import org.cojen.dirmi.Session;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,7 +28,7 @@ import Main.Client;
  * Created by larhard on 05.05.14.
  */
 
-public class SimpleGameAdapter extends Thread implements GameController {
+public class SimpleGameAdapter extends Thread implements GameController, GameClient {
 
     Map<Integer, CardInfo> normalCardsMap;
     GameService gameService;
@@ -58,6 +61,8 @@ public class SimpleGameAdapter extends Thread implements GameController {
             throw new NullPointerException();
         }
         gameService = gameDispenser.connectToGame(gameId);
+        gameService.registerClient(this);
+
         for(CardInfoPair myPair : gameService.getDeckList()) {
             normalCardsMap.put(myPair.getKey(), myPair.getValue());
         }
@@ -107,7 +112,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
     @Override
     public List<CardInfo> getCards() throws Exception {
         playerHand = gameService.getPlayerCards();
-        List<CardInfo> resultCards = new LinkedList<CardInfo>();
+        List<CardInfo> resultCards = new LinkedList<>();
         for(Integer i : playerHand) {
             resultCards.add(normalCardsMap.get(i));
         }
@@ -116,7 +121,7 @@ public class SimpleGameAdapter extends Thread implements GameController {
 
     @Override
     public List<List<Integer>> getBoard() throws Exception {
-        List<List<Integer>> result = new LinkedList<List<Integer>>();
+        List<List<Integer>> result = new LinkedList<>();
         BoardGraph myBoard = gameService.getGameBoardGraph();
 
         for(BoardGraph.Field f : ServicesHelper.getIterableBoard(myBoard)) {
@@ -126,5 +131,9 @@ public class SimpleGameAdapter extends Thread implements GameController {
             }
         }
         return result;
+    }
+
+    @Override
+    public void cardsPlayed() throws RemoteException {
     }
 }

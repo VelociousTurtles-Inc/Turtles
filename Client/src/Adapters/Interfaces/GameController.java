@@ -2,6 +2,7 @@ package Adapters.Interfaces;
 
 
 import Model.Cards.CardInfo;
+import org.cojen.dirmi.Asynchronous;
 
 import java.util.List;
 
