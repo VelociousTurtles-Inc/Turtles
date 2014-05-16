@@ -42,14 +42,15 @@ public class StandardGameView {
                     for(int j = 0; j<temp.size(); j++) {
                         turtles.get(temp.get(j)).setY(myBoard.startPositions.get(temp.get(j)).y);
                         turtles.get(temp.get(j)).setX(myBoard.startPositions.get(temp.get(j)).x);
-                        turtles.get(temp.get(j)).toBack();
+                        turtles.get(temp.get(j)).toFront();
                     }
-                }
-                int diff = (updateForBoard.get(i).size() - 1)*5;
-                for(int j = updateForBoard.get(i).size()-1; j>=0; j--) {
-                    turtles.get(temp.get(j)).setY(myBoard.positions.get(i).y - diff + j*10);
-                    turtles.get(temp.get(j)).setX(myBoard.positions.get(i).x);
-                    turtles.get(temp.get(j)).toFront();
+                } else {
+                    int diff = (updateForBoard.get(i).size() - 1) * 5;
+                    for (int j = updateForBoard.get(i).size() - 1; j >= 0; j--) {
+                        turtles.get(temp.get(j)).setY(myBoard.positions.get(i).y - diff + j * 10);
+                        turtles.get(temp.get(j)).setX(myBoard.positions.get(i).x);
+                        turtles.get(temp.get(j)).toFront();
+                    }
                 }
             }
         }
