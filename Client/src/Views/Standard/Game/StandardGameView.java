@@ -18,38 +18,38 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by mz18 on 8/05/14.
  */
 public class StandardGameView {
 
-    private List<ImageView> cards = new ArrayList<ImageView>();
+    private List<ImageView> slots = new ArrayList<ImageView>();
     private List<ImageView> turtles = new ArrayList<ImageView>();
     private Board myBoard = BoardBootstrap.createSampleBoard();
     private GameController myGameController;
     private Map<String, Image> cardImages;
+    private Map<Integer, String> colorMap = Mapper.getColorMap();
 
     private void updateBoard(List<List<Integer>> updateForBoard) {
         assert DebugWriter.write("Real Updating Board", updateForBoard.toArray());
         for(int i = 0; i<myBoard.size; i++) {
             if(updateForBoard.get(i) != null && updateForBoard.get(i).size() != 0) {
+                List<Integer> temp = updateForBoard.get(i);
+                Collections.reverse(temp);
                 if(i == 0) {
-                    for(int j = 0; j<updateForBoard.get(i).size(); j++) {
-                        turtles.get(updateForBoard.get(i).get(j)).setY(myBoard.startPositions.get(updateForBoard.get(i).get(j)).y);
-                        turtles.get(updateForBoard.get(i).get(j)).setX(myBoard.startPositions.get(updateForBoard.get(i).get(j)).x);
-                        turtles.get(updateForBoard.get(i).get(j)).toBack();
+                    for(int j = 0; j<temp.size(); j++) {
+                        turtles.get(temp.get(j)).setY(myBoard.startPositions.get(temp.get(j)).y);
+                        turtles.get(temp.get(j)).setX(myBoard.startPositions.get(temp.get(j)).x);
+                        turtles.get(temp.get(j)).toBack();
                     }
                 }
                 int diff = (updateForBoard.get(i).size() - 1)*5;
                 for(int j = updateForBoard.get(i).size()-1; j>=0; j--) {
-                    turtles.get(updateForBoard.get(i).get(j)).setY(myBoard.positions.get(i).y - diff + j*10);
-                    turtles.get(updateForBoard.get(i).get(j)).setX(myBoard.positions.get(i).x);
-                    turtles.get(updateForBoard.get(i).get(j)).toFront();
+                    turtles.get(temp.get(j)).setY(myBoard.positions.get(i).y - diff + j*10);
+                    turtles.get(temp.get(j)).setX(myBoard.positions.get(i).x);
+                    turtles.get(temp.get(j)).toFront();
                 }
             }
         }
@@ -79,7 +79,8 @@ public class StandardGameView {
 
         for (int i = 1; i <= 5; i++) {
             CardInfo cardInfo = cardsUpdate.get(i-1);
-            cards.get(i).setImage(cardImages.get(cardInfo.getType() + cardInfo.getColor() + ".png"));
+            System.out.println(cardInfo.getType() + colorMap.get(cardInfo.getColor() + 1) + ".png");
+            slots.get(i).setImage(cardImages.get(cardInfo.getType() + colorMap.get(cardInfo.getColor() + 1) + ".png"));
         }
     }
 
@@ -151,7 +152,7 @@ public class StandardGameView {
                 myOwnGameButtons.init(myGameController);
 
                 turtles = myOwnGameButtons.getTurtles();
-                cards = myOwnGameButtons.getCards();
+                slots = myOwnGameButtons.getCardSlots();
 
                 for(int i = 1; i<=5; i++) {
                     turtles.get(i).setX(myBoard.startPositions.get(i).x);

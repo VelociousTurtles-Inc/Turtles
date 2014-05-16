@@ -28,7 +28,7 @@ public class StandardGameButtons {
     @FXML private ImageView fourthCardImage;
     @FXML private ImageView fifthCardImage;
 
-    List<ImageView> getCards() {
+    List<ImageView> getCardSlots() {
         List<ImageView> cards = new ArrayList<>();
 
         cards.add(null);

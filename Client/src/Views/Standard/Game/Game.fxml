@@ -32,29 +32,29 @@
     <Button fx:id="firstCard" layoutX="531.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseFirst" prefHeight="70.0" prefWidth="76.0" />
       <ImageView fx:id="firstTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
           <image>
-              <Image url="@../../Images/Turtles/turtle1.png" />
+              <Image url="@../../Images/Turtles/turtleBlue.png" />
 
           </image>
     </ImageView>
     <ImageView fx:id="secondTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@../../Images/Turtles/turtle2.png" />
+        <Image url="@../../Images/Turtles/turtleGreen.png" />
 
       </image>
     </ImageView>
     <ImageView fx:id="thirdTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@../../Images/Turtles/turtle3.png" />
+        <Image url="@../../Images/Turtles/turtleYellow.png" />
       </image>
     </ImageView>
     <ImageView fx:id="fourthTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@../../Images/Turtles/turtle4.png" />
+        <Image url="@../../Images/Turtles/turtleOrange.png" />
       </image>
     </ImageView>
   <ImageView fx:id="fifthTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
     <image>
-      <Image url="@../../Images/Turtles/turtle5.png" />
+      <Image url="@../../Images/Turtles/turtleRed.png" />
     </image>
   </ImageView><ImageView fx:id="fifthCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="881.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
