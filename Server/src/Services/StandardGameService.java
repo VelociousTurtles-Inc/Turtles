@@ -16,6 +16,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -112,6 +113,7 @@ public class StandardGameService implements GameService {
 
     @Override
     public List<PlayedCard> getPlayedCards() throws Exception {
-        throw new NotImplementedException();
+        // TODO make it work
+        return Arrays.asList(new PlayedCard(1, 1), new PlayedCard(1, 2), new PlayedCard(1, 3));
     }
 }
