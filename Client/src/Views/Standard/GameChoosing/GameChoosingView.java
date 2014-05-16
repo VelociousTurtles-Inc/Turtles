@@ -40,6 +40,7 @@ public class GameChoosingView {
                 myButtons.setStage(myStage);
 
                 myStage.setScene(new Scene(myParent));
+                myStage.show();
             }
         });
     }

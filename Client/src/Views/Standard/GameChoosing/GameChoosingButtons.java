@@ -41,11 +41,12 @@ public class GameChoosingButtons {
     }
     @FXML
     public void newGame(ActionEvent actionEvent) {
-        controller.create();
+        //controller.create();
+        myObservableTableList.add(new SimpleGameInfo("Something1", "Something2", "Something3"));
     }
     @FXML
     public void join(ActionEvent actionEvent) {
-        controller.join();
+        myObservableTableList.remove(0);
     }
 
     public void setController(GameChoosingController controller) {
@@ -62,18 +63,16 @@ public class GameChoosingButtons {
             }
         });
 
-        nameColumn.setCellFactory(new PropertyValueFactory<SimpleGameInfo,String>("gameName"));
-        nameColumn.setCellFactory(new PropertyValueFactory<SimpleGameInfo,String>("gameStatus"));
-        nameColumn.setCellFactory(new PropertyValueFactory<SimpleGameInfo,String>("numberOfPlayers"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<SimpleGameInfo, String>("gameName"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<SimpleGameInfo, String>("gameStatus"));
+        numberColumn.setCellValueFactory(new PropertyValueFactory<SimpleGameInfo, String>("numberOfPlayers"));
 
         myTableList = new ArrayList<>();
+        myTableList.add(new SimpleGameInfo("nazwa1", "nazwa2", "nazwa3"));
+
         myObservableTableList = FXCollections.observableArrayList(myTableList);
 
         myTable.setItems(myObservableTableList);
-    }
-
-    public GameChoosingController getController() {
-        return controller;
     }
 
     public void setStage(Stage myStage) {

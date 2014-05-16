@@ -9,7 +9,8 @@ import Views.Standard.GameChoosing.GameChoosingView;
  */
 public class StandardGameChoosingController implements GameChoosingController {
     public StandardGameChoosingController() {
-        new GameChoosingView(this);
+        GameChoosingView myView = new GameChoosingView(this);
+        myView.start();
     }
 
     Event endIt;
