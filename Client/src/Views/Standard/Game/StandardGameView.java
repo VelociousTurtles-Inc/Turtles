@@ -80,7 +80,6 @@ public class StandardGameView {
 
         for (int i = 1; i <= 5; i++) {
             CardInfo cardInfo = cardsUpdate.get(i-1);
-            System.out.println(cardInfo.getType() + colorMap.get(cardInfo.getColor() + 1) + ".png");
             slots.get(i).setImage(cardImages.get(cardInfo.getType() + colorMap.get(cardInfo.getColor() + 1) + ".png"));
         }
     }
