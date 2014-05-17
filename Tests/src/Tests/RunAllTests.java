@@ -1,6 +1,8 @@
 package Tests;
 
+import Colors.ColorsTest;
 import Images.ImagesTest;
+import Utils.RangeTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -14,7 +16,9 @@ public class RunAllTests extends TestSuite {
      */
     public static Test suite() {
         final TestSuite suite = new TestSuite();
-        suite.addTestSuite(Images.ImagesTest.class);
+        suite.addTestSuite(ImagesTest.class);
+        suite.addTestSuite(ColorsTest.class);
+        suite.addTestSuite(RangeTest.class);
         return suite;
     }
 }
