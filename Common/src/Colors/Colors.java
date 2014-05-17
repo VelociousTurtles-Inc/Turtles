@@ -1,8 +1,6 @@
 package Colors;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by larhard on 17.05.14.
@@ -13,6 +11,12 @@ public enum Colors {
     private static Map<Object, Colors> objectColorsMap = new HashMap<>();
     private static Map<Colors, Integer> colorsIntegerMap = new HashMap<>();
     private static Map<Colors, String> colorsStringMap = new HashMap<>();
+    private static List<Integer> realIntegers = new ArrayList<>();
+    private static List<Integer> allIntegers = new ArrayList<>();
+    private static List<String> realStrings = new ArrayList<>();
+    private static List<String> allStrings = new ArrayList<>();
+    private static List<Colors> realColors = new ArrayList<>();
+    private static List<Colors> allColors = new ArrayList<>();
 
     static {
         colorsIntegerMap.put(NULL, 0);
@@ -31,16 +35,21 @@ public enum Colors {
 
         for (Colors i : colorsIntegerMap.keySet()) {
             objectColorsMap.put(i, i);
-        }
-        for (Colors i : colorsStringMap.keySet()) {
-            objectColorsMap.put(i, i);
+            objectColorsMap.put(colorsIntegerMap.get(i), i);
+            if (NULL != i) {
+                realIntegers.add(colorsIntegerMap.get(i));
+                realColors.add(i);
+            }
+            allIntegers.add(colorsIntegerMap.get(i));
+            allColors.add(i);
         }
 
-        for (Colors i : colorsIntegerMap.keySet()) {
-            objectColorsMap.put(colorsIntegerMap.get(i), i);
-        }
         for (Colors i : colorsStringMap.keySet()) {
             objectColorsMap.put(colorsStringMap.get(i), i);
+            if (NULL != i) {
+                realStrings.add(colorsStringMap.get(i));
+            }
+            allStrings.add(colorsStringMap.get(i));
         }
     }
 
@@ -64,5 +73,29 @@ public enum Colors {
     }
     public static Map<Colors, String> getColorsStringMap() {
         return colorsStringMap;
+    }
+
+    public static Iterable<Integer> getRealIntegers() {
+        return realIntegers;
+    }
+
+    public static Iterable<Colors> getRealColors() {
+        return realColors;
+    }
+
+    public static Iterable<Colors> getAllColors() {
+        return allColors;
+    }
+
+    public static Iterable<String> getRealStrings() {
+        return realStrings;
+    }
+
+    public static Iterable<Integer> getAllIntegers() {
+        return allIntegers;
+    }
+
+    public static Iterable<String> getAllStrings() {
+        return allStrings;
     }
 }

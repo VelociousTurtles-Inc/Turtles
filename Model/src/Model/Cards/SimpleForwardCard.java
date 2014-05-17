@@ -1,6 +1,7 @@
 package Model.Cards;
 
 
+import Colors.Colors;
 import Model.Board.BoardGraph;
 import Model.Board.Board;
 import Model.Turtles.Turtle;
@@ -20,8 +21,8 @@ public class SimpleForwardCard extends Card {
     {
         ArrayList<Card> result = new ArrayList<>();
         for (int j = 0; j < 3; j++)
-        for (int i = 0; i < 5; i++)
-        result.add(new SimpleForwardCard(i));
+            for (int i : Colors.getRealIntegers())
+                result.add(new SimpleForwardCard(i-1));
         return result;
     }
 
