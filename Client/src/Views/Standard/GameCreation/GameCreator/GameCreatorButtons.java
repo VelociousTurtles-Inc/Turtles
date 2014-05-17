@@ -27,7 +27,7 @@ public class GameCreatorButtons {
         myStage.close();
     }
 
-    public void create(ActionEvent actionEvent) {
+    public void create(ActionEvent actionEvent) throws Exception {
         myController.create(String.valueOf(name.getCharacters()));
     }
 }

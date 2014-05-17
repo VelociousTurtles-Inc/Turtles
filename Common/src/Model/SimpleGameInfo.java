@@ -1,12 +1,13 @@
 package Model;
 
+import Client.Interfaces.ThreeStringsGet;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Created by michaziobro on 16.05.2014.
  */
 
-public class SimpleGameInfo {
+public class SimpleGameInfo implements ThreeStringsGet {
 
     private final SimpleStringProperty gameName;
     private final SimpleStringProperty gameStatus;

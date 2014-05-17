@@ -27,7 +27,10 @@ public class StandardGameManager implements GameStarter, GameManager {
     IBoard board;
     ICards cards;
 
-    public StandardGameManager() {
+    public StandardGameManager(String name) {
+        started = false;
+        this.name = name;
+        numberOfPlayers = 0;
     }
 
     @Override

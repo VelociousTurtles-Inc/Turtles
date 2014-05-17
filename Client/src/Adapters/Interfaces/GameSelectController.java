@@ -1,6 +1,8 @@
 package Adapters.Interfaces;
 
+import Client.Interfaces.ThreeStringsGet;
 import Model.SimpleGameInfo;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -13,5 +15,6 @@ public interface GameSelectController {
     public void create();
     public void setClosingEvent(Event myClosingEvent);
     public void setUpdateEvent(Event updateEvent);
-    public void update(List<SimpleGameInfo> updateGameInfo);
+
+    List<ThreeStringsGet> getUpdateList();
 }

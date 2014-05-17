@@ -3,6 +3,7 @@ package Adapters;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
 import Client.Interfaces.GameSelecter;
+import Client.Interfaces.ThreeStringsGet;
 import Main.Client;
 import Model.SimpleGameInfo;
 import Views.Standard.GameSelect.GameSelectView;
@@ -20,7 +21,7 @@ import java.util.List;
 public class StandardGameSelectController implements GameSelectController, GameSelecter {
 
     GameDispenser myGameDispenser;
-    List<SimpleGameInfo> simpleGameInfos;
+    List<ThreeStringsGet> simpleGameInfos;
 
     Event endIt;
     Event updateIt;
@@ -34,12 +35,8 @@ public class StandardGameSelectController implements GameSelectController, GameS
         Environment environment = new Environment();
         Session session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
 
-        GameDispenser gameDispenser = (GameDispenser) session.receive();
-
-        /*Integer gameId = gameDispenser.createNewGame();
-        if (gameId == null) {
-            throw new NullPointerException();
-        }*/
+        myGameDispenser = (GameDispenser) session.receive();
+        myGameDispenser.registerGameSelector(this);
 
     }
 
@@ -55,8 +52,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void create() {
-        StandardGameCreatorController mySGCC = new StandardGameCreatorController();
-
+        StandardGameCreatorController mySGCC = new StandardGameCreatorController(myGameDispenser);
     }
 
     @Override
@@ -70,8 +66,14 @@ public class StandardGameSelectController implements GameSelectController, GameS
     }
 
     @Override
-    public void update(List<SimpleGameInfo> updateGameInfo) {
+    public void update(List<ThreeStringsGet> updateGameInfo) {
         simpleGameInfos = updateGameInfo;
         updateIt.call();
     }
+
+    @Override
+    public List<ThreeStringsGet> getUpdateList() {
+        return simpleGameInfos;
+    }
+
 }

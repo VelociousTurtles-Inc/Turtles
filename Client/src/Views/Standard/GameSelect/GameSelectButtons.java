@@ -2,6 +2,7 @@ package Views.Standard.GameSelect;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
+import Client.Interfaces.ThreeStringsGet;
 import Model.SimpleGameInfo;
 import Client.Interfaces.GameWaiter;
 import javafx.application.Platform;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -46,7 +48,7 @@ public class GameSelectButtons {
         controller.join();
     }
 
-    public void setController(GameSelectController controller) {
+    public void setController(final GameSelectController controller) {
         this.controller = controller;
         this.controller.setClosingEvent(new Event() {
             @Override
@@ -57,6 +59,18 @@ public class GameSelectButtons {
                         myStage.close();
                     }
                 });
+            }
+        });
+        this.controller.setUpdateEvent(new Event() {
+            @Override
+            public void call() {
+                List<SimpleGameInfo> tmpList = new LinkedList<>();
+                /*for(ThreeStringsGet myTSG : controller.getUpdateList()) {
+                    tmpList.add(new SimpleGameInfo(myTSG.getGameName(), myTSG.getGameStatus(), myTSG.getNumberOfPlayers()));
+                }
+                myTableList = tmpList;*/
+                myObservableTableList = FXCollections.observableArrayList(tmpList);
+                myTable.setItems(myObservableTableList);
             }
         });
 
@@ -74,9 +88,5 @@ public class GameSelectButtons {
 
     public void setStage(Stage myStage) {
         this.myStage = myStage;
-    }
-
-    public void update(List<SimpleGameInfo> myInfoList) {
-        myObservableTableList = FXCollections.observableArrayList(myTableList);
     }
 }
