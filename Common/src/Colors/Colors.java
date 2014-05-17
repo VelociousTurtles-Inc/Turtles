@@ -18,8 +18,8 @@ public enum Colors {
         colorsIntegerMap.put(NULL, 0);
         colorsIntegerMap.put(BLUE, 1);
         colorsIntegerMap.put(GREEN, 2);
-        colorsIntegerMap.put(ORANGE, 3);
-        colorsIntegerMap.put(YELLOW, 4);
+        colorsIntegerMap.put(YELLOW, 3);
+        colorsIntegerMap.put(ORANGE, 4);
         colorsIntegerMap.put(RED, 5);
 
         colorsStringMap.put(NULL, "Null");
