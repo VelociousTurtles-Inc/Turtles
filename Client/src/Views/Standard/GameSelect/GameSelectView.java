@@ -1,4 +1,4 @@
-package Views.Standard.GameChoosing;
+package Views.Standard.GameSelect;
 
 import Adapters.Interfaces.GameSelectController;
 import javafx.application.Platform;
@@ -12,12 +12,12 @@ import java.io.IOException;
 /**
  * Created by michaziobro on 16.05.2014.
  */
-public class GameChoosingView {
+public class GameSelectView {
 
     GameSelectController myController;
-    GameChoosingButtons myButtons;
+    GameSelectButtons myButtons;
 
-    public GameChoosingView(GameSelectController myController) {
+    public GameSelectView(GameSelectController myController) {
         this.myController = myController;
     }
 
@@ -30,7 +30,7 @@ public class GameChoosingView {
 
                 Parent myParent = null;
                 try {
-                    myParent = (Parent) myLoader.load(getClass().getResource("GameChoosingView.fxml").openStream());
+                    myParent = (Parent) myLoader.load(getClass().getResource("GameSelectView.fxml").openStream());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -1,8 +1,9 @@
-package Views.Standard.GameChoosing;
+package Views.Standard.GameSelect;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
 import Model.SimpleGameInfo;
+import Server.Interfaces.GameWaiter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by michaziobro on 16.05.2014.
  */
-public class GameChoosingButtons {
+public class GameSelectButtons implements GameWaiter {
 
     public TableColumn numberColumn;
     public TableColumn statusColumn;
@@ -38,12 +39,11 @@ public class GameChoosingButtons {
     }
     @FXML
     public void newGame(ActionEvent actionEvent) {
-        //controller.create();
-        myObservableTableList.add(new SimpleGameInfo("Something1", "Something2", "Something3"));
+        controller.create();
     }
     @FXML
     public void join(ActionEvent actionEvent) {
-        myObservableTableList.remove(0);
+        controller.join();
     }
 
     public void setController(GameSelectController controller) {
@@ -74,5 +74,9 @@ public class GameChoosingButtons {
 
     public void setStage(Stage myStage) {
         this.myStage = myStage;
+    }
+
+    public void update(List<SimpleGameInfo> myInfoList) {
+        myObservableTableList = FXCollections.observableArrayList(myTableList);
     }
 }

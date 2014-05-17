@@ -19,7 +19,7 @@ public class StandardMenuController implements MenuController {
     public void startGame() throws Exception {
         /*assert DebugWriter.write(this + ".startGame()");
         GameController myGame = new SimpleGameAdapter();*/
-        StandardGameChoosingController myGCC = new StandardGameChoosingController();
+        StandardGameSelectController myGCC = new StandardGameSelectController();
     }
 
     @Override

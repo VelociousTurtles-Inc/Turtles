@@ -8,6 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Model" />
+    <orderEntry type="library" name="DiRMI" level="project" />
   </component>
 </module>
 

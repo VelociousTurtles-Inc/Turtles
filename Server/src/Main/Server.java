@@ -1,7 +1,7 @@
 package Main;
 
-import Server.Interfaces.GameService;
-import Services.StandardGameService;
+import GameDispenser.StandardGameDispenser;
+import Server.Interfaces.GameDispenser;
 import org.cojen.dirmi.Environment;
 
 import java.util.Scanner;
@@ -10,15 +10,13 @@ import java.util.Scanner;
  * Created by larhard on 15.05.14.
  */
 public class Server {
+    private static int port;
     public static void main(String[] args) throws Exception {
+        port = args.length > 1 ? Integer.valueOf(args[0]) : 8080;
         System.out.println("Server starting...");
-        int port = 8080;
-        if (args.length > 1) {
-            port = Integer.valueOf(args[0]);
-        }
         Environment environment = new Environment();
-        GameService gameService = new StandardGameService();
-        environment.newSessionAcceptor(port).acceptAll(gameService);
+        GameDispenser gameDispenser = new StandardGameDispenser();
+        environment.newSessionAcceptor(port).acceptAll(gameDispenser);
         System.out.println("Server started");
         System.out.println("type exit to stop server");
         Scanner scanner = new Scanner(System.in);
