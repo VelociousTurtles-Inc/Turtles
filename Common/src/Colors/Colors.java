@@ -1,97 +1,68 @@
 package Colors;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 /**
  * Created by larhard on 17.05.14.
  */
 public enum Colors {
     NULL, RED, GREEN, YELLOW, BLUE, ORANGE;
 
-    public static Integer asInteger(Object color) {
-        switch (asColor(color)) {
-            case BLUE:
-                return 1;
-            case GREEN:
-                return 2;
-            case ORANGE:
-                return 3;
-            case YELLOW:
-                return 4;
-            case RED:
-                return 5;
-            case NULL:
-                return null;
+    private static Map<Object, Colors> objectColorsMap = new HashMap<>();
+    private static Map<Colors, Integer> colorsIntegerMap = new HashMap<>();
+    private static Map<Colors, String> colorsStringMap = new HashMap<>();
+
+    static {
+        colorsIntegerMap.put(NULL, 0);
+        colorsIntegerMap.put(BLUE, 1);
+        colorsIntegerMap.put(GREEN, 2);
+        colorsIntegerMap.put(ORANGE, 3);
+        colorsIntegerMap.put(YELLOW, 4);
+        colorsIntegerMap.put(RED, 5);
+
+        colorsStringMap.put(NULL, "Null");
+        colorsStringMap.put(BLUE, "Blue");
+        colorsStringMap.put(GREEN, "Green");
+        colorsStringMap.put(ORANGE, "Orange");
+        colorsStringMap.put(YELLOW, "Yellow");
+        colorsStringMap.put(RED, "Red");
+
+        for (Colors i : colorsIntegerMap.keySet()) {
+            objectColorsMap.put(i, i);
         }
-        assert false;
-        return null;
+        for (Colors i : colorsStringMap.keySet()) {
+            objectColorsMap.put(i, i);
+        }
+
+        for (Colors i : colorsIntegerMap.keySet()) {
+            objectColorsMap.put(colorsIntegerMap.get(i), i);
+        }
+        for (Colors i : colorsStringMap.keySet()) {
+            objectColorsMap.put(colorsStringMap.get(i), i);
+        }
     }
 
-    public static String asString(Colors color) {
-        switch (asColor(color)) {
-            case RED:
-                return "Red";
-            case GREEN:
-                return "Green";
-            case YELLOW:
-                return "Yellow";
-            case BLUE:
-                return "Blue";
-            case ORANGE:
-                return "Orange";
-            case NULL:
-                return "Null";
-        }
-        assert false;
-        return null;
+    public static Integer asInteger(Object color) {
+        return colorsIntegerMap.get(objectColorsMap.get(color));
+    }
+
+    public static String asString(Object color) {
+        return colorsStringMap.get(objectColorsMap.get(color));
     }
 
     public static Colors asColor(Object color) {
-        if (color instanceof Integer) {
-            return asColor((Integer) color);
-        } else if (color instanceof String) {
-            return asColor((String) color);
-        } else if (color instanceof Colors) {
-            return (Colors) color;
-        } else {
-            throw new IllegalArgumentException();
-        }
+        return objectColorsMap.get(color);
     }
 
-    public static Colors asColor(String color) {
-        switch (color) {
-            case "Red":
-                return RED;
-            case "Green":
-                return GREEN;
-            case "Yellow":
-                return YELLOW;
-            case "Blue":
-                return BLUE;
-            case "Orange":
-                return ORANGE;
-            case "Null":
-                return NULL;
-        }
-        assert false : "Unsupported color String: " + color;
-        return null;
+    public static Map<Object, Colors> getObjectColorsMap() {
+        return objectColorsMap;
     }
-
-    public static Colors asColor(Integer color) {
-        if (color == null) {
-            return NULL;
-        }
-        switch (color) {
-            case 1:
-                return BLUE;
-            case 2:
-                return GREEN;
-            case 3:
-                return ORANGE;
-            case 4:
-                return YELLOW;
-            case 5:
-                return RED;
-        }
-        assert false : "Unsupported color Integer: " + color;
-        return null;
+    public static Map<Colors, Integer> getColorsIntegerMap() {
+        return colorsIntegerMap;
+    }
+    public static Map<Colors, String> getColorsStringMap() {
+        return colorsStringMap;
     }
 }

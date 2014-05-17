@@ -2,6 +2,7 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import Colors.Colors;
 import Model.Cards.CardInfo;
 import ModelHelpers.DebugWriter;
 import Views.Board;
@@ -30,7 +31,6 @@ public class StandardGameView {
     private Board myBoard = BoardBootstrap.createSampleBoard();
     private GameController myGameController;
     private Map<String, Image> cardImages;
-    private Map<Integer, String> colorMap = Mapper.getColorMap();
 
     private void updateBoard(List<List<Integer>> updateForBoard) {
         assert DebugWriter.write("Real Updating Board", updateForBoard.toArray());
@@ -80,7 +80,7 @@ public class StandardGameView {
 
         for (int i = 1; i <= 5; i++) {
             CardInfo cardInfo = cardsUpdate.get(i-1);
-            slots.get(i).setImage(cardImages.get(cardInfo.getType() + colorMap.get(cardInfo.getColor() + 1) + ".png"));
+            slots.get(i).setImage(cardImages.get(cardInfo.getType() + Colors.asString(cardInfo.getColor() + 1) + ".png"));
         }
     }
 
