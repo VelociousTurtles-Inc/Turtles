@@ -125,7 +125,7 @@ public class StandardGameView {
 
         this.myGameController = myGameController;
 
-        cardImages = loadCardImages("Client/src/Views/Images/Cards/");
+        cardImages = loadCardImages(this.getClass().getClassLoader().getResource("Resources/Images/Cards").getFile());
         assert cardImages != null;
 
         Platform.runLater(new Runnable() {

@@ -14,14 +14,14 @@
         <InnerShadow />
       </effect>
       <image>
-        <Image preserveRatio="true" smooth="true" url="@../../Images/Boards/board.png" />
+        <Image preserveRatio="true" smooth="true" url="@../../../Resources/Images/Boards/board.png" />
       </image>
     </ImageView>
     <Button layoutX="825.0" layoutY="659.0" mnemonicParsing="false" onAction="#playIt" prefHeight="29.0" prefWidth="122.0" text="Use card" />
     <Button fx:id="myButOne" layoutX="28.0" layoutY="659.0" mnemonicParsing="false" onAction="#surrIt" prefHeight="29.0" prefWidth="122.0" text="Surrender" />
     <ImageView fitHeight="83.75" fitWidth="83.0" layoutX="28.0" layoutY="548.0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@../../Images/Heroes/plytak.png" />
+        <Image url="@../../../Resources/Images/Heroes/plytak.png" />
       </image>
     </ImageView>
 
@@ -32,47 +32,47 @@
     <Button fx:id="firstCard" layoutX="531.0" layoutY="548.0" mnemonicParsing="false" onAction="#chooseFirst" prefHeight="70.0" prefWidth="76.0" />
       <ImageView fx:id="firstTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
           <image>
-              <Image url="@../../Images/Turtles/turtleBlue.png" />
+              <Image url="@../../../Resources/Images/Turtles/turtleBlue.png" />
 
           </image>
     </ImageView>
     <ImageView fx:id="secondTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@../../Images/Turtles/turtleGreen.png" />
+        <Image url="@../../../Resources/Images/Turtles/turtleGreen.png" />
 
       </image>
     </ImageView>
     <ImageView fx:id="thirdTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@../../Images/Turtles/turtleYellow.png" />
+        <Image url="@../../../Resources/Images/Turtles/turtleYellow.png" />
       </image>
     </ImageView>
     <ImageView fx:id="fourthTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
       <image>
-        <Image url="@../../Images/Turtles/turtleOrange.png" />
+        <Image url="@../../../Resources/Images/Turtles/turtleOrange.png" />
       </image>
     </ImageView>
   <ImageView fx:id="fifthTurtle" fitHeight="57.0" fitWidth="76.0" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="false">
     <image>
-      <Image url="@../../Images/Turtles/turtleRed.png" />
+      <Image url="@../../../Resources/Images/Turtles/turtleRed.png" />
     </image>
   </ImageView><ImageView fx:id="fifthCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="881.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image fx:id="Card1" url="@../../Images/Cards/Backwards5.png" />
+<Image fx:id="Card1" url="@../../../Resources/Images/Cards/Backwards5.png" />
 </image></ImageView><ImageView fx:id="fourthCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="797.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image fx:id="Card2" url="@../../Images/Cards/Backwards5.png" />
+<Image fx:id="Card2" url="@../../../Resources/Images/Cards/Backwards5.png" />
 </image></ImageView><ImageView fx:id="thirdCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="712.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image fx:id="Card3" url="@../../Images/Cards/Backwards5.png" />
+<Image fx:id="Card3" url="@../../../Resources/Images/Cards/Backwards5.png" />
 </image>
 </ImageView><ImageView fx:id="secondCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="627.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image fx:id="Card4" url="@../../Images/Cards/Backwards5.png" />
+<Image fx:id="Card4" url="@../../../Resources/Images/Cards/Backwards5.png" />
 </image>
 </ImageView><ImageView fx:id="firstCardImage" fitHeight="57.0" fitWidth="70.0" layoutX="541.0" layoutY="555.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image fx:id="Card5" url="@../../Images/Cards/Backwards5.png" />
+<Image fx:id="Card5" url="@../../../Resources/Images/Cards/Backwards5.png" />
 
 </image>
 </ImageView>
