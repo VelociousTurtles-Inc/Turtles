@@ -3,7 +3,7 @@ package Views.Standard.GameSelect;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
 import Model.SimpleGameInfo;
-import Server.Interfaces.GameWaiter;
+import Client.Interfaces.GameWaiter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by michaziobro on 16.05.2014.
  */
-public class GameSelectButtons implements GameWaiter {
+public class GameSelectButtons {
 
     public TableColumn numberColumn;
     public TableColumn statusColumn;

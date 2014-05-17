@@ -28,5 +28,6 @@ public class GameCreatorButtons {
     }
 
     public void create(ActionEvent actionEvent) {
+        myController.create(String.valueOf(name.getCharacters()));
     }
 }
