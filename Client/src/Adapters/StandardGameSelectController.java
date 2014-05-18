@@ -3,9 +3,9 @@ package Adapters;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
 import Client.Interfaces.GameSelecter;
+import Client.Interfaces.SimpliestGameInfo;
 import Client.Interfaces.ThreeStringsGet;
 import Main.Client;
-import Model.SimpleGameInfo;
 import Views.Standard.GameSelect.GameSelectView;
 import Server.Interfaces.GameDispenser;
 
@@ -21,7 +21,7 @@ import java.util.List;
 public class StandardGameSelectController implements GameSelectController, GameSelecter {
 
     GameDispenser myGameDispenser;
-    List<ThreeStringsGet> simpleGameInfos;
+    List<SimpliestGameInfo> simpleGameInfos;
 
     Event endIt;
     Event updateIt;
@@ -41,8 +41,8 @@ public class StandardGameSelectController implements GameSelectController, GameS
     }
 
     @Override
-    public void join() {
-        StandardGameWaiterController mySGWC = new StandardGameWaiterController();
+    public void join(int myID) throws Exception {
+        StandardGameWaiterController mySGWC = new StandardGameWaiterController(myID, myGameDispenser);
     }
 
     @Override
@@ -66,13 +66,13 @@ public class StandardGameSelectController implements GameSelectController, GameS
     }
 
     @Override
-    public void update(List<ThreeStringsGet> updateGameInfo) {
-        simpleGameInfos = updateGameInfo;
+    public void update(ThreeStringsGet updateGameInfo) throws Exception {
+        simpleGameInfos = updateGameInfo.getList();
         updateIt.call();
     }
 
     @Override
-    public List<ThreeStringsGet> getUpdateList() {
+    public List<SimpliestGameInfo> getUpdateList() {
         return simpleGameInfos;
     }
 

@@ -2,7 +2,7 @@ package Views.Standard.GameChoosing;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
-import Model.SimpleGameInfo;
+import Adapters.SimpleGameInfo;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

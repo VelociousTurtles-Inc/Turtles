@@ -20,27 +20,23 @@ public class GameCreatorsWaitingView {
     public GameCreatorsWaitingView(StandardGameCreatorWaiterController standardGameCreatorController) {
         myController = standardGameCreatorController;
     }
-    public void start() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                Stage myStage = new Stage();
-                FXMLLoader myLoader = new FXMLLoader();
+    public void start() throws InterruptedException {
+        Stage myStage = new Stage();
+        FXMLLoader myLoader = new FXMLLoader();
 
-                Parent myParent = null;
-                try {
-                    myParent = (Parent) myLoader.load(getClass().getResource("GameCreatorsWaiting.fxml").openStream());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        Parent myParent = null;
+        try {
+            myParent = (Parent) myLoader.load(getClass().getResource("GameCreatorsWaiting.fxml").openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-                myButtons = myLoader.getController();
-                myButtons.setController(myController);
-                myButtons.setStage(myStage);
+        myButtons = myLoader.getController();
 
-                myStage.setScene(new Scene(myParent));
-                myStage.show();
-            }
-        });
+        myButtons.setStage(myStage);
+
+        myStage.setScene(new Scene(myParent));
+        myStage.show();
+        myButtons.setController(myController);
     }
 }

@@ -1,4 +1,4 @@
-package Model;
+package Adapters;
 
 import Client.Interfaces.ThreeStringsGet;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,8 +7,9 @@ import javafx.beans.property.SimpleStringProperty;
  * Created by michaziobro on 16.05.2014.
  */
 
-public class SimpleGameInfo implements ThreeStringsGet {
+public class SimpleGameInfo {
 
+    private int myID;
     private final SimpleStringProperty gameName;
     private final SimpleStringProperty gameStatus;
     private final SimpleStringProperty numberOfPlayers;
@@ -41,6 +42,14 @@ public class SimpleGameInfo implements ThreeStringsGet {
 
     public void setNumberOfPlayers(String fName) {
         numberOfPlayers.set(fName);
+    }
+
+    public int getMyID() {
+        return myID;
+    }
+
+    public void setMyID(int myID) {
+        this.myID = myID;
     }
 }
 

@@ -1,15 +1,17 @@
 package Services;
 
 
+import Client.Interfaces.GameWaiter;
+import Client.Interfaces.SimpliestGameInfo;
 import Interfaces.IBoard;
 import Interfaces.ICards;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Cards.Cards;
-import Model.SimpleGameInfo;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.GameStarter;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +28,9 @@ public class StandardGameManager implements GameStarter, GameManager {
 
     IBoard board;
     ICards cards;
+    private int myId;
+
+    List<GameWaiter> myWaiters = new LinkedList<>();
 
     public StandardGameManager(String name) {
         started = false;
@@ -56,7 +61,7 @@ public class StandardGameManager implements GameStarter, GameManager {
     }
 
     @Override
-    public SimpleGameInfo getGameInfo() {
+    public SimpliestGameInfo getGameInfo() {
         String sstatus;
         if(started == true) {
             sstatus = "Started";
@@ -64,7 +69,14 @@ public class StandardGameManager implements GameStarter, GameManager {
         else {
             sstatus = "In preparation";
         }
-        return new SimpleGameInfo(name, sstatus, String.valueOf(numberOfPlayers));
+        SimpliestGameInfo myGameInfo = new SimpliestGameInfo(name, sstatus, String.valueOf(numberOfPlayers));
+        myGameInfo.setMyID(myId);
+        return myGameInfo;
+    }
+
+    @Override
+    public void setId(int id) {
+        myId = id;
     }
 
     @Override
@@ -73,14 +85,17 @@ public class StandardGameManager implements GameStarter, GameManager {
     }
 
     @Override
-    public void addPlayer() {
+    public void addPlayer(GameWaiter newWaiter) {
+        myWaiters.add(newWaiter);
         numberOfPlayers++;
         return ;
     }
 
     @Override
-    public void removePlayer(int playerID) {
-
+    public void removePlayer(GameWaiter oldWaiter) {
+        myWaiters.remove(oldWaiter);
+        numberOfPlayers--;
+        return ;
     }
 
     @Override
@@ -89,4 +104,13 @@ public class StandardGameManager implements GameStarter, GameManager {
         cards = new Cards(numberOfPlayers);
     }
 
+    public int getMyId() {
+        return myId;
+    }
+
+    public void update() throws Exception {
+        for(GameWaiter waiter : myWaiters) {
+            waiter.update(numberOfPlayers);
+        }
+    }
 }

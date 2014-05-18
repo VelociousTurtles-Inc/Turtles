@@ -17,7 +17,7 @@
       </font>
     </Label>
     <Label font="$x1" layoutX="14.0" layoutY="63.0" prefWidth="163.0" text="Number of players:" />
-    <Label contentDisplay="RIGHT" font="$x1" layoutX="171.0" layoutY="30.0" prefWidth="76.0" text="Unnamed" textAlignment="RIGHT" />
-    <Label contentDisplay="RIGHT" font="$x1" layoutX="171.0" layoutY="63.0" prefWidth="35.0" text="0" textAlignment="RIGHT" />
+    <Label contentDisplay="RIGHT" font="$x1" layoutX="171.0" layoutY="30.0" prefWidth="76.0" text="Unnamed" textAlignment="RIGHT" fx:id="gameName"/>
+    <Label contentDisplay="RIGHT" font="$x1" layoutX="171.0" layoutY="63.0" prefWidth="35.0" text="0" textAlignment="RIGHT" fx:id="numberOfPlayers"/>
   </children>
 </AnchorPane>

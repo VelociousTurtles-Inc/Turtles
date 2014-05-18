@@ -1,28 +1,41 @@
 package Views.Standard.GameCreation.GameCreatorsWaiting;
 
-import Adapters.StandardGameCreatorController;
+import Adapters.Interfaces.Event;
 import Adapters.StandardGameCreatorWaiterController;
-import Views.Standard.GameCreation.GameCreator.GameCreatorButtons;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * Created by michaziobro on 16.05.2014.
  */
 public class GameCreatorsWaitingButtons {
 
+    public Label numberOfPlayers;
+    public Label gameName;
     private StandardGameCreatorWaiterController controller;
     private Stage stage;
 
-    public void setController(StandardGameCreatorWaiterController controller) {
-        this.controller = controller;
+    public void setController(StandardGameCreatorWaiterController myController) {
+        this.controller = myController;
+        this.controller.registerUpdateEvent(new Event() {
+            @Override
+            public void call() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        numberOfPlayers.setText(String.valueOf(controller.getNumberOfPlayers()));
+                    }
+                });
+            }
+        });
     }
+
+    public void setName(String name) {
+        gameName.setText(name);
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }

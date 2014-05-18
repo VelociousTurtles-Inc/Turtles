@@ -1,5 +1,6 @@
 package Server.Interfaces;
 
+import Client.Interfaces.GameWaiter;
 import Interfaces.IBoard;
 import Model.Cards.Card;
 
@@ -13,4 +14,6 @@ public interface GameManager extends Remote {
     public IBoard getBoard();
     public int playCard(int cardID, int playerID);
     public Map<Integer, Card> getInGameCards();
+
+
 }

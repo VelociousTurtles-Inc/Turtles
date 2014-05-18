@@ -1,8 +1,6 @@
 package Views.Standard.GameCreation.GameWaiting;
 
-import Adapters.StandardGameCreatorController;
 import Adapters.StandardGameWaiterController;
-import Views.Standard.GameCreation.GameCreator.GameCreatorButtons;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,10 +19,8 @@ public class GameWaitingView {
     public GameWaitingView(StandardGameWaiterController controller) {
         myController = controller;
     }
-    public void start() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+    public void start() throws Exception {
+
                 Stage myStage = new Stage();
                 FXMLLoader myLoader = new FXMLLoader();
 
@@ -35,13 +31,14 @@ public class GameWaitingView {
                     e.printStackTrace();
                 }
 
+                System.out.println("Wowowowowwowow");
+
                 myButtons = myLoader.getController();
                 myButtons.setController(myController);
                 myButtons.setStage(myStage);
 
                 myStage.setScene(new Scene(myParent));
                 myStage.show();
-            }
-        });
+
     }
 }

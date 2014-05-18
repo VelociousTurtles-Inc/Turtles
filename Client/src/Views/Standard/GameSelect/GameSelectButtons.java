@@ -2,9 +2,8 @@ package Views.Standard.GameSelect;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
-import Client.Interfaces.ThreeStringsGet;
-import Model.SimpleGameInfo;
-import Client.Interfaces.GameWaiter;
+import Adapters.SimpleGameInfo;
+import Client.Interfaces.SimpliestGameInfo;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,8 +43,10 @@ public class GameSelectButtons {
         controller.create();
     }
     @FXML
-    public void join(ActionEvent actionEvent) {
-        controller.join();
+    public void join(ActionEvent actionEvent) throws Exception {
+        SimpleGameInfo myInfo = (SimpleGameInfo) myTable.getSelectionModel().getSelectedItem();
+        System.out.println(myInfo.getMyID());
+        controller.join(myInfo.getMyID());
     }
 
     public void setController(final GameSelectController controller) {
@@ -64,12 +65,14 @@ public class GameSelectButtons {
         this.controller.setUpdateEvent(new Event() {
             @Override
             public void call() {
-                List<SimpleGameInfo> tmpList = new LinkedList<>();
-                /*for(ThreeStringsGet myTSG : controller.getUpdateList()) {
-                    tmpList.add(new SimpleGameInfo(myTSG.getGameName(), myTSG.getGameStatus(), myTSG.getNumberOfPlayers()));
+                List<SimpliestGameInfo> tmpList = controller.getUpdateList();
+                List<SimpleGameInfo> myList = new LinkedList<>();
+                for(SimpliestGameInfo simple : tmpList) {
+                    SimpleGameInfo myInfo = new SimpleGameInfo(simple.getGameName(), simple.getGameStatus(), simple.getNumberOfPlayers());
+                    myInfo.setMyID(simple.getMyID());
+                    myList.add(myInfo);
                 }
-                myTableList = tmpList;*/
-                myObservableTableList = FXCollections.observableArrayList(tmpList);
+                myObservableTableList = FXCollections.observableArrayList(myList);
                 myTable.setItems(myObservableTableList);
             }
         });
