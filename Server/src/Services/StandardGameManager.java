@@ -98,9 +98,13 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public void startGame() {
-        board = new SimpleBoard();
+    public void startGame() throws Exception {
+        for(GameWaiter waiter : myWaiters) {
+            waiter.start();
+        }
+        /*board = new SimpleBoard();
         cards = new Cards(numberOfPlayers);
+        started = true;*/
     }
 
     public int getMyId() {

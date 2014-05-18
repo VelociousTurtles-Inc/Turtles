@@ -36,6 +36,12 @@ public class StandardGameWaiterController implements GameWaiter {
         cancelEvent.call();
     }
 
+    @Override
+    public void start() throws Exception {
+        SimpleGameAdapter myAdapter = new SimpleGameAdapter();
+        myAdapter.start();
+    }
+
     public void registerCancelEvent(Event cancelEvent) {
         this.cancelEvent = cancelEvent;
     }

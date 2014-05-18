@@ -129,7 +129,7 @@ public class StandardGameView {
 
         this.myGameController = myGameController;
 
-        cardImages = loadCardImages("Client/src/Views/Images/Cards/");
+        cardImages = loadCardImages("Turtles/Client/src/Views/Images/Cards/");
 
         assert cardImages != null;
 

@@ -83,8 +83,9 @@ public class StandardGameDispenser implements GameDispenser {
         update();
     }
 
-    public void startGame() throws Exception {
-
+    @Override
+    public void startGame(int gameID) throws Exception {
+        gameServices.get(gameID).startGame();
     }
 
     private void update() throws Exception {

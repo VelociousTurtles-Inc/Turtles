@@ -57,7 +57,7 @@ public class GameCreatorsWaitingButtons {
         controller.cancelAll();
     }
 
-    public void start(ActionEvent actionEvent) {
-        controller.start();
+    public void start(ActionEvent actionEvent) throws Exception {
+        controller.startAll();
     }
 }

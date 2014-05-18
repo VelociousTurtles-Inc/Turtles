@@ -42,8 +42,13 @@ public class StandardGameCreatorWaiterController implements GameWaiter {
         myUpdateEvent = updateEvent;
     }
 
-    public void start() {
-        
+    public void start() throws Exception {
+        SimpleGameAdapter myAdapter = new SimpleGameAdapter();
+        myAdapter.start(null);
+    }
+
+    public void startAll() throws Exception {
+        myDispenser.startGame(gameID);
     }
 
     public void cancelAll() throws Exception {

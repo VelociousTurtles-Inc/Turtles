@@ -56,9 +56,6 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
         for(CardInfoPair myPair : gameService.getDeckList()) {
             normalCardsMap.put(myPair.getKey(), myPair.getValue());
         }*/
-
-
-
     }
 
     public void updateCards() {
