@@ -177,8 +177,14 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
         return;
     }
 
-    public List<Integer> getPlayedCards(){
-        return playdCards;
+    public List<CardInfo> PlayedCards(){
+        List<CardInfo> temp = new LinkedList<>();
+
+        for (Integer i : playdCards){
+            temp.add(normalCardsMap.get(i));
+        }
+
+        return temp;
     }
 
     /*
