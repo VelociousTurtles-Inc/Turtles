@@ -4,26 +4,16 @@ package Adapters;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Client.Interfaces.GameClient;
-import Model.Board.BoardGraph;
 import Model.Cards.Card;
-import Model.Cards.CardInfo;
-import Model.Cards.CardInfoPair;
-import Model.Turtles.Turtle;
 import ModelHelpers.DebugWriter;
-import ModelHelpers.ServicesHelper;
-import Server.Interfaces.GameDispenser;
-import Server.Interfaces.GameStarter;
 import Server.Interfaces.PlayerService;
 import Views.Standard.Game.StandardGameView;
-import org.cojen.dirmi.Environment;
-import org.cojen.dirmi.Session;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import Main.Client;
 
 /**
  * Created by larhard on 05.05.14.

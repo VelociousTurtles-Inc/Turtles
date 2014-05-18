@@ -7,4 +7,5 @@ import java.rmi.Remote;
  */
 public interface GameWaiter extends Remote {
     public void update(int newNumberOfPlayers) throws Exception;
+    public void cancel() throws Exception;
 }

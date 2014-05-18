@@ -6,7 +6,7 @@ import Client.Interfaces.SimpliestGameInfo;
 import Client.Interfaces.ThreeStringsGet;
 import Model.Utility.Utility;
 import Server.Interfaces.GameDispenser;
-import Server.Interfaces.GameStarter;
+import Server.Interfaces.GameManager;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -15,7 +15,7 @@ import java.util.logging.Level;
  * Created by larhard on 15.05.14.
  */
 public class StandardGameDispenser implements GameDispenser {
-    private Map<Integer, GameStarter> gameServices = new HashMap<>();
+    private Map<Integer, GameManager> gameServices = new HashMap<>();
     private List<GameSelecter> mySelecters = new LinkedList<>();
 
     private int getEmptyId() {
@@ -29,7 +29,7 @@ public class StandardGameDispenser implements GameDispenser {
     }
 
     @Override
-    public GameStarter connectToGame(int id, GameWaiter mySel) throws Exception {
+    public GameManager connectToGame(int id, GameWaiter mySel) throws Exception {
         if (gameServices.containsKey(id)) {
             Utility.Debug.log(Level.INFO, "[ StandardGameDispenser ] new client connected to game #" + id);
             gameServices.get(id).addPlayer(mySel);
@@ -77,8 +77,10 @@ public class StandardGameDispenser implements GameDispenser {
     }
 
     @Override
-    public void cancelGame() throws Exception{
-
+    public void cancelGame(int gameID) throws Exception{
+        gameServices.get(gameID).cancel();
+        gameServices.remove(gameID);
+        update();
     }
 
     public void startGame() throws Exception {
@@ -99,7 +101,7 @@ public class StandardGameDispenser implements GameDispenser {
                 return list;
             }
         };
-        for(GameStarter myGame : gameServices.values()) {
+        for(GameManager myGame : gameServices.values()) {
              myList.add(myGame.getGameInfo());
         }
         myTSG.setList(myList);

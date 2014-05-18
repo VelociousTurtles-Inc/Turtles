@@ -9,7 +9,6 @@ import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Cards.Cards;
 import Server.Interfaces.GameManager;
-import Server.Interfaces.GameStarter;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +19,7 @@ import java.util.Map;
  * For now there's only one game.
  */
 
-public class StandardGameManager implements GameStarter, GameManager {
+public class StandardGameManager implements GameManager {
 
     boolean started;
     int numberOfPlayers;
@@ -39,18 +38,18 @@ public class StandardGameManager implements GameStarter, GameManager {
     }
 
     @Override
-    public IBoard getBoard() {
+    public IBoard getBoard() throws Exception {
         return board;
     }
 
     @Override
-    public int playCard(int cardID, int playerID) {
+    public int playCard(int cardID, int playerID) throws Exception {
         cards.getCardsMap().get(cardID).play(null);
         return 0;
     }
 
     @Override
-    public Map<Integer, Card> getInGameCards() {
+    public Map<Integer, Card> getInGameCards() throws Exception {
         return cards.getCardsMap();
     }
 
@@ -111,6 +110,13 @@ public class StandardGameManager implements GameStarter, GameManager {
     public void update() throws Exception {
         for(GameWaiter waiter : myWaiters) {
             waiter.update(numberOfPlayers);
+        }
+    }
+
+    @Override
+    public void cancel() throws Exception {
+        for(GameWaiter waiter : myWaiters) {
+            waiter.cancel();
         }
     }
 }

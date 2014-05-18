@@ -14,6 +14,7 @@ public class StandardGameWaiterController implements GameWaiter {
     private GameDispenser myGameDispenser;
     Event updateEvent;
     private String gameName;
+    private Event cancelEvent;
 
     public StandardGameWaiterController(int myID, GameDispenser myGameDispenser) throws Exception {
         gameID = myID;
@@ -28,6 +29,15 @@ public class StandardGameWaiterController implements GameWaiter {
     public void update(int newNumberOfPlayers) {
         myNumberOfPlayers = newNumberOfPlayers;
         updateEvent.call();
+    }
+
+    @Override
+    public void cancel() throws Exception {
+        cancelEvent.call();
+    }
+
+    public void registerCancelEvent(Event cancelEvent) {
+        this.cancelEvent = cancelEvent;
     }
 
     public void registerUpdate(Event update) {

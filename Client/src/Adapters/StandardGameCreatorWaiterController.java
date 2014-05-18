@@ -12,19 +12,30 @@ public class StandardGameCreatorWaiterController implements GameWaiter {
     GameDispenser myDispenser;
     private  int numberOfPlayers;
     private Event myUpdateEvent;
+    private Event cancelEvent;
+    private String gameName;
+    private int gameID;
 
     public StandardGameCreatorWaiterController(String s, GameDispenser standardGameCreatorController) throws Exception {
         GameCreatorsWaitingView myView = new GameCreatorsWaitingView(this);
         myView.start();
 
         this.myDispenser = standardGameCreatorController;
-        myDispenser.createNewGame(s, this);
+        int id = myDispenser.createNewGame(s, this);
+        gameName =  myDispenser.getGameName(id);
+        gameID = id;
+        update(numberOfPlayers);
     }
 
     @Override
     public void update(int newNumberOfPlayers) {
         this.numberOfPlayers = newNumberOfPlayers;
         myUpdateEvent.call();
+    }
+
+    @Override
+    public void cancel() throws Exception {
+        cancelEvent.call();
     }
 
     public void registerUpdateEvent(Event updateEvent) {
@@ -35,11 +46,19 @@ public class StandardGameCreatorWaiterController implements GameWaiter {
         
     }
 
-    public void cancel() {
-
+    public void cancelAll() throws Exception {
+        myDispenser.cancelGame(gameID);
     }
 
     public int getNumberOfPlayers() {
         return numberOfPlayers;
+    }
+
+    public void registerCancelEvent(Event cancelEvent) {
+        this.cancelEvent = cancelEvent;
+    }
+
+    public String getGameName() {
+        return gameName;
     }
 }

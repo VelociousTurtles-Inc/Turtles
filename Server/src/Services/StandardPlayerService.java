@@ -53,7 +53,7 @@ public class StandardPlayerService implements PlayerService, Player {
     }
 
     @Override
-    public void playCard(int cardID) {
+    public void playCard(int cardID) throws Exception {
         int newCard = myGameManager.playCard(cardID, myID);
         for(int i = 1; i<=5; i++) {
 
@@ -61,7 +61,7 @@ public class StandardPlayerService implements PlayerService, Player {
     }
 
     @Override
-    public IBoard getGameBoard() {
+    public IBoard getGameBoard() throws Exception {
         return myGameManager.getBoard();
     }
 }

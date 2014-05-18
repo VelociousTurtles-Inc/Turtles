@@ -11,7 +11,7 @@ import java.rmi.Remote;
 public interface GameDispenser extends Remote {
     // TODO authenticate
 
-    GameStarter connectToGame(int id, GameWaiter mySel) throws Exception;
+    GameManager connectToGame(int id, GameWaiter mySel) throws Exception;
 
     public Integer createNewGame(String name, GameWaiter mySel) throws Exception;
 
@@ -19,7 +19,8 @@ public interface GameDispenser extends Remote {
 
     void leaveGame(int gameID, GameWaiter mySel) throws Exception;
 
-    public void cancelGame() throws Exception;
+    void cancelGame(int gameID) throws Exception;
+
     public void startGame() throws Exception;
     public void registerGameSelector(GameSelecter mySel) throws Exception;
 

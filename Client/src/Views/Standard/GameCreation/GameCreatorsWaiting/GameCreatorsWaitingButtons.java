@@ -26,8 +26,21 @@ public class GameCreatorsWaitingButtons {
                     @Override
                     public void run() {
                         numberOfPlayers.setText(String.valueOf(controller.getNumberOfPlayers()));
+                        gameName.setText(controller.getGameName());
                     }
                 });
+            }
+        });
+        this.controller.registerCancelEvent(new Event() {
+            @Override
+            public void call() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        stage.close();
+                    }
+                });
+
             }
         });
     }
@@ -40,9 +53,8 @@ public class GameCreatorsWaitingButtons {
         this.stage = stage;
     }
 
-    public void cancel(ActionEvent actionEvent) {
-        controller.cancel();
-        stage.close();
+    public void cancel(ActionEvent actionEvent) throws Exception {
+        controller.cancelAll();
     }
 
     public void start(ActionEvent actionEvent) {
