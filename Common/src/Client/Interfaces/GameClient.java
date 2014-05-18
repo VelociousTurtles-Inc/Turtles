@@ -10,5 +10,11 @@ import java.rmi.RemoteException;
  */
 public interface GameClient extends Remote {
     @Asynchronous
+    void updateCards() throws RemoteException;
+
+    @Asynchronous
+    void updateBoards() throws RemoteException;
+
+    @Asynchronous
     void cardsPlayed() throws RemoteException;
 }

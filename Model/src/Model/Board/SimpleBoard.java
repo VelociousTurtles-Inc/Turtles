@@ -1,29 +1,34 @@
 package Model.Board;
 
-import Interfaces.IBoard;
+import Model.Turtles.Turtle;
 import Model.Utility.Utility;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Created by Maciej on 2014-05-05.
  */
-public class SimpleBoard implements IBoard {
-    List<List<Integer>> myFields;
+public class SimpleBoard extends Board {
+
     public SimpleBoard()
     {
-        myFields = new LinkedList<>();
-        for(int i = 0; i <= 7; i++) {
-            myFields.add(new LinkedList<Integer>());
+        BoardGraph.Field F = graph.start = new BoardGraph.Field();
+        for (int i = 0; i < 6; i++)
+        {
+            BoardGraph.Field S = new BoardGraph.Field();
+            F.successors.add(S);
+            F=S;
         }
-        for(int i = 1; i<=5; i++) {
-            myFields.get(0).add(i);
-        }
+        BoardGraph.Field End = new BoardGraph.Field(BoardGraph.FieldType.FINAL);
+        F.successors.add(End);
+
+        for(int i = 0; i<5; i++) graph.start.turtles.add(new Turtle(i));
+
+        for (BoardGraph.Field field : graph)
+            Utility.Debug.log(Level.INFO,"[BOARD CONSTRUCTOR DEBUG]graph>>"+graph.toString());
+
     }
-    public List<List<Integer>> asSimpleList() {
-        return myFields;
-    }
+
+
 }

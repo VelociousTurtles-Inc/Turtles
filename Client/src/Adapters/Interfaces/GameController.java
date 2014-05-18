@@ -12,7 +12,7 @@ import java.util.List;
  * Created by mz18 on 7/05/14.
  */
 public interface GameController {
-    public void start(PlayerService myService);
+    public void start(PlayerService myService) throws Exception;
 
     void playCard(int card) throws Exception;
     void surrender();

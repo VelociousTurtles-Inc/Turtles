@@ -4,9 +4,13 @@ package Adapters;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Client.Interfaces.GameClient;
+import Model.Board.BoardGraph;
 import Model.Cards.Card;
+import Model.Turtles.Turtle;
 import ModelHelpers.DebugWriter;
+import ModelHelpers.ServicesHelper;
 import Server.Interfaces.PlayerService;
+import Views.Board;
 import Views.Standard.Game.StandardGameView;
 
 import java.rmi.RemoteException;
@@ -58,12 +62,14 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
         }*/
     }
 
+    @Override
     public void updateCards() {
         for(Event up : cardsUpdates) {
             up.call();
         }
     }
 
+    @Override
     public void updateBoards() {
         for(Event up : boardUpdates) {
             up.call();
@@ -71,17 +77,21 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
     }
 
     @Override
-    public void start(PlayerService myService) {
+    public void start(PlayerService myService) throws Exception {
+        playerService = myService;
+        normalCardsMap = myService.getCardsMap();
+        myService.setClient(this);
         StandardGameView myGameView = new StandardGameView(this);
     }
 
     @Override
     public void playCard(int card) throws Exception {
-        if (playerHand == null)getCards();
+        /*if (playerHand == null)getCards();
         int cardID = playerHand.get(card-1);
         playerService.playCard(cardID);
         updateCards();
-        updateBoards();
+        updateBoards();*/
+        playerService.playCard(card);
     }
 
     @Override
@@ -114,11 +124,9 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
 
     @Override
     public List<List<Integer>> getBoard() throws Exception {
-//<<<<<<< HEAD
-        return playerService.getGameBoard().asSimpleList();
-/*=======
+
         List<List<Integer>> result = new LinkedList<>();
-        BoardGraph myBoard = gameStarter.getGameBoardGraph();
+        BoardGraph myBoard = playerService.getGameBoard().graph;
 
         for(BoardGraph.Field f : ServicesHelper.getIterableBoard(myBoard)) {
             result.add(new LinkedList<Integer>());
@@ -127,7 +135,7 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
             }
         }
         return result;
->>>>>>> master*/
+
     }
 
     @Override

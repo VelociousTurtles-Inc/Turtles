@@ -3,13 +3,14 @@ package Services;
 
 import Client.Interfaces.GameWaiter;
 import Client.Interfaces.SimpliestGameInfo;
-import Interfaces.IBoard;
-import Interfaces.ICards;
+import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
-import Model.Cards.Cards;
+import Model.Deck;
 import Server.Interfaces.GameManager;
+import Server.Interfaces.PlayerService;
 
+import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -25,11 +26,13 @@ public class StandardGameManager implements GameManager {
     int numberOfPlayers;
     String name;
 
-    IBoard board;
-    ICards cards;
+    Deck myDeck;
+    Board board;
+
     private int myId;
 
     List<GameWaiter> myWaiters = new LinkedList<>();
+    List<PlayerService> myPlayers;
 
     public StandardGameManager(String name) {
         started = false;
@@ -38,19 +41,23 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public IBoard getBoard() throws Exception {
+    public Board getBoard() throws RemoteException {
         return board;
     }
 
     @Override
-    public int playCard(int cardID, int playerID) throws Exception {
-        cards.getCardsMap().get(cardID).play(null);
-        return 0;
+    public int playCard(int cardID) throws RemoteException {
+        myDeck.getCardsMap().get(cardID).play(board);
+        myDeck.returnCard(cardID);
+        for(PlayerService myPlayer : myPlayers) {
+            myPlayer.update();
+        }
+        return myDeck.getCard();
     }
 
     @Override
     public Map<Integer, Card> getInGameCards() throws Exception {
-        return cards.getCardsMap();
+        return myDeck.getCardsMap();
     }
 
     @Override
@@ -99,12 +106,16 @@ public class StandardGameManager implements GameManager {
 
     @Override
     public void startGame() throws Exception {
-        for(GameWaiter waiter : myWaiters) {
-            waiter.start();
+        myDeck = new Deck();
+        board = new SimpleBoard();
+
+        myPlayers = new LinkedList<>();
+
+        for(int i = 0; i<myWaiters.size(); i++) {
+            myPlayers.add(new StandardPlayerService(this));
+            myWaiters.get(i).start(myPlayers.get(i));
         }
-        /*board = new SimpleBoard();
-        cards = new Cards(numberOfPlayers);
-        started = true;*/
+        started = true;
     }
 
     public int getMyId() {
@@ -122,5 +133,14 @@ public class StandardGameManager implements GameManager {
         for(GameWaiter waiter : myWaiters) {
             waiter.cancel();
         }
+    }
+
+    @Override
+    public List<Integer> getHand() throws RemoteException {
+        List<Integer> result = new LinkedList<>();
+        for(int i = 0; i<5; i++) {
+            result.add(myDeck.getCard());
+        }
+        return result;
     }
 }

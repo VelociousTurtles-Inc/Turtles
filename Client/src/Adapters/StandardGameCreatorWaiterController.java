@@ -3,6 +3,7 @@ package Adapters;
 import Adapters.Interfaces.Event;
 import Client.Interfaces.GameWaiter;
 import Server.Interfaces.GameDispenser;
+import Server.Interfaces.PlayerService;
 import Views.Standard.GameCreation.GameCreatorsWaiting.GameCreatorsWaitingView;
 
 /**
@@ -42,9 +43,9 @@ public class StandardGameCreatorWaiterController implements GameWaiter {
         myUpdateEvent = updateEvent;
     }
 
-    public void start() throws Exception {
+    public void start(PlayerService player) throws Exception {
         SimpleGameAdapter myAdapter = new SimpleGameAdapter();
-        myAdapter.start(null);
+        myAdapter.start(player);
     }
 
     public void startAll() throws Exception {

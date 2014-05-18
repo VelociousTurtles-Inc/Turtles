@@ -3,7 +3,6 @@ package Model;
 import Interfaces.IBoard;
 import Interfaces.ICards;
 import Interfaces.IGame;
-import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Cards.Cards;
@@ -64,8 +63,8 @@ public class Game implements IGame {
 
     @Override
     public void start() {
-        board = new SimpleBoard();
-        cards = new Cards(numberOfPlayers);
+        /*board = new SimpleBoard();
+        cards = new Cards(numberOfPlayers);*/
     }
 
 }

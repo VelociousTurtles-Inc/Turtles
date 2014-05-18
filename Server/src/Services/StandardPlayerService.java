@@ -1,22 +1,38 @@
 package Services;
 
-import Interfaces.IBoard;
-import Interfaces.IDeck;
+import Client.Interfaces.GameClient;
+import Model.Board.Board;
+import Model.Cards.Card;
 import Server.Interfaces.GameManager;
-import Server.Interfaces.Player;
 import Server.Interfaces.PlayerService;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by michaziobro on 17.05.2014.
  */
-public class StandardPlayerService implements PlayerService, Player {
+public class StandardPlayerService implements PlayerService {
+
+    private GameManager myManager;
+    private GameClient myClient;
+    private List<CardIDBox> myCards;
+
+    public StandardPlayerService(GameManager myManager) throws Exception {
+        this.myManager = myManager;
+        List<Integer> tmpList = myManager.getHand();
+        myCards = new LinkedList<>();
+        for(Integer i : tmpList) {
+            myCards.add(new CardIDBox(i));
+        }
+    }
 
     @Override
-    public void update() {
-
+    public void setClient(GameClient myClient) {
+        this.myClient = myClient;
     }
 
     private class CardIDBox {
@@ -34,13 +50,9 @@ public class StandardPlayerService implements PlayerService, Player {
         }
     }
 
-    IDeck deck;
-    List<CardIDBox> myCards;
-    private GameManager myGameManager;
-    private int myID;
-
-    public StandardPlayerService(GameManager myGameManager) {
-        this.myGameManager = myGameManager;
+    public void update() throws RemoteException {
+        myClient.updateBoards();
+        myClient.updateCards();
     }
 
     @Override
@@ -53,15 +65,17 @@ public class StandardPlayerService implements PlayerService, Player {
     }
 
     @Override
-    public void playCard(int cardID) throws Exception {
-        int newCard = myGameManager.playCard(cardID, myID);
-        for(int i = 1; i<=5; i++) {
-
-        }
+    public Map<Integer, Card> getCardsMap() throws Exception {
+        return myManager.getInGameCards();
     }
 
     @Override
-    public IBoard getGameBoard() throws Exception {
-        return myGameManager.getBoard();
+    public void playCard(int cardNumber) throws RemoteException {
+        myCards.get(cardNumber).setCardID(myManager.playCard(myCards.get(cardNumber).getCardID()));
+    }
+
+    @Override
+    public Board getGameBoard() throws RemoteException {
+        return myManager.getBoard();
     }
 }
