@@ -2,14 +2,13 @@ package Model;
 
 import Model.Cards.Card;
 import Model.Cards.SimpleForwardCard;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
 
 /**
  * Created by Maciej on 2014-05-05.
  */
-public class Deck implements Iterable<Integer>{
+public class Deck{
     public Map<Integer, Card> cardsMap;
     List<Integer> deckContainer;
     Set<Integer> lockContainer;
@@ -28,41 +27,23 @@ public class Deck implements Iterable<Integer>{
         Collections.shuffle(deckContainer);
     }
 
-    @Override
-    public Iterator<Integer> iterator() {
-        return new Iterator<Integer>() {
-            Iterator<Integer> inner = deckContainer.iterator();
-            @Override
-            public boolean hasNext() {
-                return true;
-            }
+    public Integer drawCard(){
+        if (deckContainer.size() == 0) throw new ArrayIndexOutOfBoundsException();
 
-            @Override
-            public Integer next() {
-                if (inner.hasNext())
-                {
-                    Integer temp = inner.next();
-                    inner.remove();
-                    lockContainer.add(temp);
-                    return temp;
-                }
-                else
-                {
-                    deckContainer.addAll(graveContainer);
-                    graveContainer.clear();
-                    Collections.shuffle(deckContainer);
-                    inner = deckContainer.iterator();
-                    if (!inner.hasNext())throw new ArrayIndexOutOfBoundsException();
-                    return next();
-                }
-            }
+        Integer temp = deckContainer.get(0);
+        deckContainer.remove(0);
+        lockContainer.add(temp);
 
-            @Override
-            public void remove() {
-                throw new NotImplementedException();
-            }
-        };
+        if (deckContainer.size() == 0){
+            deckContainer.addAll(graveContainer);
+            graveContainer.clear();
+
+            Collections.shuffle(deckContainer);
+        }
+
+        return temp;
     }
+
     private void moveCard(Integer cardID, Collection<Integer> A, Collection<Integer> B)
     {
         if (A.remove(cardID))

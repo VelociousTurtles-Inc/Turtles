@@ -95,11 +95,8 @@ public class StandardGameService implements GameService {
 
     {
         if (hand.size() >= 5)return;
-        for (Integer c: deck)
-        {
-            hand.add(c);
-            if (hand.size() >= 5)
-                break;
+        while(hand.size() < 5){
+            hand.add(deck.drawCard());
         }
     }
 
