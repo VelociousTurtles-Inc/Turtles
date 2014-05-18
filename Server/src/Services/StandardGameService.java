@@ -6,7 +6,6 @@ import Model.Board.BoardGraph;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Cards.CardInfoPair;
-import Model.Cards.PlayedCard;
 import Model.Deck;
 import Model.Game.GameInfo;
 import Model.Turtles.Turtle;
@@ -15,7 +14,6 @@ import Server.Interfaces.GameService;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -111,8 +109,7 @@ public class StandardGameService implements GameService {
     }
 
     @Override
-    public List<PlayedCard> getPlayedCards() throws Exception {
-        // TODO make it work
-        return Arrays.asList(new PlayedCard(1, 1), new PlayedCard(1, 2), new PlayedCard(1, 3));
+    public List<Integer> getPlayedCards() throws Exception {
+        return deck.getPlayedCards();
     }
 }

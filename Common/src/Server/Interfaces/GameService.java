@@ -4,7 +4,6 @@ import Client.Interfaces.GameClient;
 import Model.Board.BoardGraph;
 import Model.Cards.CardInfoPair;
 import Model.Game.GameInfo;
-import Model.Cards.PlayedCard;
 
 import java.rmi.Remote;
 import java.util.List;
@@ -18,6 +17,6 @@ public interface GameService extends Remote {
     public GameInfo getGameState() throws Exception;
     public List<Integer> getPlayerCards() throws Exception;
     public void playCard(int cardID) throws Exception;
-    public List<PlayedCard> getPlayedCards() throws Exception;
+    public List<Integer> getPlayedCards() throws Exception;
     public void registerClient(GameClient client) throws Exception;
 }

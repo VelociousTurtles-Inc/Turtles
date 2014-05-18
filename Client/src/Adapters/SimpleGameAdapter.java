@@ -17,7 +17,6 @@ import Views.Standard.Game.StandardGameView;
 import org.cojen.dirmi.Environment;
 import org.cojen.dirmi.Session;
 
-import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -43,6 +42,8 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
     List<Event> cardsUpdates;
 
     List<Integer> playerHand;
+
+    List<Integer> playdCards;
 
     public SimpleGameAdapter() throws Exception {
         normalCardsMap = new HashMap<>();
@@ -164,6 +165,24 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
     }
 
     @Override
-    public void cardsPlayed() throws RemoteException {
+    public void cardsPlayed() throws Exception {
+        List<Integer> temp;
+        temp = gameService.getPlayedCards();
+        for (int i=0; i<3; i++){
+            if (temp.size()-i >= 1) break;
+
+            playdCards.add(0, temp.get(temp.size()-1-i));
+        }
+
+        return;
     }
+
+    public List<Integer> getPlayedCards(){
+        return playdCards;
+    }
+
+    /*
+        18.05.2014, Maciek
+        I think it's easier to use Integer instead of class 'PlaydCards'.
+     */
 }

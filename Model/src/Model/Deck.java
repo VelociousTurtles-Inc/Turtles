@@ -12,12 +12,12 @@ public class Deck{
     public Map<Integer, Card> cardsMap;
     List<Integer> deckContainer;
     Set<Integer> lockContainer;
-    Set<Integer> graveContainer;
+    List<Integer> graveContainer;
     public Deck()
     {
         deckContainer = new LinkedList<Integer>();
         lockContainer = new HashSet<Integer>();
-        graveContainer = new HashSet<Integer>();
+        graveContainer = new LinkedList<Integer>();
         cardsMap = new HashMap<Integer, Card>();
         for(Card temp : SimpleForwardCard.populate()){
             cardsMap.put(temp.getID(), temp);
@@ -62,5 +62,9 @@ public class Deck{
     public void ressurectCard(Integer cardID)
     {
         moveCard(cardID, lockContainer,graveContainer);
+    }
+
+    public List<Integer> getPlayedCards(){
+        return graveContainer;
     }
 }
