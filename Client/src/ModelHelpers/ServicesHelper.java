@@ -1,20 +1,25 @@
 package ModelHelpers;
 
 
-import Model.Board.BoardGraph;
-
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  * Created by mz18 on 12/05/14.
  */
+
+/*
+    Commented out on 18 may 2014 by Szymon
+        boardGraph implements iterable, why should we implement it
+        once again here ?
+        Leaving in case it would really be needed in the future.
+ */
+
+    /*
 public class ServicesHelper {
     public static Iterable<BoardGraph.Field> getIterableBoard(final BoardGraph board)
     {
+
         return new Iterable<BoardGraph.Field>()
         {
+
             @Override
             public Iterator<BoardGraph.Field> iterator() {
                 int position = 0;
@@ -57,7 +62,7 @@ public class ServicesHelper {
                 };
             }
         };
-    }
+    } */
     /*public static Map<Integer, CardInfo> createCardMap() {
         Map<Integer, CardInfo> resultMap = new TreeMap<Integer, CardInfo>();
         for(int i = 1; i<=5; i++) {
@@ -68,4 +73,8 @@ public class ServicesHelper {
 
         return resultMap;
     }*/
+
+/*
 }
+
+*/

@@ -2,18 +2,27 @@ package Model.Board;
 
 import Model.Utility.Utility;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by Maciej on 2014-05-05.
  */
-public class SimpleBoard extends Board{
+public class SimpleBoard extends Board {
 
     public SimpleBoard()
     {
-        BoardGraph.Field F = graph.start = new BoardGraph.Field();
-        for (int i = 0; i < 6; i++)
+
+        BoardGraph.Field F = new BoardGraph.Field();
+        graph.starts = new ArrayList<>();
+
+        for(int i = 0; i < 5; i++)
+            graph.starts.add(new BoardGraph.Field());
+
+        for(BoardGraph.Field a : graph.starts)
+            a.successors.add(F);
+
+        for (int i = 0; i < 5; i++)
         {
             BoardGraph.Field S = new BoardGraph.Field();
             F.successors.add(S);

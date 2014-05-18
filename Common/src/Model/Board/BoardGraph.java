@@ -13,13 +13,18 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable
     private static final long serialVersionUID = -2995046707046230025L;
 
     static int counter;
-    public Field start;
+    public ArrayList<Field> starts;
+    public Field end;
 
-    public Field getStart() {
-        return start;
+    public ArrayList<Field> getStarts() {
+        return starts;
     }
 
 
+    /*
+    Warning : only works for simple linear boards as for now (18 may 2014)
+        Szymon
+     */
     @Override
     public Iterator<Field> iterator() {
         int position = 0;
@@ -28,14 +33,17 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable
             {
                 q = new LinkedList<Field>();
                 Queue<Field> tmp = new LinkedList<Field>();
-                Field ref = start;
-                q.add(start);
-                tmp.add(ref);
+                Field ref;
+                for(Field a : starts)
+                    q.add(a);
+                for(Field a : starts)
+                    tmp.add(a);
                 while(!tmp.isEmpty()) {
                     ref = tmp.remove();
                     for (Field it : ref.successors) {
                         q.add(it);
                         tmp.add(it);
+                        end = it;
                     }
                 }
             }
@@ -61,6 +69,7 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable
     {
         FINAL, NORMAL
     }
+
     public static class Field implements Serializable {
         private static final long serialVersionUID = -5406846425764941114L;
 

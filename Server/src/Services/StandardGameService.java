@@ -12,7 +12,6 @@ import Model.Game.GameInfo;
 import Model.Turtles.Turtle;
 import Model.Utility.Utility;
 import Server.Interfaces.GameService;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -34,11 +33,14 @@ public class StandardGameService implements GameService {
     private GameInfo info = new GameInfo();
 
     {
-        for (int i = 0; i < 5; i++)
-        {
+        for(int i = 0; i < 5; i++) {
             info.turtles.add(new Turtle(i));
         }
-        board.graph.start.turtles.addAll(info.turtles);
+
+        for(int i = 0; i < 5; i++) {
+            board.graph.starts.get(i).turtles.add(info.turtles.get(i));
+        }
+
 
     }
 

@@ -2,8 +2,8 @@ package Model.Cards;
 
 
 import Colors.Colors;
-import Model.Board.BoardGraph;
 import Model.Board.Board;
+import Model.Board.BoardGraph;
 import Model.Turtles.Turtle;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class SimpleForwardCard extends Card {
                         it.remove();
                         if (it.hasNext())turtle = it.next();
                         else turtle = null;
-                    }while(turtle != null);
+                    } while(turtle != null);
                     break outer;
                 }
 
@@ -61,6 +61,6 @@ public class SimpleForwardCard extends Card {
     }
     public String getDescription()
     {
-        return "Porusza żolwia we wskazanymk kolorze o jedno pole do przodu";
+        return "Porusza żolwia we wskazanym kolorze o jedno pole do przodu";
     }
 }
