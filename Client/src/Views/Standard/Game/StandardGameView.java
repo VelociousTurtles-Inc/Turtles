@@ -2,9 +2,7 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
-import Colors.Colors;
 import Model.Cards.Card;
-import Model.Cards.CardInfo;
 import ModelHelpers.DebugWriter;
 import Views.Board;
 import Views.BoardBootstrap;
@@ -36,6 +34,7 @@ public class StandardGameView {
 
     private void updateBoard(List<List<Integer>> updateForBoard) {
         assert DebugWriter.write("Real Updating Board", updateForBoard.toArray());
+        System.out.println(updateForBoard);
         for(int i = 0; i<myBoard.size; i++) {
             if(updateForBoard.get(i) != null && updateForBoard.get(i).size() != 0) {
                 List<Integer> temp = updateForBoard.get(i);

@@ -15,7 +15,7 @@ public class Board implements Serializable {
     public List<Point> positions = new ArrayList<Point>();
     public int size, maxTurtles;
     public String name;
-    //path to image
+    //path to image should be here
 
 
     public Board() {
