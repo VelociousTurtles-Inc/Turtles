@@ -1,6 +1,7 @@
 package Adapters;
 
 import Adapters.Interfaces.GameCreatorController;
+import Main.Client;
 import Server.Interfaces.GameDispenser;
 import Views.Standard.GameCreation.GameCreator.GameCreatorView;
 
@@ -12,10 +13,10 @@ public class StandardGameCreatorController implements GameCreatorController {
 
     public  StandardGameCreatorController(GameDispenser myDispenser) {
         this.myDispenser = myDispenser;
-        GameCreatorView myView = new GameCreatorView(this);
-        myView.start();
+        Client.scenario.invoke(GameCreatorController.class, this);
     }
 
+    @Override
     public void create(String s) throws Exception {
         new StandardGameCreatorWaiterController(s, myDispenser);
     }

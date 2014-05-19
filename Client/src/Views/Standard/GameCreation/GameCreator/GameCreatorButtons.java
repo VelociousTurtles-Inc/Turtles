@@ -1,5 +1,6 @@
 package Views.Standard.GameCreation.GameCreator;
 
+import Adapters.Interfaces.GameCreatorController;
 import Adapters.StandardGameCreatorController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
@@ -13,12 +14,12 @@ public class GameCreatorButtons {
 
     public TextField name;
     Stage myStage;
-    StandardGameCreatorController myController;
+    GameCreatorController myController;
 
     public void setStage(Stage stage) {
         myStage = stage;
     }
-    public void setController(StandardGameCreatorController myController) {
+    public void setController(GameCreatorController myController) {
         this.myController = myController;
     }
 
