@@ -1,7 +1,6 @@
 package Views.Standard.GameSelect;
 
 import Adapters.Interfaces.GameSelectController;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,26 +18,27 @@ public class GameSelectView {
 
     public GameSelectView(GameSelectController myController) {
         this.myController = myController;
+        start();
     }
 
     public void start() {
 
-                Stage myStage = new Stage();
-                FXMLLoader myLoader = new FXMLLoader();
+        Stage myStage = new Stage();
+        FXMLLoader myLoader = new FXMLLoader();
 
-                Parent myParent = null;
-                try {
-                    myParent = (Parent) myLoader.load(getClass().getResource("GameSelectView.fxml").openStream());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        Parent myParent = null;
+        try {
+            myParent = (Parent) myLoader.load(getClass().getResource("GameSelectView.fxml").openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-                myButtons = myLoader.getController();
-                myButtons.setController(myController);
-                myButtons.setStage(myStage);
+        myButtons = myLoader.getController();
+        myButtons.setController(myController);
+        myButtons.setStage(myStage);
 
-                myStage.setScene(new Scene(myParent));
-                myStage.show();
+        myStage.setScene(new Scene(myParent));
+        myStage.show();
 
 
     }

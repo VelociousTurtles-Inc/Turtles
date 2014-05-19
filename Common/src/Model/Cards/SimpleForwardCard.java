@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class SingleForwardCard extends Card {
+public class SimpleForwardCard extends Card {
+    private static final long serialVersionUID = 4739049860217674267L;
 
-
-    public SingleForwardCard(int color) {
+    public SimpleForwardCard(int color) {
         super(color);
     }
 
@@ -26,7 +26,7 @@ public class SingleForwardCard extends Card {
         ArrayList<Card> result = new ArrayList<>();
         for (int j = 0; j < 3; j++)
             for (int i : Colors.getRealIntegers())
-                result.add(new SingleForwardCard(i-1));
+                result.add(new SimpleForwardCard(i-1));
         return result;
     }
 

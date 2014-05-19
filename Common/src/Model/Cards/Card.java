@@ -16,8 +16,8 @@ import java.util.List;
 public abstract class Card implements Serializable {
     private static final long serialVersionUID = 4650075470587092743L;
 
-    final int color;
-    final int id;
+    final protected int color;
+    final protected int id;
     static int counter;
 
     public Card()

@@ -5,6 +5,7 @@ import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Client.Interfaces.GameClient;
 import Colors.Colors;
+import Main.Client;
 import Model.Board.BoardGraph;
 import Model.Cards.Card;
 import Model.Turtles.Turtle;
@@ -93,7 +94,7 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
         playerService = myService;
         normalCardsMap = myService.getCardsMap();
         myService.setClient(this);
-        StandardGameView myGameView = new StandardGameView(this);
+        Client.scenario.invoke(GameController.class, this);
     }
 
     @Override
