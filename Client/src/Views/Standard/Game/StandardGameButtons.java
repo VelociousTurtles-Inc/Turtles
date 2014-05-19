@@ -68,7 +68,12 @@ public class StandardGameButtons {
     @FXML protected void playIt(ActionEvent event) {
         assert DebugWriter.write("Play Card " + chosenCard);
         try {
-            myGameController.playCard(chosenCard);
+            //myGameController.playCard(chosenCard);
+            //
+            // MB: later we use chosenCard as number in list,
+            //     so we should decrease chosenCard by 1:
+
+            myGameController.playCard(chosenCard-1);
         } catch (Exception e) {
             e.printStackTrace();
         }
