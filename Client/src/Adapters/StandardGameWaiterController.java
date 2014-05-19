@@ -3,9 +3,9 @@ package Adapters;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameWaiterController;
 import Client.Interfaces.GameWaiterClient;
+import Main.Client;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.PlayerService;
-import Views.Standard.GameCreation.GameWaiting.GameWaiterView;
 
 /**
  * Created by michaziobro on 17.05.2014.
@@ -20,8 +20,7 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
 
     public StandardGameWaiterController(int myID, GameDispenser myGameDispenser) throws Exception {
         gameID = myID;
-        GameWaiterView myView = new GameWaiterView(this);
-        myView.start();
+        Client.scenario.invoke(GameWaiterController.class, this);
         this.myGameDispenser = myGameDispenser;
         gameName = myGameDispenser.getGameName(gameID);
         myGameDispenser.connectToGame(myID, this);
@@ -44,22 +43,27 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
         myAdapter.start(player);
     }
 
+    @Override
     public void registerCancelEvent(Event cancelEvent) {
         this.cancelEvent = cancelEvent;
     }
 
+    @Override
     public void registerUpdate(Event update) {
         updateEvent = update;
     }
 
+    @Override
     public int getNumberOfPlayers() {
         return myNumberOfPlayers;
     }
 
+    @Override
     public void leave() throws Exception {
         myGameDispenser.leaveGame(gameID,this);
     }
 
+    @Override
     public String getGameName() throws Exception {
         return gameName;
     }

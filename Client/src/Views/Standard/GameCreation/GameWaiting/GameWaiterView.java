@@ -1,7 +1,6 @@
 package Views.Standard.GameCreation.GameWaiting;
 
-import Adapters.StandardGameWaiterController;
-import javafx.application.Platform;
+import Adapters.Interfaces.GameWaiterController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,11 +12,16 @@ import java.io.IOException;
  * Created by michaziobro on 16.05.2014.
  */
 public class GameWaiterView {
-    StandardGameWaiterController myController;
+    GameWaiterController myController;
     GameWaitingButtons myButtons;
 
-    public GameWaiterView(StandardGameWaiterController controller) {
+    public GameWaiterView(GameWaiterController controller) {
         myController = controller;
+        try {
+            start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void start() throws Exception {
 

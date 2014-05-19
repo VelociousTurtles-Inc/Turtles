@@ -18,7 +18,6 @@ public class StandardScenario extends GUIScenario {
         add(GameController.class, StandardGameView.class);
         add(GameCreatorController.class, GameCreatorView.class);
         add(GameCreatorWaiterController.class, GameCreatorWaiterView.class);
-        add(GameSelectController.class, GameSelectView.class);
         add(GameWaiterController.class, GameWaiterView.class);
     }
 }
