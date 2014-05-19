@@ -58,6 +58,29 @@ public class StandardGameDispenser implements GameDispenser {
     @Override
     public void registerGameSelector(GameSelecter mySelector) throws Exception {
         mySelecters.add(mySelector);
+
+        // update list of games - it throws exception, I don't know why
+        /*ThreeStringsGet myTSG = new ThreeStringsGet() {
+            List<SimpliestGameInfo> list;
+            @Override
+            public void setList(List<SimpliestGameInfo> list) throws Exception{
+                this.list = list;
+            }
+
+            @Override
+            public List<SimpliestGameInfo> getList() throws Exception {
+                return list;
+            }
+        };
+
+        try {
+            mySelector.update(myTSG);
+        } catch (ClosedException e) {
+            mySelecters.remove(mySelector);
+        }*/
+
+        // or just - but we don't need update all
+        update();
     }
 
     @Override
