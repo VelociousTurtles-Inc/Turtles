@@ -5,17 +5,12 @@ import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Client.Interfaces.GameClient;
 import Colors.Colors;
-import Main.Client;
 import Model.Board.BoardGraph;
-import Model.Cards.CardInfo;
-import Model.Cards.CardInfoPair;
+import Model.Cards.Card;
 import Model.Turtles.Turtle;
 import ModelHelpers.DebugWriter;
-import Server.Interfaces.GameDispenser;
-import Server.Interfaces.GameService;
+import Server.Interfaces.PlayerService;
 import Views.Standard.Game.StandardGameView;
-import org.cojen.dirmi.Environment;
-import org.cojen.dirmi.Session;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -23,23 +18,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-//import ModelHelpers.ServicesHelper;
-
 /**
  * Created by larhard on 05.05.14.
  */
 
 public class SimpleGameAdapter extends Thread implements GameController, GameClient {
 
-    Map<Integer, CardInfo> normalCardsMap;
-    GameService gameService;
-
-    //List of events for Board updates
+    Map<Integer, Card> normalCardsMap;
+    PlayerService playerService;
 
     List<Event> boardUpdates;
-
-    //List of events for Cards updates
-
     List<Event> cardsUpdates;
 
     List<Integer> playerHand;
@@ -47,15 +35,19 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
     public SimpleGameAdapter() throws Exception {
         normalCardsMap = new HashMap<>();
 
-        boardUpdates = new LinkedList<Event>();
-        cardsUpdates = new LinkedList<Event>();
+        boardUpdates = new LinkedList<>();
+        cardsUpdates = new LinkedList<>();
 
         //WebServiceFeature[] enabledRequiredwsf = {new AddressingFeature(true, true)};
 
-        // TODO achieving gameService
-        //gameService = new ServicesTypes.GameService_Service().getGameServicePort();//new ServicesTypes.GameService_Service().getPort(GameService.class,enabledRequiredwsf);
-        Environment environment = new Environment();
+        // TODO achieving gameStarter
+        //gameStarter = new ServicesTypes.GameService_Service().getGameServicePort();//new ServicesTypes.GameService_Service().getPort(GameStarter.class,enabledRequiredwsf);
+/*      Environment environment = new Environment();
         Session session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
+
+        gameService = (GameStarter) session.receive();
+        normalCardsMap = gameService.getDeckMap(0);
+        =======
         GameDispenser gameDispenser = (GameDispenser) session.receive();
         Integer gameId = gameDispenser.createNewGame();
         if (gameId == null) {
@@ -66,44 +58,52 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
 
         for(CardInfoPair myPair : gameService.getDeckList()) {
             normalCardsMap.put(myPair.getKey(), myPair.getValue());
-        }
-
-        StandardGameView myGameView = new StandardGameView(this);
+        }*/
     }
 
+    @Override
     public void updateCards() {
         for(Event up : cardsUpdates) {
             up.call();
         }
     }
 
+    @Override
     public void updateBoards() {
         for(Event up : boardUpdates) {
             up.call();
         }
     }
 
-    public boolean checkForWinner() throws Exception {
-        BoardGraph myBoardGraph = gameService.getGameBoardGraph();
+//    public boolean checkForWinner() throws Exception {
+//        BoardGraph myBoardGraph = gameService.getGameBoardGraph();
+//
+//        if(myBoardGraph.end.getTurtles().size() != 0) {
+//            Turtle temp = myBoardGraph.end.getTurtles().get(myBoardGraph.end.getTurtles().size() - 1);
+//            System.out.println("The " + Colors.asString(temp.getColor() + 1) + " turtle has won the game.");
+//            return true;
+//        } else {
+//            return false;
+//        }
+//
+//    }
 
-        if(myBoardGraph.end.getTurtles().size() != 0) {
-            Turtle temp = myBoardGraph.end.getTurtles().get(myBoardGraph.end.getTurtles().size() - 1);
-            System.out.println("The " + Colors.asString(temp.getColor() + 1) + " turtle has won the game.");
-            return true;
-        } else {
-            return false;
-        }
-
+    @Override
+    public void start(PlayerService myService) throws Exception {
+        playerService = myService;
+        normalCardsMap = myService.getCardsMap();
+        myService.setClient(this);
+        StandardGameView myGameView = new StandardGameView(this);
     }
 
     @Override
     public void playCard(int card) throws Exception {
-        if (playerHand == null)getCards();
+        /*if (playerHand == null)getCards();
         int cardID = playerHand.get(card-1);
-        gameService.playCard(cardID);
+        playerService.playCard(cardID);
         updateCards();
-        updateBoards();
-        checkForWinner();
+        updateBoards();*/
+        playerService.playCard(card);
     }
 
     @Override
@@ -125,9 +125,9 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
     }
 
     @Override
-    public List<CardInfo> getCards() throws Exception {
-        playerHand = gameService.getPlayerCards();
-        List<CardInfo> resultCards = new LinkedList<>();
+    public List<Card> getCards() throws Exception {
+        playerHand = playerService.getPlayerCards();
+        List<Card> resultCards = new LinkedList<Card>();
         for(Integer i : playerHand) {
             resultCards.add(normalCardsMap.get(i));
         }
@@ -142,13 +142,9 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
      */
     @Override
     public List<List<Integer>> getBoard() throws Exception {
-        List<List<Integer>> result = new LinkedList<>();
-        BoardGraph myBoardGraph = gameService.getGameBoardGraph();
 
-        result.add(new LinkedList<Integer>());
-        for(BoardGraph.Field f : myBoardGraph.starts)
-            for(Turtle t : f.getTurtles())
-                result.get(0).add(t.getColor()+1);
+        List<List<Integer>> result = new LinkedList<>();
+        BoardGraph myBoardGraph = playerService.getGameBoard().graph;
 
         BoardGraph.Field temp = myBoardGraph.starts.get(0);
 
@@ -161,9 +157,15 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
         }
 
         return result;
+
     }
 
     @Override
     public void cardsPlayed() throws RemoteException {
+
     }
+
+    /*@Override
+    public void cardsPlayed() throws RemoteException {
+    }*/
 }

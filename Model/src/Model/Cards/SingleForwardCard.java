@@ -17,6 +17,10 @@ public class SingleForwardCard extends Card {
         super(color);
     }
 
+    public String getType() {
+        return "SimpleForwardCard";
+    }
+
     public static List<Card> populate()
     {
         ArrayList<Card> result = new ArrayList<>();

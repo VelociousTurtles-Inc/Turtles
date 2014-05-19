@@ -55,6 +55,7 @@ public abstract class Card implements Serializable {
 
     public abstract void play(Board board);
     public abstract CardInfo getCardInfo();
+    public abstract String getType();
 
     @Override
     public String toString() {

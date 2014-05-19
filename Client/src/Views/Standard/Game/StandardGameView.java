@@ -3,6 +3,7 @@ package Views.Standard.Game;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Colors.Colors;
+import Model.Cards.Card;
 import Model.Cards.CardInfo;
 import ModelHelpers.DebugWriter;
 import Views.Board;
@@ -26,6 +27,7 @@ import java.util.*;
  */
 public class StandardGameView {
 
+    // cards -> slots
     private List<ImageView> slots = new ArrayList<ImageView>();
     private List<ImageView> turtles = new ArrayList<ImageView>();
     private Board myBoard = BoardBootstrap.createSampleBoard();
@@ -74,13 +76,12 @@ public class StandardGameView {
         return result;
     }
 
-    private void updateCards(List<CardInfo> cardsUpdate) {
+    private void updateCards(List<Card> cardsUpdate) {
         assert DebugWriter.write("Real Updating Cards", cardsUpdate);
 
-
         for (int i = 1; i <= 5; i++) {
-            CardInfo cardInfo = cardsUpdate.get(i-1);
-            slots.get(i).setImage(cardImages.get(cardInfo.getType() + Colors.asString(cardInfo.getColor() + 1) + ".png"));
+            Card cardInfo = cardsUpdate.get(i-1);
+            slots.get(i).setImage(cardImages.get(cardInfo.getType() + cardInfo.getColor() + ".png"));
         }
     }
 
@@ -105,7 +106,7 @@ public class StandardGameView {
         @Override
         public void call() {
             assert DebugWriter.write("Cards Updating");
-            final List<CardInfo> cardInfos;
+            final List<Card> cardInfos;
             try {
                 cardInfos = myGameController.getCards();
                 Platform.runLater(new Runnable() {

@@ -1,5 +1,6 @@
 package Model.Board;
 
+import Model.Turtles.Turtle;
 import Model.Utility.Utility;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class SimpleBoard extends Board {
         }
         BoardGraph.Field End = new BoardGraph.Field(BoardGraph.FieldType.FINAL);
         F.successors.add(End);
+
+//        for(int i = 0; i<5; i++) graph.start.turtles.add(new Turtle(i));
 
         for (BoardGraph.Field field : graph)
             Utility.Debug.log(Level.INFO,"[BOARD CONSTRUCTOR DEBUG]graph>>"+graph.toString());
