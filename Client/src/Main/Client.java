@@ -1,7 +1,11 @@
 package Main;
 
+import Adapters.Interfaces.GameController;
+import Adapters.SimpleGameAdapter;
 import Adapters.StandardMenuController;
 import ModelHelpers.DebugWriter;
+import Scenario.Scenario;
+import Views.Standard.Game.StandardGameView;
 
 /**
  * Created by michaziobro on 01.05.2014.
@@ -18,6 +22,8 @@ public class Client {
         return port;
     }
 
+    public static Scenario scenario = new Scenario();
+
     public static void main(String[] args) {
         host = "localhost";
         if (args.length >= 1) {
@@ -27,6 +33,8 @@ public class Client {
         if (args.length >= 2) {
             host = args[1];
         }
+
+        scenario.add(GameController.class, StandardGameView.class);
 
         assert DebugWriter.write("Starting application", args);
         StandardMenuController myMenuController = new StandardMenuController();
