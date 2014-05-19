@@ -1,6 +1,6 @@
 package Views.Standard.GameCreation.GameCreator;
 
-import Adapters.StandardGameCreatorController;
+import Adapters.Interfaces.GameCreatorController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,11 +13,12 @@ import java.io.IOException;
  * Created by michaziobro on 16.05.2014.
  */
 public class GameCreatorView {
-    StandardGameCreatorController myController;
+    GameCreatorController myController;
     GameCreatorButtons myButtons;
 
-    public GameCreatorView(StandardGameCreatorController standardGameCreatorController) {
+    public GameCreatorView(GameCreatorController standardGameCreatorController) {
         myController = standardGameCreatorController;
+        start();
     }
     public void start() {
         Platform.runLater(new Runnable() {

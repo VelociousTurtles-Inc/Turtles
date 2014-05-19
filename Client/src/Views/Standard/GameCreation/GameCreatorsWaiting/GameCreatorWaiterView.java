@@ -1,8 +1,6 @@
 package Views.Standard.GameCreation.GameCreatorsWaiting;
 
-import Adapters.StandardGameCreatorWaiterController;
-import Views.Standard.GameCreation.GameCreator.GameCreatorButtons;
-import javafx.application.Platform;
+import Adapters.Interfaces.GameCreatorWaiterController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,12 +11,17 @@ import java.io.IOException;
 /**
  * Created by michaziobro on 16.05.2014.
  */
-public class GameCreatorsWaiterView {
-    StandardGameCreatorWaiterController myController;
-    GameCreatorsWaitingButtons myButtons;
+public class GameCreatorWaiterView {
+    GameCreatorWaiterController myController;
+    GameCreatorsWaiterButtons myButtons;
 
-    public GameCreatorsWaiterView(StandardGameCreatorWaiterController standardGameCreatorController) {
+    public GameCreatorWaiterView(GameCreatorWaiterController standardGameCreatorController) {
         myController = standardGameCreatorController;
+        try {
+            start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     public void start() throws InterruptedException {
         Stage myStage = new Stage();
