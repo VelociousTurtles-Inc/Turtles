@@ -2,7 +2,6 @@ package Views.Standard.GameCreation.GameCreator;
 
 import Adapters.StandardGameCreatorController;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,5 +28,6 @@ public class GameCreatorButtons {
 
     public void create(ActionEvent actionEvent) throws Exception {
         myController.create(String.valueOf(name.getCharacters()));
+        cancel(actionEvent);
     }
 }
