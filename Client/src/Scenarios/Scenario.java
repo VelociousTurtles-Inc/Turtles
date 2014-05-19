@@ -1,4 +1,4 @@
-package Scenario;
+package Scenarios;
 
 import Utils.NullIterable;
 
