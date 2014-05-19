@@ -1,7 +1,7 @@
 package Services;
 
 
-import Client.Interfaces.GameWaiter;
+import Client.Interfaces.GameWaiterClient;
 import Client.Interfaces.SimpliestGameInfo;
 import Model.Board.Board;
 import Model.Board.SimpleBoard;
@@ -31,7 +31,7 @@ public class StandardGameManager implements GameManager {
 
     private int myId;
 
-    List<GameWaiter> myWaiters = new LinkedList<>();
+    List<GameWaiterClient> myWaiters = new LinkedList<>();
     List<PlayerService> myPlayers;
 
     public StandardGameManager(String name) {
@@ -91,14 +91,14 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public void addPlayer(GameWaiter newWaiter) {
+    public void addPlayer(GameWaiterClient newWaiter) {
         myWaiters.add(newWaiter);
         numberOfPlayers++;
         return ;
     }
 
     @Override
-    public void removePlayer(GameWaiter oldWaiter) {
+    public void removePlayer(GameWaiterClient oldWaiter) {
         myWaiters.remove(oldWaiter);
         numberOfPlayers--;
         return ;
@@ -123,14 +123,14 @@ public class StandardGameManager implements GameManager {
     }
 
     public void update() throws Exception {
-        for(GameWaiter waiter : myWaiters) {
+        for(GameWaiterClient waiter : myWaiters) {
             waiter.update(numberOfPlayers);
         }
     }
 
     @Override
     public void cancel() throws Exception {
-        for(GameWaiter waiter : myWaiters) {
+        for(GameWaiterClient waiter : myWaiters) {
             waiter.cancel();
         }
     }

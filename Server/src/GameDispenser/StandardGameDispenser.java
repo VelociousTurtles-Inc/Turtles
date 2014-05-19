@@ -1,7 +1,7 @@
 package GameDispenser;
 
-import Client.Interfaces.GameSelecter;
-import Client.Interfaces.GameWaiter;
+import Client.Interfaces.GameSelectClient;
+import Client.Interfaces.GameWaiterClient;
 import Client.Interfaces.SimpliestGameInfo;
 import Client.Interfaces.ThreeStringsGet;
 import Model.Utility.Utility;
@@ -17,7 +17,7 @@ import java.util.logging.Level;
  */
 public class StandardGameDispenser implements GameDispenser {
     private Map<Integer, GameManager> gameServices = new HashMap<>();
-    private Set<GameSelecter> mySelecters = new HashSet<>();
+    private Set<GameSelectClient> mySelecters = new HashSet<>();
 
     private int getEmptyId() {
         Random random = new Random();
@@ -30,7 +30,7 @@ public class StandardGameDispenser implements GameDispenser {
     }
 
     @Override
-    public GameManager connectToGame(int id, GameWaiter mySel) throws Exception {
+    public GameManager connectToGame(int id, GameWaiterClient mySel) throws Exception {
         if (gameServices.containsKey(id)) {
             Utility.Debug.log(Level.INFO, "[ StandardGameDispenser ] new client connected to game #" + id);
             gameServices.get(id).addPlayer(mySel);
@@ -44,7 +44,7 @@ public class StandardGameDispenser implements GameDispenser {
     }
 
     @Override
-    public Integer createNewGame(String name, GameWaiter mySel) throws Exception {
+    public Integer createNewGame(String name, GameWaiterClient mySel) throws Exception {
         int id = getEmptyId();
         gameServices.put(id, new Services.StandardGameManager(name));
         gameServices.get(id).addPlayer(mySel);
@@ -56,7 +56,7 @@ public class StandardGameDispenser implements GameDispenser {
     }
 
     @Override
-    public void registerGameSelector(GameSelecter mySelector) throws Exception {
+    public void registerGameSelector(GameSelectClient mySelector) throws Exception {
         mySelecters.add(mySelector);
 
         // update list of game
@@ -94,12 +94,12 @@ public class StandardGameDispenser implements GameDispenser {
     }
 
     @Override
-    public void unregisterGameSelector(GameSelecter mySelector) throws Exception {
+    public void unregisterGameSelector(GameSelectClient mySelector) throws Exception {
         mySelecters.remove(mySelector);
     }
 
     @Override
-    public void leaveGame(int gameID, GameWaiter mySel) throws Exception {
+    public void leaveGame(int gameID, GameWaiterClient mySel) throws Exception {
         gameServices.get(gameID).removePlayer(mySel);
         gameServices.get(gameID).update();
         update();
@@ -136,16 +136,16 @@ public class StandardGameDispenser implements GameDispenser {
         }
         myTSG.setList(myList);
 
-        List<GameSelecter> closedSelecters = new ArrayList<>();
-        for(GameSelecter mySel : mySelecters) {
+        List<GameSelectClient> closedSelecters = new ArrayList<>();
+        for(GameSelectClient mySel : mySelecters) {
             try {
                 mySel.update(myTSG);
             } catch (ClosedException e) {
                 closedSelecters.add(mySel);
             }
         }
-        for (GameSelecter gameSelecter : closedSelecters) {
-            mySelecters.remove(gameSelecter);
+        for (GameSelectClient gameSelectClient : closedSelecters) {
+            mySelecters.remove(gameSelectClient);
         }
     }
 }

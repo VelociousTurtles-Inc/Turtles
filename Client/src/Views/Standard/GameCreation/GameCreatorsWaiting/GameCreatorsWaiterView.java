@@ -13,11 +13,11 @@ import java.io.IOException;
 /**
  * Created by michaziobro on 16.05.2014.
  */
-public class GameCreatorsWaitingView {
+public class GameCreatorsWaiterView {
     StandardGameCreatorWaiterController myController;
     GameCreatorsWaitingButtons myButtons;
 
-    public GameCreatorsWaitingView(StandardGameCreatorWaiterController standardGameCreatorController) {
+    public GameCreatorsWaiterView(StandardGameCreatorWaiterController standardGameCreatorController) {
         myController = standardGameCreatorController;
     }
     public void start() throws InterruptedException {

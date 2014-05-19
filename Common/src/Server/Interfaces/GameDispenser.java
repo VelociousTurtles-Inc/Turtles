@@ -1,7 +1,7 @@
 package Server.Interfaces;
 
-import Client.Interfaces.GameSelecter;
-import Client.Interfaces.GameWaiter;
+import Client.Interfaces.GameSelectClient;
+import Client.Interfaces.GameWaiterClient;
 
 import java.rmi.Remote;
 
@@ -11,12 +11,12 @@ import java.rmi.Remote;
 public interface GameDispenser extends Remote {
     // TODO authenticate
 
-    GameManager connectToGame(int id, GameWaiter mySel) throws Exception;
-    public Integer createNewGame(String name, GameWaiter mySel) throws Exception;
-    void unregisterGameSelector(GameSelecter mySelector) throws Exception;
-    void leaveGame(int gameID, GameWaiter mySel) throws Exception;
+    GameManager connectToGame(int id, GameWaiterClient mySel) throws Exception;
+    public Integer createNewGame(String name, GameWaiterClient mySel) throws Exception;
+    void unregisterGameSelector(GameSelectClient mySelector) throws Exception;
+    void leaveGame(int gameID, GameWaiterClient mySel) throws Exception;
     void cancelGame(int gameID) throws Exception;
-    public void registerGameSelector(GameSelecter mySel) throws Exception;
+    public void registerGameSelector(GameSelectClient mySel) throws Exception;
     public String getGameName(int gameID) throws Exception;
     void startGame(int gameID) throws Exception;
 }

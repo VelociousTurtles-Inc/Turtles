@@ -2,11 +2,10 @@ package Adapters;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
-import Client.Interfaces.GameSelecter;
+import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.SimpliestGameInfo;
 import Client.Interfaces.ThreeStringsGet;
 import Main.Client;
-import Views.Standard.GameSelect.GameSelectView;
 import Server.Interfaces.GameDispenser;
 
 import org.cojen.dirmi.Environment;
@@ -18,7 +17,7 @@ import java.util.List;
 /**
  * Created by michaziobro on 16.05.2014.
  */
-public class StandardGameSelectController implements GameSelectController, GameSelecter {
+public class StandardGameSelectController implements GameSelectController, GameSelectClient {
 
     GameDispenser myGameDispenser;
     List<SimpliestGameInfo> simpleGameInfos;

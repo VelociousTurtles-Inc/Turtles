@@ -12,11 +12,11 @@ import java.io.IOException;
 /**
  * Created by michaziobro on 16.05.2014.
  */
-public class GameWaitingView {
+public class GameWaiterView {
     StandardGameWaiterController myController;
     GameWaitingButtons myButtons;
 
-    public GameWaitingView(StandardGameWaiterController controller) {
+    public GameWaiterView(StandardGameWaiterController controller) {
         myController = controller;
     }
     public void start() throws Exception {

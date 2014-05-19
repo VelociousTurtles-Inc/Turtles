@@ -1,13 +1,13 @@
 package Adapters;
 
-import Client.Interfaces.GameWaiter;
+import Adapters.Interfaces.GameCreatorController;
 import Server.Interfaces.GameDispenser;
 import Views.Standard.GameCreation.GameCreator.GameCreatorView;
 
 /**
  * Created by michaziobro on 17.05.2014.
  */
-public class StandardGameCreatorController {
+public class StandardGameCreatorController implements GameCreatorController {
     GameDispenser myDispenser;
 
     public  StandardGameCreatorController(GameDispenser myDispenser) {

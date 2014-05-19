@@ -1,15 +1,16 @@
 package Adapters;
 
 import Adapters.Interfaces.Event;
-import Client.Interfaces.GameWaiter;
+import Adapters.Interfaces.GameCreatorWaiterController;
+import Client.Interfaces.GameWaiterClient;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.PlayerService;
-import Views.Standard.GameCreation.GameCreatorsWaiting.GameCreatorsWaitingView;
+import Views.Standard.GameCreation.GameCreatorsWaiting.GameCreatorsWaiterView;
 
 /**
  * Created by michaziobro on 17.05.2014.
  */
-public class StandardGameCreatorWaiterController implements GameWaiter {
+public class StandardGameCreatorWaiterController implements GameCreatorWaiterController, GameWaiterClient {
     GameDispenser myDispenser;
     private  int numberOfPlayers;
     private Event myUpdateEvent;
@@ -18,7 +19,7 @@ public class StandardGameCreatorWaiterController implements GameWaiter {
     private int gameID;
 
     public StandardGameCreatorWaiterController(String s, GameDispenser standardGameCreatorController) throws Exception {
-        GameCreatorsWaitingView myView = new GameCreatorsWaitingView(this);
+        GameCreatorsWaiterView myView = new GameCreatorsWaiterView(this);
         myView.start();
 
         this.myDispenser = standardGameCreatorController;
