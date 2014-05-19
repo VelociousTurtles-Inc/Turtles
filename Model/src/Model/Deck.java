@@ -1,7 +1,7 @@
 package Model;
 
 import Model.Cards.Card;
-import Model.Cards.SimpleForwardCard;
+import Model.Cards.SingleForwardCard;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
@@ -20,7 +20,7 @@ public class Deck implements Iterable<Integer>{
         lockContainer = new HashSet<Integer>();
         graveContainer = new HashSet<Integer>();
         cardsMap = new HashMap<Integer, Card>();
-        for(Card temp : SimpleForwardCard.populate()){
+        for(Card temp : SingleForwardCard.populate()){
             cardsMap.put(temp.getID(), temp);
             deckContainer.add(temp.getID());
         }
