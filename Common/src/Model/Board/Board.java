@@ -11,6 +11,6 @@ public class Board implements Serializable {
     public BoardGraph graph;
 
     public Board() {
-        graph= new BoardGraph();
+        graph = new BoardGraph();
     }
 }

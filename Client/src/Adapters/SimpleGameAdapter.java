@@ -4,14 +4,12 @@ package Adapters;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Client.Interfaces.GameClient;
-import Colors.Colors;
 import Main.Client;
 import Model.Board.BoardGraph;
 import Model.Cards.Card;
 import Model.Turtles.Turtle;
 import ModelHelpers.DebugWriter;
 import Server.Interfaces.PlayerService;
-import Views.Standard.Game.StandardGameView;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -147,6 +145,11 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
         List<List<Integer>> result = new LinkedList<>();
         BoardGraph myBoardGraph = playerService.getGameBoard().graph;
 
+        result.add(new LinkedList<Integer>());
+        for(BoardGraph.Field f : myBoardGraph.starts)
+            for(Turtle t : f.getTurtles())
+                result.get(0).add(t.getColor()+1);
+
         BoardGraph.Field temp = myBoardGraph.starts.get(0);
 
         while(temp.getSuccessors().size() != 0) {
@@ -158,7 +161,6 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
         }
 
         return result;
-
     }
 
     @Override

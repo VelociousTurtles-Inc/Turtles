@@ -3,9 +3,7 @@ package Model;
 import Interfaces.IBoard;
 import Interfaces.ICards;
 import Interfaces.IGame;
-import Model.Board.SimpleBoard;
 import Model.Cards.Card;
-import Model.Cards.Cards;
 
 import java.util.List;
 import java.util.Map;
