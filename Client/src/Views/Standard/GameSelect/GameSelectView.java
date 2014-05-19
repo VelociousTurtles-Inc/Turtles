@@ -1,7 +1,6 @@
 package Views.Standard.GameSelect;
 
 import Adapters.Interfaces.GameSelectController;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

@@ -1,10 +1,8 @@
 package Adapters;
 
-import Adapters.Interfaces.GameController;
 import Adapters.Interfaces.MenuController;
 import Main.Client;
 import ModelHelpers.DebugWriter;
-import Views.Standard.Menu.StandardMenuView;
 
 /**
  * Created by mz18 on 8/05/14.

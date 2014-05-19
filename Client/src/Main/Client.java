@@ -3,24 +3,42 @@ package Main;
 import Adapters.Interfaces.GameController;
 import Adapters.Interfaces.GameSelectController;
 import Adapters.Interfaces.MenuController;
-import Adapters.SimpleGameAdapter;
-import Adapters.StandardGameSelectController;
 import Adapters.StandardMenuController;
 import ModelHelpers.DebugWriter;
 import Scenario.Scenario;
+import Views.GUIApplication;
 import Views.Standard.Game.StandardGameView;
 import Views.Standard.GameSelect.GameSelectView;
 import Views.Standard.Menu.StandardMenuView;
+
+import java.util.concurrent.Semaphore;
+
+import static javafx.application.Application.launch;
 
 /**
  * Created by michaziobro on 01.05.2014.
  */
 public class Client {
+    public static Semaphore guiSemaphore = new Semaphore(0);
+
+    static GUIApplication guiApplication;
     public static Scenario StandardScenario() {
         Scenario result = new Scenario();
-        result.add(GameController.class, StandardGameView.class);
-        result.add(GameSelectController.class, GameSelectView.class);
+        new Thread() {
+            @Override
+            public void run() {
+                launch(GUIApplication.class);
+            }
+        }.start();
+        try {
+            guiSemaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         result.add(MenuController.class, StandardMenuView.class);
+        result.add(GameSelectController.class, GameSelectView.class);
+        result.add(GameController.class, StandardGameView.class);
         return result;
     }
 
@@ -37,7 +55,7 @@ public class Client {
 
     public static Scenario scenario = new Scenario();
 
-    public static void launch(String host, int port, Scenario scenario) {
+    public static void start(String host, int port, Scenario scenario) {
         Client.scenario = scenario;
 
         assert DebugWriter.write("Launching game", "host = " + host, "port = " + port);
@@ -55,6 +73,6 @@ public class Client {
         }
 
         assert DebugWriter.write("Starting application", args);
-        launch(host, port, StandardScenario());
+        start(host, port, StandardScenario());
     }
 }
