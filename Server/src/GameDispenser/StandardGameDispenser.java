@@ -59,8 +59,9 @@ public class StandardGameDispenser implements GameDispenser {
     public void registerGameSelector(GameSelecter mySelector) throws Exception {
         mySelecters.add(mySelector);
 
-        // update list of games - it throws exception, I don't know why
-        /*ThreeStringsGet myTSG = new ThreeStringsGet() {
+        // update list of game
+        /*List<SimpliestGameInfo> myList = new LinkedList<>();
+        ThreeStringsGet myTSG = new ThreeStringsGet() {
             List<SimpliestGameInfo> list;
             @Override
             public void setList(List<SimpliestGameInfo> list) throws Exception{
@@ -72,6 +73,10 @@ public class StandardGameDispenser implements GameDispenser {
                 return list;
             }
         };
+        for(GameManager myGame : gameServices.values()) {
+            myList.add(myGame.getGameInfo());
+        }
+        myTSG.setList(myList);
 
         try {
             mySelector.update(myTSG);
