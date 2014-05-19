@@ -7,6 +7,7 @@ import Client.Interfaces.ThreeStringsGet;
 import Model.Utility.Utility;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameManager;
+import org.cojen.dirmi.ClosedException;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -16,7 +17,7 @@ import java.util.logging.Level;
  */
 public class StandardGameDispenser implements GameDispenser {
     private Map<Integer, GameManager> gameServices = new HashMap<>();
-    private List<GameSelecter> mySelecters = new LinkedList<>();
+    private Set<GameSelecter> mySelecters = new HashSet<>();
 
     private int getEmptyId() {
         Random random = new Random();
@@ -106,8 +107,17 @@ public class StandardGameDispenser implements GameDispenser {
              myList.add(myGame.getGameInfo());
         }
         myTSG.setList(myList);
+
+        List<GameSelecter> closedSelecters = new ArrayList<>();
         for(GameSelecter mySel : mySelecters) {
-            mySel.update(myTSG);
+            try {
+                mySel.update(myTSG);
+            } catch (ClosedException e) {
+                closedSelecters.add(mySel);
+            }
+        }
+        for (GameSelecter gameSelecter : closedSelecters) {
+            mySelecters.remove(gameSelecter);
         }
     }
 }
