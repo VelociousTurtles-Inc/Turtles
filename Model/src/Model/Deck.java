@@ -1,7 +1,12 @@
 package Model;
 
 import Model.Cards.Card;
+<<<<<<< HEAD
 import Model.Cards.SimpleForwardCard;
+=======
+import Model.Cards.SingleForwardCard;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+>>>>>>> 54c5d8adee4cb63e5f85b94f6e3b879ebd809014
 
 import java.util.*;
 
@@ -19,7 +24,7 @@ public class Deck{
         lockContainer = new HashSet<Integer>();
         graveContainer = new LinkedList<Integer>();
         cardsMap = new HashMap<Integer, Card>();
-        for(Card temp : SimpleForwardCard.populate()){
+        for(Card temp : SingleForwardCard.populate()){
             cardsMap.put(temp.getID(), temp);
             deckContainer.add(temp.getID());
         }

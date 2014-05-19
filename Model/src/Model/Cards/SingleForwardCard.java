@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class SimpleForwardCard extends Card {
+public class SingleForwardCard extends Card {
 
 
-    public SimpleForwardCard(int color) {
+    public SingleForwardCard(int color) {
         super(color);
     }
 
@@ -22,7 +22,7 @@ public class SimpleForwardCard extends Card {
         ArrayList<Card> result = new ArrayList<>();
         for (int j = 0; j < 3; j++)
             for (int i : Colors.getRealIntegers())
-                result.add(new SimpleForwardCard(i-1));
+                result.add(new SingleForwardCard(i-1));
         return result;
     }
 
