@@ -22,9 +22,7 @@ public class GameSelectView {
     }
 
     public void start() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+
                 Stage myStage = new Stage();
                 FXMLLoader myLoader = new FXMLLoader();
 
@@ -41,7 +39,7 @@ public class GameSelectView {
 
                 myStage.setScene(new Scene(myParent));
                 myStage.show();
-            }
-        });
+
+
     }
 }
