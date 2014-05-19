@@ -58,6 +58,27 @@ public class StandardGameDispenser implements GameDispenser {
     @Override
     public void registerGameSelector(GameSelecter mySelector) throws Exception {
         mySelecters.add(mySelector);
+
+        // update list of games
+        ThreeStringsGet myTSG = new ThreeStringsGet() {
+            List<SimpliestGameInfo> list;
+            @Override
+            public void setList(List<SimpliestGameInfo> list) throws Exception{
+                this.list = list;
+            }
+
+            @Override
+            public List<SimpliestGameInfo> getList() throws Exception {
+                return list;
+            }
+        };
+
+        try {
+            mySelector.update(myTSG);
+        } catch (ClosedException e) {}
+
+        // or just - but we don't need update all
+        // update();
     }
 
     @Override
