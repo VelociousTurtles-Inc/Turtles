@@ -11,6 +11,7 @@ import Server.Interfaces.GameDispenser;
 import org.cojen.dirmi.Environment;
 import org.cojen.dirmi.Session;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class StandardGameSelectController implements GameSelectController, GameS
     GameDispenser myGameDispenser;
     List<SimpliestGameInfo> simpleGameInfos;
 
-    Event endIt;
-    Event updateIt;
+    List<Event> endIt = new ArrayList<>();
+    List<Event> updateIt = new ArrayList<>();
 
     public StandardGameSelectController() throws Exception {
         simpleGameInfos = new LinkedList<>();
@@ -45,7 +46,9 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void cancel() {
-        endIt.call();
+        for (Event e : endIt) {
+            e.call();
+        }
     }
 
     @Override
@@ -54,19 +57,21 @@ public class StandardGameSelectController implements GameSelectController, GameS
     }
 
     @Override
-    public void setClosingEvent(Event myClosingEvent) {
-        this.endIt = myClosingEvent;
+    public void registerClosingEvent(Event myClosingEvent) {
+        endIt.add(myClosingEvent);
     }
 
     @Override
-    public void setUpdateEvent(Event myUpdateEvent) {
-        this.updateIt = myUpdateEvent;
+    public void registerUpdateEvent(Event myUpdateEvent) {
+        updateIt.add(myUpdateEvent);
     }
 
     @Override
     public void update(ThreeStringsGet updateGameInfo) throws Exception {
         simpleGameInfos = updateGameInfo.getList();
-        updateIt.call();
+        for (Event e : updateIt) {
+            e.call();
+        }
     }
 
     @Override

@@ -12,8 +12,8 @@ public interface GameSelectController {
     public void join(int myID) throws Exception;
     public void cancel();
     public void create();
-    public void setClosingEvent(Event myClosingEvent);
-    public void setUpdateEvent(Event updateEvent);
+    public void registerClosingEvent(Event myClosingEvent);
+    public void registerUpdateEvent(Event updateEvent);
 
     List<SimpliestGameInfo> getUpdateList();
 }

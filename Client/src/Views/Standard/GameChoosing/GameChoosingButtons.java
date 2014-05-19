@@ -48,7 +48,7 @@ public class GameChoosingButtons {
 
     public void setController(GameSelectController controller) {
         this.controller = controller;
-        this.controller.setClosingEvent(new Event() {
+        this.controller.registerClosingEvent(new Event() {
             @Override
             public void call() {
                 Platform.runLater(new Runnable() {

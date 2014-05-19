@@ -51,7 +51,7 @@ public class GameSelectButtons {
 
     public void setController(final GameSelectController controller) {
         this.controller = controller;
-        this.controller.setClosingEvent(new Event() {
+        this.controller.registerClosingEvent(new Event() {
             @Override
             public void call() {
                 Platform.runLater(new Runnable() {
@@ -62,12 +62,12 @@ public class GameSelectButtons {
                 });
             }
         });
-        this.controller.setUpdateEvent(new Event() {
+        this.controller.registerUpdateEvent(new Event() {
             @Override
             public void call() {
                 List<SimpliestGameInfo> tmpList = controller.getUpdateList();
                 List<SimpleGameInfo> myList = new LinkedList<>();
-                for(SimpliestGameInfo simple : tmpList) {
+                for (SimpliestGameInfo simple : tmpList) {
                     SimpleGameInfo myInfo = new SimpleGameInfo(simple.getGameName(), simple.getGameStatus(), simple.getNumberOfPlayers());
                     myInfo.setMyID(simple.getMyID());
                     myList.add(myInfo);

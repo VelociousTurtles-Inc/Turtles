@@ -7,6 +7,9 @@ import Main.Client;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.PlayerService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by michaziobro on 17.05.2014.
  */
@@ -14,9 +17,9 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     private int gameID;
     private int myNumberOfPlayers;
     private GameDispenser myGameDispenser;
-    Event updateEvent;
+    private List<Event> updateEvents = new ArrayList<>();
     private String gameName;
-    private Event cancelEvent;
+    private List<Event> cancelEvents = new ArrayList<>();
 
     public StandardGameWaiterController(int myID, GameDispenser myGameDispenser) throws Exception {
         gameID = myID;
@@ -29,12 +32,16 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     @Override
     public void update(int newNumberOfPlayers) {
         myNumberOfPlayers = newNumberOfPlayers;
-        updateEvent.call();
+        for (Event e : updateEvents) {
+            e.call();
+        }
     }
 
     @Override
     public void cancel() throws Exception {
-        cancelEvent.call();
+        for (Event e : cancelEvents) {
+            e.call();
+        }
     }
 
     @Override
@@ -45,12 +52,12 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
 
     @Override
     public void registerCancelEvent(Event cancelEvent) {
-        this.cancelEvent = cancelEvent;
+        cancelEvents.add(cancelEvent);
     }
 
     @Override
     public void registerUpdate(Event update) {
-        updateEvent = update;
+        updateEvents.add(update);
     }
 
     @Override

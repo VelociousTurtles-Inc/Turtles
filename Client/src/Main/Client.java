@@ -23,6 +23,8 @@ public class Client {
     public static Scenario scenario;
 
     public static void start(String host, int port, Scenario scenario) {
+        Client.host = host;
+        Client.port = port;
         Client.scenario = scenario;
 
         assert DebugWriter.write("Launching game", "host = " + host, "port = " + port);
@@ -30,11 +32,11 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        host = "localhost";
+        String host = "localhost";
         if (args.length >= 1) {
             host = args[0];
         }
-        port = 8080;
+        int port = 8080;
         if (args.length >= 2) {
             host = args[1];
         }
