@@ -16,7 +16,7 @@ public class CardInfo implements Serializable {
         return color;
     }
 
-    CardInfo(String type, int id, int color)
+    public CardInfo(String type, int id, int color)
     {
         this.type = type;
         this.ID = id;

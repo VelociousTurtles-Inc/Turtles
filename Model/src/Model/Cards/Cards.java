@@ -25,7 +25,7 @@ public class Cards implements ICards {
 
         cardsMap = new HashMap<>();
 
-        for(Card temp : SingleForwardCard.populate()) {
+        for(Card temp : SimpleForwardCard.populate()) {
             cardsMap.put(temp.getID(), temp);
         }
 

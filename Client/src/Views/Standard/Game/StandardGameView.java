@@ -28,8 +28,8 @@ import java.util.*;
 public class StandardGameView {
 
     // cards -> slots
-    private List<ImageView> slots = new ArrayList<ImageView>();
-    private List<ImageView> turtles = new ArrayList<ImageView>();
+    private List<ImageView> slots = new ArrayList<>();
+    private List<ImageView> turtles = new ArrayList<>();
     private Board myBoard = BoardBootstrap.createSampleBoard();
     private GameController myGameController;
     private Map<String, Image> cardImages;
