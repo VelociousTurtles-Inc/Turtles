@@ -39,10 +39,14 @@ public class Scenario {
         }
     }
 
+    /**
+     * Invokes all registered views for given adapterClass
+     * @param adapterClass
+     * @param adapter have to implement / extend adapterClass
+     */
     public void invoke(Class<?> adapterClass, Object adapter) {
         for (Class<?> view : get(adapterClass)) {
             try {
-                System.out.println(Arrays.toString(view.getDeclaredConstructors()));
                 view.getDeclaredConstructor(adapterClass).newInstance(adapter);
             } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
                 e.printStackTrace();

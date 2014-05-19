@@ -2,6 +2,7 @@ package Adapters;
 
 import Adapters.Interfaces.GameController;
 import Adapters.Interfaces.MenuController;
+import Main.Client;
 import ModelHelpers.DebugWriter;
 import Views.Standard.Menu.StandardMenuView;
 
@@ -12,7 +13,7 @@ public class StandardMenuController implements MenuController {
 
     public StandardMenuController() {
         assert DebugWriter.write("Create new StandarMenuController");
-        new StandardMenuView(this);
+        Client.scenario.invoke(MenuController.class, this);
     }
 
     @Override
