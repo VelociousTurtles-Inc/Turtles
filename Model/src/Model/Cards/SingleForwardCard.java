@@ -18,7 +18,7 @@ public class SingleForwardCard extends Card {
     }
 
     public String getType() {
-        return "SimpleForwardCard";
+        return "SingleForwardCard";
     }
 
     public static List<Card> populate()
