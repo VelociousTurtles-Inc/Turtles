@@ -26,7 +26,7 @@ public class Board implements Serializable {
         assert DebugWriter.write("Reading Board \"" + nname + "\"");
         Board temp = new Board();
         try {
-            FileInputStream fileIn = new FileInputStream(System.getProperty("user.dir")+"/Client/src/Views/Boards/"+nname);
+            InputStream fileIn = Board.class.getResourceAsStream("Resources/Boards/"+nname);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             temp = (Board) in.readObject();
             in.close();
@@ -44,11 +44,9 @@ public class Board implements Serializable {
 
     public void saveBoard() {
         assert DebugWriter.write("Saving Board \"" + name + "\"");
-        System.out.println(System.getProperty("user.dir"));
 
         try {
-            FileOutputStream fileOut =
-                    new FileOutputStream(System.getProperty("user.dir")+"/Client/src/Views/Boards/"+name);
+            OutputStream fileOut = new FileOutputStream(Board.class.getResource("Resources/Boards/"+name).getFile());
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);
             out.close();
