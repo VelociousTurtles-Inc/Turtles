@@ -1,5 +1,6 @@
 package Model.Board;
 
+import Model.Turtles.Turtle;
 import Model.Utility.Utility;
 
 import java.util.ArrayList;
@@ -16,8 +17,10 @@ public class SimpleBoard extends Board {
         BoardGraph.Field F = new BoardGraph.Field();
         graph.starts = new ArrayList<>();
 
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 5; i++) {
             graph.starts.add(new BoardGraph.Field());
+            graph.starts.get(i).getTurtles().add(new Turtle(i));
+        }
 
         for(BoardGraph.Field a : graph.starts)
             a.successors.add(F);
