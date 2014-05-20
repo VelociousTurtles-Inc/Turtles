@@ -29,14 +29,13 @@ public class StandardGameSelectController implements GameSelectController, GameS
     public StandardGameSelectController() throws Exception {
         simpleGameInfos = new LinkedList<>();
 
-        Client.scenario.invoke(GameSelectController.class, this);
-
         Environment environment = new Environment();
         Session session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
 
         myGameDispenser = (GameDispenser) session.receive();
         myGameDispenser.registerGameSelector(this);
 
+        Client.scenario.invoke(GameSelectController.class, this);
     }
 
     @Override

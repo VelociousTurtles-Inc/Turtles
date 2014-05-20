@@ -18,7 +18,17 @@ public class GameCreatorView {
 
     public GameCreatorView(GameCreatorController standardGameCreatorController) {
         myController = standardGameCreatorController;
-        start();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
     public void start() {
         Platform.runLater(new Runnable() {

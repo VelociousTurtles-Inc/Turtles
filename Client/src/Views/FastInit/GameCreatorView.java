@@ -1,7 +1,6 @@
 package Views.FastInit;
 
 import Adapters.Interfaces.GameCreatorController;
-import javafx.application.Platform;
 
 import java.util.Random;
 
@@ -17,16 +16,11 @@ public class GameCreatorView {
         Random random = new Random();
         synchronized (lastGameSync) {
             lastGame = "Test-" + random.nextInt();
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        gameCreatorController.create(lastGame);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+            try {
+                gameCreatorController.create(lastGame);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

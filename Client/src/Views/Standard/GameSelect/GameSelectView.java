@@ -1,6 +1,7 @@
 package Views.Standard.GameSelect;
 
 import Adapters.Interfaces.GameSelectController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +19,17 @@ public class GameSelectView {
 
     public GameSelectView(GameSelectController myController) {
         this.myController = myController;
-        start();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     public void start() {

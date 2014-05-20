@@ -1,6 +1,7 @@
 package Views.Standard.GameCreation.GameCreatorsWaiting;
 
 import Adapters.Interfaces.GameCreatorWaiterController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,11 +18,17 @@ public class GameCreatorWaiterView {
 
     public GameCreatorWaiterView(GameCreatorWaiterController standardGameCreatorController) {
         myController = standardGameCreatorController;
-        try {
-            start();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
     public void start() throws InterruptedException {
         Stage myStage = new Stage();

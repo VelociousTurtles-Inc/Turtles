@@ -1,7 +1,6 @@
 package Views.DoubleFastInit;
 
 import Adapters.Interfaces.MenuController;
-import javafx.application.Platform;
 
 import java.util.concurrent.Semaphore;
 
@@ -13,32 +12,23 @@ public class MenuView {
     public static int mode = 0;
     public MenuView(final MenuController menuController) {
         System.err.println(this.getClass());
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    menuController.startGame();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        try {
+            menuController.startGame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             System.err.println("MenuView waiting for semaphore");
             menuSemaphore.acquire();
+            System.err.println("has MenuView semaphore");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         mode = 1;
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    menuController.startGame();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        try {
+            menuController.startGame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

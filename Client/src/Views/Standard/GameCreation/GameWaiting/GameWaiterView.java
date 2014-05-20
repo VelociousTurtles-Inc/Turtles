@@ -1,6 +1,7 @@
 package Views.Standard.GameCreation.GameWaiting;
 
 import Adapters.Interfaces.GameWaiterController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,11 +18,17 @@ public class GameWaiterView {
 
     public GameWaiterView(GameWaiterController controller) {
         myController = controller;
-        try {
-            start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
     public void start() throws Exception {
 

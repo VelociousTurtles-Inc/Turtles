@@ -136,37 +136,41 @@ public class StandardGameView {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                assert DebugWriter.write("Launching StandardGameView");
-                Stage GameStage = new Stage();
-
-                FXMLLoader myLoader = new FXMLLoader();
-                myLoader.setLocation(getClass().getResource("Game.fxml"));
-                Parent game = null;
-                try {
-                    game = (Parent) myLoader.load((getClass().getResource("Game.fxml")).openStream());
-                } catch (IOException e) {
-
-                }
-
-                GameStage.setScene(new Scene(game));
-                GameStage.setResizable(false);
-
-                GameStage.show();
-
-                StandardGameButtons myOwnGameButtons = myLoader.getController();
-                myOwnGameButtons.init(myGameController);
-
-                turtles = myOwnGameButtons.getTurtles();
-                slots = myOwnGameButtons.getCardSlots();
-
-                for(int i = 1; i<=5; i++) {
-                    turtles.get(i).setX(myBoard.startPositions.get(i).x);
-                    turtles.get(i).setY(myBoard.startPositions.get(i).y);
-                }
+                start();
             }
         });
 
         myGameController.registerUpdateBoardEvent(new BoardUpdater());
         myGameController.registerUpdateCardsEvent(new CardsUpdater());
+    }
+
+    public void start() {
+        assert DebugWriter.write("Launching StandardGameView");
+        Stage GameStage = new Stage();
+
+        FXMLLoader myLoader = new FXMLLoader();
+        myLoader.setLocation(getClass().getResource("Game.fxml"));
+        Parent game = null;
+        try {
+            game = (Parent) myLoader.load((getClass().getResource("Game.fxml")).openStream());
+        } catch (IOException e) {
+
+        }
+
+        GameStage.setScene(new Scene(game));
+        GameStage.setResizable(false);
+
+        GameStage.show();
+
+        StandardGameButtons myOwnGameButtons = myLoader.getController();
+        myOwnGameButtons.init(myGameController);
+
+        turtles = myOwnGameButtons.getTurtles();
+        slots = myOwnGameButtons.getCardSlots();
+
+        for(int i = 1; i<=5; i++) {
+            turtles.get(i).setX(myBoard.startPositions.get(i).x);
+            turtles.get(i).setY(myBoard.startPositions.get(i).y);
+        }
     }
 }
