@@ -83,9 +83,6 @@ public class StandardPlayerService implements PlayerService {
 
     @Override
     public void playCard(int cardNumber) throws RemoteException {
-        System.err.println("playing card no " + cardNumber);
-        System.err.println(myCards.get(cardNumber));
-        System.err.println(myCards.get(cardNumber).getCardID());
         if (!isLocked()) myCards.get(cardNumber).setCardID(myManager.playCard(myCards.get(cardNumber).getCardID()));
     }
 

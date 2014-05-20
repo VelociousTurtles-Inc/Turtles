@@ -33,7 +33,6 @@ public class SimpleForwardCard extends Card {
     @Override
     public void play(Board board)
     {
-        System.err.println("searching " + getColor() + " in " + board.graph);
         outer: for (BoardGraph.Field field : board.graph)
         {
             for (Iterator<Turtle> it = field.turtles.iterator(); it.hasNext();)
