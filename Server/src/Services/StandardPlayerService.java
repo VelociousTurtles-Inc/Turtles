@@ -19,6 +19,7 @@ public class StandardPlayerService implements PlayerService {
     private GameManager myManager;
     private GameClient myClient;
     private List<CardIDBox> myCards;
+    private boolean locked;
 
     public StandardPlayerService(GameManager myManager) throws Exception {
         this.myManager = myManager;
@@ -32,6 +33,10 @@ public class StandardPlayerService implements PlayerService {
     @Override
     public void setClient(GameClient myClient) {
         this.myClient = myClient;
+    }
+
+    public boolean isLocked() {
+        return locked;
     }
 
     private class CardIDBox {
@@ -70,7 +75,19 @@ public class StandardPlayerService implements PlayerService {
 
     @Override
     public void playCard(int cardNumber) throws RemoteException {
-        myCards.get(cardNumber).setCardID(myManager.playCard(myCards.get(cardNumber).getCardID()));
+        if (!isLocked()) myCards.get(cardNumber).setCardID(myManager.playCard(myCards.get(cardNumber).getCardID()));
+    }
+
+    @Override
+    public void lock() throws RemoteException {
+        this.locked = true;
+        myClient.lock();
+    }
+
+    @Override
+    public void unlock() throws RemoteException {
+        this.locked = false;
+        myClient.unlock();
     }
 
     @Override

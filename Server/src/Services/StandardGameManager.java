@@ -9,6 +9,7 @@ import Model.Cards.Card;
 import Model.Deck;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.PlayerService;
+import sun.net.www.content.text.plain;
 
 import java.rmi.RemoteException;
 import java.util.LinkedList;
@@ -31,6 +32,8 @@ public class StandardGameManager implements GameManager {
 
     private int myId;
 
+    int playerOnMove;
+
     List<GameWaiterClient> myWaiters = new LinkedList<>();
     List<PlayerService> myPlayers;
 
@@ -52,6 +55,9 @@ public class StandardGameManager implements GameManager {
         for(PlayerService myPlayer : myPlayers) {
             myPlayer.update();
         }
+        myPlayers.get(playerOnMove).lock();
+        playerOnMove = (playerOnMove+1)%numberOfPlayers;
+        myPlayers.get(playerOnMove).unlock();
         return myDeck.getCard();
     }
 
@@ -114,8 +120,11 @@ public class StandardGameManager implements GameManager {
         for(int i = 0; i<myWaiters.size(); i++) {
             myPlayers.add(new StandardPlayerService(this));
             myWaiters.get(i).start(myPlayers.get(i));
+            myPlayers.get(i).lock();
         }
         started = true;
+        playerOnMove = 0;
+        myPlayers.get(playerOnMove).unlock();
     }
 
     public int getMyId() {

@@ -29,6 +29,9 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
     List<Event> boardUpdates;
     List<Event> cardsUpdates;
 
+    List<Event> unlockingEvents;
+    List<Event> lockingEvents;
+
     List<Integer> playerHand;
 
     public SimpleGameAdapter() throws Exception {
@@ -36,6 +39,9 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
 
         boardUpdates = new LinkedList<>();
         cardsUpdates = new LinkedList<>();
+
+        lockingEvents = new LinkedList<>();
+        unlockingEvents = new LinkedList<>();
 
         //WebServiceFeature[] enabledRequiredwsf = {new AddressingFeature(true, true)};
 
@@ -161,6 +167,32 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
         }
 
         return result;
+    }
+
+    @Override
+    public void lock() throws RemoteException {
+        System.out.println("Locked");
+        for(Event ev : lockingEvents) {
+            ev.call();
+        }
+    }
+
+    @Override
+    public void unlock() throws RemoteException  {
+        System.out.println("Unlocked");
+        for(Event ev : unlockingEvents) {
+            ev.call();
+        }
+    }
+
+    @Override
+    public void registerLockingEvent(Event lockingEvent) {
+        lockingEvents.add(lockingEvent);
+    }
+
+    @Override
+    public void registerUnlockingEvent(Event unlockingEvent) {
+        unlockingEvents.add(unlockingEvent);
     }
 
     @Override

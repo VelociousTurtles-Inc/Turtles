@@ -1,9 +1,12 @@
 package Views.Standard.Game;
 
+import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Utility.DebugWriter;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
@@ -14,6 +17,7 @@ import java.util.List;
  */
 public class StandardGameButtons {
 
+    public Button playItButton;
     private GameController myGameController;
 
     @FXML private ImageView firstTurtle;
@@ -58,6 +62,28 @@ public class StandardGameButtons {
 
     public void init(GameController myGameController) {
         this.myGameController = myGameController;
+        myGameController.registerLockingEvent(new Event() {
+            @Override
+            public void call() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        playItButton.setDisable(true);
+                    }
+                });
+            }
+        });
+        myGameController.registerUnlockingEvent(new Event() {
+            @Override
+            public void call() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        playItButton.setDisable(false);
+                    }
+                });
+            }
+        });
     }
 
     @FXML protected void surrIt(ActionEvent event) {

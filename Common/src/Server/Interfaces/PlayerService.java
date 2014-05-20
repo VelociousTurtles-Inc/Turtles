@@ -17,6 +17,10 @@ public interface PlayerService extends Remote {
     @Asynchronous
     void playCard(int cardID) throws RemoteException;
 
+    void lock() throws RemoteException;
+
+    void unlock() throws RemoteException;
+
     Board getGameBoard() throws RemoteException;
 
     void setClient(GameClient myClient) throws Exception;
