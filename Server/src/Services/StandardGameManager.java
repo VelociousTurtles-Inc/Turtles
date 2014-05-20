@@ -125,6 +125,9 @@ public class StandardGameManager implements GameManager {
         started = true;
         playerOnMove = 0;
         myPlayers.get(playerOnMove).unlock();
+        for(GameWaiterClient myWaiter : myWaiters) {
+            myWaiter.closeMe();
+        }
     }
 
     public int getMyId() {

@@ -1,5 +1,6 @@
 package Views.Standard.GameCreation.GameCreator;
 
+import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameCreatorController;
 import Adapters.StandardGameCreatorController;
 import javafx.event.ActionEvent;
@@ -21,6 +22,12 @@ public class GameCreatorButtons {
     }
     public void setController(GameCreatorController myController) {
         this.myController = myController;
+        this.myController.registerClosingEvent(new Event() {
+            @Override
+            public void call() {
+                myStage.close();
+            }
+        });
     }
 
     public void cancel(ActionEvent actionEvent) {

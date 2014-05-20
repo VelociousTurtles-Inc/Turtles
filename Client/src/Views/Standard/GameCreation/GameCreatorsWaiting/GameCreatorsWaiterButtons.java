@@ -43,6 +43,17 @@ public class GameCreatorsWaiterButtons {
 
             }
         });
+        this.controller.registerClosingEvent(new Event() {
+            @Override
+            public void call() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        stage.close();
+                    }
+                });
+            }
+        });
     }
 
     public void setName(String name) {

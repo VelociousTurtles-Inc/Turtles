@@ -8,6 +8,7 @@ import Server.Interfaces.GameDispenser;
 import Server.Interfaces.PlayerService;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -20,14 +21,28 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     private List<Event> updateEvents = new ArrayList<>();
     private String gameName;
     private List<Event> cancelEvents = new ArrayList<>();
+    private List<Event> closingEvents;
 
     public StandardGameWaiterController(int myID, GameDispenser myGameDispenser) throws Exception {
+        closingEvents = new LinkedList<>();
         gameID = myID;
         this.myGameDispenser = myGameDispenser;
         gameName = myGameDispenser.getGameName(gameID);
         myGameDispenser.connectToGame(myID, this);
         Client.scenario.invoke(GameWaiterController.class, this);
         update(myNumberOfPlayers);
+    }
+
+    @Override
+    public void registerClosingEvent(Event closingEvent) {
+        closingEvents.add(closingEvent);
+    }
+
+    @Override
+    public void closeMe() {
+        for(Event ev : closingEvents) {
+            ev.call();
+        }
     }
 
     @Override

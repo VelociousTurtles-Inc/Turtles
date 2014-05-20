@@ -34,6 +34,17 @@ public class GameWaitingButtons {
                 });
             }
         });
+        this.controller.registerClosingEvent(new Event() {
+            @Override
+             public void call() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        stage.close();
+                    }
+                });
+            }
+        });
         controller.registerCancelEvent(new Event() {
             @Override
             public void call() {
