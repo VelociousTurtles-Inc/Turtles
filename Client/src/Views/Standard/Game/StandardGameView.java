@@ -83,9 +83,9 @@ public class StandardGameView {
             System.out.println(cardInfo);
             System.out.println(cardInfo.getType());
             System.out.println(cardInfo.getType() + cardInfo.getColor() + ".png");
-            System.out.println(cardImages.get(cardInfo.getType() + cardInfo.getColor() + ".png"));
+            System.out.println(cardImages.get(cardInfo.getType() + (cardInfo.getColor() + 1) + ".png"));
             System.out.println(slots.get(i));
-            slots.get(i).setImage(cardImages.get(cardInfo.getType() + cardInfo.getColor() + ".png"));
+            slots.get(i).setImage(cardImages.get(cardInfo.getType() + (cardInfo.getColor() + 1) + ".png"));
         }
     }
 
