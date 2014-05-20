@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Colors.Colors;
 import Model.Board.Board;
 
 import java.io.Serializable;
@@ -59,6 +60,14 @@ public abstract class Card implements Serializable {
 
     @Override
     public String toString() {
-        return "Card : " + getClass().toString() + " of color " + getColor();
+        return "Card : " + getShortDecription() + " [ " + Colors.asString(getColor()) + " ]";
+    }
+
+    public String getShortDecription() {
+        return getClass().toString();
+    }
+
+    public String getDescription() {
+        return getClass().toString() + " [ " + Colors.asString(getColor()) + " ]";
     }
 }

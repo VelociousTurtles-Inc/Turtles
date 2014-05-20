@@ -69,7 +69,7 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     }
 
     public void start(PlayerService player) throws Exception {
-        SimpleGameAdapter myAdapter = new SimpleGameAdapter();
+        StandardGameController myAdapter = new StandardGameController();
         myAdapter.start(player);
     }
 

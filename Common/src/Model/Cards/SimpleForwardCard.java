@@ -26,19 +26,21 @@ public class SimpleForwardCard extends Card {
         ArrayList<Card> result = new ArrayList<>();
         for (int j = 0; j < 3; j++)
             for (int i : Colors.getRealIntegers())
-                result.add(new SimpleForwardCard(i-1));
+                result.add(new SimpleForwardCard(i));
         return result;
     }
 
     @Override
     public void play(Board board)
     {
+        System.err.println("searching " + getColor() + " in " + board.graph);
         outer: for (BoardGraph.Field field : board.graph)
         {
             for (Iterator<Turtle> it = field.turtles.iterator(); it.hasNext();)
             {
                 Turtle turtle = it.next();
                 if (field.successors.size() != 1)throw new IllegalArgumentException("<"+(String.valueOf(field.successors.size()))+">");
+                assert turtle.color != Colors.asInteger(Colors.NULL) : "Turtle colors are shifted";
                 if (turtle.color == this.getColor())
                 {
                     do {
@@ -59,10 +61,13 @@ public class SimpleForwardCard extends Card {
         return new CardInfo("SimpleForwardCard",this.id,this.color);
     }
 
-    public String toString()
+    @Override
+    public String getShortDecription()
     {
         return "Idz do przodu";
     }
+
+    @Override
     public String getDescription()
     {
         return "Porusza żolwia we wskazanym kolorze o jedno pole do przodu";

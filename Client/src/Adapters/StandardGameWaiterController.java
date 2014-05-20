@@ -62,7 +62,7 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
 
     @Override
     public void start(PlayerService player) throws Exception {
-        SimpleGameAdapter myAdapter = new SimpleGameAdapter();
+        StandardGameController myAdapter = new StandardGameController();
         myAdapter.start(player);
     }
 

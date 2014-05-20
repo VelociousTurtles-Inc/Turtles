@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by larhard on 05.05.14.
  */
 
-public class SimpleGameAdapter extends Thread implements GameController, GameClient {
+public class StandardGameController extends Thread implements GameController, GameClient {
 
     Map<Integer, Card> normalCardsMap;
     PlayerService playerService;
@@ -36,7 +36,7 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
 
     List<Integer> playerHand;
 
-    public SimpleGameAdapter() throws Exception {
+    public StandardGameController() throws Exception {
         normalCardsMap = new HashMap<>();
 
         boardUpdates = new LinkedList<>();
@@ -159,7 +159,7 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
         result.add(new LinkedList<Integer>());
         for(BoardGraph.Field f : myBoardGraph.starts)
             for(Turtle t : f.getTurtles())
-                result.get(0).add(t.getColor()+1);
+                result.get(0).add(t.getColor());
 
         BoardGraph.Field temp = myBoardGraph.starts.get(0);
 
@@ -167,7 +167,7 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
             LinkedList<Integer> A = new LinkedList<>();
             temp = temp.getSuccessors().get(0);
             for(Turtle t : temp.getTurtles())
-                A.add(t.getColor()+1);
+                A.add(t.getColor());
             result.add(A);
         }
 

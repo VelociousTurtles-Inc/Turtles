@@ -51,6 +51,7 @@ public class StandardGameManager implements GameManager {
     @Override
     public int playCard(int cardID) throws RemoteException {
         myDeck.getCardsMap().get(cardID).play(board);
+        System.err.println(myDeck.getCardsMap().get(cardID));
         myDeck.returnCard(cardID);
         for(PlayerService myPlayer : myPlayers) {
             myPlayer.update();
