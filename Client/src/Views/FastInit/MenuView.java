@@ -8,6 +8,7 @@ import javafx.application.Platform;
  */
 public class MenuView {
     public MenuView(final MenuController menuController) {
+        System.err.println(this.getClass());
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

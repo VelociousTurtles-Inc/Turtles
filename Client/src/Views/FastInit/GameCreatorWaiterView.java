@@ -8,6 +8,7 @@ import javafx.application.Platform;
  */
 public class GameCreatorWaiterView {
     public GameCreatorWaiterView(final GameCreatorWaiterController gameCreatorWaiterController) {
+        System.err.println(this.getClass());
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

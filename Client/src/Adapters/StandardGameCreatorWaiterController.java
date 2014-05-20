@@ -21,14 +21,14 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     private String gameName;
     private int gameID;
 
-    public StandardGameCreatorWaiterController(String s, GameDispenser standardGameCreatorController) throws Exception {
-        Client.scenario.invoke(GameCreatorWaiterController.class, this);
+    public StandardGameCreatorWaiterController(String name, GameDispenser standardGameCreatorController) throws Exception {
 
         this.myDispenser = standardGameCreatorController;
-        int id = myDispenser.createNewGame(s, this);
+        int id = myDispenser.createNewGame(name, this);
         gameName =  myDispenser.getGameName(id);
         gameID = id;
         update(numberOfPlayers);
+        Client.scenario.invoke(GameCreatorWaiterController.class, this);
     }
 
     @Override
@@ -79,5 +79,10 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     @Override
     public String getGameName() {
         return gameName;
+    }
+
+    @Override
+    public int getGameID() {
+        return gameID;
     }
 }

@@ -40,8 +40,8 @@ public class StandardGameSelectController implements GameSelectController, GameS
     }
 
     @Override
-    public void join(int myID) throws Exception {
-        StandardGameWaiterController mySGWC = new StandardGameWaiterController(myID, myGameDispenser);
+    public void join(int gameID) throws Exception {
+        StandardGameWaiterController mySGWC = new StandardGameWaiterController(gameID, myGameDispenser);
     }
 
     @Override

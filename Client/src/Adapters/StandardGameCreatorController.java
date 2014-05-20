@@ -17,7 +17,7 @@ public class StandardGameCreatorController implements GameCreatorController {
     }
 
     @Override
-    public void create(String s) throws Exception {
-        new StandardGameCreatorWaiterController(s, myDispenser);
+    public void create(String name) throws Exception {
+        new StandardGameCreatorWaiterController(name, myDispenser);
     }
 }

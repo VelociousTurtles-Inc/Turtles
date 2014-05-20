@@ -8,10 +8,16 @@ import javafx.application.Platform;
  */
 public class GameSelectView {
     public GameSelectView(final GameSelectController gameSelectController) {
+        System.err.println(this.getClass());
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                gameSelectController.create();
+                new Thread() {
+                    @Override
+                    public void run() {
+                        gameSelectController.create();
+                    }
+                }.start();
             }
         });
     }

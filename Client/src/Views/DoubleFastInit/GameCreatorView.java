@@ -1,4 +1,4 @@
-package Views.FastInit;
+package Views.DoubleFastInit;
 
 import Adapters.Interfaces.GameCreatorController;
 import javafx.application.Platform;
@@ -20,11 +20,16 @@ public class GameCreatorView {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        gameCreatorController.create(lastGame);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                gameCreatorController.create(lastGame);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }.start();
                 }
             });
         }

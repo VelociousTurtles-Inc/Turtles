@@ -1,4 +1,4 @@
-package Views.FastInit;
+package Views.DoubleFastInit;
 
 import Adapters.Interfaces.GameWaiterController;
 
@@ -8,6 +8,6 @@ import Adapters.Interfaces.GameWaiterController;
 public class GameWaiterView {
     public GameWaiterView(GameWaiterController gameWaiterController) {
         System.err.println(this.getClass());
-
+        GameCreatorWaiterView.startSemaphore.release();
     }
 }

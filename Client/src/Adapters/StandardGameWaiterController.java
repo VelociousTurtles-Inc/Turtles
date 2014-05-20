@@ -23,10 +23,10 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
 
     public StandardGameWaiterController(int myID, GameDispenser myGameDispenser) throws Exception {
         gameID = myID;
-        Client.scenario.invoke(GameWaiterController.class, this);
         this.myGameDispenser = myGameDispenser;
         gameName = myGameDispenser.getGameName(gameID);
         myGameDispenser.connectToGame(myID, this);
+        Client.scenario.invoke(GameWaiterController.class, this);
     }
 
     @Override

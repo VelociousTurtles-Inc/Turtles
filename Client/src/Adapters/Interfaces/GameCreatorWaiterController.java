@@ -15,4 +15,6 @@ public interface GameCreatorWaiterController {
     void registerCancelEvent(Event cancelEvent);
 
     String getGameName();
+
+    int getGameID();
 }
