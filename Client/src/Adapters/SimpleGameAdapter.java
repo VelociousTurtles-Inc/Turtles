@@ -8,7 +8,7 @@ import Main.Client;
 import Model.Board.BoardGraph;
 import Model.Cards.Card;
 import Model.Turtles.Turtle;
-import ModelHelpers.DebugWriter;
+import Utility.DebugWriter;
 import Server.Interfaces.PlayerService;
 
 import java.rmi.RemoteException;
@@ -29,6 +29,11 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
     List<Event> boardUpdates;
     List<Event> cardsUpdates;
 
+    List<Event> unlockingEvents;
+    List<Event> lockingEvents;
+
+    private boolean locked;
+
     List<Integer> playerHand;
 
     public SimpleGameAdapter() throws Exception {
@@ -36,6 +41,11 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
 
         boardUpdates = new LinkedList<>();
         cardsUpdates = new LinkedList<>();
+
+        lockingEvents = new LinkedList<>();
+        unlockingEvents = new LinkedList<>();
+
+        locked = true;
 
         //WebServiceFeature[] enabledRequiredwsf = {new AddressingFeature(true, true)};
 
@@ -93,6 +103,7 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
         normalCardsMap = myService.getCardsMap();
         myService.setClient(this);
         Client.scenario.invoke(GameController.class, this);
+        //myService.lockMeOrNot();
     }
 
     @Override
@@ -164,8 +175,41 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
     }
 
     @Override
+    public void lock() throws RemoteException {
+        locked = true;
+        System.out.println("Locked");
+        for(Event ev : lockingEvents) {
+            ev.call();
+        }
+    }
+
+    @Override
+    public void unlock() throws RemoteException  {
+        locked = false;
+        System.out.println("Unlocked");
+        for(Event ev : unlockingEvents) {
+            ev.call();
+        }
+    }
+
+    @Override
+    public void registerLockingEvent(Event lockingEvent) {
+        lockingEvents.add(lockingEvent);
+    }
+
+    @Override
+    public void registerUnlockingEvent(Event unlockingEvent) {
+        unlockingEvents.add(unlockingEvent);
+    }
+
+    @Override
     public void cardsPlayed() throws RemoteException {
 
+    }
+
+    @Override
+    public boolean isLocked() {
+        return locked;
     }
 
     /*@Override

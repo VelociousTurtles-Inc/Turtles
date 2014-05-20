@@ -27,6 +27,7 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
         gameName = myGameDispenser.getGameName(gameID);
         myGameDispenser.connectToGame(myID, this);
         Client.scenario.invoke(GameWaiterController.class, this);
+        update(myNumberOfPlayers);
     }
 
     @Override

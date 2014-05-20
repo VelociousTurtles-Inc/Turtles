@@ -1,4 +1,4 @@
-package ModelHelpers;
+package Utility;
 
 /**
  * Created by larhard on 13.05.14.

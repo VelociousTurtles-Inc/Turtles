@@ -6,7 +6,6 @@ import Model.Cards.Card;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.PlayerService;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +19,7 @@ public class StandardPlayerService implements PlayerService {
     private GameManager myManager;
     private GameClient myClient;
     private List<CardIDBox> myCards;
+    private boolean locked;
 
     public StandardPlayerService(GameManager myManager) throws Exception {
         this.myManager = myManager;
@@ -31,8 +31,14 @@ public class StandardPlayerService implements PlayerService {
     }
 
     @Override
-    public void setClient(GameClient myClient) {
+    public void setClient(GameClient myClient) throws RemoteException {
         this.myClient = myClient;
+        if(locked) myClient.lock();
+        else myClient.unlock();
+    }
+
+    public boolean isLocked() {
+        return locked;
     }
 
     private class CardIDBox {
@@ -56,6 +62,12 @@ public class StandardPlayerService implements PlayerService {
     }
 
     @Override
+    public void lockMeOrNot() throws RemoteException {
+        if(locked) myClient.lock();
+        else myClient.unlock();
+    }
+
+    @Override
     public List<Integer> getPlayerCards() {
         List<Integer> result = new LinkedList<>();
         for(CardIDBox i : myCards) {
@@ -71,7 +83,19 @@ public class StandardPlayerService implements PlayerService {
 
     @Override
     public void playCard(int cardNumber) throws RemoteException {
-        myCards.get(cardNumber).setCardID(myManager.playCard(myCards.get(cardNumber).getCardID()));
+        if (!isLocked()) myCards.get(cardNumber).setCardID(myManager.playCard(myCards.get(cardNumber).getCardID()));
+    }
+
+    @Override
+    public void lock() throws RemoteException {
+        this.locked = true;
+        myClient.lock();
+    }
+
+    @Override
+    public void unlock() throws RemoteException {
+        this.locked = false;
+        myClient.unlock();
     }
 
     @Override

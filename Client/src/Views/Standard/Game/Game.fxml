@@ -17,7 +17,7 @@
         <Image preserveRatio="true" smooth="true" url="@../../../Resources/Images/Boards/board.png" />
       </image>
     </ImageView>
-    <Button layoutX="825.0" layoutY="659.0" mnemonicParsing="false" onAction="#playIt" prefHeight="29.0" prefWidth="122.0" text="Use card" />
+    <Button fx:id="playItButton" layoutX="825.0" layoutY="659.0" mnemonicParsing="false" onAction="#playIt" prefHeight="29.0" prefWidth="122.0" text="Use card" />
     <Button fx:id="myButOne" layoutX="28.0" layoutY="659.0" mnemonicParsing="false" onAction="#surrIt" prefHeight="29.0" prefWidth="122.0" text="Surrender" />
     <ImageView fitHeight="83.75" fitWidth="83.0" layoutX="28.0" layoutY="548.0" pickOnBounds="true" preserveRatio="false">
       <image>

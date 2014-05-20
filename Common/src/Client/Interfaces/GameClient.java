@@ -16,5 +16,11 @@ public interface GameClient extends Remote {
     void updateBoards() throws RemoteException;
 
     @Asynchronous
+    void lock() throws RemoteException;
+
+    @Asynchronous
+    void unlock() throws RemoteException;
+
+    @Asynchronous
     void cardsPlayed() throws RemoteException;
 }

@@ -2,7 +2,7 @@ package GameDispenser;
 
 import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.GameWaiterClient;
-import Client.Interfaces.SimpliestGameInfo;
+import Model.SimplestGameInfo;
 import Client.Interfaces.ThreeStringsGet;
 import Model.Utility.Utility;
 import Server.Interfaces.GameDispenser;
@@ -111,6 +111,10 @@ public class StandardGameDispenser implements GameDispenser {
         gameServices.remove(gameID);
         update();
     }
+    @Override
+    public void updateMe() throws Exception {
+        update();
+    }
 
     @Override
     public void startGame(int gameID) throws Exception {
@@ -118,16 +122,16 @@ public class StandardGameDispenser implements GameDispenser {
     }
 
     private void update() throws Exception {
-        List<SimpliestGameInfo> myList = new LinkedList<>();
+        List<SimplestGameInfo> myList = new LinkedList<>();
         ThreeStringsGet myTSG = new ThreeStringsGet() {
-            List<SimpliestGameInfo> list;
+            List<SimplestGameInfo> list;
             @Override
-            public void setList(List<SimpliestGameInfo> list) throws Exception{
+            public void setList(List<SimplestGameInfo> list) throws Exception{
                 this.list = list;
             }
 
             @Override
-            public List<SimpliestGameInfo> getList() throws Exception {
+            public List<SimplestGameInfo> getList() throws Exception {
                 return list;
             }
         };

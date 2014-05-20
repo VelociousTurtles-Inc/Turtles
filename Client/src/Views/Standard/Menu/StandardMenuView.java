@@ -1,7 +1,7 @@
 package Views.Standard.Menu;
 
 import Adapters.Interfaces.MenuController;
-import ModelHelpers.DebugWriter;
+import Utility.DebugWriter;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;

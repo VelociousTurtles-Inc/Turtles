@@ -22,4 +22,10 @@ public interface GameController {
 
     List<Card> getCards() throws Exception;
     List<List<Integer>> getBoard() throws Exception;
+
+    void registerLockingEvent(Event lockingEvent);
+
+    void registerUnlockingEvent(Event unlockingEvent);
+
+    boolean isLocked();
 }
