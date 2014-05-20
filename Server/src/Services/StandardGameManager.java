@@ -2,7 +2,7 @@ package Services;
 
 
 import Client.Interfaces.GameWaiterClient;
-import Client.Interfaces.SimpliestGameInfo;
+import Model.SimplestGameInfo;
 import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
@@ -67,7 +67,7 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public SimpliestGameInfo getGameInfo() {
+    public SimplestGameInfo getGameInfo() {
         String sstatus;
         if(started == true) {
             sstatus = "Started";
@@ -75,7 +75,7 @@ public class StandardGameManager implements GameManager {
         else {
             sstatus = "In preparation";
         }
-        SimpliestGameInfo myGameInfo = new SimpliestGameInfo(name, sstatus, String.valueOf(numberOfPlayers));
+        SimplestGameInfo myGameInfo = new SimplestGameInfo(name, sstatus, String.valueOf(numberOfPlayers));
         myGameInfo.setMyID(myId);
         return myGameInfo;
     }

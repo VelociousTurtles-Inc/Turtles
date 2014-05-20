@@ -1,18 +1,19 @@
-package Client.Interfaces;
+package Model;
 
 import java.io.Serializable;
 
 /**
  * Created by michaziobro on 17.05.2014.
  */
-public class SimpliestGameInfo implements Serializable {
+public class SimplestGameInfo implements Serializable {
 
-        private int myID;
+    private static final long serialVersionUID = -4605840894396370671L;
+    private int myID;
         private String gameName;
         private String gameStatus;
         private String numberOfPlayers;
 
-        public SimpliestGameInfo(String fName, String lName, String numberOfPlayers) {
+        public SimplestGameInfo(String fName, String lName, String numberOfPlayers) {
             this.gameName = new String(fName);
             this.gameStatus = new String(lName);
             this.numberOfPlayers = new String(numberOfPlayers);

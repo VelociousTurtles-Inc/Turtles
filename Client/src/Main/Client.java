@@ -1,7 +1,7 @@
 package Main;
 
 import Adapters.StandardMenuController;
-import ModelHelpers.DebugWriter;
+import Utility.DebugWriter;
 import Scenarios.Scenario;
 import Scenarios.StandardScenario;
 

@@ -1,7 +1,6 @@
 package Adapters.Interfaces;
 
-import Adapters.SimpleGameInfo;
-import Client.Interfaces.SimpliestGameInfo;
+import Model.SimplestGameInfo;
 
 import java.util.List;
 
@@ -15,5 +14,5 @@ public interface GameSelectController {
     public void registerClosingEvent(Event myClosingEvent);
     public void registerUpdateEvent(Event updateEvent);
 
-    List<SimpliestGameInfo> getUpdateList();
+    List<SimplestGameInfo> getUpdateList();
 }

@@ -1,7 +1,7 @@
 package Server.Interfaces;
 
 import Client.Interfaces.GameWaiterClient;
-import Client.Interfaces.SimpliestGameInfo;
+import Model.SimplestGameInfo;
 import Model.Board.Board;
 import Model.Cards.Card;
 
@@ -22,7 +22,7 @@ public interface GameManager extends Remote {
     public void startGame() throws Exception;
     public boolean isStarted() throws Exception;
     public boolean isFull() throws Exception;
-    public SimpliestGameInfo getGameInfo() throws Exception;
+    public SimplestGameInfo getGameInfo() throws Exception;
     void addPlayer(GameWaiterClient newWaiter) throws Exception;
 
     void removePlayer(GameWaiterClient oldWaiter) throws Exception;

@@ -3,7 +3,7 @@ package Views.Standard.Game;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Model.Cards.Card;
-import ModelHelpers.DebugWriter;
+import Utility.DebugWriter;
 import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;

@@ -8,7 +8,7 @@ import Main.Client;
 import Model.Board.BoardGraph;
 import Model.Cards.Card;
 import Model.Turtles.Turtle;
-import ModelHelpers.DebugWriter;
+import Utility.DebugWriter;
 import Server.Interfaces.PlayerService;
 
 import java.rmi.RemoteException;

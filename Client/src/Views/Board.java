@@ -1,6 +1,6 @@
 package Views;
 
-import ModelHelpers.DebugWriter;
+import Utility.DebugWriter;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package Main;
 
-import ModelHelpers.DebugWriter;
+import Utility.DebugWriter;
 import Scenarios.FastDoubleInitScenario;
 
 /**

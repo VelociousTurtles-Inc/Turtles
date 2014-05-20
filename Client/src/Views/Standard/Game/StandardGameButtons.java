@@ -1,7 +1,7 @@
 package Views.Standard.Game;
 
 import Adapters.Interfaces.GameController;
-import ModelHelpers.DebugWriter;
+import Utility.DebugWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;

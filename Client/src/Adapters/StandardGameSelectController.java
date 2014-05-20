@@ -3,7 +3,7 @@ package Adapters;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
 import Client.Interfaces.GameSelectClient;
-import Client.Interfaces.SimpliestGameInfo;
+import Model.SimplestGameInfo;
 import Client.Interfaces.ThreeStringsGet;
 import Main.Client;
 import Server.Interfaces.GameDispenser;
@@ -21,7 +21,7 @@ import java.util.List;
 public class StandardGameSelectController implements GameSelectController, GameSelectClient {
 
     GameDispenser myGameDispenser;
-    List<SimpliestGameInfo> simpleGameInfos;
+    List<SimplestGameInfo> simpleGameInfos;
 
     List<Event> endIt = new ArrayList<>();
     List<Event> updateIt = new ArrayList<>();
@@ -75,7 +75,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
     }
 
     @Override
-    public List<SimpliestGameInfo> getUpdateList() {
+    public List<SimplestGameInfo> getUpdateList() {
         return simpleGameInfos;
     }
 

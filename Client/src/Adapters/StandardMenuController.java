@@ -2,7 +2,7 @@ package Adapters;
 
 import Adapters.Interfaces.MenuController;
 import Main.Client;
-import ModelHelpers.DebugWriter;
+import Utility.DebugWriter;
 
 /**
  * Created by mz18 on 8/05/14.
