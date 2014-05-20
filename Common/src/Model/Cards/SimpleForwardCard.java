@@ -26,7 +26,7 @@ public class SimpleForwardCard extends Card {
         ArrayList<Card> result = new ArrayList<>();
         for (int j = 0; j < 3; j++)
             for (int i : Colors.getRealIntegers())
-                result.add(new SimpleForwardCard(i-1));
+                result.add(new SimpleForwardCard(i));
         return result;
     }
 
@@ -59,10 +59,13 @@ public class SimpleForwardCard extends Card {
         return new CardInfo("SimpleForwardCard",this.id,this.color);
     }
 
-    public String toString()
+    @Override
+    public String getShortDecription()
     {
         return "Idz do przodu";
     }
+
+    @Override
     public String getDescription()
     {
         return "Porusza żolwia we wskazanym kolorze o jedno pole do przodu";

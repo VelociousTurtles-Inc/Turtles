@@ -2,6 +2,7 @@ package Views.Standard.Game;
 
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
+import Colors.Colors;
 import Model.Cards.Card;
 import Utility.DebugWriter;
 import Views.Board;
@@ -80,12 +81,7 @@ public class StandardGameView {
 
         for (int i = 1; i <= 5; i++) {
             Card cardInfo = cardsUpdate.get(i-1);
-            System.out.println(cardInfo);
-            System.out.println(cardInfo.getType());
-            System.out.println(cardInfo.getType() + cardInfo.getColor() + ".png");
-            System.out.println(cardImages.get(cardInfo.getType() + (cardInfo.getColor() + 1) + ".png"));
-            System.out.println(slots.get(i));
-            slots.get(i).setImage(cardImages.get(cardInfo.getType() + (cardInfo.getColor() + 1) + ".png"));
+            slots.get(i).setImage(cardImages.get(cardInfo.getType() + Colors.asString(cardInfo.getColor()) + ".png"));
         }
     }
 
