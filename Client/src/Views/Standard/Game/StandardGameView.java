@@ -3,6 +3,7 @@ package Views.Standard.Game;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Colors.Colors;
+import Images.Images;
 import Model.Cards.Card;
 import Utility.DebugWriter;
 import Views.Board;
@@ -164,7 +165,12 @@ public class StandardGameView {
         turtles = myOwnGameButtons.getTurtles();
         slots = myOwnGameButtons.getCardSlots();
 
-        for(int i = 1; i<=5; i++) {
+        for (int i : Colors.getRealIntegers()) {
+            try {
+                turtles.get(i).setImage(Images.load(this.getClass().getClassLoader(), "Resources/Images/Turtles/turtle" + Colors.asString(i) + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             turtles.get(i).setX(myBoard.startPositions.get(i).x);
             turtles.get(i).setY(myBoard.startPositions.get(i).y);
         }

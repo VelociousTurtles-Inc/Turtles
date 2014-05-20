@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by larhard on 05.05.14.
  */
 
-public class SimpleGameAdapter extends Thread implements GameController, GameClient {
+public class StandardGameController extends Thread implements GameController, GameClient {
 
     Map<Integer, Card> normalCardsMap;
     PlayerService playerService;
@@ -36,7 +36,7 @@ public class SimpleGameAdapter extends Thread implements GameController, GameCli
 
     List<Integer> playerHand;
 
-    public SimpleGameAdapter() throws Exception {
+    public StandardGameController() throws Exception {
         normalCardsMap = new HashMap<>();
 
         boardUpdates = new LinkedList<>();
