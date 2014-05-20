@@ -62,6 +62,7 @@ public class StandardGameButtons {
 
     public void init(GameController myGameController) {
         this.myGameController = myGameController;
+
         myGameController.registerLockingEvent(new Event() {
             @Override
             public void call() {
@@ -84,6 +85,7 @@ public class StandardGameButtons {
                 });
             }
         });
+        playItButton.setDisable(myGameController.isLocked());
     }
 
     @FXML protected void surrIt(ActionEvent event) {

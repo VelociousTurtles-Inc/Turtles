@@ -18,5 +18,8 @@ public interface GameDispenser extends Remote {
     void cancelGame(int gameID) throws Exception;
     public void registerGameSelector(GameSelectClient mySel) throws Exception;
     public String getGameName(int gameID) throws Exception;
+
+    void updateMe() throws Exception;
+
     void startGame(int gameID) throws Exception;
 }

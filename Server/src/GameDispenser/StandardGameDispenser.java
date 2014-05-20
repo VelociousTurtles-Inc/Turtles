@@ -111,6 +111,10 @@ public class StandardGameDispenser implements GameDispenser {
         gameServices.remove(gameID);
         update();
     }
+    @Override
+    public void updateMe() throws Exception {
+        update();
+    }
 
     @Override
     public void startGame(int gameID) throws Exception {

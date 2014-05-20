@@ -31,8 +31,10 @@ public class StandardPlayerService implements PlayerService {
     }
 
     @Override
-    public void setClient(GameClient myClient) {
+    public void setClient(GameClient myClient) throws RemoteException {
         this.myClient = myClient;
+        if(locked) myClient.lock();
+        else myClient.unlock();
     }
 
     public boolean isLocked() {
@@ -57,6 +59,12 @@ public class StandardPlayerService implements PlayerService {
     public void update() throws RemoteException {
         myClient.updateBoards();
         myClient.updateCards();
+    }
+
+    @Override
+    public void lockMeOrNot() throws RemoteException {
+        if(locked) myClient.lock();
+        else myClient.unlock();
     }
 
     @Override

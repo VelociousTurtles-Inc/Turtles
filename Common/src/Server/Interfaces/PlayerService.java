@@ -32,4 +32,7 @@ public interface PlayerService extends Remote {
 
     @Asynchronous
     void update() throws RemoteException;
+
+    @Asynchronous
+    void lockMeOrNot() throws RemoteException;
 }

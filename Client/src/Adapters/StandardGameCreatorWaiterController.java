@@ -27,8 +27,9 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
         int id = myDispenser.createNewGame(name, this);
         gameName =  myDispenser.getGameName(id);
         gameID = id;
-        update(numberOfPlayers);
+
         Client.scenario.invoke(GameCreatorWaiterController.class, this);
+        update(numberOfPlayers);
     }
 
     @Override
