@@ -1,5 +1,6 @@
 package Model.Board;
 
+import Colors.Colors;
 import Model.Turtles.Turtle;
 import Model.Utility.Utility;
 
@@ -17,9 +18,12 @@ public class SimpleBoard extends Board {
         BoardGraph.Field F = new BoardGraph.Field();
         graph.starts = new ArrayList<>();
 
-        for(int i = 0; i < 5; i++) {
+        for (int i : Colors.getRealIntegers()) {
             graph.starts.add(new BoardGraph.Field());
-            graph.starts.get(i).getTurtles().add(new Turtle(i));
+        }
+
+        for (int i : Colors.getRealIntegers()) {
+            graph.starts.get(i-1).getTurtles().add(new Turtle(i));
         }
 
         for(BoardGraph.Field a : graph.starts)

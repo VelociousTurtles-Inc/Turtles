@@ -159,7 +159,7 @@ public class StandardGameController extends Thread implements GameController, Ga
         result.add(new LinkedList<Integer>());
         for(BoardGraph.Field f : myBoardGraph.starts)
             for(Turtle t : f.getTurtles())
-                result.get(0).add(t.getColor()+1);
+                result.get(0).add(t.getColor());
 
         BoardGraph.Field temp = myBoardGraph.starts.get(0);
 
@@ -167,7 +167,7 @@ public class StandardGameController extends Thread implements GameController, Ga
             LinkedList<Integer> A = new LinkedList<>();
             temp = temp.getSuccessors().get(0);
             for(Turtle t : temp.getTurtles())
-                A.add(t.getColor()+1);
+                A.add(t.getColor());
             result.add(A);
         }
 

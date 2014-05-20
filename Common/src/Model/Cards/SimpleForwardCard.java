@@ -33,12 +33,14 @@ public class SimpleForwardCard extends Card {
     @Override
     public void play(Board board)
     {
+        System.err.println("searching " + getColor() + " in " + board.graph);
         outer: for (BoardGraph.Field field : board.graph)
         {
             for (Iterator<Turtle> it = field.turtles.iterator(); it.hasNext();)
             {
                 Turtle turtle = it.next();
                 if (field.successors.size() != 1)throw new IllegalArgumentException("<"+(String.valueOf(field.successors.size()))+">");
+                assert turtle.color != Colors.asInteger(Colors.NULL) : "Turtle colors are shifted";
                 if (turtle.color == this.getColor())
                 {
                     do {
