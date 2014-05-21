@@ -8,8 +8,8 @@ import Main.Client;
 import Model.Board.BoardGraph;
 import Model.Cards.Card;
 import Model.Turtles.Turtle;
-import Utility.DebugWriter;
 import Server.Interfaces.PlayerService;
+import Utility.DebugWriter;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;

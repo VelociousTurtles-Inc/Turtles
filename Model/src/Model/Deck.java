@@ -2,7 +2,7 @@ package Model;
 
 import Interfaces.IDeck;
 import Model.Cards.Card;
-import Model.Cards.SimpleForwardCard;
+import Model.Cards.SingleForwardCard;
 
 import java.util.*;
 
@@ -22,7 +22,7 @@ public class Deck implements IDeck {
         deadCards = new LinkedList<>();
         cardsMap = new HashMap<>();
 
-        for(Card temp : SimpleForwardCard.populate()) {
+        for(Card temp : SingleForwardCard.populate()) {
             cardsMap.put(temp.getID(), temp);
             avaibleCards.add(temp.getID());
         }

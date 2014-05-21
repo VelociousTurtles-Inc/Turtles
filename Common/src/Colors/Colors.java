@@ -1,6 +1,9 @@
 package Colors;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by larhard on 17.05.14.

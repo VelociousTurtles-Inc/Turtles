@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class SimpleForwardCard extends Card {
+public class SingleForwardCard extends Card {
     private static final long serialVersionUID = 4739049860217674267L;
 
-    public SimpleForwardCard(int color) {
+    public SingleForwardCard(int color) {
         super(color);
     }
 
@@ -21,12 +21,13 @@ public class SimpleForwardCard extends Card {
         return "SingleForwardCard";
     }
 
-    public static List<Card> populate()
-    {
-        ArrayList<Card> result = new ArrayList<>();
-        for (int j = 0; j < 3; j++)
-            for (int i : Colors.getRealIntegers())
-                result.add(new SimpleForwardCard(i));
+    public static List<Card> populate() {
+        List<Card> result = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            for (int i : Colors.getRealIntegers()) {
+                result.add(new SingleForwardCard(i));
+            }
+        }
         return result;
     }
 
@@ -57,18 +58,16 @@ public class SimpleForwardCard extends Card {
 
     @Override
     public CardInfo getCardInfo() {
-        return new CardInfo("SimpleForwardCard",this.id,this.color);
+        return new CardInfo("SingleForwardCard",this.id,this.color);
     }
 
     @Override
-    public String getShortDecription()
-    {
-        return "Idz do przodu";
+    public String getShortDecription() {
+        return "Idź do przodu";
     }
 
     @Override
-    public String getDescription()
-    {
+    public String getDescription() {
         return "Porusza żolwia we wskazanym kolorze o jedno pole do przodu";
     }
 }

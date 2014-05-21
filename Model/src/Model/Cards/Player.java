@@ -3,7 +3,6 @@ package Model.Cards;
 import Interfaces.IDeck;
 import Interfaces.IPlayer;
 
-
 import java.util.LinkedList;
 import java.util.List;
 

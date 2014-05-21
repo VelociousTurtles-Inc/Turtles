@@ -2,9 +2,7 @@ package Adapters.Interfaces;
 
 
 import Model.Cards.Card;
-import Model.Cards.CardInfo;
 import Server.Interfaces.PlayerService;
-import org.cojen.dirmi.Asynchronous;
 
 import java.util.List;
 

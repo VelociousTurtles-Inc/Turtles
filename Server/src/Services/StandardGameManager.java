@@ -2,14 +2,13 @@ package Services;
 
 
 import Client.Interfaces.GameWaiterClient;
-import Model.SimplestGameInfo;
 import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Deck;
+import Model.SimplestGameInfo;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.PlayerService;
-import sun.net.www.content.text.plain;
 
 import java.rmi.RemoteException;
 import java.util.LinkedList;

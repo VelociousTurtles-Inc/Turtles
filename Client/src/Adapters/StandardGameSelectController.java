@@ -3,11 +3,10 @@ package Adapters;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
 import Client.Interfaces.GameSelectClient;
-import Model.SimplestGameInfo;
 import Client.Interfaces.ThreeStringsGet;
 import Main.Client;
+import Model.SimplestGameInfo;
 import Server.Interfaces.GameDispenser;
-
 import org.cojen.dirmi.Environment;
 import org.cojen.dirmi.Session;
 
