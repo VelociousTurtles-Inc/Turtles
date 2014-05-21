@@ -11,22 +11,22 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class SingleForwardCard extends Card {
-    private static final long serialVersionUID = 4739049860217674267L;
+public class DoubleForwardCard extends Card {
+    private static final long serialVersionUID = 5936392580097739232L;
 
-    public SingleForwardCard(int color) {
+    public DoubleForwardCard(int color) {
         super(color);
     }
 
     public String getType() {
-        return "SingleForwardCard";
+        return "DoubleForwardCard";
     }
 
     public static List<Card> populate() {
         List<Card> result = new ArrayList<>();
-        for (int j = 0; j < 3; j++) {
+        for (int j = 0; j < 2; j++) {
             for (int i : Colors.getRealIntegers()) {
-                result.add(new SingleForwardCard(i));
+                result.add(new DoubleForwardCard(i));
             }
         }
         return result;
@@ -40,11 +40,13 @@ public class SingleForwardCard extends Card {
             for (Iterator<Turtle> it = field.turtles.iterator(); it.hasNext();)
             {
                 Turtle turtle = it.next();
-                Random random = new Random();
                 assert turtle.color != Colors.asInteger(Colors.NULL) : "Turtle colors are shifted";
                 if (turtle.color == this.getColor()) {
+                    Random random = new Random();
                     if (field.getSuccessors().size() < 1)throw new IllegalArgumentException("<"+(String.valueOf(field.getSuccessors().size()))+">");
                     BoardGraph.Field target = field.getSuccessors().get(random.nextInt(field.getSuccessors().size()));
+                    if (target.getSuccessors().size() < 1)throw new IllegalArgumentException("<"+(String.valueOf(target.getSuccessors().size()))+">");
+                    target = target.getSuccessors().get(random.nextInt(target.getSuccessors().size()));
                     do {
                         target.turtles.add(turtle);
                         it.remove();
@@ -60,16 +62,16 @@ public class SingleForwardCard extends Card {
 
     @Override
     public CardInfo getCardInfo() {
-        return new CardInfo("SingleForwardCard",this.id,this.color);
+        return new CardInfo("DoubleForwardCard",this.id,this.color);
     }
 
     @Override
     public String getShortDecription() {
-        return "Idź do przodu";
+        return "Idź do przodu o dwa";
     }
 
     @Override
     public String getDescription() {
-        return "Porusza żolwia we wskazanym kolorze o jedno pole do przodu";
+        return "Porusza żolwia we wskazanym kolorze o dwa pola do przodu";
     }
 }
