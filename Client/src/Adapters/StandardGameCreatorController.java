@@ -15,10 +15,9 @@ import java.util.List;
 public class StandardGameCreatorController implements GameCreatorController {
     GameDispenser myDispenser;
 
-    List<Event> closingEvents;
+    private final List<Event> closingEvents = new LinkedList<>();
 
-    public  StandardGameCreatorController(GameDispenser myDispenser) {
-        closingEvents = new LinkedList<>();
+    public StandardGameCreatorController(GameDispenser myDispenser) {
 
         this.myDispenser = myDispenser;
         Client.scenario.invoke(GameCreatorController.class, this);
@@ -26,12 +25,16 @@ public class StandardGameCreatorController implements GameCreatorController {
 
     @Override
     public void registerClosingEvent(Event closingEvent) {
-       closingEvents.add(closingEvent);
+        synchronized (closingEvents) {
+            closingEvents.add(closingEvent);
+        }
     }
 
     private void closeIt() {
-        for(Event ev : closingEvents) {
-            ev.call();
+        synchronized (closingEvents) {
+            for (Event ev : closingEvents) {
+                ev.call();
+            }
         }
     }
 

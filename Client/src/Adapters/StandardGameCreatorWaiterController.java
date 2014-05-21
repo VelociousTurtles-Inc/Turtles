@@ -16,17 +16,14 @@ import java.util.List;
  */
 public class StandardGameCreatorWaiterController implements GameCreatorWaiterController, GameWaiterClient {
     GameDispenser myDispenser;
-    private  int numberOfPlayers;
-    private List<Event> myUpdateEvents = new ArrayList<>();
-    private List<Event> cancelEvents = new ArrayList<>();
+    private int numberOfPlayers;
+    private final List<Event> updateEvents = new ArrayList<>();
+    private final List<Event> cancelEvents = new ArrayList<>();
     private String gameName;
     private int gameID;
-    private List<Event> closingEvents;
+    private final List<Event> closingEvents = new ArrayList<>();
 
     public StandardGameCreatorWaiterController(String name, GameDispenser standardGameCreatorController) throws Exception {
-
-        closingEvents = new LinkedList<>();
-
         this.myDispenser = standardGameCreatorController;
         int id = myDispenser.createNewGame(name, this);
         gameName =  myDispenser.getGameName(id);
@@ -38,34 +35,44 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
 
     @Override
     public void registerClosingEvent(Event closingEvent) {
-        closingEvents.add(closingEvent);
+        synchronized (closingEvents) {
+            closingEvents.add(closingEvent);
+        }
     }
 
     @Override
     public void closeMe() {
-        for(Event ev : closingEvents) {
-            ev.call();
+        synchronized (closingEvents) {
+            for (Event ev : closingEvents) {
+                ev.call();
+            }
         }
     }
 
     @Override
     public void update(int newNumberOfPlayers) {
         this.numberOfPlayers = newNumberOfPlayers;
-        for (Event e : myUpdateEvents) {
-            e.call();
+        synchronized (updateEvents) {
+            for (Event e : updateEvents) {
+                e.call();
+            }
         }
     }
 
     @Override
     public void cancel() throws Exception {
-        for (Event e : cancelEvents) {
-            e.call();
+        synchronized (cancelEvents) {
+            for (Event e : cancelEvents) {
+                e.call();
+            }
         }
     }
 
     @Override
     public void registerUpdateEvent(Event updateEvent) {
-        myUpdateEvents.add(updateEvent);
+        synchronized (updateEvents) {
+            updateEvents.add(updateEvent);
+        }
     }
 
     public void start(PlayerService player) throws Exception {
@@ -90,7 +97,9 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
 
     @Override
     public void registerCancelEvent(Event cancelEvent) {
-        cancelEvents.add(cancelEvent);
+        synchronized (cancelEvents) {
+            cancelEvents.add(cancelEvent);
+        }
     }
 
     @Override

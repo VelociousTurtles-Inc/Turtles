@@ -18,13 +18,12 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     private int gameID;
     private int myNumberOfPlayers;
     private GameDispenser myGameDispenser;
-    private List<Event> updateEvents = new ArrayList<>();
+    private final List<Event> updateEvents = new LinkedList<>();
     private String gameName;
-    private List<Event> cancelEvents = new ArrayList<>();
-    private List<Event> closingEvents;
+    private final List<Event> cancelEvents = new LinkedList<>();
+    private final List<Event> closingEvents = new LinkedList<>();
 
     public StandardGameWaiterController(int myID, GameDispenser myGameDispenser) throws Exception {
-        closingEvents = new LinkedList<>();
         gameID = myID;
         this.myGameDispenser = myGameDispenser;
         gameName = myGameDispenser.getGameName(gameID);
@@ -35,28 +34,36 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
 
     @Override
     public void registerClosingEvent(Event closingEvent) {
-        closingEvents.add(closingEvent);
+        synchronized (closingEvents) {
+            closingEvents.add(closingEvent);
+        }
     }
 
     @Override
     public void closeMe() {
-        for(Event ev : closingEvents) {
-            ev.call();
+        synchronized (closingEvents) {
+            for (Event ev : closingEvents) {
+                ev.call();
+            }
         }
     }
 
     @Override
     public void update(int newNumberOfPlayers) {
         myNumberOfPlayers = newNumberOfPlayers;
-        for (Event e : updateEvents) {
-            e.call();
+        synchronized (updateEvents) {
+            for (Event e : updateEvents) {
+                e.call();
+            }
         }
     }
 
     @Override
     public void cancel() throws Exception {
-        for (Event e : cancelEvents) {
-            e.call();
+        synchronized (cancelEvents) {
+            for (Event e : cancelEvents) {
+                e.call();
+            }
         }
     }
 
@@ -68,12 +75,16 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
 
     @Override
     public void registerCancelEvent(Event cancelEvent) {
-        cancelEvents.add(cancelEvent);
+        synchronized (cancelEvents) {
+            cancelEvents.add(cancelEvent);
+        }
     }
 
     @Override
     public void registerUpdate(Event update) {
-        updateEvents.add(update);
+        synchronized (updateEvents) {
+            updateEvents.add(update);
+        }
     }
 
     @Override

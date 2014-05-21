@@ -20,11 +20,11 @@ import java.util.List;
  */
 public class StandardGameSelectController implements GameSelectController, GameSelectClient {
 
-    GameDispenser myGameDispenser;
-    List<SimplestGameInfo> simpleGameInfos;
+    private GameDispenser myGameDispenser;
+    private List<SimplestGameInfo> simpleGameInfos;
 
-    List<Event> endIt = new ArrayList<>();
-    List<Event> updateIt = new ArrayList<>();
+    private final List<Event> cancelEvents = new ArrayList<>();
+    private final List<Event> updateEvents = new ArrayList<>();
 
     public StandardGameSelectController() throws Exception {
         simpleGameInfos = new LinkedList<>();
@@ -45,8 +45,10 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void cancel() {
-        for (Event e : endIt) {
-            e.call();
+        synchronized (cancelEvents) {
+            for (Event e : cancelEvents) {
+                e.call();
+            }
         }
     }
 
@@ -57,19 +59,25 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void registerClosingEvent(Event myClosingEvent) {
-        endIt.add(myClosingEvent);
+        synchronized (cancelEvents) {
+            cancelEvents.add(myClosingEvent);
+        }
     }
 
     @Override
     public void registerUpdateEvent(Event myUpdateEvent) {
-        updateIt.add(myUpdateEvent);
+        synchronized (updateEvents) {
+            updateEvents.add(myUpdateEvent);
+        }
     }
 
     @Override
     public void update(ThreeStringsGet updateGameInfo) throws Exception {
         simpleGameInfos = updateGameInfo.getList();
-        for (Event e : updateIt) {
-            e.call();
+        synchronized (updateEvents) {
+            for (Event e : updateEvents) {
+                e.call();
+            }
         }
     }
 

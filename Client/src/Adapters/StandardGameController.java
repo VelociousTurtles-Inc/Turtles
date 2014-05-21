@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by larhard on 05.05.14.
@@ -23,29 +24,23 @@ import java.util.Map;
 
 public class StandardGameController extends Thread implements GameController, GameClient {
 
-    Map<Integer, Card> normalCardsMap;
-    PlayerService playerService;
+    private Map<Integer, Card> normalCardsMap;
+    private PlayerService playerService;
 
-    List<Event> boardUpdates;
-    List<Event> cardsUpdates;
+    private final List<Event> boardUpdateEvents = new LinkedList<>();
+    private final List<Event> cardsUpdateEvents = new LinkedList<>();
 
-    List<Event> unlockingEvents;
-    List<Event> lockingEvents;
+    private final List<Event> unlockingEvents = new LinkedList<>();
+    private final List<Event> lockingEvents = new LinkedList<>();
 
-    private boolean locked;
+    private AtomicBoolean locked = new AtomicBoolean();
 
     List<Integer> playerHand;
 
     public StandardGameController() throws Exception {
         normalCardsMap = new HashMap<>();
 
-        boardUpdates = new LinkedList<>();
-        cardsUpdates = new LinkedList<>();
-
-        lockingEvents = new LinkedList<>();
-        unlockingEvents = new LinkedList<>();
-
-        locked = true;
+        locked.set(true);
 
         //WebServiceFeature[] enabledRequiredwsf = {new AddressingFeature(true, true)};
 
@@ -72,15 +67,19 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public void updateCards() {
-        for(Event up : cardsUpdates) {
-            up.call();
+        synchronized (cardsUpdateEvents) {
+            for (Event up : cardsUpdateEvents) {
+                up.call();
+            }
         }
     }
 
     @Override
     public void updateBoards() {
-        for(Event up : boardUpdates) {
-            up.call();
+        synchronized (boardUpdateEvents) {
+            for (Event up : boardUpdateEvents) {
+                up.call();
+            }
         }
     }
 
@@ -123,15 +122,19 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public void registerUpdateBoardEvent(Event updateBoardEvent) {
-        assert DebugWriter.write("Registering new Update Board Event");
-        boardUpdates.add(updateBoardEvent);
+        synchronized (boardUpdateEvents) {
+            assert DebugWriter.write("Registering new Update Board Event");
+            boardUpdateEvents.add(updateBoardEvent);
+        }
     }
 
     @Override
     public void registerUpdateCardsEvent(Event updateCardEvent) {
-        assert DebugWriter.write("Registering new Update Cards Event");
-        cardsUpdates.add(updateCardEvent);
-        updateCardEvent.call();
+        synchronized (cardsUpdateEvents) {
+            assert DebugWriter.write("Registering new Update Cards Event");
+            cardsUpdateEvents.add(updateCardEvent);
+            updateCardEvent.call();
+        }
     }
 
     @Override
@@ -176,7 +179,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public void lock() throws RemoteException {
-        locked = true;
+        locked.set(true);
         System.out.println("Locked");
         for(Event ev : lockingEvents) {
             ev.call();
@@ -185,7 +188,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public void unlock() throws RemoteException  {
-        locked = false;
+        locked.set(false);
         System.out.println("Unlocked");
         for(Event ev : unlockingEvents) {
             ev.call();
@@ -194,12 +197,16 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public void registerLockingEvent(Event lockingEvent) {
-        lockingEvents.add(lockingEvent);
+        synchronized (lockingEvents) {
+            lockingEvents.add(lockingEvent);
+        }
     }
 
     @Override
     public void registerUnlockingEvent(Event unlockingEvent) {
-        unlockingEvents.add(unlockingEvent);
+        synchronized (unlockingEvents) {
+            unlockingEvents.add(unlockingEvent);
+        }
     }
 
     @Override
@@ -209,7 +216,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public boolean isLocked() {
-        return locked;
+        return locked.get();
     }
 
     /*@Override
