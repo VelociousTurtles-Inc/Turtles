@@ -6,6 +6,7 @@ import Colors.Colors;
 import Images.Images;
 import Model.Cards.Card;
 import Utility.DebugWriter;
+import Utils.BoolRunnable;
 import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;
@@ -34,9 +35,22 @@ public class StandardGameView {
     private GameController myGameController;
     private Map<String, Image> cardImages;
 
-    private void updateBoard(List<List<Integer>> updateForBoard) {
-        assert DebugWriter.write("Real Updating Board", updateForBoard.toArray());
-        System.out.println(updateForBoard);
+    private void updateBoard(final List<List<Integer>> updateForBoard) {
+        assert new BoolRunnable() {
+            @Override
+            public boolean run() {
+                System.err.print("BoardUpdate : ");
+                for (List<Integer> field : updateForBoard) {
+                    System.err.print("[");
+                    for (int i : field) {
+                        System.err.print(Colors.asString(i) + ", ");
+                    }
+                    System.err.print("], ");
+                }
+                System.err.println();
+                return true;
+            }
+        }.run();
         for(int i = 0; i<myBoard.size; i++) {
             if(updateForBoard.get(i) != null && updateForBoard.get(i).size() != 0) {
                 List<Integer> temp = updateForBoard.get(i);

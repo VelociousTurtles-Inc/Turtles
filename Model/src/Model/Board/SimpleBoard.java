@@ -32,7 +32,7 @@ public class SimpleBoard extends Board {
             f.predecessors.add(a);
         }
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             BoardGraph.Field s = new BoardGraph.Field();
             f.successors.add(s);
             s.predecessors.add(f);
