@@ -25,7 +25,7 @@ public class SingleForwardCard extends Card {
     public static List<Card> populate() {
         List<Card> result = new ArrayList<>();
         for (int j = 0; j < 3; j++) {
-            for (int i : Colors.getRealIntegers()) {
+            for (int i : Colors.getAllIntegers()) {
                 result.add(new SingleForwardCard(i));
             }
         }
@@ -35,6 +35,10 @@ public class SingleForwardCard extends Card {
     @Override
     public void play(Board board)
     {
+        int color = getColor();
+        if (color == Colors.asInteger(Colors.NULL)) {
+            color = Colors.asInteger(Colors.getRandomColorFromReal());
+        }
         outer: for (BoardGraph.Field field : board.graph)
         {
             for (Iterator<Turtle> it = field.turtles.iterator(); it.hasNext();)
@@ -42,7 +46,7 @@ public class SingleForwardCard extends Card {
                 Turtle turtle = it.next();
                 Random random = new Random();
                 assert turtle.color != Colors.asInteger(Colors.NULL) : "Turtle colors are shifted";
-                if (turtle.color == this.getColor()) {
+                if (turtle.color == color) {
                     if (field.getSuccessors().size() < 1)throw new IllegalArgumentException("<"+(String.valueOf(field.getSuccessors().size()))+">");
                     BoardGraph.Field target = field.getSuccessors().get(random.nextInt(field.getSuccessors().size()));
                     do {

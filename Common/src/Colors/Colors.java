@@ -1,9 +1,6 @@
 package Colors;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by larhard on 17.05.14.
@@ -20,6 +17,7 @@ public enum Colors {
     private static List<String> allStrings = new ArrayList<>();
     private static List<Colors> realColors = new ArrayList<>();
     private static List<Colors> allColors = new ArrayList<>();
+    private final static Random random = new Random();
 
     static {
         colorsIntegerMap.put(NULL, 0);
@@ -78,27 +76,39 @@ public enum Colors {
         return colorsStringMap;
     }
 
-    public static Iterable<Integer> getRealIntegers() {
+    public static List<Integer> getRealIntegers() {
         return realIntegers;
     }
 
-    public static Iterable<Colors> getRealColors() {
+    public static List<Colors> getRealColors() {
         return realColors;
     }
 
-    public static Iterable<Colors> getAllColors() {
+    public static List<Colors> getAllColors() {
         return allColors;
     }
 
-    public static Iterable<String> getRealStrings() {
+    public static List<String> getRealStrings() {
         return realStrings;
     }
 
-    public static Iterable<Integer> getAllIntegers() {
+    public static List<Integer> getAllIntegers() {
         return allIntegers;
     }
 
-    public static Iterable<String> getAllStrings() {
+    public static List<String> getAllStrings() {
         return allStrings;
+    }
+
+    public static Colors getRandomColorFromReal() {
+        synchronized (random) {
+            return getRealColors().get(random.nextInt(getRealIntegers().size()));
+        }
+    }
+
+    public static Colors getRandomColorFromAll() {
+        synchronized (random) {
+            return getAllColors().get(random.nextInt(getAllColors().size()));
+        }
     }
 }
