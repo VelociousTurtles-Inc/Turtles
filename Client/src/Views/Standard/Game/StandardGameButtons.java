@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by mz18 on 8/05/14.
@@ -59,8 +60,9 @@ public class StandardGameButtons {
     }
 
     private int chosenCard = 1;
+    private final AtomicBoolean locked = new AtomicBoolean();
 
-    public void init(GameController myGameController) {
+    public void init(final GameController myGameController) {
         this.myGameController = myGameController;
 
         myGameController.registerLockingEvent(new Event() {
@@ -69,18 +71,10 @@ public class StandardGameButtons {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        playItButton.setDisable(true);
-                    }
-                });
-            }
-        });
-        myGameController.registerUnlockingEvent(new Event() {
-            @Override
-            public void call() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        playItButton.setDisable(false);
+                        synchronized (locked) {
+                            locked.set(myGameController.isLocked());
+                            playItButton.setDisable(locked.get());
+                        }
                     }
                 });
             }

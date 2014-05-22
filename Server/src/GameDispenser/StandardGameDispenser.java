@@ -2,8 +2,8 @@ package GameDispenser;
 
 import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.GameWaiterClient;
-import Model.SimplestGameInfo;
 import Client.Interfaces.ThreeStringsGet;
+import Model.SimplestGameInfo;
 import Model.Utility.Utility;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameManager;

@@ -2,7 +2,9 @@ package Model;
 
 import Interfaces.IDeck;
 import Model.Cards.Card;
-import Model.Cards.SimpleForwardCard;
+import Model.Cards.DoubleForwardCard;
+import Model.Cards.SingleBackwardCard;
+import Model.Cards.SingleForwardCard;
 
 import java.util.*;
 
@@ -22,12 +24,18 @@ public class Deck implements IDeck {
         deadCards = new LinkedList<>();
         cardsMap = new HashMap<>();
 
-        for(Card temp : SimpleForwardCard.populate()) {
+        addCards(SingleForwardCard.populate());
+        addCards(DoubleForwardCard.populate());
+        addCards(SingleBackwardCard.populate());
+
+        Collections.shuffle(avaibleCards);
+    }
+
+    private void addCards(Iterable<Card> cards) {
+        for(Card temp : cards) {
             cardsMap.put(temp.getID(), temp);
             avaibleCards.add(temp.getID());
         }
-
-        Collections.shuffle(avaibleCards);
     }
 
     public int getCard() {

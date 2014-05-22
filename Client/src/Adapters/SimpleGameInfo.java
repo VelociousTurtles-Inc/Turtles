@@ -1,6 +1,5 @@
 package Adapters;
 
-import Client.Interfaces.ThreeStringsGet;
 import javafx.beans.property.SimpleStringProperty;
 
 /**

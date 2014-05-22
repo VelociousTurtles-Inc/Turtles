@@ -11,11 +11,12 @@ import java.util.logging.Level;
  * Created by Maciej on 2014-05-05.
  */
 public class SimpleBoard extends Board {
+    private static final long serialVersionUID = -3932283805405624796L;
 
     public SimpleBoard()
     {
 
-        BoardGraph.Field F = new BoardGraph.Field();
+        BoardGraph.Field f = new BoardGraph.Field();
         graph.starts = new ArrayList<>();
 
         for (int i : Colors.getRealIntegers()) {
@@ -26,23 +27,24 @@ public class SimpleBoard extends Board {
             graph.starts.get(i-1).getTurtles().add(new Turtle(i));
         }
 
-        for(BoardGraph.Field a : graph.starts)
-            a.successors.add(F);
-
-        for (int i = 0; i < 6; i++)
-        {
-            BoardGraph.Field S = new BoardGraph.Field();
-            F.successors.add(S);
-            F=S;
+        for(BoardGraph.Field a : graph.starts) {
+            a.successors.add(f);
+            f.predecessors.add(a);
         }
+
+        for (int i = 0; i < 5; i++) {
+            BoardGraph.Field s = new BoardGraph.Field();
+            f.successors.add(s);
+            s.predecessors.add(f);
+            f=s;
+        }
+
         BoardGraph.Field End = new BoardGraph.Field(BoardGraph.FieldType.FINAL);
-        F.successors.add(End);
+        f.successors.add(End);
 
-//        for(int i = 0; i<5; i++) graph.start.turtles.add(new Turtle(i));
-
-        for (BoardGraph.Field field : graph)
-            Utility.Debug.log(Level.INFO,"[BOARD CONSTRUCTOR DEBUG]graph>>"+graph.toString());
-
+        for (BoardGraph.Field field : graph) {
+            Utility.Debug.log(Level.INFO, "[BOARD CONSTRUCTOR DEBUG]graph>>" + graph.toString());
+        }
     }
 
 

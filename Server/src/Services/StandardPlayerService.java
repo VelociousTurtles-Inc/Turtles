@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by michaziobro on 17.05.2014.
@@ -19,7 +20,7 @@ public class StandardPlayerService implements PlayerService {
     private GameManager myManager;
     private GameClient myClient;
     private List<CardIDBox> myCards;
-    private boolean locked;
+    private final AtomicBoolean locked = new AtomicBoolean();
 
     public StandardPlayerService(GameManager myManager) throws Exception {
         this.myManager = myManager;
@@ -33,12 +34,15 @@ public class StandardPlayerService implements PlayerService {
     @Override
     public void setClient(GameClient myClient) throws RemoteException {
         this.myClient = myClient;
-        if(locked) myClient.lock();
-        else myClient.unlock();
+        if(locked.get()) lock();
+        else unlock();
     }
 
+    @Override
     public boolean isLocked() {
-        return locked;
+        synchronized (locked) {
+            return locked.get();
+        }
     }
 
     private class CardIDBox {
@@ -63,8 +67,8 @@ public class StandardPlayerService implements PlayerService {
 
     @Override
     public void lockMeOrNot() throws RemoteException {
-        if(locked) myClient.lock();
-        else myClient.unlock();
+        if(locked.get()) lock();
+        else unlock();
     }
 
     @Override
@@ -88,14 +92,18 @@ public class StandardPlayerService implements PlayerService {
 
     @Override
     public void lock() throws RemoteException {
-        this.locked = true;
-        myClient.lock();
+        synchronized (locked) {
+            this.locked.set(true);
+            myClient.updateLock();
+        }
     }
 
     @Override
     public void unlock() throws RemoteException {
-        this.locked = false;
-        myClient.unlock();
+        synchronized (locked) {
+            this.locked.set(false);
+            myClient.updateLock();
+        }
     }
 
     @Override

@@ -8,7 +8,6 @@ import Server.Interfaces.GameDispenser;
 import Server.Interfaces.PlayerService;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -110,5 +109,10 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     @Override
     public int getGameID() {
         return gameID;
+    }
+
+    @Override
+    public void initValues() throws Exception {
+        myDispenser.updateMe();
     }
 }

@@ -1,9 +1,9 @@
 package Server.Interfaces;
 
 import Client.Interfaces.GameWaiterClient;
-import Model.SimplestGameInfo;
 import Model.Board.Board;
 import Model.Cards.Card;
+import Model.SimplestGameInfo;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

@@ -15,4 +15,6 @@ public interface GameSelectController {
     public void registerUpdateEvent(Event updateEvent);
 
     List<SimplestGameInfo> getUpdateList();
+
+    void initValues() throws Exception;
 }

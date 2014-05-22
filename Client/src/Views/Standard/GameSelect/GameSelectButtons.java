@@ -49,7 +49,7 @@ public class GameSelectButtons {
         controller.join(myInfo.getMyID());
     }
 
-    public void setController(final GameSelectController controller) {
+    public void setController(final GameSelectController controller) throws Exception {
         this.controller = controller;
         this.controller.registerClosingEvent(new Event() {
             @Override
@@ -87,6 +87,7 @@ public class GameSelectButtons {
         myObservableTableList = FXCollections.observableArrayList(myTableList);
 
         myTable.setItems(myObservableTableList);
+        controller.initValues();
     }
 
     public void setStage(Stage myStage) {

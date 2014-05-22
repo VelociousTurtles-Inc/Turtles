@@ -1,9 +1,9 @@
 package Main;
 
 import Adapters.StandardMenuController;
-import Utility.DebugWriter;
 import Scenarios.Scenario;
 import Scenarios.StandardScenario;
+import Utility.DebugWriter;
 
 /**
  * Created by michaziobro on 01.05.2014.

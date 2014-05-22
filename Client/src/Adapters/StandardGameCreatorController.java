@@ -4,7 +4,6 @@ import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameCreatorController;
 import Main.Client;
 import Server.Interfaces.GameDispenser;
-import Views.Standard.GameCreation.GameCreator.GameCreatorView;
 
 import java.util.LinkedList;
 import java.util.List;

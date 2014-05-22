@@ -8,8 +8,8 @@ import Main.Client;
 import Model.Board.BoardGraph;
 import Model.Cards.Card;
 import Model.Turtles.Turtle;
-import Utility.DebugWriter;
 import Server.Interfaces.PlayerService;
+import Utility.DebugWriter;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -31,9 +31,9 @@ public class StandardGameController extends Thread implements GameController, Ga
     private final List<Event> cardsUpdateEvents = new LinkedList<>();
 
     private final List<Event> unlockingEvents = new LinkedList<>();
-    private final List<Event> lockingEvents = new LinkedList<>();
+    private final List<Event> lockEvents = new LinkedList<>();
 
-    private AtomicBoolean locked = new AtomicBoolean();
+    private final AtomicBoolean locked = new AtomicBoolean();
 
     List<Integer> playerHand;
 
@@ -125,6 +125,7 @@ public class StandardGameController extends Thread implements GameController, Ga
         synchronized (boardUpdateEvents) {
             assert DebugWriter.write("Registering new Update Board Event");
             boardUpdateEvents.add(updateBoardEvent);
+            updateBoardEvent.call();
         }
     }
 
@@ -182,34 +183,23 @@ public class StandardGameController extends Thread implements GameController, Ga
     }
 
     @Override
-    public void lock() throws RemoteException {
-        locked.set(true);
-        System.out.println("Locked");
-        for(Event ev : lockingEvents) {
-            ev.call();
+    public void updateLock() {
+        synchronized (locked) {
+            try {
+                locked.set(playerService.isLocked());
+                for (Event ev : lockEvents) {
+                    ev.call();
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
-    public void unlock() throws RemoteException  {
-        locked.set(false);
-        System.out.println("Unlocked");
-        for(Event ev : unlockingEvents) {
-            ev.call();
-        }
-    }
-
-    @Override
-    public void registerLockingEvent(Event lockingEvent) {
-        synchronized (lockingEvents) {
-            lockingEvents.add(lockingEvent);
-        }
-    }
-
-    @Override
-    public void registerUnlockingEvent(Event unlockingEvent) {
-        synchronized (unlockingEvents) {
-            unlockingEvents.add(unlockingEvent);
+    public void registerLockingEvent(Event lockEvent) {
+        synchronized (lockEvents) {
+            lockEvents.add(lockEvent);
         }
     }
 

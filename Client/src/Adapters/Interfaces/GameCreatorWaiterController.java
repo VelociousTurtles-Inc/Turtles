@@ -19,4 +19,6 @@ public interface GameCreatorWaiterController {
     String getGameName();
 
     int getGameID();
+
+    void initValues() throws Exception;
 }

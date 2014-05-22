@@ -16,6 +16,9 @@ public class GameWaitingButtons {
     private GameWaiterController controller;
     private Stage stage;
 
+    private String name;
+    private int number;
+
     public void setController(GameWaiterController myController) throws Exception {
         this.controller = myController;
         this.controller.registerUpdate(new Event() {
@@ -56,6 +59,8 @@ public class GameWaitingButtons {
                 });
             }
         });
+        numberOfPlayers.setText(String.valueOf(number));
+        gameName.setText(name);
     }
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -64,5 +69,10 @@ public class GameWaitingButtons {
     public void leave(ActionEvent actionEvent) throws Exception {
         stage.close();
         controller.leave();
+    }
+
+    public void setInitValues(String name, int numberOP) {
+        this.name = name;
+        this.number = numberOP;
     }
 }

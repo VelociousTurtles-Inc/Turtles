@@ -3,11 +3,10 @@ package Adapters;
 import Adapters.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
 import Client.Interfaces.GameSelectClient;
-import Model.SimplestGameInfo;
 import Client.Interfaces.ThreeStringsGet;
 import Main.Client;
+import Model.SimplestGameInfo;
 import Server.Interfaces.GameDispenser;
-
 import org.cojen.dirmi.Environment;
 import org.cojen.dirmi.Session;
 
@@ -84,6 +83,11 @@ public class StandardGameSelectController implements GameSelectController, GameS
     @Override
     public List<SimplestGameInfo> getUpdateList() {
         return simpleGameInfos;
+    }
+
+    @Override
+    public void initValues() throws Exception {
+        myGameDispenser.updateMe();
     }
 
 }
