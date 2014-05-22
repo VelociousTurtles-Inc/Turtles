@@ -125,6 +125,7 @@ public class StandardGameController extends Thread implements GameController, Ga
         synchronized (boardUpdateEvents) {
             assert DebugWriter.write("Registering new Update Board Event");
             boardUpdateEvents.add(updateBoardEvent);
+            updateBoardEvent.call();
         }
     }
 
