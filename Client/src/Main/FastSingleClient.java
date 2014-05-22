@@ -1,7 +1,7 @@
 package Main;
 
-import Utility.DebugWriter;
 import Scenarios.FastInitScenario;
+import Utility.DebugWriter;
 
 /**
  * Created by larhard on 20.05.14.

@@ -26,11 +26,10 @@ import java.util.*;
  * Created by mz18 on 8/05/14.
  */
 public class StandardGameView {
-
     // cards -> slots
     private List<ImageView> slots = new ArrayList<>();
     private List<ImageView> turtles = new ArrayList<>();
-    private Board myBoard = BoardBootstrap.createSampleBoard();
+    private Board myBoard = BoardBootstrap.createSampleBoard();   //Board.readBoard("sampleBoard");
     private GameController myGameController;
     private Map<String, Image> cardImages;
 
@@ -41,19 +40,12 @@ public class StandardGameView {
             if(updateForBoard.get(i) != null && updateForBoard.get(i).size() != 0) {
                 List<Integer> temp = updateForBoard.get(i);
                 Collections.reverse(temp);
-                if(i == 0) {
-                    for(int j = 0; j<temp.size(); j++) {
-                        turtles.get(temp.get(j)).setY(myBoard.startPositions.get(temp.get(j)).y);
-                        turtles.get(temp.get(j)).setX(myBoard.startPositions.get(temp.get(j)).x);
-                        turtles.get(temp.get(j)).toFront();
-                    }
-                } else {
-                    int diff = (updateForBoard.get(i).size() - 1) * 5;
-                    for (int j = updateForBoard.get(i).size() - 1; j >= 0; j--) {
-                        turtles.get(temp.get(j)).setY(myBoard.positions.get(i).y - diff + j * 10);
-                        turtles.get(temp.get(j)).setX(myBoard.positions.get(i).x);
-                        turtles.get(temp.get(j)).toFront();
-                    }
+
+                int diff = (updateForBoard.get(i).size() - 1) * 5;
+                for (int j = updateForBoard.get(i).size() - 1; j >= 0; j--) {
+                    turtles.get(temp.get(j)).setY(myBoard.positions.get(i).y - diff + j * 10);
+                    turtles.get(temp.get(j)).setX(myBoard.positions.get(i).x);
+                    turtles.get(temp.get(j)).toFront();
                 }
             }
         }
@@ -171,8 +163,8 @@ public class StandardGameView {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            turtles.get(i).setX(myBoard.startPositions.get(i).x);
-            turtles.get(i).setY(myBoard.startPositions.get(i).y);
+            turtles.get(i).setX(myBoard.positions.get(i-1).x);
+            turtles.get(i).setY(myBoard.positions.get(i-1).y);
         }
     }
 }

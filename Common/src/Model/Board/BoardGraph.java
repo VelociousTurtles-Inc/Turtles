@@ -28,6 +28,7 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable
     @Override
     public Iterator<Field> iterator() {
         int position = 0;
+        //TODO bad BFS
         return new Iterator<Field>() {
             Queue<Field> q;
             {

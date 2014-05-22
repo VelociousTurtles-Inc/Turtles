@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class Board implements Serializable {
 
-    public List<Point> startPositions = new ArrayList<Point>();
     public List<Point> positions = new ArrayList<Point>();
     public int size, maxTurtles;
     public String name;
@@ -26,7 +25,10 @@ public class Board implements Serializable {
         assert DebugWriter.write("Reading Board \"" + nname + "\"");
         Board temp = new Board();
         try {
-            InputStream fileIn = Board.class.getResourceAsStream("Resources/Boards/"+nname);
+            //TODO, if anyone wants to change anything here, please do it on working code and
+            //make sure it still works after the change.
+            //InputStream fileIn = Board.class.getResourceAsStream("Resources/Boards/"+nname);
+            InputStream fileIn = new FileInputStream(System.getProperty("user.dir")+"/Client/src/Resources/Boards/"+nname);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             temp = (Board) in.readObject();
             in.close();
@@ -46,7 +48,11 @@ public class Board implements Serializable {
         assert DebugWriter.write("Saving Board \"" + name + "\"");
 
         try {
-            OutputStream fileOut = new FileOutputStream(Board.class.getResource("Resources/Boards/"+name).getFile());
+            System.out.println(name);
+            //TODO, if anyone wants to change anything here, please do it on working code and
+            //make sure it still works after the change.
+            //OutputStream fileOut = new FileOutputStream(Board.class.getResource("Resources/Boards/"+name).getFile());
+            OutputStream fileOut = new FileOutputStream(System.getProperty("user.dir")+"/Client/src/Resources/Boards/"+name);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);
             out.close();

@@ -8,18 +8,17 @@ public class BoardBootstrap {
     public static Board createSampleBoard() {
         Board temp = new Board();
 
-        //the first position is not used because the GUI designer counts from 1
-        temp.startPositions.add(new Point(42, 42));
+        //the first position is not used because the GUI designer counts from 0
+        //temp.positions.add(new Point(42, 42));
 
-        temp.startPositions.add(new Point(60, 120));
-        temp.startPositions.add(new Point(45, 170));
-        temp.startPositions.add(new Point(60, 220));
-        temp.startPositions.add(new Point(45, 270));
-        temp.startPositions.add(new Point(60, 320));
-        temp.maxTurtles = temp.startPositions.size();
+        temp.positions.add(new Point(60, 120));
+        temp.positions.add(new Point(45, 170));
+        temp.positions.add(new Point(60, 220));
+        temp.positions.add(new Point(45, 270));
+        temp.positions.add(new Point(60, 320));
+        temp.maxTurtles = temp.positions.size();
 
-        //the first position is not used because the GUI designer counts from 1
-        temp.positions.add(new Point(42, 42));
+        //the first position is not used because the GUI designer counts from 0
 
         temp.positions.add(new Point(170, 340));
         temp.positions.add(new Point(280, 290));
@@ -30,7 +29,7 @@ public class BoardBootstrap {
         temp.positions.add(new Point(840, 220));
         temp.size = temp.positions.size();
 
-        temp.name = "sample board";
+        temp.name = "sampleBoard";
 
         return temp;
     }

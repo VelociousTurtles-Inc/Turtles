@@ -159,10 +159,14 @@ public class StandardGameController extends Thread implements GameController, Ga
         List<List<Integer>> result = new LinkedList<>();
         BoardGraph myBoardGraph = playerService.getGameBoard().graph;
 
-        result.add(new LinkedList<Integer>());
-        for(BoardGraph.Field f : myBoardGraph.starts)
-            for(Turtle t : f.getTurtles())
-                result.get(0).add(t.getColor());
+
+
+        for(BoardGraph.Field f : myBoardGraph.starts) {
+            LinkedList<Integer> A = new LinkedList<>();
+            for (Turtle t : f.getTurtles())
+                A.add(t.getColor());
+            result.add(A);
+        }
 
         BoardGraph.Field temp = myBoardGraph.starts.get(0);
 
