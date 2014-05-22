@@ -23,7 +23,5 @@ public interface GameController {
 
     void registerLockingEvent(Event lockingEvent);
 
-    void registerUnlockingEvent(Event unlockingEvent);
-
     boolean isLocked();
 }

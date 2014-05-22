@@ -31,9 +31,9 @@ public class StandardGameController extends Thread implements GameController, Ga
     private final List<Event> cardsUpdateEvents = new LinkedList<>();
 
     private final List<Event> unlockingEvents = new LinkedList<>();
-    private final List<Event> lockingEvents = new LinkedList<>();
+    private final List<Event> lockEvents = new LinkedList<>();
 
-    private AtomicBoolean locked = new AtomicBoolean();
+    private final AtomicBoolean locked = new AtomicBoolean();
 
     List<Integer> playerHand;
 
@@ -177,35 +177,34 @@ public class StandardGameController extends Thread implements GameController, Ga
         return result;
     }
 
+    private void updateLock() {
+        for (Event ev : lockEvents) {
+            ev.call();
+        }
+    }
+
     @Override
     public void lock() throws RemoteException {
-        locked.set(true);
-        System.out.println("Locked");
-        for(Event ev : lockingEvents) {
-            ev.call();
+        synchronized (locked) {
+            locked.set(true);
+            System.out.println("Locked");
+            updateLock();
         }
     }
 
     @Override
     public void unlock() throws RemoteException  {
-        locked.set(false);
-        System.out.println("Unlocked");
-        for(Event ev : unlockingEvents) {
-            ev.call();
+        synchronized (locked) {
+            locked.set(false);
+            System.out.println("Unlocked");
+            updateLock();
         }
     }
 
     @Override
-    public void registerLockingEvent(Event lockingEvent) {
-        synchronized (lockingEvents) {
-            lockingEvents.add(lockingEvent);
-        }
-    }
-
-    @Override
-    public void registerUnlockingEvent(Event unlockingEvent) {
-        synchronized (unlockingEvents) {
-            unlockingEvents.add(unlockingEvent);
+    public void registerLockingEvent(Event lockEvent) {
+        synchronized (lockEvents) {
+            lockEvents.add(lockEvent);
         }
     }
 

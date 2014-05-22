@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by michaziobro on 17.05.2014.
@@ -19,7 +20,7 @@ public class StandardPlayerService implements PlayerService {
     private GameManager myManager;
     private GameClient myClient;
     private List<CardIDBox> myCards;
-    private boolean locked;
+    private final AtomicBoolean locked = new AtomicBoolean();
 
     public StandardPlayerService(GameManager myManager) throws Exception {
         this.myManager = myManager;
@@ -33,12 +34,14 @@ public class StandardPlayerService implements PlayerService {
     @Override
     public void setClient(GameClient myClient) throws RemoteException {
         this.myClient = myClient;
-        if(locked) myClient.lock();
+        if(locked.get()) myClient.lock();
         else myClient.unlock();
     }
 
     public boolean isLocked() {
-        return locked;
+        synchronized (locked) {
+            return locked.get();
+        }
     }
 
     private class CardIDBox {
@@ -63,7 +66,7 @@ public class StandardPlayerService implements PlayerService {
 
     @Override
     public void lockMeOrNot() throws RemoteException {
-        if(locked) myClient.lock();
+        if(locked.get()) myClient.lock();
         else myClient.unlock();
     }
 
@@ -88,13 +91,13 @@ public class StandardPlayerService implements PlayerService {
 
     @Override
     public void lock() throws RemoteException {
-        this.locked = true;
+        this.locked.set(true);
         myClient.lock();
     }
 
     @Override
     public void unlock() throws RemoteException {
-        this.locked = false;
+        this.locked.set(false);
         myClient.unlock();
     }
 
