@@ -177,27 +177,17 @@ public class StandardGameController extends Thread implements GameController, Ga
         return result;
     }
 
-    private void updateLock() {
-        for (Event ev : lockEvents) {
-            ev.call();
-        }
-    }
-
     @Override
-    public void lock() throws RemoteException {
+    public void updateLock() {
         synchronized (locked) {
-            locked.set(true);
-            System.out.println("Locked");
-            updateLock();
-        }
-    }
-
-    @Override
-    public void unlock() throws RemoteException  {
-        synchronized (locked) {
-            locked.set(false);
-            System.out.println("Unlocked");
-            updateLock();
+            try {
+                locked.set(playerService.isLocked());
+                for (Event ev : lockEvents) {
+                    ev.call();
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 

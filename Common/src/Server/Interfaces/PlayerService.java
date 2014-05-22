@@ -30,6 +30,8 @@ public interface PlayerService extends Remote {
 
     Map<Integer,Card> getCardsMap() throws Exception;
 
+    boolean isLocked() throws RemoteException;
+
     @Asynchronous
     void update() throws RemoteException;
 
