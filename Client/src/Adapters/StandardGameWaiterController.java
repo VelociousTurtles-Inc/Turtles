@@ -100,4 +100,6 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     public String getGameName() throws Exception {
         return gameName;
     }
+
+
 }

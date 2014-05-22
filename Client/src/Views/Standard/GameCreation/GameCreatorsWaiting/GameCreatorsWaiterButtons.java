@@ -17,7 +17,10 @@ public class GameCreatorsWaiterButtons {
     private GameCreatorWaiterController controller;
     private Stage stage;
 
-    public void setController(GameCreatorWaiterController myController) {
+    private String name;
+    private int number;
+
+    public void setController(GameCreatorWaiterController myController) throws Exception {
         this.controller = myController;
         this.controller.registerUpdateEvent(new Event() {
             @Override
@@ -54,10 +57,13 @@ public class GameCreatorsWaiterButtons {
                 });
             }
         });
+        gameName.setText(name);
+        numberOfPlayers.setText(String.valueOf(number));
     }
 
-    public void setName(String name) {
-        gameName.setText(name);
+    public void setInitValues(String name, int i) {
+        this.name = name;
+        this.number = i;
     }
 
     public void setStage(Stage stage) {

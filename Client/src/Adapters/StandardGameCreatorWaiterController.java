@@ -110,4 +110,9 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     public int getGameID() {
         return gameID;
     }
+
+    @Override
+    public void initValues() throws Exception {
+        myDispenser.updateMe();
+    }
 }

@@ -22,7 +22,7 @@ public class GameWaiterView {
             @Override
             public void run() {
                 try {
-                    start();
+                    start(myController.getGameName(), myController.getNumberOfPlayers());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -30,7 +30,7 @@ public class GameWaiterView {
             }
         });
     }
-    public void start() throws Exception {
+    public void start(String name, int numberOP) throws Exception {
 
                 Stage myStage = new Stage();
                 FXMLLoader myLoader = new FXMLLoader();
@@ -45,11 +45,14 @@ public class GameWaiterView {
                 System.out.println("Wowowowowwowow");
 
                 myButtons = myLoader.getController();
-                myButtons.setController(myController);
+
                 myButtons.setStage(myStage);
 
                 myStage.setScene(new Scene(myParent));
                 myStage.show();
+
+                myButtons.setInitValues(name, numberOP);
+                myButtons.setController(myController);
 
     }
 }

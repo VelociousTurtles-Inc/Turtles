@@ -32,7 +32,7 @@ public class GameSelectView {
         });
     }
 
-    public void start() {
+    public void start() throws Exception {
 
         Stage myStage = new Stage();
         FXMLLoader myLoader = new FXMLLoader();

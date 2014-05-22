@@ -85,4 +85,9 @@ public class StandardGameSelectController implements GameSelectController, GameS
         return simpleGameInfos;
     }
 
+    @Override
+    public void initValues() throws Exception {
+        myGameDispenser.updateMe();
+    }
+
 }
