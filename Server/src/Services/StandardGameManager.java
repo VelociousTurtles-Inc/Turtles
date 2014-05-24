@@ -8,7 +8,7 @@ import Model.Cards.Card;
 import Model.Deck;
 import Model.SimplestGameInfo;
 import Server.Interfaces.GameManager;
-import Server.Interfaces.PlayerService;
+import Server.Interfaces.ServerPlayerService;
 
 import java.rmi.RemoteException;
 import java.util.LinkedList;
@@ -33,8 +33,8 @@ public class StandardGameManager implements GameManager {
 
     int playerOnMove;
 
-    List<GameWaiterClient> myWaiters = new LinkedList<>();
-    List<PlayerService> myPlayers;
+    List<GameWaiterClient> gameWaiterClients = new LinkedList<>();
+    List<ServerPlayerService> playerServices;
 
     public StandardGameManager(String name) {
         started = false;
@@ -51,12 +51,12 @@ public class StandardGameManager implements GameManager {
     public int playCard(int cardID) throws RemoteException {
         myDeck.getCardsMap().get(cardID).play(board);
         myDeck.returnCard(cardID);
-        for(PlayerService myPlayer : myPlayers) {
+        for(ServerPlayerService myPlayer : playerServices) {
             myPlayer.update();
         }
-        myPlayers.get(playerOnMove).lock();
+        playerServices.get(playerOnMove).lock();
         playerOnMove = (playerOnMove+1)%numberOfPlayers;
-        myPlayers.get(playerOnMove).unlock();
+        playerServices.get(playerOnMove).unlock();
         return myDeck.getCard();
     }
 
@@ -97,14 +97,14 @@ public class StandardGameManager implements GameManager {
 
     @Override
     public void addPlayer(GameWaiterClient newWaiter) {
-        myWaiters.add(newWaiter);
+        gameWaiterClients.add(newWaiter);
         numberOfPlayers++;
         return ;
     }
 
     @Override
     public void removePlayer(GameWaiterClient oldWaiter) {
-        myWaiters.remove(oldWaiter);
+        gameWaiterClients.remove(oldWaiter);
         numberOfPlayers--;
         return ;
     }
@@ -114,17 +114,17 @@ public class StandardGameManager implements GameManager {
         myDeck = new Deck();
         board = new SimpleBoard();
 
-        myPlayers = new LinkedList<>();
+        playerServices = new LinkedList<>();
 
-        for(int i = 0; i<myWaiters.size(); i++) {
-            myPlayers.add(new StandardPlayerService(this));
-            myWaiters.get(i).start(myPlayers.get(i));
-            myPlayers.get(i).lock();
+        for(int i = 0; i< gameWaiterClients.size(); i++) {
+            playerServices.add(new StandardPlayerService(this));
+            gameWaiterClients.get(i).start((Server.Interfaces.PlayerService) playerServices.get(i));
+            playerServices.get(i).lock();
         }
         started = true;
         playerOnMove = 0;
-        myPlayers.get(playerOnMove).unlock();
-        for(GameWaiterClient myWaiter : myWaiters) {
+        playerServices.get(playerOnMove).unlock();
+        for(GameWaiterClient myWaiter : gameWaiterClients) {
             myWaiter.closeMe();
         }
     }
@@ -134,14 +134,14 @@ public class StandardGameManager implements GameManager {
     }
 
     public void update() throws Exception {
-        for(GameWaiterClient waiter : myWaiters) {
+        for(GameWaiterClient waiter : gameWaiterClients) {
             waiter.update(numberOfPlayers);
         }
     }
 
     @Override
     public void cancel() throws Exception {
-        for(GameWaiterClient waiter : myWaiters) {
+        for(GameWaiterClient waiter : gameWaiterClients) {
             waiter.cancel();
         }
     }
@@ -153,5 +153,16 @@ public class StandardGameManager implements GameManager {
             result.add(myDeck.getCard());
         }
         return result;
+    }
+
+    @Override
+    public void leave() {
+        close();
+    }
+
+    public void close() {
+        for (ServerPlayerService playerService : playerServices) {
+            playerService.close();
+        }
     }
 }

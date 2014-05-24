@@ -32,4 +32,6 @@ public interface GameManager extends Remote {
     void cancel() throws Exception;
 
     List<Integer> getHand() throws RemoteException;
+
+    void leave() throws RemoteException;
 }

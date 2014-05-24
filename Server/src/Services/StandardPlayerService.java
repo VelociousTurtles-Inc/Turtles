@@ -5,6 +5,7 @@ import Model.Board.Board;
 import Model.Cards.Card;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.PlayerService;
+import Server.Interfaces.ServerPlayerService;
 
 import java.rmi.RemoteException;
 import java.util.LinkedList;
@@ -15,7 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Created by michaziobro on 17.05.2014.
  */
-public class StandardPlayerService implements PlayerService {
+public class StandardPlayerService implements PlayerService, ServerPlayerService {
 
     private GameManager myManager;
     private GameClient myClient;
@@ -60,15 +61,22 @@ public class StandardPlayerService implements PlayerService {
         }
     }
 
-    public void update() throws RemoteException {
-        myClient.updateBoards();
-        myClient.updateCards();
+    public void update() {
+        try {
+            myClient.updateBoards();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        try {
+            myClient.updateCards();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void lockMeOrNot() throws RemoteException {
-        if(locked.get()) lock();
-        else unlock();
+    public void leave() throws RemoteException {
+        myManager.leave();
     }
 
     @Override
@@ -91,23 +99,40 @@ public class StandardPlayerService implements PlayerService {
     }
 
     @Override
-    public void lock() throws RemoteException {
+    public void lock() {
         synchronized (locked) {
             this.locked.set(true);
-            myClient.updateLock();
+            try {
+                myClient.updateLock();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
-    public void unlock() throws RemoteException {
+    public void unlock() {
         synchronized (locked) {
             this.locked.set(false);
-            myClient.updateLock();
+            try {
+                myClient.updateLock();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     public Board getGameBoard() throws RemoteException {
         return myManager.getBoard();
+    }
+
+    @Override
+    public void close() {
+        try {
+            myClient.close();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }

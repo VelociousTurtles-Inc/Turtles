@@ -20,4 +20,7 @@ public interface GameClient extends Remote {
 
     @Asynchronous
     void cardsPlayed() throws RemoteException;
+
+    @Asynchronous
+    void close() throws RemoteException;
 }

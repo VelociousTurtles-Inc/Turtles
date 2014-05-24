@@ -150,7 +150,7 @@ public class StandardGameController extends Thread implements GameController, Ga
     @Override
     public void leave() throws Exception {
         // TODO real leave game
-        closeViews();
+        playerService.leave();
     }
 
     private void closeViews() {
@@ -229,6 +229,11 @@ public class StandardGameController extends Thread implements GameController, Ga
     @Override
     public void cardsPlayed() throws RemoteException {
 
+    }
+
+    @Override
+    public void close() throws RemoteException {
+        closeViews();
     }
 
     @Override
