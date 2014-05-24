@@ -31,12 +31,26 @@ public class StandardGameController extends Thread implements GameController, Ga
     private final List<Event> cardsUpdateEvents = new LinkedList<>();
     private final List<Event> closeEvents = new LinkedList<>();
 
-    private final List<Event> unlockingEvents = new LinkedList<>();
     private final List<Event> lockEvents = new LinkedList<>();
 
     private final AtomicBoolean locked = new AtomicBoolean();
 
     List<Integer> playerHand;
+
+    private void clearEvents() {
+        synchronized (boardUpdateEvents) {
+            boardUpdateEvents.clear();
+        }
+        synchronized (cardsUpdateEvents) {
+            cardsUpdateEvents.clear();
+        }
+        synchronized (closeEvents) {
+            closeEvents.clear();
+        }
+        synchronized (lockEvents) {
+            lockEvents.clear();
+        }
+    }
 
     public StandardGameController() throws Exception {
         normalCardsMap = new HashMap<>();
@@ -234,6 +248,7 @@ public class StandardGameController extends Thread implements GameController, Ga
     @Override
     public void close() throws RemoteException {
         closeViews();
+        clearEvents();
     }
 
     @Override

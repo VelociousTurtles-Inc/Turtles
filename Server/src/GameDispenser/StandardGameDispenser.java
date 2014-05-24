@@ -46,7 +46,7 @@ public class StandardGameDispenser implements GameDispenser {
     @Override
     public Integer createNewGame(String name, GameWaiterClient mySel) throws Exception {
         int id = getEmptyId();
-        gameServices.put(id, new Services.StandardGameManager(name));
+        gameServices.put(id, new Services.StandardGameManager(name, id, this));
         gameServices.get(id).addPlayer(mySel);
         gameServices.get(id).setId(id);
         gameServices.get(id).update();
@@ -111,6 +111,7 @@ public class StandardGameDispenser implements GameDispenser {
         gameServices.remove(gameID);
         update();
     }
+
     @Override
     public void updateMe() throws Exception {
         update();

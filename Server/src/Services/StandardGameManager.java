@@ -7,6 +7,7 @@ import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Deck;
 import Model.SimplestGameInfo;
+import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.ServerPlayerService;
 
@@ -35,8 +36,12 @@ public class StandardGameManager implements GameManager {
 
     List<GameWaiterClient> gameWaiterClients = new LinkedList<>();
     List<ServerPlayerService> playerServices;
+    private int gameId;
+    private GameDispenser gameDispenser;
 
-    public StandardGameManager(String name) {
+    public StandardGameManager(String name, int gameId, GameDispenser gameDispenser) {
+        this.gameId = gameId;
+        this.gameDispenser = gameDispenser;
         started = false;
         this.name = name;
         numberOfPlayers = 0;
@@ -163,6 +168,11 @@ public class StandardGameManager implements GameManager {
     public void close() {
         for (ServerPlayerService playerService : playerServices) {
             playerService.close();
+        }
+        try {
+            gameDispenser.cancelGame(gameId);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
