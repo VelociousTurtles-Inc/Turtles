@@ -3,6 +3,7 @@ package Adapters.Interfaces;
 
 import Model.Cards.Card;
 import Server.Interfaces.PlayerService;
+import Views.Standard.Game.StandardGameView;
 
 import java.util.List;
 
@@ -18,10 +19,14 @@ public interface GameController {
     void registerUpdateBoardEvent(Event updateBoardEvent);
     void registerUpdateCardsEvent(Event updateCardEvent);
 
+    void leave() throws Exception;
+
     List<Card> getCards() throws Exception;
     List<List<Integer>> getBoard() throws Exception;
 
     void registerLockingEvent(Event lockingEvent);
 
     boolean isLocked();
+
+    void registerCloseEvent(Event closeEvent);
 }

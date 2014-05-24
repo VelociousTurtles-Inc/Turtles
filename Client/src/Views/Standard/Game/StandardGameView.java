@@ -10,12 +10,14 @@ import Utils.BoolRunnable;
 import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,8 +33,10 @@ public class StandardGameView {
     private List<ImageView> slots = new ArrayList<>();
     private List<ImageView> turtles = new ArrayList<>();
     private Board myBoard = BoardBootstrap.createSampleBoard();   //Board.readBoard("sampleBoard");
-    private GameController myGameController;
+    private GameController gameController;
     private Map<String, Image> cardImages;
+
+    private Stage stage;
 
     private void updateBoard(final List<List<Integer>> updateForBoard) {
         assert new BoolRunnable() {
@@ -66,10 +70,6 @@ public class StandardGameView {
     }
 
     private Map<String, Image> loadCardImages(String dir) {
-        // TODO load files from jar
-        // InputStream stream = Client.class.getClassLoader().getResource("Views/Images/Cards/Backwards0.png").openStream();
-        // new Image(stream);
-        // stream.close();
         assert DebugWriter.write("Loading Card Images from " + dir);
         Map<String, Image> result = new HashMap<>();
         for (File file : new File(dir).listFiles()) {
@@ -100,7 +100,7 @@ public class StandardGameView {
                 public void run() {
                     assert DebugWriter.write("Board Updating");
                     try {
-                        updateBoard(myGameController.getBoard());
+                        updateBoard(gameController.getBoard());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -115,7 +115,7 @@ public class StandardGameView {
             assert DebugWriter.write("Cards Updating");
             final List<Card> cardInfos;
             try {
-                cardInfos = myGameController.getCards();
+                cardInfos = gameController.getCards();
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -128,10 +128,24 @@ public class StandardGameView {
         }
     }
 
-    public StandardGameView(final GameController myGameController) {
-        assert DebugWriter.write("Create new StandardGameView", myGameController);
+    private class CloseEvent implements Event {
+        @Override
+        public void call() {
+            assert DebugWriter.write("Closing View");
+            final Stage finalStage = stage;
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    finalStage.close();
+                }
+            });
+        }
+    }
 
-        this.myGameController = myGameController;
+    public StandardGameView(final GameController gameController) {
+        assert DebugWriter.write("Create new StandardGameView", gameController);
+
+        this.gameController = gameController;
 
         cardImages = loadCardImages(this.getClass().getClassLoader().getResource("Resources/Images/Cards").getFile());
         assert cardImages != null;
@@ -143,13 +157,14 @@ public class StandardGameView {
             }
         });
 
-        myGameController.registerUpdateBoardEvent(new BoardUpdater());
-        myGameController.registerUpdateCardsEvent(new CardsUpdater());
+        gameController.registerUpdateBoardEvent(new BoardUpdater());
+        gameController.registerUpdateCardsEvent(new CardsUpdater());
+        gameController.registerCloseEvent(new CloseEvent());
     }
 
     public void start() {
         assert DebugWriter.write("Launching StandardGameView");
-        Stage GameStage = new Stage();
+        stage = new Stage();
 
         FXMLLoader myLoader = new FXMLLoader();
         myLoader.setLocation(getClass().getResource("Game.fxml"));
@@ -160,13 +175,24 @@ public class StandardGameView {
 
         }
 
-        GameStage.setScene(new Scene(game));
-        GameStage.setResizable(false);
+        stage.setScene(new Scene(game));
+        stage.setResizable(false);
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                assert DebugWriter.write("handled CloseRequest from " + this);
+                try {
+                    gameController.leave();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        GameStage.show();
+        stage.show();
 
         StandardGameButtons myOwnGameButtons = myLoader.getController();
-        myOwnGameButtons.init(myGameController);
+        myOwnGameButtons.init(gameController);
 
         turtles = myOwnGameButtons.getTurtles();
         slots = myOwnGameButtons.getCardSlots();

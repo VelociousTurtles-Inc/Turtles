@@ -29,6 +29,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     private final List<Event> boardUpdateEvents = new LinkedList<>();
     private final List<Event> cardsUpdateEvents = new LinkedList<>();
+    private final List<Event> closeEvents = new LinkedList<>();
 
     private final List<Event> unlockingEvents = new LinkedList<>();
     private final List<Event> lockEvents = new LinkedList<>();
@@ -121,6 +122,14 @@ public class StandardGameController extends Thread implements GameController, Ga
     }
 
     @Override
+    public void registerCloseEvent(Event closeEvent) {
+        synchronized (closeEvents) {
+            assert DebugWriter.write("Registering new Game View Close Event");
+            closeEvents.add(closeEvent);
+        }
+    }
+
+    @Override
     public void registerUpdateBoardEvent(Event updateBoardEvent) {
         synchronized (boardUpdateEvents) {
             assert DebugWriter.write("Registering new Update Board Event");
@@ -139,9 +148,23 @@ public class StandardGameController extends Thread implements GameController, Ga
     }
 
     @Override
+    public void leave() throws Exception {
+        // TODO real leave game
+        closeViews();
+    }
+
+    private void closeViews() {
+        synchronized (closeEvents) {
+            for (Event event : closeEvents) {
+                event.call();
+            }
+        }
+    }
+
+    @Override
     public List<Card> getCards() throws Exception {
         playerHand = playerService.getPlayerCards();
-        List<Card> resultCards = new LinkedList<Card>();
+        List<Card> resultCards = new LinkedList<>();
         for(Integer i : playerHand) {
             resultCards.add(normalCardsMap.get(i));
         }
