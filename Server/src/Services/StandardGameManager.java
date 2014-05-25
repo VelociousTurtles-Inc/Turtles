@@ -185,11 +185,10 @@ public class StandardGameManager implements GameManager {
             }
         }
         else {
-            GameWaiterClient gameWaiterClient = null;
             Utility.logInfo("Trying to clean");
             Iterator<GameWaiterClient> gameWaiterClientIterator = gameWaiterClients.iterator();
             do {
-                gameWaiterClient = gameWaiterClientIterator.next();
+                GameWaiterClient gameWaiterClient = gameWaiterClientIterator.next();
                 Utility.logInfo("nextClient");
                 if (gameWaiterClient != null) {
                     try {
