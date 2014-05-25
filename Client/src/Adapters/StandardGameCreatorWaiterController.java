@@ -80,6 +80,10 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     }
 
     @Override
+    public void ping() {
+    }
+
+    @Override
     public void startAll() throws Exception {
         myDispenser.startGame(gameID);
     }

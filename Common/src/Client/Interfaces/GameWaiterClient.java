@@ -14,4 +14,6 @@ public interface GameWaiterClient extends Remote {
     public void update(int newNumberOfPlayers) throws Exception;
     public void cancel() throws Exception;
     public void start(PlayerService player) throws Exception;
+
+    void ping() throws RemoteException;
 }

@@ -11,9 +11,11 @@ import Model.Utility.Utility;
 import Server.Interfaces.*;
 
 import java.rmi.RemoteException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Main model class for interacting with specific game.
@@ -22,7 +24,7 @@ import java.util.Map;
 
 public class StandardGameManager implements GameManager {
 
-    boolean started;
+    final AtomicBoolean started = new AtomicBoolean();
     int numberOfPlayers;
     String name;
 
@@ -33,15 +35,15 @@ public class StandardGameManager implements GameManager {
 
     int playerOnMove;
 
-    List<GameWaiterClient> gameWaiterClients = new LinkedList<>();
-    List<ServerPlayerService> playerServices;
+    private final List<GameWaiterClient> gameWaiterClients = new LinkedList<>();
+    private final List<ServerPlayerService> playerServices = new LinkedList<>();
     private int gameId;
     private ServerGameDispenser gameDispenser;
 
     public StandardGameManager(String name, int gameId, ServerGameDispenser gameDispenser) {
         this.gameId = gameId;
         this.gameDispenser = gameDispenser;
-        started = false;
+        started.set(false);
         this.name = name;
         numberOfPlayers = 0;
     }
@@ -78,7 +80,7 @@ public class StandardGameManager implements GameManager {
     @Override
     public SimplestGameInfo getGameInfo() {
         String sstatus;
-        if(started == true) {
+        if(started.get() == true) {
             sstatus = "Started";
         }
         else {
@@ -96,7 +98,7 @@ public class StandardGameManager implements GameManager {
 
     @Override
     public boolean isStarted() {
-        return started;
+        return started.get();
     }
 
     @Override
@@ -118,14 +120,12 @@ public class StandardGameManager implements GameManager {
         myDeck = new Deck();
         board = new SimpleBoard();
 
-        playerServices = new LinkedList<>();
-
         for(int i = 0; i< gameWaiterClients.size(); i++) {
             playerServices.add(new StandardPlayerService(this));
             gameWaiterClients.get(i).start((Server.Interfaces.PlayerService) playerServices.get(i));
             playerServices.get(i).lock();
         }
-        started = true;
+        started.set(true);
         playerOnMove = 0;
         playerServices.get(playerOnMove).unlock();
         for(GameWaiterClient myWaiter : gameWaiterClients) {
@@ -174,13 +174,37 @@ public class StandardGameManager implements GameManager {
 
     @Override
     public void checkForZombies() {
-        for (ServerPlayerService playerService : playerServices) {
-            playerService.checkZombieness();
-        }
+        if (isStarted()) {
+            for (ServerPlayerService playerService : playerServices) {
+                playerService.checkZombieness();
+            }
 
-        if (playerServices.size() == 0) {
-            Utility.logInfo("Removing zombie game #"+gameId);
-            gameDispenser.cancelGame(gameId);
+            if (playerServices.isEmpty()) {
+                Utility.logInfo("Removing zombie game #" + gameId);
+                gameDispenser.cancelGame(gameId);
+            }
+        }
+        else {
+            GameWaiterClient gameWaiterClient = null;
+            Utility.logInfo("Trying to clean");
+            Iterator<GameWaiterClient> gameWaiterClientIterator = gameWaiterClients.iterator();
+            do {
+                gameWaiterClient = gameWaiterClientIterator.next();
+                Utility.logInfo("nextClient");
+                if (gameWaiterClient != null) {
+                    try {
+                        gameWaiterClient.ping();
+                    } catch (RemoteException e) {
+                        Utility.logInfo("Removing Zombie Waiter");
+                        gameWaiterClientIterator.remove();
+                    }
+                }
+            } while (gameWaiterClientIterator.hasNext());
+
+            if (gameWaiterClients.isEmpty()) {
+                Utility.logInfo("Removing zombie game #" + gameId);
+                gameDispenser.cancelGame(gameId);
+            }
         }
     }
 }

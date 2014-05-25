@@ -7,6 +7,7 @@ import Main.Client;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.PlayerService;
 
+import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -70,6 +71,11 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     public void start(PlayerService player) throws Exception {
         StandardGameController myAdapter = new StandardGameController();
         myAdapter.start(player);
+    }
+
+    @Override
+    public void ping() throws RemoteException {
+
     }
 
     @Override
