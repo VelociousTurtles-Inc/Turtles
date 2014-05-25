@@ -3,10 +3,13 @@ package GameDispenser;
 import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.GameWaiterClient;
 import Client.Interfaces.ThreeStringsGet;
+import Events.Event;
+import Main.Server;
 import Model.SimplestGameInfo;
 import Model.Utility.Utility;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameManager;
+import Server.Interfaces.ServerGameDispenser;
 import org.cojen.dirmi.ClosedException;
 
 import java.util.*;
@@ -15,7 +18,7 @@ import java.util.logging.Level;
 /**
  * Created by larhard on 15.05.14.
  */
-public class StandardGameDispenser implements GameDispenser {
+public class StandardGameDispenser implements GameDispenser, ServerGameDispenser {
     private Map<Integer, GameManager> gameServices = new HashMap<>();
     private Set<GameSelectClient> mySelecters = new HashSet<>();
 
@@ -27,6 +30,10 @@ public class StandardGameDispenser implements GameDispenser {
                 return result;
             }
         }
+    }
+
+    public StandardGameDispenser() {
+        Server.scenario.invoke(ServerGameDispenser.class, this);
     }
 
     @Override
@@ -53,6 +60,20 @@ public class StandardGameDispenser implements GameDispenser {
         update();
         Utility.Debug.log(Level.INFO, "[ StandardGameDispenser ] created new game #" + id);
         return id;
+    }
+
+    Collection<Event> closeEvents = new LinkedList<>();
+
+    private void callCloseEvents() {
+        for (Event event : closeEvents) {
+            event.call();
+        }
+        closeEvents.clear();
+    }
+
+    @Override
+    public void registerCloseEvent(Event event) {
+        closeEvents.add(event);
     }
 
     @Override
@@ -106,10 +127,18 @@ public class StandardGameDispenser implements GameDispenser {
     }
 
     @Override
-    public void cancelGame(int gameID) throws Exception{
-        gameServices.get(gameID).cancel();
+    public void cancelGame(int gameID) {
+        try {
+            gameServices.get(gameID).cancel();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         gameServices.remove(gameID);
-        update();
+        try {
+            update();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -122,7 +151,8 @@ public class StandardGameDispenser implements GameDispenser {
         gameServices.get(gameID).startGame();
     }
 
-    private void update() throws Exception {
+    @Override
+    public void update() throws Exception {
         List<SimplestGameInfo> myList = new LinkedList<>();
         ThreeStringsGet myTSG = new ThreeStringsGet() {
             List<SimplestGameInfo> list;
@@ -152,5 +182,16 @@ public class StandardGameDispenser implements GameDispenser {
         for (GameSelectClient gameSelectClient : closedSelecters) {
             mySelecters.remove(gameSelectClient);
         }
+    }
+
+    @Override
+    public Collection<GameManager> getGameManagers() {
+        return gameServices.values();
+    }
+
+    @Override
+    public void close() {
+        Utility.logInfo("Calling GameDispenser CloseEvents");
+        callCloseEvents();
     }
 }

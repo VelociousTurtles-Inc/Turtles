@@ -1,6 +1,6 @@
 package Views.Standard.Game;
 
-import Adapters.Interfaces.Event;
+import Events.Event;
 import Adapters.Interfaces.GameController;
 import Colors.Colors;
 import Images.Images;

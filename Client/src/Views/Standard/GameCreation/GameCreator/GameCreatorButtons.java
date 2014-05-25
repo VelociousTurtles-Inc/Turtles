@@ -1,6 +1,6 @@
 package Views.Standard.GameCreation.GameCreator;
 
-import Adapters.Interfaces.Event;
+import Events.Event;
 import Adapters.Interfaces.GameCreatorController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;

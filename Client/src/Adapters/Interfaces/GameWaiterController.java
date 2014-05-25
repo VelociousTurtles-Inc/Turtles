@@ -1,5 +1,7 @@
 package Adapters.Interfaces;
 
+import Events.Event;
+
 /**
  * Created by larhard on 20.05.14.
  */

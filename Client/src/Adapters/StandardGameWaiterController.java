@@ -1,6 +1,6 @@
 package Adapters;
 
-import Adapters.Interfaces.Event;
+import Events.Event;
 import Adapters.Interfaces.GameWaiterController;
 import Client.Interfaces.GameWaiterClient;
 import Main.Client;

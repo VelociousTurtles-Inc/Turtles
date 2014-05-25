@@ -1,9 +1,9 @@
 package Adapters.Interfaces;
 
 
+import Events.Event;
 import Model.Cards.Card;
 import Server.Interfaces.PlayerService;
-import Views.Standard.Game.StandardGameView;
 
 import java.util.List;
 

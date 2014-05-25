@@ -1,6 +1,6 @@
 package Adapters;
 
-import Adapters.Interfaces.Event;
+import Events.Event;
 import Adapters.Interfaces.GameCreatorController;
 import Main.Client;
 import Server.Interfaces.GameDispenser;

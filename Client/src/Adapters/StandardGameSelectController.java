@@ -1,6 +1,6 @@
 package Adapters;
 
-import Adapters.Interfaces.Event;
+import Events.Event;
 import Adapters.Interfaces.GameSelectController;
 import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.ThreeStringsGet;

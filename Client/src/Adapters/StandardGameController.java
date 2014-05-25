@@ -1,7 +1,7 @@
 package Adapters;
 
 
-import Adapters.Interfaces.Event;
+import Events.Event;
 import Adapters.Interfaces.GameController;
 import Client.Interfaces.GameClient;
 import Main.Client;
@@ -259,4 +259,8 @@ public class StandardGameController extends Thread implements GameController, Ga
     /*@Override
     public void cardsPlayed() throws RemoteException {
     }*/
+
+    @Override
+    public void ping() throws RemoteException {
+    }
 }

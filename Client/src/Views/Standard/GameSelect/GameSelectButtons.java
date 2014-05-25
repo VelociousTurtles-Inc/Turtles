@@ -1,6 +1,6 @@
 package Views.Standard.GameSelect;
 
-import Adapters.Interfaces.Event;
+import Events.Event;
 import Adapters.Interfaces.GameSelectController;
 import Adapters.SimpleGameInfo;
 import Model.SimplestGameInfo;

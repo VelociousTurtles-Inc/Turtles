@@ -1,4 +1,4 @@
-package Adapters.Interfaces;
+package Events;
 
 /**
  * Created by mz18 on 9/05/14.

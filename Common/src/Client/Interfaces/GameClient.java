@@ -23,4 +23,6 @@ public interface GameClient extends Remote {
 
     @Asynchronous
     void close() throws RemoteException;
+
+    void ping() throws RemoteException;
 }

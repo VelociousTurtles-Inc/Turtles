@@ -3,6 +3,7 @@ package Services;
 import Client.Interfaces.GameClient;
 import Model.Board.Board;
 import Model.Cards.Card;
+import Model.Utility.Utility;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.PlayerService;
 import Server.Interfaces.ServerPlayerService;
@@ -133,6 +134,21 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
             myClient.close();
         } catch (RemoteException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void checkZombieness() {
+        try {
+            myClient.ping();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            Utility.logInfo("Assumed player is zombie => removing");
+            try {
+                leave();
+            } catch (RemoteException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 }

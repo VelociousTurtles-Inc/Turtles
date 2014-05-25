@@ -34,4 +34,6 @@ public interface GameManager extends Remote {
     List<Integer> getHand() throws RemoteException;
 
     void leave() throws RemoteException;
+
+    void checkForZombies();
 }
