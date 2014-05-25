@@ -38,6 +38,7 @@ public class Deck implements IDeck {
         }
     }
 
+    @Override
     public int getCard() {
         int result = avaibleCards.get(avaibleCards.size()-1);
         avaibleCards.remove(avaibleCards.size()-1);
@@ -50,6 +51,8 @@ public class Deck implements IDeck {
 
         return result;
     }
+
+    @Override
     public void returnCard(int cardID) {
         deadCards.add(cardID);
     }

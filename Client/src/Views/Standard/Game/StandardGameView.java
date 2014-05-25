@@ -1,8 +1,9 @@
 package Views.Standard.Game;
 
-import Events.Event;
 import Adapters.Interfaces.GameController;
 import Colors.Colors;
+import Events.Event;
+import Images.ImageContainer;
 import Images.Images;
 import Model.Cards.Card;
 import Utility.DebugWriter;
@@ -14,16 +15,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by mz18 on 8/05/14.
@@ -34,9 +33,10 @@ public class StandardGameView {
     private List<ImageView> turtles = new ArrayList<>();
     private Board myBoard = BoardBootstrap.createSampleBoard();   //Board.readBoard("sampleBoard");
     private GameController gameController;
-    private Map<String, Image> cardImages;
 
     private Stage stage;
+
+    private ImageContainer imageContainer = new ImageContainer(this.getClass().getClassLoader(), "Resources/Images/Cards");
 
     private void updateBoard(final List<List<Integer>> updateForBoard) {
         assert new BoolRunnable() {
@@ -69,26 +69,16 @@ public class StandardGameView {
         }
     }
 
-    private Map<String, Image> loadCardImages(String dir) {
-        assert DebugWriter.write("Loading Card Images from " + dir);
-        Map<String, Image> result = new HashMap<>();
-        for (File file : new File(dir).listFiles()) {
-            assert DebugWriter.write("loading " + file.getName());
-            try {
-                result.put(file.getName(), new Image(new FileInputStream(file)));
-            } catch (FileNotFoundException e) {
-                assert DebugWriter.write("failed to load " + file.getName());
-            }
-        }
-        return result;
-    }
-
     private void updateCards(List<Card> cardsUpdate) {
         assert DebugWriter.write("Real Updating Cards", cardsUpdate);
 
         for (int i = 1; i <= 5; i++) {
             Card cardInfo = cardsUpdate.get(i-1);
-            slots.get(i).setImage(cardImages.get(cardInfo.getType() + Colors.asString(cardInfo.getColor()) + ".png"));
+            try {
+                slots.get(i).setImage(imageContainer.get(cardInfo.getImageName()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -146,9 +136,6 @@ public class StandardGameView {
         assert DebugWriter.write("Create new StandardGameView", gameController);
 
         this.gameController = gameController;
-
-        cardImages = loadCardImages(this.getClass().getClassLoader().getResource("Resources/Images/Cards").getFile());
-        assert cardImages != null;
 
         Platform.runLater(new Runnable() {
             @Override

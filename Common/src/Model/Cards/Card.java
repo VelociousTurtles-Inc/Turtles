@@ -53,6 +53,10 @@ public abstract class Card implements Serializable {
     public abstract void play(Board board);
     public abstract String getType();
 
+    public String getImageName() {
+        return getType() + Colors.asString(color) + ".png";
+    }
+
     @Override
     public String toString() {
         return "Card : " + getShortDecription() + " [ " + Colors.asString(getColor()) + " ]";
