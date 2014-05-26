@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
@@ -32,6 +33,11 @@ public class StandardGameButtons {
     @FXML private ImageView thirdCardImage;
     @FXML private ImageView fourthCardImage;
     @FXML private ImageView fifthCardImage;
+
+    @FXML private TextArea InputTextArea; //TODO
+    @FXML private TextArea OutputTextArea; //TODO
+
+
 
     List<ImageView> getCardSlots() {
         List<ImageView> cards = new ArrayList<>();
@@ -122,4 +128,6 @@ public class StandardGameButtons {
         chosenCard = 5;
     }
 
+    @FXML public void sentTextToServer(ActionEvent actionEvent) {
+    }
 }
