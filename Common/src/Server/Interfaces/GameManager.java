@@ -35,5 +35,5 @@ public interface GameManager extends Remote {
 
     void leave() throws RemoteException;
 
-    void checkForZombies();
+    void checkForZombies() throws RemoteException;
 }

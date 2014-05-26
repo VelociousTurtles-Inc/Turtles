@@ -5,6 +5,8 @@ import Model.Utility.Utility;
 import Server.Interfaces.ServerGameDispenser;
 import Server.Interfaces.GameManager;
 
+import java.rmi.RemoteException;
+
 /**
  * Creates thread, which deletes zombie games
  * Created by larhard on 25.05.14.
@@ -34,7 +36,11 @@ public class StandardGameWatchdog {
             while (!Thread.interrupted()) {
                 Utility.logInfo("Running Watchdog Zombie Collector");
                 for (GameManager gameManager : gameDispenser.getGameManagers()) {
-                    gameManager.checkForZombies();
+                    try {
+                        gameManager.checkForZombies();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                 }
                 try {
                     Thread.sleep(WATCHDOG_TIMEOUT);
