@@ -27,7 +27,7 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     public StandardGameWaiterController(int myID, WaiterService myGameDispenser) throws Exception {
         gameID = myID;
         this.myGameDispenser = myGameDispenser;
-        gameName = myGameDispenser.getGameName(gameID);
+        gameName = myGameDispenser.getGameName();
         myGameDispenser.connectToGame(myID, this);
         Client.scenario.invoke(GameWaiterController.class, this);
         update(myNumberOfPlayers);
@@ -100,7 +100,7 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
 
     @Override
     public void leave() throws Exception {
-        myGameDispenser.leaveGame(gameID,this);
+        myGameDispenser.leaveGame();
     }
 
     @Override

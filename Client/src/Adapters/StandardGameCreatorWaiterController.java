@@ -26,7 +26,7 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     public StandardGameCreatorWaiterController(String name, WaiterService standardGameCreatorController) throws Exception {
         this.myDispenser = standardGameCreatorController;
         int id = myDispenser.createNewGame(name, this);
-        gameName =  myDispenser.getGameName(id);
+        gameName =  myDispenser.getGameName();
         gameID = id;
 
         Client.scenario.invoke(GameCreatorWaiterController.class, this);
@@ -86,12 +86,12 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
 
     @Override
     public void startAll() throws Exception {
-        myDispenser.startGame(gameID);
+        myDispenser.startGame();
     }
 
     @Override
     public void cancelAll() throws Exception {
-        myDispenser.cancelGame(gameID);
+        myDispenser.cancelGame();
     }
 
     @Override

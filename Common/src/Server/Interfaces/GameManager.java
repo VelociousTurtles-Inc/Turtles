@@ -23,13 +23,15 @@ public interface GameManager extends Remote {
     void nextTurn() throws RemoteException;
 
     public Map<Integer, Card> getInGameCards() throws Exception;
+
+    void removePlayer(WaiterService oldWaiter) throws RemoteException;
+
+    void addPlayer(WaiterService newWaiter) throws RemoteException;
+
     public void startGame() throws Exception;
     public boolean isStarted() throws Exception;
     public boolean isFull() throws Exception;
     public SimplestGameInfo getGameInfo() throws Exception;
-    void addPlayer(GameWaiterClient newWaiter) throws Exception;
-
-    void removePlayer(GameWaiterClient oldWaiter) throws Exception;
     void setId(int id) throws Exception;
     public void update() throws Exception;
 

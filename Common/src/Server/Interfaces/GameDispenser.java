@@ -13,10 +13,13 @@ import java.util.Collection;
 public interface GameDispenser {
     // TODO authenticate
 
-    GameManager connectToGame(int id, GameWaiterClient mySel) throws Exception;
-    public Integer createNewGame(String name, GameWaiterClient mySel) throws Exception;
-    void leaveGame(int gameID, GameWaiterClient mySel) throws Exception;
+    void leaveGame(int gameID, WaiterService mySel) throws Exception;
     void cancelGame(int gameID) throws Exception;
+
+    GameManager connectToGame(int id, WaiterService mySel) throws Exception;
+
+    Integer createNewGame(String name, WaiterService mySel) throws Exception;
+
     public String getGameName(int gameID) throws Exception;
 
     void updateMe() throws Exception;

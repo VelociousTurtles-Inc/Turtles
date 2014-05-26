@@ -8,10 +8,7 @@ import Events.Event;
 import Main.Server;
 import Model.SimplestGameInfo;
 import Model.Utility.Utility;
-import Server.Interfaces.GameDispenser;
-import Server.Interfaces.GameEntry;
-import Server.Interfaces.GameManager;
-import Server.Interfaces.ServerGameDispenser;
+import Server.Interfaces.*;
 import Services.StandardWaiterService;
 import org.cojen.dirmi.ClosedException;
 
@@ -24,7 +21,7 @@ import java.util.logging.Level;
  */
 public class StandardGameDispenser implements GameDispenser, ServerGameDispenser, GameEntry {
     private Map<Integer, GameManager> gameServices = new HashMap<>();
-    private Set<StandardWaiterService> mySelecters = new HashSet<>();
+    private Set<WaiterService> mySelecters = new HashSet<>();
 
     private int getEmptyId() {
         Random random = new Random();
@@ -41,7 +38,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 
     @Override
-    public GameManager connectToGame(int id, GameWaiterClient mySel) throws Exception {
+    public GameManager connectToGame(int id, WaiterService mySel) throws Exception {
         if (gameServices.containsKey(id)) {
             Utility.Debug.log(Level.INFO, "[ StandardGameDispenser ] new client connected to game #" + id);
             gameServices.get(id).addPlayer(mySel);
@@ -55,7 +52,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 
     @Override
-    public Integer createNewGame(String name, GameWaiterClient mySel) throws Exception {
+    public Integer createNewGame(String name, WaiterService mySel) throws Exception {
         int id = getEmptyId();
         gameServices.put(id, new Services.StandardGameManager(name, id, this));
         gameServices.get(id).addPlayer(mySel);
@@ -124,7 +121,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }*/
 
     @Override
-    public void leaveGame(int gameID, GameWaiterClient mySel) throws Exception {
+    public void leaveGame(int gameID, WaiterService mySel) throws Exception {
         gameServices.get(gameID).removePlayer(mySel);
         gameServices.get(gameID).update();
         update();
@@ -176,7 +173,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
         myTSG.setList(myList);
 
         List<StandardWaiterService> closedSelecters = new ArrayList<>();
-        for(StandardWaiterService mySel : mySelecters) {
+        for(WaiterService mySel : mySelecters) {
             //try {
                 mySel.update(myTSG);
             //} catch (ClosedException e) {

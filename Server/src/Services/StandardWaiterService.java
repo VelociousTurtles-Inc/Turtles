@@ -6,7 +6,10 @@ import Client.Interfaces.GameWaiterClient;
 import Client.Interfaces.ThreeStringsGet;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameManager;
+import Server.Interfaces.PlayerService;
 import Server.Interfaces.WaiterService;
+
+import java.rmi.RemoteException;
 
 /**
  * Created by michaziobro on 26.05.2014.
@@ -15,6 +18,8 @@ public class StandardWaiterService implements WaiterService {
 
     private GameDispenser myDispenser;
     private GameSelectClient mySelecter;
+    private GameWaiterClient myWaiter;
+    private int chosenGame;
     private String myName;
 
     public StandardWaiterService(String name, ClientLogin selecter, GameDispenser dispenser) throws Exception {
@@ -24,18 +29,23 @@ public class StandardWaiterService implements WaiterService {
         selecter.toGameSelect(this);
     }
 
-    String getName() {
+    @Override
+    public String getName() {
         return myName;
     }
 
     @Override
     public GameManager connectToGame(int id, GameWaiterClient mySel) throws Exception {
-        return myDispenser.connectToGame(id, mySel);
+        myWaiter = mySel;
+        chosenGame = id;
+        return myDispenser.connectToGame(id, this);
     }
 
     @Override
     public Integer createNewGame(String name, GameWaiterClient mySel) throws Exception {
-        return myDispenser.createNewGame(name, mySel);
+        myWaiter = mySel;
+        chosenGame = myDispenser.createNewGame(name, this);
+        return chosenGame;
     }
 
  /*   @Override
@@ -44,13 +54,17 @@ public class StandardWaiterService implements WaiterService {
     }*/
 
     @Override
-    public void leaveGame(int gameID, GameWaiterClient mySel) throws Exception {
-        myDispenser.leaveGame(gameID, mySel);
+    public void leaveGame() throws Exception {
+        myDispenser.leaveGame(chosenGame, this);
+        myWaiter = null;
+        chosenGame = -1;
     }
 
     @Override
-    public void cancelGame(int gameID) throws Exception {
-        myDispenser.cancelGame(gameID);
+    public void cancelGame() throws Exception {
+        myDispenser.cancelGame(chosenGame);
+        myWaiter = null;
+        chosenGame = -1;
     }
 
     @Override
@@ -59,8 +73,8 @@ public class StandardWaiterService implements WaiterService {
     }
 
     @Override
-    public String getGameName(int gameID) throws Exception {
-        return myDispenser.getGameName(gameID);
+    public String getGameName() throws Exception {
+        return myDispenser.getGameName(chosenGame);
     }
 
     @Override
@@ -69,11 +83,34 @@ public class StandardWaiterService implements WaiterService {
     }
 
     @Override
-    public void startGame(int gameID) throws Exception {
-        myDispenser.startGame(gameID);
+    public void cancel() throws Exception {
+        myWaiter.cancel();
+    }
+
+    @Override
+    public void startGame() throws Exception {
+        myDispenser.startGame(chosenGame);
     }
 
     public void update(ThreeStringsGet myTSG) throws Exception {
         mySelecter.update(myTSG);
+    }
+
+    @Override
+    public void start(PlayerService playerService) throws Exception {
+        myWaiter.start(playerService);
+    }
+
+    public void closeMe() throws RemoteException {
+        myWaiter.closeMe();
+    }
+
+    @Override
+    public void updateWaiter(int numberOfPlayers) throws Exception {
+        myWaiter.update(numberOfPlayers);
+    }
+
+    public void ping() throws RemoteException {
+        myWaiter.ping();
     }
 }
