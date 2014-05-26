@@ -30,12 +30,14 @@ public class StandardGameController extends Thread implements GameController, Ga
     private final List<Event> boardUpdateEvents = new LinkedList<>();
     private final List<Event> cardsUpdateEvents = new LinkedList<>();
     private final List<Event> closeEvents = new LinkedList<>();
+    private final List<Event> changeEvents = new LinkedList<>();
 
     private final List<Event> lockEvents = new LinkedList<>();
 
     private final AtomicBoolean locked = new AtomicBoolean();
 
     List<Integer> playerHand;
+    private int playerOnMove;
 
     private void clearEvents() {
         synchronized (boardUpdateEvents) {
@@ -262,5 +264,28 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public void ping() throws RemoteException {
+    }
+
+    @Override
+    public void setPlayerOnMove(int playerOnMove) {
+        this.playerOnMove = playerOnMove;
+        for(Event change : changeEvents) {
+            change.call();
+        }
+    }
+
+    @Override
+    public void registerChangeMovingPlayerEvent(Event changeEvent) {
+        changeEvents.add(changeEvent);
+    }
+
+    @Override
+    public List<String> getPlayers() throws RemoteException {
+        return playerService.GetListOfPlayers();
+    }
+
+    @Override
+    public int getLastMoving() {
+        return playerOnMove;
     }
 }

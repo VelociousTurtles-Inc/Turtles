@@ -6,9 +6,7 @@ import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.ThreeStringsGet;
 import Main.Client;
 import Model.SimplestGameInfo;
-import Server.Interfaces.GameDispenser;
-import org.cojen.dirmi.Environment;
-import org.cojen.dirmi.Session;
+import Server.Interfaces.WaiterService;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -19,27 +17,22 @@ import java.util.List;
  */
 public class StandardGameSelectController implements GameSelectController, GameSelectClient {
 
-    private GameDispenser myGameDispenser;
+    private WaiterService myWaiter;
     private List<SimplestGameInfo> simpleGameInfos;
 
     private final List<Event> cancelEvents = new ArrayList<>();
     private final List<Event> updateEvents = new ArrayList<>();
 
-    public StandardGameSelectController() throws Exception {
+    public StandardGameSelectController(WaiterService waiter) throws Exception {
         simpleGameInfos = new LinkedList<>();
-
-        Environment environment = new Environment();
-        Session session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
-
-        myGameDispenser = (GameDispenser) session.receive();
-        myGameDispenser.registerGameSelector(this);
-
+        myWaiter = waiter;
+        myWaiter.setGameSelector(this);
         Client.scenario.invoke(GameSelectController.class, this);
     }
 
     @Override
     public void join(int gameID) throws Exception {
-        StandardGameWaiterController mySGWC = new StandardGameWaiterController(gameID, myGameDispenser);
+        StandardGameWaiterController mySGWC = new StandardGameWaiterController(gameID, myWaiter);
     }
 
     @Override
@@ -53,7 +46,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void create() {
-        StandardGameCreatorController mySGCC = new StandardGameCreatorController(myGameDispenser);
+        StandardGameCreatorController mySGCC = new StandardGameCreatorController(myWaiter);
     }
 
     @Override
@@ -87,7 +80,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void initValues() throws Exception {
-        myGameDispenser.updateMe();
+        myWaiter.updateMe();
     }
 
 }

@@ -28,4 +28,6 @@ public interface PlayerService extends Remote {
     boolean isLocked() throws RemoteException;
 
     void leave() throws RemoteException;
+
+    List<String> GetListOfPlayers() throws RemoteException;
 }

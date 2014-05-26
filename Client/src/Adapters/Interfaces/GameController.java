@@ -5,6 +5,7 @@ import Events.Event;
 import Model.Cards.Card;
 import Server.Interfaces.PlayerService;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -29,4 +30,10 @@ public interface GameController {
     boolean isLocked();
 
     void registerCloseEvent(Event closeEvent);
+
+    void registerChangeMovingPlayerEvent(Event changeEvent);
+
+    List<String> getPlayers() throws RemoteException;
+
+    int getLastMoving();
 }

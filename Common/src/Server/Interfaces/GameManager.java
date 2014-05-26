@@ -42,4 +42,6 @@ public interface GameManager extends Remote {
     void checkForZombies() throws RemoteException;
 
     void addZombie() throws RemoteException;
-}
+
+    List<String> GetListOfPlayers() throws RemoteException;
+        }

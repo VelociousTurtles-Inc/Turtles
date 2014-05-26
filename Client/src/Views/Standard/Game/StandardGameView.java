@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -140,7 +141,11 @@ public class StandardGameView {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                start();
+                try {
+                    start();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -149,7 +154,7 @@ public class StandardGameView {
         gameController.registerCloseEvent(new CloseEvent());
     }
 
-    public void start() {
+    public void start() throws RemoteException {
         assert DebugWriter.write("Launching StandardGameView");
         stage = new Stage();
 

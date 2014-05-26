@@ -6,6 +6,7 @@ import Client.Interfaces.GameWaiterClient;
 import Main.Client;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.PlayerService;
+import Server.Interfaces.WaiterService;
 
 import java.rmi.RemoteException;
 import java.util.LinkedList;
@@ -17,13 +18,13 @@ import java.util.List;
 public class StandardGameWaiterController implements GameWaiterController, GameWaiterClient {
     private int gameID;
     private int myNumberOfPlayers;
-    private GameDispenser myGameDispenser;
+    private WaiterService myGameDispenser;
     private final List<Event> updateEvents = new LinkedList<>();
     private String gameName;
     private final List<Event> cancelEvents = new LinkedList<>();
     private final List<Event> closingEvents = new LinkedList<>();
 
-    public StandardGameWaiterController(int myID, GameDispenser myGameDispenser) throws Exception {
+    public StandardGameWaiterController(int myID, WaiterService myGameDispenser) throws Exception {
         gameID = myID;
         this.myGameDispenser = myGameDispenser;
         gameName = myGameDispenser.getGameName(gameID);

@@ -5,6 +5,7 @@ import Client.Interfaces.GameWaiterClient;
 import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
+import Model.Cards.Player;
 import Model.Deck;
 import Model.SimplestGameInfo;
 import Model.Utility.Utility;
@@ -67,7 +68,7 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public void nextTurn() {
+    public void nextTurn() throws RemoteException {
         if (zombiesCount.get() == numberOfPlayers) {
             return;
         }
@@ -76,6 +77,9 @@ public class StandardGameManager implements GameManager {
             playerOnMove = (playerOnMove+1)%numberOfPlayers;
         } while (playerServices.get(playerOnMove).isZombie() && zombiesCount.get() < numberOfPlayers);
         playerServices.get(playerOnMove).unlock();
+        for(ServerPlayerService player : playerServices) {
+            player.setPlayerOnMove(playerOnMove);
+        }
     }
 
     @Override
@@ -133,7 +137,7 @@ public class StandardGameManager implements GameManager {
         board = new SimpleBoard();
 
         for(int i = 0; i< gameWaiterClients.size(); i++) {
-            playerServices.add(new StandardPlayerService(this));
+            playerServices.add(new StandardPlayerService(this, "Player" + i));
             gameWaiterClients.get(i).start((Server.Interfaces.PlayerService) playerServices.get(i));
             playerServices.get(i).lock();
         }
@@ -222,5 +226,15 @@ public class StandardGameManager implements GameManager {
     @Override
     public void addZombie() throws RemoteException {
         zombiesCount.incrementAndGet();
+    }
+
+    @Override
+    public List<String> GetListOfPlayers() throws RemoteException {
+        List<String> result = new LinkedList<>();
+        for(ServerPlayerService player : playerServices) {
+            result.add(player.getName());
+            System.out.println(player.getName());
+        }
+        return result;
     }
 }

@@ -1,5 +1,6 @@
 package GameDispenser;
 
+import Client.Interfaces.ClientLogin;
 import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.GameWaiterClient;
 import Client.Interfaces.ThreeStringsGet;
@@ -8,19 +9,22 @@ import Main.Server;
 import Model.SimplestGameInfo;
 import Model.Utility.Utility;
 import Server.Interfaces.GameDispenser;
+import Server.Interfaces.GameEntry;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.ServerGameDispenser;
+import Services.StandardWaiterService;
 import org.cojen.dirmi.ClosedException;
 
+import java.rmi.RemoteException;
 import java.util.*;
 import java.util.logging.Level;
 
 /**
  * Created by larhard on 15.05.14.
  */
-public class StandardGameDispenser implements GameDispenser, ServerGameDispenser {
+public class StandardGameDispenser implements GameDispenser, ServerGameDispenser, GameEntry {
     private Map<Integer, GameManager> gameServices = new HashMap<>();
-    private Set<GameSelectClient> mySelecters = new HashSet<>();
+    private Set<StandardWaiterService> mySelecters = new HashSet<>();
 
     private int getEmptyId() {
         Random random = new Random();
@@ -75,9 +79,9 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     public void registerCloseEvent(Event event) {
         closeEvents.add(event);
     }
-
+/*
     @Override
-    public void registerGameSelector(GameSelectClient mySelector) throws Exception {
+    public void setGameSelector(GameSelectClient mySelector) throws Exception {
         mySelecters.add(mySelector);
 
         // update list of game
@@ -103,21 +107,21 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
             mySelector.update(myTSG);
         } catch (ClosedException e) {
             mySelecters.remove(mySelector);
-        }*/
+        }
 
         // or just - but we don't need update all
         update();
     }
-
+*/
     @Override
     public String getGameName(int gameID) throws Exception {
         return gameServices.get(gameID).getGameInfo().getGameName();
     }
 
-    @Override
+ /*   @Override
     public void unregisterGameSelector(GameSelectClient mySelector) throws Exception {
         mySelecters.remove(mySelector);
-    }
+    }*/
 
     @Override
     public void leaveGame(int gameID, GameWaiterClient mySel) throws Exception {
@@ -171,15 +175,15 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
         }
         myTSG.setList(myList);
 
-        List<GameSelectClient> closedSelecters = new ArrayList<>();
-        for(GameSelectClient mySel : mySelecters) {
-            try {
+        List<StandardWaiterService> closedSelecters = new ArrayList<>();
+        for(StandardWaiterService mySel : mySelecters) {
+            //try {
                 mySel.update(myTSG);
-            } catch (ClosedException e) {
-                closedSelecters.add(mySel);
-            }
+            //} catch (ClosedException e) {
+            //    closedSelecters.add(mySel);
+            //}
         }
-        for (GameSelectClient gameSelectClient : closedSelecters) {
+        for (StandardWaiterService gameSelectClient : closedSelecters) {
             mySelecters.remove(gameSelectClient);
         }
     }
@@ -193,5 +197,10 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     public void close() {
         Utility.logInfo("Calling GameDispenser CloseEvents");
         callCloseEvents();
+    }
+
+    @Override
+    public void newSelector(String name, ClientLogin login) throws Exception {
+        mySelecters.add(new StandardWaiterService(name, login, this));
     }
 }

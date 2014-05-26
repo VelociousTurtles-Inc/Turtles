@@ -25,8 +25,20 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     private final AtomicBoolean locked = new AtomicBoolean();
     private final AtomicBoolean dead = new AtomicBoolean(false);
 
-    public StandardPlayerService(GameManager myManager) throws Exception {
+    private String myName;
+
+    public String getName() {
+        return myName;
+    }
+
+    @Override
+    public void setPlayerOnMove(int playerOnMove) throws RemoteException {
+        myClient.setPlayerOnMove(playerOnMove);
+    }
+
+    public StandardPlayerService(GameManager myManager, String name) throws Exception {
         this.myManager = myManager;
+        this.myName = name;
         List<Integer> tmpList = myManager.getHand();
         myCards = new LinkedList<>();
         for(Integer i : tmpList) {
@@ -175,5 +187,10 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
             }
         }
         return isZombie();
+    }
+
+    @Override
+    public List<String> GetListOfPlayers() throws RemoteException {
+        return myManager.GetListOfPlayers();
     }
 }

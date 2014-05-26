@@ -4,6 +4,7 @@ import GameDispenser.StandardGameDispenser;
 import Model.Utility.Utility;
 import Scenarios.Scenario;
 import Scenarios.StandardScenario;
+import Server.Interfaces.GameEntry;
 import Server.Interfaces.ServerGameDispenser;
 import org.cojen.dirmi.Environment;
 
@@ -20,7 +21,7 @@ public class Server {
         scenario = new StandardScenario();
         port = args.length > 1 ? Integer.valueOf(args[0]) : 8080;
         Environment environment = null;
-        ServerGameDispenser  gameDispenser = null;
+        StandardGameDispenser gameDispenser = null;
         try {
             System.out.println("Server starting...");
             environment = new Environment();

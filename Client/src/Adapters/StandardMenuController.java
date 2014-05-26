@@ -20,7 +20,8 @@ public class StandardMenuController implements MenuController {
             @Override
             public void run() {
                 try {
-                    StandardGameSelectController myGCC = new StandardGameSelectController();
+                    //StandardGameSelectController myGCC = new StandardGameSelectController();
+                    LoginController myController = new LoginController();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -4,6 +4,7 @@ import Events.Event;
 import Adapters.Interfaces.GameCreatorController;
 import Main.Client;
 import Server.Interfaces.GameDispenser;
+import Server.Interfaces.WaiterService;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,11 +13,11 @@ import java.util.List;
  * Created by michaziobro on 17.05.2014.
  */
 public class StandardGameCreatorController implements GameCreatorController {
-    GameDispenser myDispenser;
+    WaiterService myDispenser;
 
     private final List<Event> closingEvents = new LinkedList<>();
 
-    public StandardGameCreatorController(GameDispenser myDispenser) {
+    public StandardGameCreatorController(WaiterService myDispenser) {
 
         this.myDispenser = myDispenser;
         Client.scenario.invoke(GameCreatorController.class, this);
