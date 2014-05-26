@@ -14,10 +14,14 @@ import java.util.Map;
  * Created by michaziobro on 17.05.2014.
  */
 public interface GameManager extends Remote {
+    // TODO server side GameManager interface
 
     public Board getBoard() throws RemoteException;
 
     public int playCard(int cardID) throws RemoteException;
+
+    void nextTurn() throws RemoteException;
+
     public Map<Integer, Card> getInGameCards() throws Exception;
     public void startGame() throws Exception;
     public boolean isStarted() throws Exception;
@@ -36,4 +40,6 @@ public interface GameManager extends Remote {
     void leave() throws RemoteException;
 
     void checkForZombies() throws RemoteException;
+
+    void addZombie() throws RemoteException;
 }

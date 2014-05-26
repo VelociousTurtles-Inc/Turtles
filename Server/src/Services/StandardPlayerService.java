@@ -23,6 +23,7 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     private GameClient myClient;
     private List<CardIDBox> myCards;
     private final AtomicBoolean locked = new AtomicBoolean();
+    private final AtomicBoolean dead = new AtomicBoolean(false);
 
     public StandardPlayerService(GameManager myManager) throws Exception {
         this.myManager = myManager;
@@ -77,7 +78,27 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
 
     @Override
     public void leave() throws RemoteException {
-        myManager.leave();
+        setZombie();
+    }
+
+    public boolean isZombie() {
+        return dead.get();
+    }
+
+    public void setZombie() {
+        try {
+            myManager.addZombie();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        dead.set(true);
+        if (!isLocked()) {
+            try {
+                myManager.nextTurn();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -119,6 +140,7 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
                 myClient.updateLock();
             } catch (RemoteException e) {
                 e.printStackTrace();
+                setZombie();
             }
         }
     }
@@ -138,17 +160,20 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     }
 
     @Override
-    public void checkZombieness() {
-        try {
-            myClient.ping();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-            Utility.logInfo("Assumed player is zombie => removing");
+    public boolean checkZombieness() {
+        if (!isZombie()) {
             try {
-                leave();
-            } catch (RemoteException e1) {
-                e1.printStackTrace();
+                myClient.ping();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                Utility.logInfo("Assumed player is zombie => removing");
+                try {
+                    leave();
+                } catch (RemoteException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
+        return isZombie();
     }
 }

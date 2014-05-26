@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Main model class for interacting with specific game.
@@ -37,6 +38,7 @@ public class StandardGameManager implements GameManager {
 
     private final List<GameWaiterClient> gameWaiterClients = new LinkedList<>();
     private final List<ServerPlayerService> playerServices = new LinkedList<>();
+    private final AtomicInteger zombiesCount = new AtomicInteger();
     private int gameId;
     private ServerGameDispenser gameDispenser;
 
@@ -60,10 +62,20 @@ public class StandardGameManager implements GameManager {
         for(ServerPlayerService myPlayer : playerServices) {
             myPlayer.update();
         }
-        playerServices.get(playerOnMove).lock();
-        playerOnMove = (playerOnMove+1)%numberOfPlayers;
-        playerServices.get(playerOnMove).unlock();
+        nextTurn();
         return myDeck.getCard();
+    }
+
+    @Override
+    public void nextTurn() {
+        if (zombiesCount.get() == numberOfPlayers) {
+            return;
+        }
+        playerServices.get(playerOnMove).lock();
+        do {
+            playerOnMove = (playerOnMove+1)%numberOfPlayers;
+        } while (playerServices.get(playerOnMove).isZombie() && zombiesCount.get() < numberOfPlayers);
+        playerServices.get(playerOnMove).unlock();
     }
 
     @Override
@@ -179,7 +191,7 @@ public class StandardGameManager implements GameManager {
                 playerService.checkZombieness();
             }
 
-            if (playerServices.isEmpty()) {
+            if (playerServices.isEmpty() || zombiesCount.get() == numberOfPlayers) {
                 Utility.logInfo("Removing zombie game #" + gameId);
                 gameDispenser.cancelGame(gameId);
             }
@@ -205,5 +217,10 @@ public class StandardGameManager implements GameManager {
                 gameDispenser.cancelGame(gameId);
             }
         }
+    }
+
+    @Override
+    public void addZombie() throws RemoteException {
+        zombiesCount.incrementAndGet();
     }
 }
