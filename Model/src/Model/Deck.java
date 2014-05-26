@@ -16,11 +16,11 @@ public class Deck implements IDeck {
 
     HashMap<Integer, Card> cardsMap;
 
-    List<Integer> avaibleCards;
+    List<Integer> availableCards;
     List<Integer> deadCards;
 
     public Deck() {
-        avaibleCards = new LinkedList<>();
+        availableCards = new LinkedList<>();
         deadCards = new LinkedList<>();
         cardsMap = new HashMap<>();
 
@@ -28,25 +28,25 @@ public class Deck implements IDeck {
         addCards(DoubleForwardCard.populate());
         addCards(SingleBackwardCard.populate());
 
-        Collections.shuffle(avaibleCards);
+        Collections.shuffle(availableCards);
     }
 
     private void addCards(Iterable<Card> cards) {
         for(Card temp : cards) {
             cardsMap.put(temp.getID(), temp);
-            avaibleCards.add(temp.getID());
+            availableCards.add(temp.getID());
         }
     }
 
     @Override
     public int getCard() {
-        int result = avaibleCards.get(avaibleCards.size()-1);
-        avaibleCards.remove(avaibleCards.size()-1);
+        int result = availableCards.get(availableCards.size()-1);
+        availableCards.remove(availableCards.size()-1);
 
-        if(avaibleCards.size() == 0) {
-            avaibleCards = deadCards;
+        if(availableCards.size() == 0) {
+            availableCards = deadCards;
             deadCards = new LinkedList<>();
-            Collections.shuffle(avaibleCards);
+            Collections.shuffle(availableCards);
         }
 
         return result;
