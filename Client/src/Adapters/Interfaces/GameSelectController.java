@@ -1,7 +1,7 @@
 package Adapters.Interfaces;
 
-import Events.Event;
-import Model.SimplestGameInfo;
+import Common.Interfaces.Event;
+import Model.GameInfo;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface GameSelectController {
     public void registerClosingEvent(Event myClosingEvent);
     public void registerUpdateEvent(Event updateEvent);
 
-    List<SimplestGameInfo> getUpdateList();
+    List<GameInfo> getUpdateList();
 
     void initValues() throws Exception;
 }

@@ -1,4 +1,4 @@
-package Colors;
+package Enums;
 
 import java.util.*;
 

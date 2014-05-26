@@ -1,6 +1,4 @@
-package Scenarios;
-
-import Utils.NullIterable;
+package Utility;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;

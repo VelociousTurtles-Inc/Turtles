@@ -1,4 +1,4 @@
-package Utils;
+package Common.Interfaces;
 
 /**
  * Created by larhard on 22.05.14.

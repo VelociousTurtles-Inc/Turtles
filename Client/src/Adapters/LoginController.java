@@ -1,32 +1,26 @@
 package Adapters;
 
 import Client.Interfaces.ClientLogin;
-import Events.Event;
+import Common.Interfaces.Event;
 import Main.Client;
-import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameEntry;
 import Server.Interfaces.WaiterService;
 import Views.Standard.Login.LoginView;
 import org.cojen.dirmi.Environment;
 import org.cojen.dirmi.Session;
 
-import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by michaziobro on 26.05.2014.
- */
 public class LoginController implements ClientLogin {
 
     GameEntry gameEntry;
 
-    LoginView myView;
+    LoginView loginView;
 
     LoginController() throws Exception {
-        myView = new LoginView(this);
-        myView.start();
+        loginView = new LoginView(this);
+        loginView.start();
     }
 
     List<Event> closeEvents = new LinkedList<>();

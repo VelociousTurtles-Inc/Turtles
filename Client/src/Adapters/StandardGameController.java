@@ -1,7 +1,7 @@
 package Adapters;
 
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Client.Interfaces.GameClient;
 import Main.Client;
@@ -105,7 +105,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 //
 //        if(myBoardGraph.end.getTurtles().size() != 0) {
 //            Turtle temp = myBoardGraph.end.getTurtles().get(myBoardGraph.end.getTurtles().size() - 1);
-//            System.out.println("The " + Colors.asString(temp.getColor() + 1) + " turtle has won the game.");
+//            System.out.println("The " + Enums.asString(temp.getColor() + 1) + " turtle has won the game.");
 //            return true;
 //        } else {
 //            return false;
@@ -134,6 +134,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public void surrender() {
+        // TODO: implement
         System.out.println("I surended!");
     }
 
@@ -202,20 +203,20 @@ public class StandardGameController extends Thread implements GameController, Ga
 
 
         for(BoardGraph.Field f : myBoardGraph.starts) {
-            LinkedList<Integer> A = new LinkedList<>();
+            LinkedList<Integer> turtlesIDs = new LinkedList<>();
             for (Turtle t : f.getTurtles())
-                A.add(t.getColor());
-            result.add(A);
+                turtlesIDs.add(t.getColor());
+            result.add(turtlesIDs);
         }
 
         BoardGraph.Field temp = myBoardGraph.starts.get(0);
 
         while(temp.getSuccessors().size() != 0) {
-            LinkedList<Integer> A = new LinkedList<>();
+            LinkedList<Integer> turtlesIDs = new LinkedList<>();
             temp = temp.getSuccessors().get(0);
             for(Turtle t : temp.getTurtles())
-                A.add(t.getColor());
-            result.add(A);
+                turtlesIDs.add(t.getColor());
+            result.add(turtlesIDs);
         }
 
         return result;

@@ -1,8 +1,8 @@
 package Tests;
 
-import Colors.ColorsTest;
+import Enums.ColorsTest;
 import Images.ImagesTest;
-import Utils.RangeTest;
+import Utility.RangeTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

@@ -1,6 +1,6 @@
 package Views.Standard.Game;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Utility.DebugWriter;
 import javafx.application.Platform;
@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;

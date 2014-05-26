@@ -1,7 +1,7 @@
 package Adapters.Interfaces;
 
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Model.Cards.Card;
 import Server.Interfaces.PlayerService;
 

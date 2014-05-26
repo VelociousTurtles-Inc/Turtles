@@ -5,9 +5,8 @@ import Client.Interfaces.GameWaiterClient;
 import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
-import Model.Cards.Player;
 import Model.Deck;
-import Model.SimplestGameInfo;
+import Model.GameInfo;
 import Model.Utility.Utility;
 import Server.Interfaces.*;
 
@@ -19,10 +18,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Main model class for interacting with specific game.
- * For now there's only one game.
- */
 
 public class StandardGameManager implements GameManager {
 
@@ -94,15 +89,15 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public SimplestGameInfo getGameInfo() {
-        String sstatus;
+    public GameInfo getGameInfo() {
+        String status;
         if(started.get() == true) {
-            sstatus = "Started";
+            status = "Started";
         }
         else {
-            sstatus = "In preparation";
+            status = "In preparation";
         }
-        SimplestGameInfo myGameInfo = new SimplestGameInfo(name, sstatus, String.valueOf(numberOfPlayers));
+        GameInfo myGameInfo = new GameInfo(name, status, String.valueOf(numberOfPlayers));
         myGameInfo.setMyID(myId);
         return myGameInfo;
     }

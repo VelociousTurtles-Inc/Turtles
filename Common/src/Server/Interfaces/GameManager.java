@@ -3,7 +3,7 @@ package Server.Interfaces;
 import Client.Interfaces.GameWaiterClient;
 import Model.Board.Board;
 import Model.Cards.Card;
-import Model.SimplestGameInfo;
+import Model.GameInfo;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -26,7 +26,7 @@ public interface GameManager extends Remote {
     public void startGame() throws Exception;
     public boolean isStarted() throws Exception;
     public boolean isFull() throws Exception;
-    public SimplestGameInfo getGameInfo() throws Exception;
+    public GameInfo getGameInfo() throws Exception;
     void addPlayer(GameWaiterClient newWaiter) throws Exception;
 
     void removePlayer(GameWaiterClient oldWaiter) throws Exception;

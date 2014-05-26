@@ -1,9 +1,9 @@
 package Views.Standard.GameSelect;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
 import Adapters.SimpleGameInfo;
-import Model.SimplestGameInfo;
+import Model.GameInfo;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -65,9 +65,9 @@ public class GameSelectButtons {
         this.controller.registerUpdateEvent(new Event() {
             @Override
             public void call() {
-                List<SimplestGameInfo> tmpList = controller.getUpdateList();
+                List<GameInfo> tmpList = controller.getUpdateList();
                 List<SimpleGameInfo> myList = new LinkedList<>();
-                for (SimplestGameInfo simple : tmpList) {
+                for (GameInfo simple : tmpList) {
                     SimpleGameInfo myInfo = new SimpleGameInfo(simple.getGameName(), simple.getGameStatus(), simple.getNumberOfPlayers());
                     myInfo.setMyID(simple.getMyID());
                     myList.add(myInfo);

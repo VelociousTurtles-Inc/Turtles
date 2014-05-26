@@ -1,11 +1,10 @@
 package Main;
 
 import GameDispenser.StandardGameDispenser;
+import Model.PlayerDispenser;
 import Model.Utility.Utility;
-import Scenarios.Scenario;
+import Utility.Scenario;
 import Scenarios.StandardScenario;
-import Server.Interfaces.GameEntry;
-import Server.Interfaces.ServerGameDispenser;
 import org.cojen.dirmi.Environment;
 
 import java.util.NoSuchElementException;
@@ -26,6 +25,7 @@ public class Server {
             System.out.println("Server starting...");
             environment = new Environment();
             gameDispenser = new StandardGameDispenser();
+            PlayerDispenser playerDispenser = new PlayerDispenser();
             environment.newSessionAcceptor(port).acceptAll(gameDispenser);
             System.out.println("Server started");
             System.out.println("type exit to stop server");

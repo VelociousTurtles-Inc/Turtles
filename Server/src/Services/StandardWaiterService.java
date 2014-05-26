@@ -14,14 +14,14 @@ import Server.Interfaces.WaiterService;
 public class StandardWaiterService implements WaiterService {
 
     private GameDispenser myDispenser;
-    private GameSelectClient mySelecter;
+    private GameSelectClient mySelector;
     private String myName;
 
-    public StandardWaiterService(String name, ClientLogin selecter, GameDispenser dispenser) throws Exception {
+    public StandardWaiterService(String name, ClientLogin selector, GameDispenser dispenser) throws Exception {
         myDispenser = dispenser;
         myName = name;
 
-        selecter.toGameSelect(this);
+        selector.toGameSelect(this);
     }
 
     String getName() {
@@ -55,7 +55,7 @@ public class StandardWaiterService implements WaiterService {
 
     @Override
     public void setGameSelector(GameSelectClient mySel) throws Exception {
-        mySelecter = mySel;
+        mySelector = mySel;
     }
 
     @Override
@@ -74,6 +74,6 @@ public class StandardWaiterService implements WaiterService {
     }
 
     public void update(ThreeStringsGet myTSG) throws Exception {
-        mySelecter.update(myTSG);
+        mySelector.update(myTSG);
     }
 }

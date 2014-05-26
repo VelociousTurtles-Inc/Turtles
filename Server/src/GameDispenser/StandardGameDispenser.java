@@ -1,21 +1,18 @@
 package GameDispenser;
 
 import Client.Interfaces.ClientLogin;
-import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.GameWaiterClient;
 import Client.Interfaces.ThreeStringsGet;
-import Events.Event;
+import Model.GameInfo;
+import Common.Interfaces.Event;
 import Main.Server;
-import Model.SimplestGameInfo;
 import Model.Utility.Utility;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameEntry;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.ServerGameDispenser;
 import Services.StandardWaiterService;
-import org.cojen.dirmi.ClosedException;
 
-import java.rmi.RemoteException;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -24,7 +21,7 @@ import java.util.logging.Level;
  */
 public class StandardGameDispenser implements GameDispenser, ServerGameDispenser, GameEntry {
     private Map<Integer, GameManager> gameServices = new HashMap<>();
-    private Set<StandardWaiterService> mySelecters = new HashSet<>();
+    private Set<StandardWaiterService> mySelectors = new HashSet<>();
 
     private int getEmptyId() {
         Random random = new Random();
@@ -82,7 +79,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
 /*
     @Override
     public void setGameSelector(GameSelectClient mySelector) throws Exception {
-        mySelecters.add(mySelector);
+        mySelectors.add(mySelector);
 
         // update list of game
         /*List<SimpliestGameInfo> myList = new LinkedList<>();
@@ -106,7 +103,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
         try {
             mySelector.update(myTSG);
         } catch (ClosedException e) {
-            mySelecters.remove(mySelector);
+            mySelectors.remove(mySelector);
         }
 
         // or just - but we don't need update all
@@ -120,7 +117,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
 
  /*   @Override
     public void unregisterGameSelector(GameSelectClient mySelector) throws Exception {
-        mySelecters.remove(mySelector);
+        mySelectors.remove(mySelector);
     }*/
 
     @Override
@@ -157,16 +154,14 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
 
     @Override
     public void update() throws Exception {
-        List<SimplestGameInfo> myList = new LinkedList<>();
-        ThreeStringsGet myTSG = new ThreeStringsGet() {
-            List<SimplestGameInfo> list;
-            @Override
-            public void setList(List<SimplestGameInfo> list) throws Exception{
+        List<GameInfo> myList = new LinkedList<>();
+        ThreeStringsGet myTSG = new ThreeStringsGet(){
+            private List<GameInfo> list;
+            public void setList(List<GameInfo> list) throws Exception{
                 this.list = list;
             }
 
-            @Override
-            public List<SimplestGameInfo> getList() throws Exception {
+            public List<GameInfo> getList() throws Exception {
                 return list;
             }
         };
@@ -175,16 +170,16 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
         }
         myTSG.setList(myList);
 
-        List<StandardWaiterService> closedSelecters = new ArrayList<>();
-        for(StandardWaiterService mySel : mySelecters) {
+        List<StandardWaiterService> closedSelectors = new ArrayList<>();
+        for(StandardWaiterService mySel : mySelectors) {
             //try {
                 mySel.update(myTSG);
             //} catch (ClosedException e) {
-            //    closedSelecters.add(mySel);
+            //    closedSelectors.add(mySel);
             //}
         }
-        for (StandardWaiterService gameSelectClient : closedSelecters) {
-            mySelecters.remove(gameSelectClient);
+        for (StandardWaiterService gameSelectClient : closedSelectors) {
+            mySelectors.remove(gameSelectClient);
         }
     }
 
@@ -201,6 +196,6 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
 
     @Override
     public void newSelector(String name, ClientLogin login) throws Exception {
-        mySelecters.add(new StandardWaiterService(name, login, this));
+        mySelectors.add(new StandardWaiterService(name, login, this));
     }
 }

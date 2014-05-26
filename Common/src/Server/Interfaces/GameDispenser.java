@@ -1,11 +1,6 @@
 package Server.Interfaces;
 
-import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.GameWaiterClient;
-import Events.Event;
-
-import java.rmi.Remote;
-import java.util.Collection;
 
 /**
  * Created by larhard on 15.05.14.

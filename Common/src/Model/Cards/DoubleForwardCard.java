@@ -1,7 +1,7 @@
 package Model.Cards;
 
 
-import Colors.Colors;
+import Enums.Colors;
 import Model.Board.Board;
 import Model.Board.BoardGraph;
 import Model.Turtles.Turtle;
