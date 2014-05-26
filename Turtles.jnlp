@@ -1,0 +1,22 @@
+<?xml version="1.1" encoding="utf-8"?>
+<jnlp
+        spec="7.0+"
+        codebase="http://elgassia.tk/turtles-jnlp"
+        href="Client.jnlp">
+    <information>
+        <title>Turtles</title>
+        <vendor>Velocious Turtles-Inc</vendor>
+        <description>Turtles game</description>
+        <offline-allowed/> 
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.7+" java-vm-args="-ea"/>
+        <jar href="Client.jar"/>
+    </resources>
+    <application-desc main-class="Main.Client">
+        <argument>elgassia.tk</argument>
+    </application-desc>
+</jnlp> 
