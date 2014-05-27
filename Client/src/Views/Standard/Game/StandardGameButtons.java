@@ -167,7 +167,7 @@ public class StandardGameButtons {
         chosenCard = 5;
     }
 
-    @FXML public void sentTextToServer(ActionEvent actionEvent) {
+    @FXML public void sendTextToServer(ActionEvent actionEvent) {
     }
 
     public Pane getWinnerPane() {

@@ -60,7 +60,6 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable {
             @Override
             public void remove() {
                 assert false;
-                return;
             }
         };
     }

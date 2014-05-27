@@ -35,7 +35,7 @@ public class Scenario {
             if (scenarioMap.containsKey(adapter)) {
                 return scenarioMap.get(adapter).views;
             } else {
-                return new NullIterable<>();
+                return new NullIterable<Class<?>>();
             }
         }
     }

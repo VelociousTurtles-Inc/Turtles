@@ -111,14 +111,13 @@ public class StandardGameManager implements GameManager {
 
     @Override
     public boolean isFull() {
-        if(numberOfPlayers == 7) return true;
-        else return false;
+        return numberOfPlayers == 7;
     }
 
     @Override
     public GameInfo getGameInfo() {
         String status;
-        if(started.get() == true) {
+        if(started.get()) {
             status = "Started";
         }
         else {
@@ -143,14 +142,12 @@ public class StandardGameManager implements GameManager {
     public void addPlayer(WaiterService newWaiter) {
         gameWaiterClients.add(newWaiter);
         numberOfPlayers++;
-        return ;
     }
 
     @Override
     public void removePlayer(WaiterService oldWaiter) {
         gameWaiterClients.remove(oldWaiter);
         numberOfPlayers--;
-        return ;
     }
 
     @Override
