@@ -28,7 +28,7 @@ public class GameCreatorWaiterView {
             }
         });
     }
-    public void start(String name, int numberOP) throws RemoteException {
+    public void start(String name, int numberOP) {
         Stage myStage = new Stage();
         FXMLLoader myLoader = new FXMLLoader();
 
