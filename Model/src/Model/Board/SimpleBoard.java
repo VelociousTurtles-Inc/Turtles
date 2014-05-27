@@ -1,6 +1,6 @@
 package Model.Board;
 
-import Colors.Colors;
+import Enums.Colors;
 import Model.Turtles.Turtle;
 import Utility.Utility;
 

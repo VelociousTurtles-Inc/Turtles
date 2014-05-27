@@ -1,6 +1,6 @@
 package Model.Cards;
 
-import Colors.Colors;
+import Enums.Colors;
 import Model.Board.Board;
 
 import java.io.Serializable;

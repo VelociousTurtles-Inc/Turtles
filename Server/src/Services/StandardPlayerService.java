@@ -1,7 +1,7 @@
 package Services;
 
 import Client.Interfaces.GameClient;
-import Colors.Colors;
+import Enums.Colors;
 import Model.Board.Board;
 import Model.Cards.Card;
 import Utility.Utility;
@@ -26,8 +26,20 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     private final AtomicBoolean locked = new AtomicBoolean();
     private final AtomicBoolean dead = new AtomicBoolean(false);
 
-    public StandardPlayerService(GameManager myManager) throws Exception {
+    private String myName;
+
+    public String getName() {
+        return myName;
+    }
+
+    @Override
+    public void setPlayerOnMove(int playerOnMove) throws RemoteException {
+        myClient.setPlayerOnMove(playerOnMove);
+    }
+
+    public StandardPlayerService(GameManager myManager, String name) throws Exception {
         this.myManager = myManager;
+        this.myName = name;
         List<Integer> tmpList = myManager.getHand();
         myCards = new LinkedList<>();
         for(Integer i : tmpList) {
@@ -64,6 +76,62 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
         }
     }
 
+
+
+
+    @Override
+    public List<Integer> getPlayerCards() {
+        List<Integer> result = new LinkedList<>();
+        for(CardIDBox i : myCards) {
+            result.add(i.getCardID());
+        }
+        return result;
+    }
+
+    @Override
+    public Map<Integer, Card> getCardsMap() throws Exception {
+        return myManager.getInGameCards();
+    }
+
+    @Override
+    public void playCard(int cardNumber) throws RemoteException {
+        if (!isLocked()) myCards.get(cardNumber).setCardID(myManager.playCard(myCards.get(cardNumber).getCardID()));
+    }
+
+    @Override
+    public Board getGameBoard() throws RemoteException {
+        return myManager.getBoard();
+    }
+
+
+    @Override
+    public List<String> GetListOfPlayers() throws RemoteException {
+        return myManager.GetListOfPlayers();
+    }
+
+    public void leave() throws RemoteException {
+        setZombie();
+    }
+
+// START OF NOTREMOTE SECTION
+    @Override
+    public boolean checkZombieness() {
+        if (!isZombie()) {
+            try {
+                myClient.ping();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                Utility.logInfo("Assumed player is zombie => removing");
+                try {
+                    leave();
+                } catch (RemoteException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+        return isZombie();
+    }
+
     public void update() {
         try {
             myClient.updateBoards();
@@ -78,10 +146,6 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     }
 
     @Override
-    public void leave() throws RemoteException {
-        setZombie();
-    }
-
     public boolean isZombie() {
         return dead.get();
     }
@@ -101,24 +165,13 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
             }
         }
     }
-
     @Override
-    public List<Integer> getPlayerCards() {
-        List<Integer> result = new LinkedList<>();
-        for(CardIDBox i : myCards) {
-            result.add(i.getCardID());
-        }
-        return result;
+    public void close() {
+        try {
+            myClient.close();
+        } catch (RemoteException e) {
+            e.printStackTrace();
     }
-
-    @Override
-    public Map<Integer, Card> getCardsMap() throws Exception {
-        return myManager.getInGameCards();
-    }
-
-    @Override
-    public void playCard(int cardNumber) throws RemoteException {
-        if (!isLocked()) myCards.get(cardNumber).setCardID(myManager.playCard(myCards.get(cardNumber).getCardID()));
     }
 
     @Override
@@ -146,38 +199,7 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
         }
     }
 
-    @Override
-    public Board getGameBoard() throws RemoteException {
-        return myManager.getBoard();
-    }
-
-    @Override
-    public void close() {
-        try {
-            myClient.close();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public boolean checkZombieness() {
-        if (!isZombie()) {
-            try {
-                myClient.ping();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-                Utility.logInfo("Assumed player is zombie => removing");
-                try {
-                    leave();
-                } catch (RemoteException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        }
-        return isZombie();
-    }
-
+// END OF NOTREMOTE SECTION
     @Override
     public void announceWinner(Colors winner) {
         try {

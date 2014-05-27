@@ -26,6 +26,7 @@ public interface GameClient extends Remote {
 
     void ping() throws RemoteException;
 
+    void setPlayerOnMove(int playerOnMove) throws RemoteException;
     @Asynchronous
     void announceWinner(Integer winner) throws RemoteException;
 }

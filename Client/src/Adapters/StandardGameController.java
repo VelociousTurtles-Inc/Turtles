@@ -1,10 +1,10 @@
 package Adapters;
 
 
-import Colors.Colors;
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Client.Interfaces.GameClient;
+import Enums.Colors;
 import Main.Client;
 import Model.Board.BoardGraph;
 import Model.Cards.Card;
@@ -33,12 +33,14 @@ public class StandardGameController extends Thread implements GameController, Ga
     private final List<Event> cardsUpdateEvents = new LinkedList<>();
     private final List<Event> winnerUpdateEvents = new LinkedList<>();
     private final List<Event> closeEvents = new LinkedList<>();
+    private final List<Event> changeEvents = new LinkedList<>();
 
     private final List<Event> lockEvents = new LinkedList<>();
 
     private final AtomicBoolean locked = new AtomicBoolean();
 
     List<Integer> playerHand;
+    private int playerOnMove;
     private Colors winner;
 
     private void clearEvents() {
@@ -85,7 +87,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 //
 //        if(myBoardGraph.end.getTurtles().size() != 0) {
 //            Turtle temp = myBoardGraph.end.getTurtles().get(myBoardGraph.end.getTurtles().size() - 1);
-//            System.out.println("The " + Colors.asString(temp.getColor() + 1) + " turtle has won the game.");
+//            System.out.println("The " + Enums.asString(temp.getColor() + 1) + " turtle has won the game.");
 //            return true;
 //        } else {
 //            return false;
@@ -114,6 +116,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public void surrender() {
+        // TODO: implement
         System.out.println("I surended!");
         try {
             leave();
@@ -187,20 +190,20 @@ public class StandardGameController extends Thread implements GameController, Ga
 
 
         for(BoardGraph.Field f : myBoardGraph.starts) {
-            LinkedList<Integer> A = new LinkedList<>();
+            LinkedList<Integer> turtlesIDs = new LinkedList<>();
             for (Turtle t : f.getTurtles())
-                A.add(t.getColor());
-            result.add(A);
+                turtlesIDs.add(t.getColor());
+            result.add(turtlesIDs);
         }
 
         BoardGraph.Field temp = myBoardGraph.starts.get(0);
 
         while(temp.getSuccessors().size() != 0) {
-            LinkedList<Integer> A = new LinkedList<>();
+            LinkedList<Integer> turtlesIDs = new LinkedList<>();
             temp = temp.getSuccessors().get(0);
             for(Turtle t : temp.getTurtles())
-                A.add(t.getColor());
-            result.add(A);
+                turtlesIDs.add(t.getColor());
+            result.add(turtlesIDs);
         }
 
         return result;
@@ -252,6 +255,13 @@ public class StandardGameController extends Thread implements GameController, Ga
     }
 
     @Override
+    public void setPlayerOnMove(int playerOnMove) {
+        this.playerOnMove = playerOnMove;
+        for(Event change : changeEvents) {
+            change.call();
+        }
+    }
+    @Override
     public void registerWinnerUpdateEvent(Event winnerUpdateEvent) {
         synchronized (winnerUpdateEvents) {
             assert DebugWriter.write("Registering new Winner Update Event");
@@ -259,6 +269,18 @@ public class StandardGameController extends Thread implements GameController, Ga
         }
     }
 
+    
+
+    @Override
+    public void registerChangeMovingPlayerEvent(Event changeEvent) {
+        changeEvents.add(changeEvent);
+    }
+
+    @Override
+    public List<String> getPlayers() throws RemoteException {
+        return playerService.GetListOfPlayers();
+    }
+    
     @Override
     public void announceWinner(Integer winner) throws RemoteException {
         this.winner = Colors.asColor(winner);
@@ -269,8 +291,16 @@ public class StandardGameController extends Thread implements GameController, Ga
         }
     }
 
+
+    @Override
+    public int getLastMoving() {
+        return playerOnMove;
+    }
     @Override
     public Colors getWinner() {
         return winner;
     }
+
 }
+
+

@@ -1,4 +1,4 @@
-package Events;
+package Common.Interfaces;
 
 /**
  * Created by mz18 on 9/05/14.

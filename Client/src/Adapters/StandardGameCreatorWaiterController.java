@@ -1,11 +1,11 @@
 package Adapters;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameCreatorWaiterController;
 import Client.Interfaces.GameWaiterClient;
 import Main.Client;
-import Server.Interfaces.GameDispenser;
 import Server.Interfaces.PlayerService;
+import Server.Interfaces.WaiterService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  * Created by michaziobro on 17.05.2014.
  */
 public class StandardGameCreatorWaiterController implements GameCreatorWaiterController, GameWaiterClient {
-    GameDispenser myDispenser;
+    WaiterService myDispenser;
     private int numberOfPlayers;
     private final List<Event> updateEvents = new ArrayList<>();
     private final List<Event> cancelEvents = new ArrayList<>();
@@ -22,10 +22,10 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     private int gameID;
     private final List<Event> closingEvents = new ArrayList<>();
 
-    public StandardGameCreatorWaiterController(String name, GameDispenser standardGameCreatorController) throws Exception {
+    public StandardGameCreatorWaiterController(String name, WaiterService standardGameCreatorController) throws Exception {
         this.myDispenser = standardGameCreatorController;
         int id = myDispenser.createNewGame(name, this);
-        gameName =  myDispenser.getGameName(id);
+        gameName =  myDispenser.getGameName();
         gameID = id;
 
         Client.scenario.invoke(GameCreatorWaiterController.class, this);
@@ -85,12 +85,12 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
 
     @Override
     public void startAll() throws Exception {
-        myDispenser.startGame(gameID);
+        myDispenser.startGame();
     }
 
     @Override
     public void cancelAll() throws Exception {
-        myDispenser.cancelGame(gameID);
+        myDispenser.cancelGame();
     }
 
     @Override

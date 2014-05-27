@@ -1,6 +1,6 @@
 package Views.Standard.Game;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Utility.DebugWriter;
 import javafx.application.Platform;
@@ -11,8 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -22,6 +26,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class StandardGameButtons {
 
     public Button playItButton;
+    public VBox myBox;
     private GameController myGameController;
 
     @FXML private ImageView firstTurtle;
@@ -55,6 +60,10 @@ public class StandardGameButtons {
         return cards;
     }
 
+    List<Label> myPlayers = new LinkedList<>();
+
+    private int lastMoving = 0;
+
     List<ImageView> getTurtles() {
         List<ImageView> turtles = new ArrayList<>();
 
@@ -71,7 +80,7 @@ public class StandardGameButtons {
     private int chosenCard = 1;
     private final AtomicBoolean locked = new AtomicBoolean();
 
-    public void init(final GameController myGameController) {
+    public void init(final GameController myGameController) throws RemoteException {
         this.myGameController = myGameController;
 
         myGameController.registerLockingEvent(new Event() {
@@ -88,7 +97,34 @@ public class StandardGameButtons {
                 });
             }
         });
+        myGameController.registerChangeMovingPlayerEvent(new Event() {
+            @Override
+            public void call() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        myPlayers.get(lastMoving).setTextFill(Color.BLACK);
+                        lastMoving = myGameController.getLastMoving();
+                        myPlayers.get(lastMoving).setTextFill(Color.GREEN);
+                    }
+                });
+            }
+        });
         playItButton.setDisable(myGameController.isLocked());
+        List<String> players = myGameController.getPlayers();
+        //myBox.getChildren().add(new Label("something"));
+        for(final String player : players) {
+            myPlayers.add(new Label(player));
+        }
+        for(final Label wow : myPlayers) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    myBox.getChildren().add(wow);
+                }
+            });
+        }
+        myPlayers.get(0).setTextFill(Color.GREEN);
     }
 
     @FXML protected void surrIt(ActionEvent event) {

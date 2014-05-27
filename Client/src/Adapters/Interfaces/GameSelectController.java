@@ -1,6 +1,6 @@
 package Adapters.Interfaces;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Model.GameInfo;
 
 import java.util.List;

@@ -1,13 +1,10 @@
 package Main;
 
 import Adapters.StandardMenuController;
-import Scenarios.Scenario;
+import Utility.Scenario;
 import Scenarios.StandardScenario;
 import Utility.DebugWriter;
 
-/**
- * Created by michaziobro on 01.05.2014.
- */
 public class Client {
     private static int port;
     private static String host;

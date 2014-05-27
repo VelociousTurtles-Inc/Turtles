@@ -1,6 +1,8 @@
 package Server.Interfaces;
 
-import Colors.Colors;
+import Enums.Colors;
+
+import java.rmi.RemoteException;
 
 /**
  * Created by larhard on 24.05.14.
@@ -18,5 +20,8 @@ public interface ServerPlayerService {
 
     boolean isZombie();
 
+    String getName();
     void announceWinner(Colors winner);
+
+    void setPlayerOnMove(int playerOnMove) throws RemoteException;
 }

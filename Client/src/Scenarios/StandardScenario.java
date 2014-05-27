@@ -1,11 +1,13 @@
 package Scenarios;
 
 import Adapters.Interfaces.*;
+import Client.Interfaces.LoginClient;
 import Views.Standard.Game.StandardGameView;
 import Views.Standard.GameCreation.GameCreator.GameCreatorView;
 import Views.Standard.GameCreation.GameCreatorsWaiting.GameCreatorWaiterView;
 import Views.Standard.GameCreation.GameWaiting.GameWaiterView;
 import Views.Standard.GameSelect.GameSelectView;
+import Views.Standard.Login.LoginView;
 import Views.Standard.Menu.StandardMenuView;
 
 /**
@@ -19,5 +21,6 @@ public class StandardScenario extends GUIScenario {
         add(GameCreatorController.class, GameCreatorView.class);
         add(GameCreatorWaiterController.class, GameCreatorWaiterView.class);
         add(GameWaiterController.class, GameWaiterView.class);
+        add(LoginController.class, LoginView.class);
     }
 }

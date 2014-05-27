@@ -1,8 +1,8 @@
 package Services;
 
 
-import Client.Interfaces.GameWaiterClient;
-import Colors.Colors;
+
+import Enums.Colors;
 import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
@@ -19,10 +19,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Main model class for interacting with specific game.
- * For now there's only one game.
- */
 
 public class StandardGameManager implements GameManager {
 
@@ -37,8 +33,8 @@ public class StandardGameManager implements GameManager {
 
     int playerOnMove;
 
-    private final List<GameWaiterClient> gameWaiterClients = new LinkedList<>();
-    private final List<ServerPlayerService> playerServices = new LinkedList<>();
+    private final List<WaiterService> gameWaiterClients = new LinkedList<>();
+    private final List<StandardPlayerService> playerServices = new LinkedList<>();
     private final AtomicInteger zombiesCount = new AtomicInteger();
     private int gameId;
     private ServerGameDispenser gameDispenser;
@@ -94,7 +90,7 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public void nextTurn() {
+    public void nextTurn() throws RemoteException {
         if (zombiesCount.get() == numberOfPlayers) {
             return;
         }
@@ -103,6 +99,9 @@ public class StandardGameManager implements GameManager {
             playerOnMove = (playerOnMove+1)%numberOfPlayers;
         } while (playerServices.get(playerOnMove).isZombie() && zombiesCount.get() < numberOfPlayers);
         playerServices.get(playerOnMove).unlock();
+        for(ServerPlayerService player : playerServices) {
+            player.setPlayerOnMove(playerOnMove);
+        }
     }
 
     @Override
@@ -141,14 +140,14 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public void addPlayer(GameWaiterClient newWaiter) {
+    public void addPlayer(WaiterService newWaiter) {
         gameWaiterClients.add(newWaiter);
         numberOfPlayers++;
         return ;
     }
 
     @Override
-    public void removePlayer(GameWaiterClient oldWaiter) {
+    public void removePlayer(WaiterService oldWaiter) {
         gameWaiterClients.remove(oldWaiter);
         numberOfPlayers--;
         return ;
@@ -160,14 +159,14 @@ public class StandardGameManager implements GameManager {
         board = new SimpleBoard();
 
         for(int i = 0; i< gameWaiterClients.size(); i++) {
-            playerServices.add(new StandardPlayerService(this));
-            gameWaiterClients.get(i).start((Server.Interfaces.PlayerService) playerServices.get(i));
+            playerServices.add(new StandardPlayerService(this, gameWaiterClients.get(i).getName()));
+            gameWaiterClients.get(i).start(playerServices.get(i));
             playerServices.get(i).lock();
         }
         started.set(true);
         playerOnMove = 0;
         playerServices.get(playerOnMove).unlock();
-        for(GameWaiterClient myWaiter : gameWaiterClients) {
+        for(WaiterService myWaiter : gameWaiterClients) {
             myWaiter.closeMe();
         }
         gameDispenser.update();
@@ -178,14 +177,14 @@ public class StandardGameManager implements GameManager {
     }
 
     public void update() throws Exception {
-        for(GameWaiterClient waiter : gameWaiterClients) {
-            waiter.update(numberOfPlayers);
+        for(WaiterService waiter : gameWaiterClients) {
+            waiter.updateWaiter(numberOfPlayers);
         }
     }
 
     @Override
     public void cancel() throws Exception {
-        for(GameWaiterClient waiter : gameWaiterClients) {
+        for(WaiterService waiter : gameWaiterClients) {
             waiter.cancel();
         }
     }
@@ -225,9 +224,9 @@ public class StandardGameManager implements GameManager {
         }
         else {
             Utility.logInfo("Trying to clean");
-            Iterator<GameWaiterClient> gameWaiterClientIterator = gameWaiterClients.iterator();
+            Iterator<WaiterService> gameWaiterClientIterator = gameWaiterClients.iterator();
             do {
-                GameWaiterClient gameWaiterClient = gameWaiterClientIterator.next();
+                WaiterService gameWaiterClient = gameWaiterClientIterator.next();
                 Utility.logInfo("nextClient");
                 if (gameWaiterClient != null) {
                     try {
@@ -249,5 +248,15 @@ public class StandardGameManager implements GameManager {
     @Override
     public void addZombie() throws RemoteException {
         zombiesCount.incrementAndGet();
+    }
+
+    @Override
+    public List<String> GetListOfPlayers() throws RemoteException {
+        List<String> result = new LinkedList<>();
+        for(ServerPlayerService player : playerServices) {
+            result.add(player.getName());
+            System.out.println(player.getName());
+        }
+        return result;
     }
 }

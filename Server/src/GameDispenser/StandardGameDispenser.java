@@ -1,16 +1,12 @@
 package GameDispenser;
 
-import Client.Interfaces.GameSelectClient;
-import Client.Interfaces.GameWaiterClient;
+import Client.Interfaces.LoginClient;
 import Client.Interfaces.ThreeStringsGet;
-import Events.Event;
-import Main.Server;
 import Model.GameInfo;
+import Common.Interfaces.Event;
 import Utility.Utility;
-import Server.Interfaces.GameDispenser;
-import Server.Interfaces.GameManager;
-import Server.Interfaces.ServerGameDispenser;
-import org.cojen.dirmi.ClosedException;
+import Server.Interfaces.*;
+import Services.StandardWaiterService;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -18,9 +14,9 @@ import java.util.logging.Level;
 /**
  * Created by larhard on 15.05.14.
  */
-public class StandardGameDispenser implements GameDispenser, ServerGameDispenser {
+public class StandardGameDispenser implements GameDispenser, ServerGameDispenser, GameEntry {
     private Map<Integer, GameManager> gameServices = new HashMap<>();
-    private Set<GameSelectClient> mySelecters = new HashSet<>();
+    private Set<StandardWaiterService> mySelectors = new HashSet<>();
 
     private int getEmptyId() {
         Random random = new Random();
@@ -33,11 +29,11 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 
     public StandardGameDispenser() {
-        Server.scenario.invoke(ServerGameDispenser.class, this);
+        //Server.scenario.invoke(ServerGameDispenser.class, this);
     }
 
     @Override
-    public GameManager connectToGame(int id, GameWaiterClient mySel) throws Exception {
+    public GameManager connectToGame(int id, WaiterService mySel) throws Exception {
         if (gameServices.containsKey(id)) {
             Utility.Debug.log(Level.INFO, "[ StandardGameDispenser ] new client connected to game #" + id);
             gameServices.get(id).addPlayer(mySel);
@@ -51,7 +47,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 
     @Override
-    public Integer createNewGame(String name, GameWaiterClient mySel) throws Exception {
+    public Integer createNewGame(String name, WaiterService mySel) throws Exception {
         int id = getEmptyId();
         gameServices.put(id, new Services.StandardGameManager(name, id, this));
         gameServices.get(id).addPlayer(mySel);
@@ -75,10 +71,10 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     public void registerCloseEvent(Event event) {
         closeEvents.add(event);
     }
-
+/*
     @Override
-    public void registerGameSelector(GameSelectClient mySelector) throws Exception {
-        mySelecters.add(mySelector);
+    public void setGameSelector(GameSelectClient mySelector) throws Exception {
+        mySelectors.add(mySelector);
 
         // update list of game
         /*List<SimpliestGameInfo> myList = new LinkedList<>();
@@ -102,25 +98,25 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
         try {
             mySelector.update(myTSG);
         } catch (ClosedException e) {
-            mySelecters.remove(mySelector);
-        }*/
+            mySelectors.remove(mySelector);
+        }
 
         // or just - but we don't need update all
         update();
     }
-
+*/
     @Override
     public String getGameName(int gameID) throws Exception {
         return gameServices.get(gameID).getGameInfo().getGameName();
     }
 
-    @Override
+ /*   @Override
     public void unregisterGameSelector(GameSelectClient mySelector) throws Exception {
-        mySelecters.remove(mySelector);
-    }
+        mySelectors.remove(mySelector);
+    }*/
 
     @Override
-    public void leaveGame(int gameID, GameWaiterClient mySel) throws Exception {
+    public void leaveGame(int gameID, WaiterService mySel) throws Exception {
         gameServices.get(gameID).removePlayer(mySel);
         gameServices.get(gameID).update();
         update();
@@ -154,14 +150,12 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     @Override
     public void update() throws Exception {
         List<GameInfo> myList = new LinkedList<>();
-        ThreeStringsGet myTSG = new ThreeStringsGet() {
-            List<GameInfo> list;
-            @Override
+        ThreeStringsGet myTSG = new ThreeStringsGet(){
+            private List<GameInfo> list;
             public void setList(List<GameInfo> list) throws Exception{
                 this.list = list;
             }
 
-            @Override
             public List<GameInfo> getList() throws Exception {
                 return list;
             }
@@ -171,16 +165,16 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
         }
         myTSG.setList(myList);
 
-        List<GameSelectClient> closedSelecters = new ArrayList<>();
-        for(GameSelectClient mySel : mySelecters) {
-            try {
+        List<StandardWaiterService> closedSelectors = new ArrayList<>();
+        for(StandardWaiterService mySel : mySelectors) {
+            //try {
                 mySel.update(myTSG);
-            } catch (ClosedException e) {
-                closedSelecters.add(mySel);
-            }
+            //} catch (ClosedException e) {
+            //    closedSelectors.add(mySel);
+            //}
         }
-        for (GameSelectClient gameSelectClient : closedSelecters) {
-            mySelecters.remove(gameSelectClient);
+        for (StandardWaiterService gameSelectClient : closedSelectors) {
+            mySelectors.remove(gameSelectClient);
         }
     }
 
@@ -193,5 +187,10 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     public void close() {
         Utility.logInfo("Calling GameDispenser CloseEvents");
         callCloseEvents();
+    }
+
+    @Override
+    public void newSelector(String name, LoginClient login) throws Exception {
+        mySelectors.add(new StandardWaiterService(name, login, this));
     }
 }

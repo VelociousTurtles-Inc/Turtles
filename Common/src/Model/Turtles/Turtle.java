@@ -1,6 +1,6 @@
 package Model.Turtles;
 
-import Colors.Colors;
+import Enums.Colors;
 import Model.Board.BoardGraph;
 
 import java.io.Serializable;

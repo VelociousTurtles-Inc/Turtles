@@ -1,11 +1,12 @@
 package Adapters.Interfaces;
 
 
-import Colors.Colors;
-import Events.Event;
+import Common.Interfaces.Event;
+import Enums.Colors;
 import Model.Cards.Card;
 import Server.Interfaces.PlayerService;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -31,7 +32,11 @@ public interface GameController {
 
     void registerCloseEvent(Event closeEvent);
 
+    void registerChangeMovingPlayerEvent(Event changeEvent);
     void registerWinnerUpdateEvent(Event winnerUpdateEvent);
 
+    List<String> getPlayers() throws RemoteException;
     Colors getWinner();
+
+    int getLastMoving();
 }

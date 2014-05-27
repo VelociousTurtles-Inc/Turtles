@@ -1,14 +1,14 @@
 package Views.Standard.Game;
 
 import Adapters.Interfaces.GameController;
-import Colors.Colors;
-import Events.Event;
+import Enums.Colors;
+import Common.Interfaces.Event;
 import Images.ImageContainer;
 import Images.Images;
 import Model.Cards.Card;
 import Utility.DebugWriter;
+import Common.Interfaces.BoolRunnable;
 import Utility.Utility;
-import Utils.BoolRunnable;
 import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;
@@ -26,6 +26,7 @@ import javafx.stage.WindowEvent;
 import java.awt.*;
 import java.awt.im.InputContext;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -148,7 +149,11 @@ public class StandardGameView {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                try {
                 start();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -173,7 +178,7 @@ public class StandardGameView {
         }
     }
 
-    public void start() {
+    public void start() throws RemoteException {
         assert DebugWriter.write("Launching StandardGameView");
         stage = new Stage();
 
