@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 /**
  * Created by michaziobro on 16.05.2014.
@@ -30,7 +31,7 @@ public class GameCreatorWaiterView {
             }
         });
     }
-    public void start(String name, int numberOP) throws Exception {
+    public void start(String name, int numberOP) throws RemoteException {
         Stage myStage = new Stage();
         FXMLLoader myLoader = new FXMLLoader();
 

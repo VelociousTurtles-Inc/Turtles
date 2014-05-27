@@ -2,6 +2,8 @@ package Adapters.Interfaces;
 
 import Common.Interfaces.Event;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by larhard on 20.05.14.
  */
@@ -14,7 +16,7 @@ public interface GameWaiterController {
 
     int getNumberOfPlayers();
 
-    void leave() throws Exception;
+    void leave() throws RemoteException;
 
-    String getGameName() throws Exception;
+    String getGameName() throws RemoteException;
 }

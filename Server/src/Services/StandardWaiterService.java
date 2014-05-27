@@ -22,7 +22,7 @@ public class StandardWaiterService implements WaiterService {
     private int chosenGame;
     private String myName;
 
-    public StandardWaiterService(String name, LoginClient selector, GameDispenser dispenser) throws Exception {
+    public StandardWaiterService(String name, LoginClient selector, GameDispenser dispenser) throws RemoteException {
         myDispenser = dispenser;
         myName = name;
 
@@ -35,69 +35,69 @@ public class StandardWaiterService implements WaiterService {
     }
 
     @Override
-    public GameManager connectToGame(int id, GameWaiterClient mySel) throws Exception {
+    public GameManager connectToGame(int id, GameWaiterClient mySel) throws RemoteException {
         myWaiter = mySel;
         chosenGame = id;
         return myDispenser.connectToGame(id, this);
     }
 
     @Override
-    public Integer createNewGame(String name, GameWaiterClient mySel) throws Exception {
+    public Integer createNewGame(String name, GameWaiterClient mySel) throws RemoteException {
         myWaiter = mySel;
         chosenGame = myDispenser.createNewGame(name, this);
         return chosenGame;
     }
 
  /*   @Override
-    public void unregisterGameSelector(GameSelectClient mySelector) throws Exception {
+    public void unregisterGameSelector(GameSelectClient mySelector) throws RemoteException {
 
     }*/
 
     @Override
-    public void leaveGame() throws Exception {
+    public void leaveGame() throws RemoteException {
         myDispenser.leaveGame(chosenGame, this);
         myWaiter = null;
         chosenGame = -1;
     }
 
     @Override
-    public void cancelGame() throws Exception {
+    public void cancelGame() throws RemoteException {
         myDispenser.cancelGame(chosenGame);
         myWaiter = null;
         chosenGame = -1;
     }
 
     @Override
-    public void setGameSelector(GameSelectClient mySel) throws Exception {
+    public void setGameSelector(GameSelectClient mySel) throws RemoteException {
         mySelector = mySel;
     }
 
     @Override
-    public String getGameName() throws Exception {
+    public String getGameName() throws RemoteException {
         return myDispenser.getGameName(chosenGame);
     }
 
     @Override
-    public void updateMe() throws Exception {
+    public void updateMe() throws RemoteException {
         myDispenser.updateMe();
     }
 
     @Override
-    public void cancel() throws Exception {
+    public void cancel() throws RemoteException {
         myWaiter.cancel();
     }
 
     @Override
-    public void startGame() throws Exception {
+    public void startGame() throws RemoteException {
         myDispenser.startGame(chosenGame);
     }
 
-    public void update(ThreeStringsGet myTSG) throws Exception {
+    public void update(ThreeStringsGet myTSG) throws RemoteException {
         mySelector.update(myTSG);
     }
 
     @Override
-    public void start(PlayerService playerService) throws Exception {
+    public void start(PlayerService playerService) throws RemoteException {
         myWaiter.start(playerService);
     }
 
@@ -106,7 +106,7 @@ public class StandardWaiterService implements WaiterService {
     }
 
     @Override
-    public void updateWaiter(int numberOfPlayers) throws Exception {
+    public void updateWaiter(int numberOfPlayers) throws RemoteException {
         myWaiter.update(numberOfPlayers);
     }
 

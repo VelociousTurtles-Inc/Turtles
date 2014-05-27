@@ -10,6 +10,7 @@ import Server.Interfaces.*;
 import Services.StandardWaiterService;
 import org.cojen.dirmi.ClosedException;
 
+import java.rmi.RemoteException;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -35,7 +36,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 
     @Override
-    public GameManager connectToGame(int id, WaiterService mySel) throws Exception {
+    public GameManager connectToGame(int id, WaiterService mySel) throws RemoteException {
         if (gameServices.containsKey(id)) {
             Utility.Debug.log(Level.INFO, "[ StandardGameDispenser ] new client connected to game #" + id);
             gameServices.get(id).addPlayer(mySel);
@@ -49,7 +50,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 
     @Override
-    public Integer createNewGame(String name, WaiterService mySel) throws Exception {
+    public Integer createNewGame(String name, WaiterService mySel) throws RemoteException {
         int id = getEmptyId();
         gameServices.put(id, new Services.StandardGameManager(name, id, this));
         gameServices.get(id).addPlayer(mySel);
@@ -75,7 +76,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 /*
     @Override
-    public void setGameSelector(GameSelectClient mySelector) throws Exception {
+    public void setGameSelector(GameSelectClient mySelector) throws RemoteException {
         mySelectors.add(mySelector);
 
         // update list of game
@@ -83,12 +84,12 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
         ThreeStringsGet myTSG = new ThreeStringsGet() {
             List<SimpliestGameInfo> list;
             @Override
-            public void setList(List<SimpliestGameInfo> list) throws Exception{
+            public void setList(List<SimpliestGameInfo> list) throws RemoteException{
                 this.list = list;
             }
 
             @Override
-            public List<SimpliestGameInfo> getList() throws Exception {
+            public List<SimpliestGameInfo> getList() throws RemoteException {
                 return list;
             }
         };
@@ -108,17 +109,17 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 */
     @Override
-    public String getGameName(int gameID) throws Exception {
+    public String getGameName(int gameID) throws RemoteException {
         return gameServices.get(gameID).getGameInfo().getGameName();
     }
 
  /*   @Override
-    public void unregisterGameSelector(GameSelectClient mySelector) throws Exception {
+    public void unregisterGameSelector(GameSelectClient mySelector) throws RemoteException {
         mySelectors.remove(mySelector);
     }*/
 
     @Override
-    public void leaveGame(int gameID, WaiterService mySel) throws Exception {
+    public void leaveGame(int gameID, WaiterService mySel) throws RemoteException {
         gameServices.get(gameID).removePlayer(mySel);
         gameServices.get(gameID).update();
         update();
@@ -128,37 +129,37 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     public void cancelGame(int gameID) {
         try {
             gameServices.get(gameID).cancel();
-        } catch (Exception e) {
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
         gameServices.remove(gameID);
         try {
             update();
-        } catch (Exception e) {
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void updateMe() throws Exception {
+    public void updateMe() throws RemoteException {
         update();
     }
 
     @Override
-    public void startGame(int gameID) throws Exception {
+    public void startGame(int gameID) throws RemoteException {
         gameServices.get(gameID).startGame();
     }
 
     @Override
-    public void update() throws Exception {
+    public void update() throws RemoteException {
         List<GameInfo> myList = new LinkedList<>();
         ThreeStringsGet myTSG = new ThreeStringsGet(){
             private List<GameInfo> list;
-            public void setList(List<GameInfo> list) throws Exception{
+            public void setList(List<GameInfo> list) throws RemoteException{
                 this.list = list;
             }
 
-            public List<GameInfo> getList() throws Exception {
+            public List<GameInfo> getList() throws RemoteException {
                 return list;
             }
         };
@@ -192,7 +193,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 
     @Override
-    public void newSelector(String name, LoginClient login) throws Exception {
+    public void newSelector(String name, LoginClient login) throws RemoteException {
         mySelectors.add(new StandardWaiterService(name, login, this));
     }
 }

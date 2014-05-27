@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by michaziobro on 16.05.2014.
  */
@@ -33,7 +35,7 @@ public class GameCreatorButtons {
         myStage.close();
     }
 
-    public void create(ActionEvent actionEvent) throws Exception {
+    public void create(ActionEvent actionEvent) throws RemoteException {
         myController.create(String.valueOf(name.getCharacters()));
         cancel(actionEvent);
     }

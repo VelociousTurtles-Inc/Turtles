@@ -15,15 +15,15 @@ import java.util.List;
  * Created by michaziobro on 17.05.2014.
  */
 public class StandardGameWaiterController implements GameWaiterController, GameWaiterClient {
+    private final List<Event> updateEvents = new LinkedList<>();
+    private final List<Event> cancelEvents = new LinkedList<>();
+    private final List<Event> closingEvents = new LinkedList<>();
     private int gameID;
     private int myNumberOfPlayers;
     private WaiterService myGameDispenser;
-    private final List<Event> updateEvents = new LinkedList<>();
     private String gameName;
-    private final List<Event> cancelEvents = new LinkedList<>();
-    private final List<Event> closingEvents = new LinkedList<>();
 
-    public StandardGameWaiterController(int myID, WaiterService myGameDispenser) throws Exception {
+    public StandardGameWaiterController(int myID, WaiterService myGameDispenser) throws RemoteException {
         gameID = myID;
         this.myGameDispenser = myGameDispenser;
 
@@ -60,7 +60,7 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     }
 
     @Override
-    public void cancel() throws Exception {
+    public void cancel() throws RemoteException {
         synchronized (cancelEvents) {
             for (Event e : cancelEvents) {
                 e.call();
@@ -69,7 +69,7 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     }
 
     @Override
-    public void start(PlayerService player) throws Exception {
+    public void start(PlayerService player) throws RemoteException {
         StandardGameController myAdapter = new StandardGameController();
         myAdapter.start(player);
     }
@@ -99,12 +99,12 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     }
 
     @Override
-    public void leave() throws Exception {
+    public void leave() throws RemoteException {
         myGameDispenser.leaveGame();
     }
 
     @Override
-    public String getGameName() throws Exception {
+    public String getGameName() throws RemoteException {
         return gameName;
     }
 

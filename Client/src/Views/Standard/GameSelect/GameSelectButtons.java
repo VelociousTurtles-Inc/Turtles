@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -43,13 +44,13 @@ public class GameSelectButtons {
         controller.create();
     }
     @FXML
-    public void join(ActionEvent actionEvent) throws Exception {
+    public void join(ActionEvent actionEvent) throws RemoteException {
         SimpleGameInfo myInfo = (SimpleGameInfo) myTable.getSelectionModel().getSelectedItem();
         System.out.println(myInfo.getMyID());
         controller.join(myInfo.getMyID());
     }
 
-    public void setController(final GameSelectController controller) throws Exception {
+    public void setController(final GameSelectController controller) throws RemoteException {
         this.controller = controller;
         this.controller.registerClosingEvent(new Event() {
             @Override

@@ -1,9 +1,8 @@
 package Adapters.Interfaces;
 
-/**
- * Created by mz18 on 8/05/14.
- */
+import java.rmi.RemoteException;
+
 public interface MenuController {
-    void startGame() throws Exception;
+    void startGame() throws RemoteException;
     void exitProgram();
 }

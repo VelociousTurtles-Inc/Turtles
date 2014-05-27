@@ -105,7 +105,7 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public Map<Integer, Card> getInGameCards() throws Exception {
+    public Map<Integer, Card> getInGameCards() throws RemoteException {
         return myDeck.getCardsMap();
     }
 
@@ -154,7 +154,7 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public void startGame() throws Exception {
+    public void startGame() throws RemoteException {
         myDeck = new Deck();
         board = new SimpleBoard();
 
@@ -176,14 +176,14 @@ public class StandardGameManager implements GameManager {
         return myId;
     }
 
-    public void update() throws Exception {
+    public void update() throws RemoteException {
         for(WaiterService waiter : gameWaiterClients) {
             waiter.updateWaiter(numberOfPlayers);
         }
     }
 
     @Override
-    public void cancel() throws Exception {
+    public void cancel() throws RemoteException {
         for(WaiterService waiter : gameWaiterClients) {
             waiter.cancel();
         }

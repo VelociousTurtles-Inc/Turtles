@@ -13,18 +13,18 @@ import java.util.List;
  * Created by mz18 on 7/05/14.
  */
 public interface GameController {
-    public void start(PlayerService myService) throws Exception;
+    public void start(PlayerService myService) throws RemoteException;
 
-    void playCard(int card) throws Exception;
+    void playCard(int card) throws RemoteException;
     void surrender();
 
     void registerUpdateBoardEvent(Event updateBoardEvent);
     void registerUpdateCardsEvent(Event updateCardEvent);
 
-    void leave() throws Exception;
+    void leave() throws RemoteException;
 
-    List<Card> getCards() throws Exception;
-    List<List<Integer>> getBoard() throws Exception;
+    List<Card> getCards() throws RemoteException;
+    List<List<Integer>> getBoard() throws RemoteException;
 
     void registerLockingEvent(Event lockingEvent);
 
