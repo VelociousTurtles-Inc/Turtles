@@ -17,7 +17,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -41,6 +43,8 @@ public class StandardGameView {
     private Stage stage;
 
     private ImageContainer imageContainer = new ImageContainer(this.getClass().getClassLoader(), "Resources/Images/Cards");
+    private javafx.scene.control.Label winnerLabel;
+    private Pane winnerPane;
 
     private void updateBoard(final List<List<Integer>> updateForBoard) {
         assert new BoolRunnable() {
@@ -162,7 +166,8 @@ public class StandardGameView {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("Announcing Winner: " + winner);
+                    winnerLabel.setText(winner.toString());
+                    winnerPane.setVisible(true);
                 }
             });
         }
@@ -202,6 +207,9 @@ public class StandardGameView {
 
         turtles = myOwnGameButtons.getTurtles();
         slots = myOwnGameButtons.getCardSlots();
+
+        winnerLabel = myOwnGameButtons.getWinnerLabel();
+        winnerPane = myOwnGameButtons.getWinnerPane();
 
         for (int i : Colors.getRealIntegers()) {
             try {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?scenebuilder-background-color 0x606060ff?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
@@ -93,6 +94,25 @@
         <TextArea fx:id="InputTextArea" layoutX="951.0" layoutY="537.0" prefHeight="130.0" prefWidth="306.0">
         </TextArea>
       <Button fx:id="SendText" layoutX="1062.0" layoutY="674.0" mnemonicParsing="false" onAction="#sentTextToServer" prefHeight="29.0" prefWidth="174.0" text="Send" />
+      <Pane fx:id="winnerPane" layoutX="527.0" layoutY="260.0" prefHeight="179.0" prefWidth="395.0" style="-fx-background-color: rgba(255,255,100,0.8);" visible="false">
+         <children>
+            <Label layoutX="14.0" layoutY="107.0" prefHeight="57.0" prefWidth="184.0" text="Winns" textAlignment="RIGHT">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="223.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Resources/Images/goldstar.gif" />
+               </image>
+            </ImageView>
+            <Label fx:id="winner" layoutX="14.0" layoutY="14.0" prefHeight="84.0" prefWidth="184.0" text="player" textAlignment="RIGHT">
+               <font>
+                  <Font size="46.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
 
     </children>
 </AnchorPane>

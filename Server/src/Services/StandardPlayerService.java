@@ -180,13 +180,11 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
 
     @Override
     public void announceWinner(Colors winner) {
-        if (!isZombie()) {
-            try {
-                myClient.announceWinner(winner.toInteger());
-            } catch (RemoteException e) {
-                e.printStackTrace();
-                setZombie();
-            }
+        try {
+            myClient.announceWinner(winner.toInteger());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            setZombie();
         }
     }
 }

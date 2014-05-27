@@ -7,8 +7,10 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,8 @@ public class StandardGameButtons {
     @FXML private TextArea InputTextArea; //TODO
     @FXML private TextArea OutputTextArea; //TODO
 
-
+    @FXML private Label winner;
+    @FXML private Pane winnerPane;
 
     List<ImageView> getCardSlots() {
         List<ImageView> cards = new ArrayList<>();
@@ -129,5 +132,13 @@ public class StandardGameButtons {
     }
 
     @FXML public void sentTextToServer(ActionEvent actionEvent) {
+    }
+
+    public Pane getWinnerPane() {
+        return winnerPane;
+    }
+
+    public Label getWinnerLabel() {
+        return winner;
     }
 }
