@@ -120,7 +120,6 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
             try {
                 myClient.ping();
             } catch (RemoteException e) {
-                e.printStackTrace();
                 Utility.logInfo("Assumed player is zombie => removing");
                 try {
                     leave();

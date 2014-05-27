@@ -2,11 +2,13 @@ package GameDispenser;
 
 import Client.Interfaces.LoginClient;
 import Client.Interfaces.ThreeStringsGet;
+import Main.Server;
 import Model.GameInfo;
 import Common.Interfaces.Event;
 import Utility.Utility;
 import Server.Interfaces.*;
 import Services.StandardWaiterService;
+import org.cojen.dirmi.ClosedException;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -29,7 +31,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 
     public StandardGameDispenser() {
-        //Server.scenario.invoke(ServerGameDispenser.class, this);
+        Server.scenario.invoke(ServerGameDispenser.class, this);
     }
 
     @Override
@@ -167,11 +169,11 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
 
         List<StandardWaiterService> closedSelectors = new ArrayList<>();
         for(StandardWaiterService mySel : mySelectors) {
-            //try {
+            try {
                 mySel.update(myTSG);
-            //} catch (ClosedException e) {
-            //    closedSelectors.add(mySel);
-            //}
+            } catch (ClosedException e) {
+                closedSelectors.add(mySel);
+            }
         }
         for (StandardWaiterService gameSelectClient : closedSelectors) {
             mySelectors.remove(gameSelectClient);
@@ -180,7 +182,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
 
     @Override
     public Collection<GameManager> getGameManagers() {
-        return gameServices.values();
+        return new LinkedList<>(gameServices.values());
     }
 
     @Override

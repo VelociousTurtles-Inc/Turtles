@@ -17,11 +17,8 @@ public class StandardLoginController implements LoginClient, LoginController {
 
     GameEntry gameEntry;
 
-    LoginView loginView;
     StandardLoginController() throws Exception {
         Client.scenario.invoke(LoginController.class, this);
-        loginView = new LoginView(this);
-        loginView.start();
     }
 
     List<Event> closeEvents = new LinkedList<>();
