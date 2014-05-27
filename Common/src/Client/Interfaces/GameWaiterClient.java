@@ -11,9 +11,9 @@ import java.rmi.RemoteException;
 public interface GameWaiterClient extends Remote {
     void closeMe() throws RemoteException;
 
-    public void update(int newNumberOfPlayers) throws Exception;
-    public void cancel() throws Exception;
-    public void start(PlayerService player) throws Exception;
+    public void update(int newNumberOfPlayers) throws RemoteException;
+    public void cancel() throws RemoteException;
+    public void start(PlayerService player) throws RemoteException;
 
     void ping() throws RemoteException;
 }

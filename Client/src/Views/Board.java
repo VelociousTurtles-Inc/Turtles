@@ -21,14 +21,14 @@ public class Board implements Serializable {
     }
 
 
-    public static Board readBoard(String nname) {
-        assert DebugWriter.write("Reading Board \"" + nname + "\"");
+    public static Board readBoard(String boardName) {
+        assert DebugWriter.write("Reading Board \"" + boardName + "\"");
         Board temp = new Board();
         try {
             //TODO, if anyone wants to change anything here, please do it on working code and
             //make sure it still works after the change.
             //InputStream fileIn = Board.class.getResourceAsStream("Resources/Boards/"+nname);
-            InputStream fileIn = new FileInputStream(System.getProperty("user.dir")+"/Client/src/Resources/Boards/"+nname);
+            InputStream fileIn = new FileInputStream(System.getProperty("user.dir")+"/Client/src/Resources/Boards/"+boardName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             temp = (Board) in.readObject();
             in.close();

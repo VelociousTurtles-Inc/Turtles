@@ -9,6 +9,7 @@ import Main.Client;
 import Model.GameInfo;
 import Server.Interfaces.WaiterService;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
     private final List<Event> cancelEvents = new ArrayList<>();
     private final List<Event> updateEvents = new ArrayList<>();
 
-    public StandardGameSelectController(WaiterService waiter) throws Exception {
+    public StandardGameSelectController(WaiterService waiter) throws RemoteException {
         gameInfoList = new LinkedList<>();
         waiterService = waiter;
         waiterService.setGameSelector(this);
@@ -32,7 +33,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
     }
 
     @Override
-    public void join(int gameID) throws Exception {
+    public void join(int gameID) throws RemoteException {
         StandardGameWaiterController gameWaiterController = new StandardGameWaiterController(gameID, waiterService);
     }
 
@@ -65,7 +66,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
     }
 
     @Override
-    public void update(ThreeStringsGet updateGameInfo) throws Exception {
+    public void update(ThreeStringsGet updateGameInfo) throws RemoteException {
         gameInfoList = updateGameInfo.getList();
         synchronized (updateEvents) {
             for (Event e : updateEvents) {
@@ -80,7 +81,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
     }
 
     @Override
-    public void initValues() throws Exception {
+    public void initValues() throws RemoteException {
         waiterService.updateMe();
     }
 

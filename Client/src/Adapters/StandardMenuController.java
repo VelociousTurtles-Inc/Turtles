@@ -4,6 +4,8 @@ import Adapters.Interfaces.MenuController;
 import Main.Client;
 import Utility.DebugWriter;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by mz18 on 8/05/14.
  */
@@ -15,7 +17,7 @@ public class StandardMenuController implements MenuController {
     }
 
     @Override
-    public void startGame() throws Exception {
+    public void startGame() throws RemoteException {
         new Thread() {
             @Override
             public void run() {

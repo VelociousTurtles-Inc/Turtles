@@ -15,9 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/**
- * Created by michaziobro on 17.05.2014.
- */
 public class StandardPlayerService implements PlayerService, ServerPlayerService {
 
     private GameManager myManager;
@@ -37,7 +34,7 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
         myClient.setPlayerOnMove(playerOnMove);
     }
 
-    public StandardPlayerService(GameManager myManager, String name) throws Exception {
+    public StandardPlayerService(GameManager myManager, String name) throws RemoteException {
         this.myManager = myManager;
         this.myName = name;
         List<Integer> tmpList = myManager.getHand();
@@ -89,7 +86,7 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     }
 
     @Override
-    public Map<Integer, Card> getCardsMap() throws Exception {
+    public Map<Integer, Card> getCardsMap() throws RemoteException {
         return myManager.getInGameCards();
     }
 

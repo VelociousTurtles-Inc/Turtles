@@ -11,5 +11,5 @@ import java.rmi.RemoteException;
 public interface LoginClient extends Remote {
     //public void toGameSelect() throws RemoteException;
 
-    void toGameSelect(WaiterService waiter) throws Exception;
+    void toGameSelect(WaiterService waiter) throws RemoteException;
 }

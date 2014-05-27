@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by michaziobro on 16.05.2014.
  */
@@ -19,7 +21,7 @@ public class GameWaitingButtons {
     private String name;
     private int number;
 
-    public void setController(GameWaiterController myController) throws Exception {
+    public void setController(GameWaiterController myController) throws RemoteException {
         this.controller = myController;
         this.controller.registerUpdate(new Event() {
             @Override
@@ -66,7 +68,7 @@ public class GameWaitingButtons {
         this.stage = stage;
     }
 
-    public void leave(ActionEvent actionEvent) throws Exception {
+    public void leave(ActionEvent actionEvent) throws RemoteException {
         stage.close();
         controller.leave();
     }

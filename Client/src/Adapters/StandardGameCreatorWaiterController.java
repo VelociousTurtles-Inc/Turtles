@@ -7,6 +7,7 @@ import Main.Client;
 import Server.Interfaces.PlayerService;
 import Server.Interfaces.WaiterService;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     private int gameID;
     private final List<Event> closingEvents = new ArrayList<>();
 
-    public StandardGameCreatorWaiterController(String name, WaiterService standardGameCreatorController) throws Exception {
+    public StandardGameCreatorWaiterController(String name, WaiterService standardGameCreatorController) throws RemoteException {
         this.myDispenser = standardGameCreatorController;
         int id = myDispenser.createNewGame(name, this);
         gameName =  myDispenser.getGameName();
@@ -59,7 +60,7 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     }
 
     @Override
-    public void cancel() throws Exception {
+    public void cancel() throws RemoteException {
         synchronized (cancelEvents) {
             for (Event e : cancelEvents) {
                 e.call();
@@ -74,7 +75,7 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
         }
     }
 
-    public void start(PlayerService player) throws Exception {
+    public void start(PlayerService player) throws RemoteException {
         StandardGameController myAdapter = new StandardGameController();
         myAdapter.start(player);
     }
@@ -84,12 +85,12 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     }
 
     @Override
-    public void startAll() throws Exception {
+    public void startAll() throws RemoteException {
         myDispenser.startGame();
     }
 
     @Override
-    public void cancelAll() throws Exception {
+    public void cancelAll() throws RemoteException {
         myDispenser.cancelGame();
     }
 
@@ -116,7 +117,7 @@ public class StandardGameCreatorWaiterController implements GameCreatorWaiterCon
     }
 
     @Override
-    public void initValues() throws Exception {
+    public void initValues() throws RemoteException {
         myDispenser.updateMe();
     }
 }

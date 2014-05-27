@@ -5,6 +5,7 @@ import Adapters.Interfaces.GameCreatorController;
 import Main.Client;
 import Server.Interfaces.WaiterService;
 
+import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class StandardGameCreatorController implements GameCreatorController {
     }
 
     @Override
-    public void create(String name) throws Exception {
+    public void create(String name) throws RemoteException {
         new StandardGameCreatorWaiterController(name, myDispenser);
         closeIt();
     }

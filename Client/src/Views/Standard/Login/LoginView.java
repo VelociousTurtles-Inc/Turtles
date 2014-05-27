@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 /**
  * Created by michaziobro on 26.05.2014.
@@ -32,7 +33,7 @@ public class LoginView {
         });
     }
 
-    public void start() throws Exception {
+    public void start() throws RemoteException {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

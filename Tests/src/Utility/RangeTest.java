@@ -2,12 +2,13 @@ package Utility;
 
 import junit.framework.TestCase;
 
+import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class RangeTest extends TestCase {
-    public void testRange() throws Exception {
+    public void testRange() {
         Set<Integer> result = new HashSet<>();
         for (int i : new Range(6)) {
             result.add(i);

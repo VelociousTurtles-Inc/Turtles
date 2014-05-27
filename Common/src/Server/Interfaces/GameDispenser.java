@@ -1,23 +1,20 @@
 package Server.Interfaces;
 
-import Client.Interfaces.GameWaiterClient;
+import java.rmi.RemoteException;
 
-/**
- * Created by larhard on 15.05.14.
- */
 public interface GameDispenser {
     // TODO authenticate
 
-    void leaveGame(int gameID, WaiterService mySel) throws Exception;
-    void cancelGame(int gameID) throws Exception;
+    void leaveGame(int gameID, WaiterService mySel) throws RemoteException;
+    void cancelGame(int gameID) throws RemoteException;
 
-    GameManager connectToGame(int id, WaiterService mySel) throws Exception;
+    GameManager connectToGame(int id, WaiterService mySel) throws RemoteException;
 
-    Integer createNewGame(String name, WaiterService mySel) throws Exception;
+    Integer createNewGame(String name, WaiterService mySel) throws RemoteException;
 
-    public String getGameName(int gameID) throws Exception;
+    public String getGameName(int gameID) throws RemoteException;
 
-    void updateMe() throws Exception;
+    void updateMe() throws RemoteException;
 
-    void startGame(int gameID) throws Exception;
+    void startGame(int gameID) throws RemoteException;
 }

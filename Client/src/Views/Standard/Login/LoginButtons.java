@@ -8,6 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by michaziobro on 26.05.2014.
  */
@@ -40,7 +42,7 @@ public class LoginButtons {
         return stage;
     }
 
-    public void submit(ActionEvent actionEvent) throws Exception {
+    public void submit(ActionEvent actionEvent) throws RemoteException {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

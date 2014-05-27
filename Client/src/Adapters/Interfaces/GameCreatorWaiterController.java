@@ -2,6 +2,8 @@ package Adapters.Interfaces;
 
 import Common.Interfaces.Event;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by larhard on 20.05.14.
  */
@@ -10,9 +12,9 @@ public interface GameCreatorWaiterController {
 
     void registerUpdateEvent(Event updateEvent);
 
-    void startAll() throws Exception;
+    void startAll() throws RemoteException;
 
-    void cancelAll() throws Exception;
+    void cancelAll() throws RemoteException;
 
     int getNumberOfPlayers();
 
@@ -22,5 +24,5 @@ public interface GameCreatorWaiterController {
 
     int getGameID();
 
-    void initValues() throws Exception;
+    void initValues() throws RemoteException;
 }

@@ -58,7 +58,7 @@ public class StandardGameController extends Thread implements GameController, Ga
         }
     }
 
-    public StandardGameController() throws Exception {
+    public StandardGameController() throws RemoteException {
         normalCardsMap = new HashMap<>();
 
         locked.set(true);
@@ -82,7 +82,7 @@ public class StandardGameController extends Thread implements GameController, Ga
         }
     }
 
-//    public boolean checkForWinner() throws Exception {
+//    public boolean checkForWinner() throws RemoteException {
 //        BoardGraph myBoardGraph = gameService.getGameBoardGraph();
 //
 //        if(myBoardGraph.end.getTurtles().size() != 0) {
@@ -96,7 +96,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 //    }
 
     @Override
-    public void start(PlayerService myService) throws Exception {
+    public void start(PlayerService myService) throws RemoteException {
         playerService = myService;
         normalCardsMap = myService.getCardsMap();
         myService.setClient(this);
@@ -105,7 +105,7 @@ public class StandardGameController extends Thread implements GameController, Ga
     }
 
     @Override
-    public void playCard(int card) throws Exception {
+    public void playCard(int card) throws RemoteException {
         /*if (playerHand == null)getCards();
         int cardID = playerHand.get(card-1);
         playerService.playCard(cardID);
@@ -147,7 +147,7 @@ public class StandardGameController extends Thread implements GameController, Ga
     }
 
     @Override
-    public void leave() throws Exception {
+    public void leave() throws RemoteException {
         // TODO real leave game
         playerService.leave();
     }
@@ -161,7 +161,7 @@ public class StandardGameController extends Thread implements GameController, Ga
     }
 
     @Override
-    public List<Card> getCards() throws Exception {
+    public List<Card> getCards() throws RemoteException {
         playerHand = playerService.getPlayerCards();
         List<Card> resultCards = new LinkedList<>();
         for(Integer i : playerHand) {
@@ -177,7 +177,7 @@ public class StandardGameController extends Thread implements GameController, Ga
         the Graph
      */
     @Override
-    public List<List<Integer>> getBoard() throws Exception {
+    public List<List<Integer>> getBoard() throws RemoteException {
 
         List<List<Integer>> result = new LinkedList<>();
         BoardGraph myBoardGraph = playerService.getGameBoard().graph;

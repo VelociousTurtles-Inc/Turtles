@@ -7,6 +7,8 @@ import Utility.Scenario;
 import Scenarios.StandardScenario;
 import org.cojen.dirmi.Environment;
 
+import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -16,7 +18,7 @@ import java.util.Scanner;
 public class Server {
     private static int port;
     public static Scenario scenario;
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         scenario = new StandardScenario();
         port = args.length > 1 ? Integer.valueOf(args[0]) : 8080;
         Environment environment = null;
