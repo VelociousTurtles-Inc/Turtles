@@ -50,19 +50,27 @@ public class StandardGameManager implements GameManager {
         return board;
     }
 
+    public void updateBoard() {
+        for (ServerPlayerService myPlayer : playerServices) {
+            myPlayer.updateBoard();
+        }
+    }
+
     @Override
-    public int playCard(int cardID) throws RemoteException {
+    public void playCard(int cardID) throws RemoteException {
         myDeck.getCardsMap().get(cardID).play(board);
         myDeck.returnCard(cardID);
-        for(ServerPlayerService myPlayer : playerServices) {
-            myPlayer.update();
-        }
         checkGameStatus();
+        updateBoard();
         if (winner == null) {
             nextTurn();
         } else {
             lockAll();
         }
+    }
+
+    @Override
+    public int getNextCard() {
         return myDeck.getCard();
     }
 
