@@ -69,12 +69,12 @@ public class DoubleForwardCard extends Card {
     }
 
     @Override
-    public String getShortDecription() {
+    public String getShortDescription() {
         return "Idź do przodu o dwa";
     }
 
     @Override
     public String getDescription() {
-        return "Porusza żolwia we wskazanym kolorze o dwa pola do przodu";
+        return "Porusza żółwia we wskazanym kolorze o dwa pola do przodu";
     }
 }

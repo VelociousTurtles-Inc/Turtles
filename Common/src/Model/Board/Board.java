@@ -8,7 +8,7 @@ import java.io.Serializable;
 public abstract class Board implements Serializable {
     private static final long serialVersionUID = 1445857174659600676L;
 
-    public BoardGraph graph;
+    public final BoardGraph graph;
 
     public Board() {
         graph = new BoardGraph();

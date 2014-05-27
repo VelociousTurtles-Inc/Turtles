@@ -13,7 +13,7 @@ public interface ServerPlayerService {
 
     void updateBoard();
 
-    boolean checkZombieness();
+    void checkZombieness();
 
     boolean isZombie();
 

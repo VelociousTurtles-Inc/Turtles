@@ -3,6 +3,8 @@ package Model;
 import java.io.Serializable;
 
 public class PlayerInfo implements Serializable {
+    private static final long serialVersionUID = 2340999700391643339L;
+
     public PlayerInfo() {
     }
 

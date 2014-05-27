@@ -1,6 +1,6 @@
-package Adapters;
+package Controllers;
 
-import Adapters.Interfaces.LoginController;
+import Controllers.Interfaces.LoginController;
 import Client.Interfaces.LoginClient;
 import Common.Interfaces.Event;
 import Main.Client;
@@ -24,7 +24,7 @@ public class StandardLoginController implements LoginClient, LoginController {
         Client.scenario.invoke(LoginController.class, this);
     }
 
-    List<Event> closeEvents = new LinkedList<>();
+    final List<Event> closeEvents = new LinkedList<>();
 
     @Override
     public void registerCloseEvent(Event event) {

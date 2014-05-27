@@ -17,13 +17,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class StandardPlayerService implements PlayerService, ServerPlayerService {
 
-    private GameManager myManager;
+    private final GameManager myManager;
     private GameClient myClient;
     private List<CardIDBox> myCards;
     private final AtomicBoolean locked = new AtomicBoolean();
     private final AtomicBoolean dead = new AtomicBoolean(false);
 
-    private String myName;
+    private final String myName;
 
     public String getName() {
         return myName;
@@ -110,9 +110,9 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
         setZombie();
     }
 
-// START OF NOTREMOTE SECTION
+// START OF NO REMOTE SECTION
     @Override
-    public boolean checkZombieness() {
+    public void checkZombieness() {
         if (!isZombie()) {
             try {
                 myClient.ping();
@@ -125,7 +125,6 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
                 }
             }
         }
-        return isZombie();
     }
 
     public void updateBoard() {
@@ -198,7 +197,7 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
         }
     }
 
-// END OF NOTREMOTE SECTION
+// END OF NO REMOTE SECTION
     @Override
     public void announceWinner(Colors winner) {
         try {

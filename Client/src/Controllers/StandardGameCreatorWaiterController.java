@@ -1,7 +1,7 @@
-package Adapters;
+package Controllers;
 
 import Common.Interfaces.Event;
-import Adapters.Interfaces.GameCreatorWaiterController;
+import Controllers.Interfaces.GameCreatorWaiterController;
 import Client.Interfaces.GameWaiterClient;
 import Main.Client;
 import Server.Interfaces.PlayerService;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StandardGameCreatorWaiterController implements GameCreatorWaiterController, GameWaiterClient {
-    WaiterService myDispenser;
+    final WaiterService myDispenser;
     private int numberOfPlayers;
     private final List<Event> updateEvents = new ArrayList<>();
     private final List<Event> cancelEvents = new ArrayList<>();

@@ -5,6 +5,6 @@ public class Point {
         this.x = x;
         this.y = y;
     }
-    public int x;
-    public int y;
+    public final int x;
+    public final int y;
 }

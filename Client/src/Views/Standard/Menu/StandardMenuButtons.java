@@ -1,6 +1,6 @@
 package Views.Standard.Menu;
 
-import Adapters.Interfaces.MenuController;
+import Controllers.Interfaces.MenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -14,7 +14,7 @@ public class StandardMenuButtons {
         this.myMenuController = myMenuController;
     }
 
-    @FXML private void startGame(ActionEvent event) throws IOException {
+    @FXML private void startGame(ActionEvent event) {
         try {
             myMenuController.startGame();
         } catch (Exception e) {

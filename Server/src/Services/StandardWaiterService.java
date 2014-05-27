@@ -13,11 +13,11 @@ import java.rmi.RemoteException;
 
 public class StandardWaiterService implements WaiterService {
 
-    private GameDispenser myDispenser;
+    private final GameDispenser myDispenser;
     private GameSelectClient mySelector;
     private GameWaiterClient myWaiter;
     private int chosenGame;
-    private String myName;
+    private final String myName;
 
     public StandardWaiterService(String name, LoginClient selector, GameDispenser dispenser) throws RemoteException {
         myDispenser = dispenser;

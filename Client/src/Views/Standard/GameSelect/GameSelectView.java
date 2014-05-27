@@ -1,6 +1,6 @@
 package Views.Standard.GameSelect;
 
-import Adapters.Interfaces.GameSelectController;
+import Controllers.Interfaces.GameSelectController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +12,7 @@ import java.rmi.RemoteException;
 
 public class GameSelectView {
 
-    GameSelectController myController;
+    final GameSelectController myController;
     GameSelectButtons myButtons;
 
     public GameSelectView(GameSelectController myController) {

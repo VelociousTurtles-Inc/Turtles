@@ -1,7 +1,7 @@
 package Views.Standard.GameCreation.GameCreator;
 
 import Common.Interfaces.Event;
-import Adapters.Interfaces.GameCreatorController;
+import Controllers.Interfaces.GameCreatorController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;

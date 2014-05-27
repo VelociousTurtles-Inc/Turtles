@@ -1,7 +1,7 @@
-package Adapters;
+package Controllers;
 
 import Common.Interfaces.Event;
-import Adapters.Interfaces.GameController;
+import Controllers.Interfaces.GameController;
 import Client.Interfaces.GameClient;
 import Enums.Colors;
 import Main.Client;
@@ -10,7 +10,6 @@ import Model.Cards.Card;
 import Model.Turtles.Turtle;
 import Server.Interfaces.PlayerService;
 import Utility.DebugWriter;
-import Utility.Utility;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -112,7 +111,7 @@ public class StandardGameController extends Thread implements GameController, Ga
     @Override
     public void surrender() {
         // TODO: implement
-        System.out.println("I surended!");
+        System.out.println("I surrendered!");
         try {
             leave();
         } catch (Exception e) {
@@ -170,12 +169,6 @@ public class StandardGameController extends Thread implements GameController, Ga
         return resultCards;
     }
 
-    /*
-        Changed on 18 may 2014 by Szymon to match the new way the BoardGraph is stored
-        Only works for the SimpleBoard, have to be very careful with it.
-        Dirty, needs changing as soon as it will be clear how are we going to implement
-        the Graph
-     */
     @Override
     public List<List<Integer>> getBoard() throws RemoteException {
 

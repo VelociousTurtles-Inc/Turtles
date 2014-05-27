@@ -1,6 +1,6 @@
 package Views.FastInit;
 
-import Adapters.Interfaces.LoginController;
+import Controllers.Interfaces.LoginController;
 
 import java.util.Random;
 

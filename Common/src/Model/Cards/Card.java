@@ -7,12 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Interface for Cards. Card should be registered in CardType enum before implementing this interface.
- * This is NOT an interface because WebMethod result must be instantiable in some way.
- * Static method populate should be overridden. Cards are currently immutable.
- * It's though highly possible that above disclaimer will be a subject to many changes due to WebResult/Parameter character od this class.
- */
 
 public abstract class Card implements Serializable {
     private static final long serialVersionUID = 4650075470587092743L;
@@ -47,7 +41,7 @@ public abstract class Card implements Serializable {
     public static List<Card> populate()
     {
         assert false;
-        return new ArrayList<Card>();
+        return new ArrayList<>();
     }
 
     public abstract void play(Board board);
@@ -59,10 +53,10 @@ public abstract class Card implements Serializable {
 
     @Override
     public String toString() {
-        return "Card : " + getShortDecription() + " [ " + Colors.asString(getColor()) + " ]";
+        return "Card : " + getShortDescription() + " [ " + Colors.asString(getColor()) + " ]";
     }
 
-    public String getShortDecription() {
+    public String getShortDescription() {
         return getClass().toString();
     }
 

@@ -1,6 +1,6 @@
-package Adapters;
+package Controllers;
 
-import Adapters.Interfaces.MenuController;
+import Controllers.Interfaces.MenuController;
 import Main.Client;
 import Utility.DebugWriter;
 
@@ -9,18 +9,17 @@ import java.rmi.RemoteException;
 public class StandardMenuController implements MenuController {
 
     public StandardMenuController() {
-        assert DebugWriter.write("Create new StandarMenuController");
+        assert DebugWriter.write("Create new StandardMenuController");
         Client.scenario.invoke(MenuController.class, this);
     }
 
     @Override
-    public void startGame() throws RemoteException {
+    public void startGame() {
         new Thread() {
             @Override
             public void run() {
                 try {
-                    //StandardGameSelectController myGCC = new StandardGameSelectController();
-                    StandardLoginController myController = new StandardLoginController();
+                    new StandardLoginController();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

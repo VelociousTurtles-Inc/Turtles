@@ -1,7 +1,7 @@
-package Adapters;
+package Controllers;
 
 import Common.Interfaces.Event;
-import Adapters.Interfaces.GameCreatorController;
+import Controllers.Interfaces.GameCreatorController;
 import Main.Client;
 import Server.Interfaces.WaiterService;
 
@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class StandardGameCreatorController implements GameCreatorController {
-    WaiterService myDispenser;
+    final WaiterService myDispenser;
 
     private final List<Event> closingEvents = new LinkedList<>();
 

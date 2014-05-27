@@ -8,7 +8,7 @@ import java.util.*;
 public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable {
     private static final long serialVersionUID = -2995046707046230025L;
 
-    static int counter;
+    private static int counter;
     public ArrayList<Field> starts;
     public Field end;
 
@@ -22,13 +22,12 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable {
      */
     @Override
     public Iterator<Field> iterator() {
-        int position = 0;
         //TODO bad BFS
         return new Iterator<Field>() {
             Queue<Field> q;
             {
-                q = new LinkedList<Field>();
-                Queue<Field> tmp = new LinkedList<Field>();
+                q = new LinkedList<>();
+                Queue<Field> tmp = new LinkedList<>();
                 Field ref;
                 for(Field a : starts)
                     q.add(a);
@@ -70,8 +69,8 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable {
 
         public final int id;
 
-        public List<Field> successors = new LinkedList<>();
-        public List<Field> predecessors = new LinkedList<>();
+        public final List<Field> successors = new LinkedList<>();
+        public final List<Field> predecessors = new LinkedList<>();
 
         public List<Field> getSuccessors() {
             return successors;
@@ -80,7 +79,7 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable {
             return predecessors;
         }
 
-        public List<Turtle> turtles = new LinkedList<>();
+        public final List<Turtle> turtles = new LinkedList<>();
 
         public final FieldType type;
         public Field ()

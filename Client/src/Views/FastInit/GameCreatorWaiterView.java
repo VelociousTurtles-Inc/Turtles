@@ -1,6 +1,6 @@
 package Views.FastInit;
 
-import Adapters.Interfaces.GameCreatorWaiterController;
+import Controllers.Interfaces.GameCreatorWaiterController;
 
 public class GameCreatorWaiterView {
     public GameCreatorWaiterView(final GameCreatorWaiterController gameCreatorWaiterController) {

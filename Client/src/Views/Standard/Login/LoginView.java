@@ -1,7 +1,6 @@
 package Views.Standard.Login;
 
-import Adapters.Interfaces.LoginController;
-import Adapters.StandardLoginController;
+import Controllers.Interfaces.LoginController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +11,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 
 public class LoginView {
-    LoginController myController;
+    final LoginController myController;
     LoginButtons myButtons;
 
     public LoginView(LoginController myController) {
@@ -30,7 +29,7 @@ public class LoginView {
         });
     }
 
-    public void start() throws RemoteException {
+    public void start() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

@@ -1,6 +1,6 @@
 package Views.FastInit;
 
-import Adapters.Interfaces.GameSelectController;
+import Controllers.Interfaces.GameSelectController;
 
 public class GameSelectView {
     public GameSelectView(final GameSelectController gameSelectController) {

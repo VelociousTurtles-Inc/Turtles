@@ -1,6 +1,6 @@
 package Views.DoubleFastInit;
 
-import Adapters.Interfaces.GameWaiterController;
+import Controllers.Interfaces.GameWaiterController;
 
 public class GameWaiterView {
     public GameWaiterView(GameWaiterController gameWaiterController) {

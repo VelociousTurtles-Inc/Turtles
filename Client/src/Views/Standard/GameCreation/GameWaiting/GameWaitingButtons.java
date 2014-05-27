@@ -1,7 +1,7 @@
 package Views.Standard.GameCreation.GameWaiting;
 
 import Common.Interfaces.Event;
-import Adapters.Interfaces.GameWaiterController;
+import Controllers.Interfaces.GameWaiterController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -18,7 +18,7 @@ public class GameWaitingButtons {
     private String name;
     private int number;
 
-    public void setController(GameWaiterController myController) throws RemoteException {
+    public void setController(GameWaiterController myController) {
         this.controller = myController;
         this.controller.registerUpdate(new Event() {
             @Override

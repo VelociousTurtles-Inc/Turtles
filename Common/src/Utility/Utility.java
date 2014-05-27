@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Utility {
-    public static Logger Debug = Logger.getLogger("Server");
+    public static final Logger Debug = Logger.getLogger("Server");
 
     public static void logInfo(String message) {
         Debug.log(Level.INFO, message);

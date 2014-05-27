@@ -2,16 +2,14 @@ package Images;
 
 import javafx.scene.image.Image;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ImageContainer {
-    private Map<String, Image> imageMap = new HashMap<>();
-    private ClassLoader classLoader;
-    private String path;
+    private final Map<String, Image> imageMap = new HashMap<>();
+    private final ClassLoader classLoader;
+    private final String path;
 
     public ImageContainer(ClassLoader classLoader, String path) {
         this.classLoader = classLoader;

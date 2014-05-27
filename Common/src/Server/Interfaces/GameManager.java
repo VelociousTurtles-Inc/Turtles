@@ -1,6 +1,5 @@
 package Server.Interfaces;
 
-import Client.Interfaces.GameWaiterClient;
 import Model.Board.Board;
 import Model.Cards.Card;
 import Model.GameInfo;

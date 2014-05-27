@@ -1,4 +1,4 @@
-package Adapters.Interfaces;
+package Controllers.Interfaces;
 
 import Common.Interfaces.Event;
 
@@ -15,5 +15,5 @@ public interface GameWaiterController {
 
     void leave() throws RemoteException;
 
-    String getGameName() throws RemoteException;
+    String getGameName();
 }

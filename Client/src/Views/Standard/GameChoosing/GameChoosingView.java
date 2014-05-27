@@ -1,6 +1,6 @@
 package Views.Standard.GameChoosing;
 
-import Adapters.Interfaces.GameSelectController;
+import Controllers.Interfaces.GameSelectController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class GameChoosingView {
 
-    GameSelectController myController;
+    final GameSelectController myController;
     GameChoosingButtons myButtons;
 
     public GameChoosingView(GameSelectController myController) {

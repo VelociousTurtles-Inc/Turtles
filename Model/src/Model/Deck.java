@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Deck{
 
-    HashMap<Integer, Card> cardsMap;
+    final HashMap<Integer, Card> cardsMap;
 
     List<Integer> availableCards;
     List<Integer> deadCards;

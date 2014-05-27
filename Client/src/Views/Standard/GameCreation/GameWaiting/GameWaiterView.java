@@ -1,6 +1,6 @@
 package Views.Standard.GameCreation.GameWaiting;
 
-import Adapters.Interfaces.GameWaiterController;
+import Controllers.Interfaces.GameWaiterController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 
 public class GameWaiterView {
-    GameWaiterController myController;
+    final GameWaiterController myController;
     GameWaitingButtons myButtons;
 
     public GameWaiterView(GameWaiterController controller) {
@@ -28,7 +28,7 @@ public class GameWaiterView {
             }
         });
     }
-    public void start(String name, int numberOP) throws RemoteException {
+    public void start(String name, int numberOP) {
 
                 Stage myStage = new Stage();
                 FXMLLoader myLoader = new FXMLLoader();
@@ -39,8 +39,6 @@ public class GameWaiterView {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                System.out.println("Wowowowowwowow");
 
                 myButtons = myLoader.getController();
 

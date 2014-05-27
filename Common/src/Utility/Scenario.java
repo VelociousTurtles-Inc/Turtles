@@ -8,10 +8,10 @@ import java.util.Set;
 
 public class Scenario {
     // TODO removing
-    private Map<Class<?>, Entry> scenarioMap = new HashMap<>();
+    private final Map<Class<?>, Entry> scenarioMap = new HashMap<>();
 
     private class Entry {
-        Set<Class<?>> views = new HashSet<>();
+        final Set<Class<?>> views = new HashSet<>();
 
         void add(Class<?> view) {
             views.add(view);
@@ -37,11 +37,6 @@ public class Scenario {
         }
     }
 
-    /**
-     * Invokes all registered views for given adapterClass
-     * @param adapterClass
-     * @param adapter have to implement / extend adapterClass
-     */
     public void invoke(Class<?> adapterClass, Object adapter) {
         for (Class<?> view : get(adapterClass)) {
             try {

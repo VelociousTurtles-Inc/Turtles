@@ -9,7 +9,7 @@ import java.util.logging.Level;
 
 public class SimpleBoard extends Board {
     private static final long serialVersionUID = -3932283805405624796L;
-    private BoardGraph.Field End;
+    private final BoardGraph.Field End;
 
     public SimpleBoard()
     {

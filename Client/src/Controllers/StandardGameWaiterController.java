@@ -1,7 +1,7 @@
-package Adapters;
+package Controllers;
 
 import Common.Interfaces.Event;
-import Adapters.Interfaces.GameWaiterController;
+import Controllers.Interfaces.GameWaiterController;
 import Client.Interfaces.GameWaiterClient;
 import Main.Client;
 import Server.Interfaces.PlayerService;
@@ -15,9 +15,9 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     private final List<Event> updateEvents = new LinkedList<>();
     private final List<Event> cancelEvents = new LinkedList<>();
     private final List<Event> closingEvents = new LinkedList<>();
-    private int gameID;
+    private final int gameID;
     private int myNumberOfPlayers;
-    private WaiterService myGameDispenser;
+    private final WaiterService myGameDispenser;
     private String gameName;
 
     public StandardGameWaiterController(int myID, WaiterService myGameDispenser) throws RemoteException {
