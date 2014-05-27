@@ -1,6 +1,5 @@
 package Model;
 
-import Interfaces.IDeck;
 import Model.Cards.Card;
 import Model.Cards.DoubleForwardCard;
 import Model.Cards.SingleBackwardCard;
@@ -12,7 +11,7 @@ import java.util.*;
  * Created by Maciej on 2014-05-05.
  */
 
-public class Deck implements IDeck {
+public class Deck{
 
     HashMap<Integer, Card> cardsMap;
 
@@ -38,7 +37,6 @@ public class Deck implements IDeck {
         }
     }
 
-    @Override
     public int getCard() {
         int result = availableCards.get(availableCards.size()-1);
         availableCards.remove(availableCards.size()-1);
@@ -52,7 +50,6 @@ public class Deck implements IDeck {
         return result;
     }
 
-    @Override
     public void returnCard(int cardID) {
         deadCards.add(cardID);
     }
