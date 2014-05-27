@@ -1,8 +1,6 @@
 package GameDispenser;
 
-import Client.Interfaces.ClientLogin;
-import Client.Interfaces.GameSelectClient;
-import Client.Interfaces.GameWaiterClient;
+import Client.Interfaces.LoginClient;
 import Client.Interfaces.ThreeStringsGet;
 import Events.Event;
 import Main.Server;
@@ -10,9 +8,7 @@ import Model.SimplestGameInfo;
 import Model.Utility.Utility;
 import Server.Interfaces.*;
 import Services.StandardWaiterService;
-import org.cojen.dirmi.ClosedException;
 
-import java.rmi.RemoteException;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -197,7 +193,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 
     @Override
-    public void newSelector(String name, ClientLogin login) throws Exception {
+    public void newSelector(String name, LoginClient login) throws Exception {
         mySelecters.add(new StandardWaiterService(name, login, this));
     }
 }

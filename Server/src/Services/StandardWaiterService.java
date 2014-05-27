@@ -1,6 +1,6 @@
 package Services;
 
-import Client.Interfaces.ClientLogin;
+import Client.Interfaces.LoginClient;
 import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.GameWaiterClient;
 import Client.Interfaces.ThreeStringsGet;
@@ -22,7 +22,7 @@ public class StandardWaiterService implements WaiterService {
     private int chosenGame;
     private String myName;
 
-    public StandardWaiterService(String name, ClientLogin selecter, GameDispenser dispenser) throws Exception {
+    public StandardWaiterService(String name, LoginClient selecter, GameDispenser dispenser) throws Exception {
         myDispenser = dispenser;
         myName = name;
 

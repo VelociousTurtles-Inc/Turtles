@@ -1,6 +1,7 @@
 package Views.Standard.Login;
 
-import Adapters.LoginController;
+import Adapters.Interfaces.LoginController;
+import Adapters.StandardLoginController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

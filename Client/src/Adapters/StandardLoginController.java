@@ -1,44 +1,41 @@
 package Adapters;
 
-import Client.Interfaces.ClientLogin;
+import Adapters.Interfaces.LoginController;
+import Client.Interfaces.LoginClient;
 import Events.Event;
 import Main.Client;
-import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameEntry;
 import Server.Interfaces.WaiterService;
-import Views.Standard.Login.LoginView;
 import org.cojen.dirmi.Environment;
 import org.cojen.dirmi.Session;
 
-import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by michaziobro on 26.05.2014.
  */
-public class LoginController implements ClientLogin {
+public class StandardLoginController implements LoginClient, LoginController {
 
     GameEntry gameEntry;
 
-    LoginView myView;
-
-    LoginController() throws Exception {
-        myView = new LoginView(this);
-        myView.start();
+    StandardLoginController() throws Exception {
+        Client.scenario.invoke(LoginController.class, this);
     }
 
     List<Event> closeEvents = new LinkedList<>();
 
+    @Override
     public void registerCloseEvent(Event event) {
         closeEvents.add(event);
     }
+    @Override
     public void close() {
         for(Event ev : closeEvents) {
             ev.call();
         }
     }
+    @Override
     public void submit(String name) throws Exception {
         System.out.println("Submit with name: " + name);
         Environment environment = new Environment();

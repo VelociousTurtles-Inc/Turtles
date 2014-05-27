@@ -1,6 +1,7 @@
 package Views.Standard.Login;
 
-import Adapters.LoginController;
+import Adapters.Interfaces.LoginController;
+import Adapters.StandardLoginController;
 import Events.Event;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

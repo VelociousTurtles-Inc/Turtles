@@ -21,7 +21,7 @@ public class StandardMenuController implements MenuController {
             public void run() {
                 try {
                     //StandardGameSelectController myGCC = new StandardGameSelectController();
-                    LoginController myController = new LoginController();
+                    StandardLoginController myController = new StandardLoginController();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
