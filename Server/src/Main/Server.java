@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Server {
     private static int port;
     public static Scenario scenario;
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         scenario = new StandardScenario();
         port = args.length > 1 ? Integer.valueOf(args[0]) : 8080;
         Environment environment = null;
