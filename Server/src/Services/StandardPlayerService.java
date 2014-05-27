@@ -89,7 +89,11 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
 
     @Override
     public void playCard(int cardNumber) throws RemoteException {
-        if (!isLocked()) myCards.get(cardNumber).setCardID(myManager.playCard(myCards.get(cardNumber).getCardID()));
+        if (!isLocked()) {
+            myManager.playCard(myCards.get(cardNumber).getCardID());
+            myCards.get(cardNumber).setCardID(myManager.getNextCard());
+            updateCards();
+        }
     }
 
     @Override
@@ -123,12 +127,15 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
         }
     }
 
-    public void update() {
+    public void updateBoard() {
         try {
             myClient.updateBoards();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateCards() {
         try {
             myClient.updateCards();
         } catch (RemoteException e) {

@@ -14,7 +14,9 @@ public interface GameManager extends Remote {
 
     public Board getBoard() throws RemoteException;
 
-    public int playCard(int cardID) throws RemoteException;
+    public void playCard(int cardID) throws RemoteException;
+
+    int getNextCard() throws RemoteException;
 
     void nextTurn() throws RemoteException;
 
@@ -42,4 +44,4 @@ public interface GameManager extends Remote {
     void addZombie() throws RemoteException;
 
     List<String> GetListOfPlayers() throws RemoteException;
-        }
+}

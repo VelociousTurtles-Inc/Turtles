@@ -11,7 +11,7 @@ public interface ServerPlayerService {
 
     void unlock();
 
-    void update();
+    void updateBoard();
 
     void checkZombieness();
 
