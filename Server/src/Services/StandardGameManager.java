@@ -225,7 +225,7 @@ public class StandardGameManager implements GameManager {
         else {
             Utility.logInfo("Trying to clean");
             Iterator<WaiterService> gameWaiterClientIterator = gameWaiterClients.iterator();
-            do {
+            while (gameWaiterClientIterator.hasNext()) {
                 WaiterService gameWaiterClient = gameWaiterClientIterator.next();
                 Utility.logInfo("nextClient");
                 if (gameWaiterClient != null) {
@@ -236,7 +236,7 @@ public class StandardGameManager implements GameManager {
                         gameWaiterClientIterator.remove();
                     }
                 }
-            } while (gameWaiterClientIterator.hasNext());
+            }
 
             if (gameWaiterClients.isEmpty()) {
                 Utility.logInfo("Removing zombie game #" + gameId);

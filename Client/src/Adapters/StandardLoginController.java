@@ -22,8 +22,6 @@ public class StandardLoginController implements LoginClient, LoginController {
     LoginView loginView;
     StandardLoginController() throws RemoteException {
         Client.scenario.invoke(LoginController.class, this);
-        loginView = new LoginView(this);
-        loginView.start();
     }
 
     List<Event> closeEvents = new LinkedList<>();

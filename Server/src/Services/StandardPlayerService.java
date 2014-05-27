@@ -117,7 +117,6 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
             try {
                 myClient.ping();
             } catch (RemoteException e) {
-                e.printStackTrace();
                 Utility.logInfo("Assumed player is zombie => removing");
                 try {
                     leave();
@@ -168,7 +167,7 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
             myClient.close();
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
+    }
     }
 
     @Override
@@ -199,15 +198,11 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
 // END OF NOTREMOTE SECTION
     @Override
     public void announceWinner(Colors winner) {
-        if (!isZombie()) {
-            try {
-                myClient.announceWinner(winner.toInteger());
-            } catch (RemoteException e) {
-                e.printStackTrace();
-                setZombie();
-            }
+        try {
+            myClient.announceWinner(winner.toInteger());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            setZombie();
         }
     }
-
-
 }
