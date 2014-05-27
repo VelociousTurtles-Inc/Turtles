@@ -97,6 +97,7 @@ public class StandardGameManager implements GameManager {
     @Override
     public void nextTurn() throws RemoteException {
         if (zombiesCount.get() == numberOfPlayers) {
+            lockAll();
             return;
         }
         playerServices.get(playerOnMove).lock();
