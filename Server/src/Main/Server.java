@@ -1,7 +1,7 @@
 package Main;
 
 import GameDispenser.StandardGameDispenser;
-import Model.Utility.Utility;
+import Utility.Utility;
 import Scenarios.Scenario;
 import Scenarios.StandardScenario;
 import Server.Interfaces.GameEntry;

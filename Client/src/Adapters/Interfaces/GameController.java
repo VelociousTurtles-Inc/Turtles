@@ -1,6 +1,7 @@
 package Adapters.Interfaces;
 
 
+import Colors.Colors;
 import Events.Event;
 import Model.Cards.Card;
 import Server.Interfaces.PlayerService;
@@ -32,8 +33,10 @@ public interface GameController {
     void registerCloseEvent(Event closeEvent);
 
     void registerChangeMovingPlayerEvent(Event changeEvent);
+    void registerWinnerUpdateEvent(Event winnerUpdateEvent);
 
     List<String> getPlayers() throws RemoteException;
+    Colors getWinner();
 
     int getLastMoving();
 }

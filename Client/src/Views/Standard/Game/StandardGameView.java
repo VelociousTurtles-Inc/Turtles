@@ -7,11 +7,13 @@ import Images.ImageContainer;
 import Images.Images;
 import Model.Cards.Card;
 import Utility.DebugWriter;
+import Utility.Utility;
 import Utils.BoolRunnable;
 import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.awt.*;
+import java.awt.im.InputContext;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -152,6 +156,21 @@ public class StandardGameView {
         gameController.registerUpdateBoardEvent(new BoardUpdater());
         gameController.registerUpdateCardsEvent(new CardsUpdater());
         gameController.registerCloseEvent(new CloseEvent());
+        gameController.registerWinnerUpdateEvent(new WinnerUpdateEvent());
+    }
+
+    private class WinnerUpdateEvent implements Event {
+        @Override
+        public void call() {
+            final Colors winner = gameController.getWinner();
+            Utility.logInfo("GV");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("Announcing Winner: " + winner);
+                }
+            });
+        }
     }
 
     public void start() throws RemoteException {

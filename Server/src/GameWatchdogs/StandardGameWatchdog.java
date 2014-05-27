@@ -1,7 +1,7 @@
 package GameWatchdogs;
 
 import Events.Event;
-import Model.Utility.Utility;
+import Utility.Utility;
 import Server.Interfaces.ServerGameDispenser;
 import Server.Interfaces.GameManager;
 

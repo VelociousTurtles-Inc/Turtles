@@ -5,7 +5,7 @@ import Adapters.Interfaces.GameSelectController;
 import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.ThreeStringsGet;
 import Main.Client;
-import Model.SimplestGameInfo;
+import Model.GameInfo;
 import Server.Interfaces.WaiterService;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.List;
 public class StandardGameSelectController implements GameSelectController, GameSelectClient {
 
     private WaiterService myWaiter;
-    private List<SimplestGameInfo> simpleGameInfos;
+    private List<GameInfo> simpleGameInfos;
 
     private final List<Event> cancelEvents = new ArrayList<>();
     private final List<Event> updateEvents = new ArrayList<>();
@@ -74,7 +74,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
     }
 
     @Override
-    public List<SimplestGameInfo> getUpdateList() {
+    public List<GameInfo> getUpdateList() {
         return simpleGameInfos;
     }
 
