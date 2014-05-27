@@ -11,9 +11,9 @@ public class GameInfo implements Serializable {
         private String numberOfPlayers;
 
         public GameInfo(String fName, String lName, String numberOfPlayers) {
-            this.gameName = new String(fName);
-            this.gameStatus = new String(lName);
-            this.numberOfPlayers = new String(numberOfPlayers);
+            this.gameName = fName;
+            this.gameStatus = lName;
+            this.numberOfPlayers = numberOfPlayers;
         }
 
         public String getGameName() {

@@ -1,6 +1,6 @@
 package Views.FastInit;
 
-import Adapters.Interfaces.MenuController;
+import Controllers.Interfaces.MenuController;
 
 public class MenuView {
     public MenuView(final MenuController menuController) {

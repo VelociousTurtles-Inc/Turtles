@@ -5,15 +5,15 @@ import java.util.*;
 public enum Colors {
     NULL, RED, GREEN, YELLOW, BLUE, ORANGE;
 
-    private static Map<Object, Colors> objectColorsMap = new HashMap<>();
-    private static Map<Colors, Integer> colorsIntegerMap = new HashMap<>();
-    private static Map<Colors, String> colorsStringMap = new HashMap<>();
-    private static List<Integer> realIntegers = new ArrayList<>();
-    private static List<Integer> allIntegers = new ArrayList<>();
-    private static List<String> realStrings = new ArrayList<>();
-    private static List<String> allStrings = new ArrayList<>();
-    private static List<Colors> realColors = new ArrayList<>();
-    private static List<Colors> allColors = new ArrayList<>();
+    private static final Map<Object, Colors> objectColorsMap = new HashMap<>();
+    private static final Map<Colors, Integer> colorsIntegerMap = new HashMap<>();
+    private static final Map<Colors, String> colorsStringMap = new HashMap<>();
+    private static final List<Integer> realIntegers = new ArrayList<>();
+    private static final List<Integer> allIntegers = new ArrayList<>();
+    private static final List<String> realStrings = new ArrayList<>();
+    private static final List<String> allStrings = new ArrayList<>();
+    private static final List<Colors> realColors = new ArrayList<>();
+    private static final List<Colors> allColors = new ArrayList<>();
     private final static Random random = new Random();
 
     static {

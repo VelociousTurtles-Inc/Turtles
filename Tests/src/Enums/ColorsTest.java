@@ -2,6 +2,7 @@ package Enums;
 
 import junit.framework.TestCase;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,9 +13,7 @@ public class ColorsTest extends TestCase {
     @Override
     public void setUp() {
         allColors = new HashSet<>();
-        for (Colors i : Colors.values()) {
-            allColors.add(i);
-        }
+        Collections.addAll(allColors, Colors.values());
     }
 
     public void testMapsFilling() {

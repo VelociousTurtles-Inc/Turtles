@@ -6,7 +6,7 @@ public interface GameDispenser {
     // TODO authenticate
 
     void leaveGame(int gameID, WaiterService mySel) throws RemoteException;
-    void cancelGame(int gameID) throws RemoteException;
+    void cancelGame(int gameID);
 
     GameManager connectToGame(int id, WaiterService mySel) throws RemoteException;
 

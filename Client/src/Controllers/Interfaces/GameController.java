@@ -1,4 +1,4 @@
-package Adapters.Interfaces;
+package Controllers.Interfaces;
 
 import Common.Interfaces.Event;
 import Enums.Colors;

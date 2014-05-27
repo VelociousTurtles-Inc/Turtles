@@ -1,6 +1,6 @@
 package Scenarios;
 
-import Adapters.Interfaces.*;
+import Controllers.Interfaces.*;
 import Views.FastInit.RandomLoginView;
 import Views.Standard.Game.StandardGameView;
 import Views.Standard.Menu.StandardMenuView;

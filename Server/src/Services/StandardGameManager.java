@@ -21,7 +21,7 @@ public class StandardGameManager implements GameManager {
 
     final AtomicBoolean started = new AtomicBoolean();
     int numberOfPlayers;
-    String name;
+    final String name;
 
     Deck myDeck;
     Board board;
@@ -33,8 +33,8 @@ public class StandardGameManager implements GameManager {
     private final List<WaiterService> gameWaiterClients = new LinkedList<>();
     private final List<StandardPlayerService> playerServices = new LinkedList<>();
     private final AtomicInteger zombiesCount = new AtomicInteger();
-    private int gameId;
-    private ServerGameDispenser gameDispenser;
+    private final int gameId;
+    private final ServerGameDispenser gameDispenser;
     private Colors winner;
 
     public StandardGameManager(String name, int gameId, ServerGameDispenser gameDispenser) {

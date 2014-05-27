@@ -8,7 +8,6 @@ import Scenarios.StandardScenario;
 import org.cojen.dirmi.Environment;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 

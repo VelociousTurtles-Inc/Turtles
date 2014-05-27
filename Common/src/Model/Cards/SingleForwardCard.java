@@ -67,7 +67,7 @@ public class SingleForwardCard extends Card {
     }
 
     @Override
-    public String getShortDecription() {
+    public String getShortDescription() {
         return "Idź do przodu";
     }
 

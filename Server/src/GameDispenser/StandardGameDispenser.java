@@ -15,8 +15,8 @@ import java.util.*;
 import java.util.logging.Level;
 
 public class StandardGameDispenser implements GameDispenser, ServerGameDispenser, GameEntry {
-    private Map<Integer, GameManager> gameServices = new HashMap<>();
-    private Set<StandardWaiterService> mySelectors = new HashSet<>();
+    private final Map<Integer, GameManager> gameServices = new HashMap<>();
+    private final Set<StandardWaiterService> mySelectors = new HashSet<>();
 
     private int getEmptyId() {
         Random random = new Random();
@@ -58,7 +58,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
         return id;
     }
 
-    Collection<Event> closeEvents = new LinkedList<>();
+    final Collection<Event> closeEvents = new LinkedList<>();
 
     private void callCloseEvents() {
         for (Event event : closeEvents) {
@@ -71,40 +71,6 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     public void registerCloseEvent(Event event) {
         closeEvents.add(event);
     }
-/*
-    @Override
-    public void setGameSelector(GameSelectClient mySelector) throws RemoteException {
-        mySelectors.add(mySelector);
-
-        // update list of game
-        /*List<SimpliestGameInfo> myList = new LinkedList<>();
-        ThreeStringsGet myTSG = new ThreeStringsGet() {
-            List<SimpliestGameInfo> list;
-            @Override
-            public void setList(List<SimpliestGameInfo> list) throws RemoteException{
-                this.list = list;
-            }
-
-            @Override
-            public List<SimpliestGameInfo> getList() throws RemoteException {
-                return list;
-            }
-        };
-        for(GameManager myGame : gameServices.values()) {
-            myList.add(myGame.getGameInfo());
-        }
-        myTSG.setList(myList);
-
-        try {
-            mySelector.update(myTSG);
-        } catch (ClosedException e) {
-            mySelectors.remove(mySelector);
-        }
-
-        // or just - but we don't need update all
-        update();
-    }
-*/
     @Override
     public String getGameName(int gameID) throws RemoteException {
         return gameServices.get(gameID).getGameInfo().getGameName();

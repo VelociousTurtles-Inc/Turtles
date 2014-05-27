@@ -1,6 +1,6 @@
 package Views.Standard.Menu;
 
-import Adapters.Interfaces.MenuController;
+import Controllers.Interfaces.MenuController;
 import Utility.DebugWriter;
 import javafx.application.Platform;
 import javafx.event.EventHandler;

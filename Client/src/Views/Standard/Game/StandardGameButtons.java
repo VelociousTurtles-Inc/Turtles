@@ -1,7 +1,7 @@
 package Views.Standard.Game;
 
 import Common.Interfaces.Event;
-import Adapters.Interfaces.GameController;
+import Controllers.Interfaces.GameController;
 import Utility.DebugWriter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -57,7 +57,7 @@ public class StandardGameButtons {
         return cards;
     }
 
-    List<Label> myPlayers = new LinkedList<>();
+    final List<Label> myPlayers = new LinkedList<>();
 
     private int lastMoving = 0;
 
@@ -124,7 +124,7 @@ public class StandardGameButtons {
         myPlayers.get(0).setTextFill(Color.GREEN);
     }
 
-    @FXML protected void surrIt(ActionEvent event) {
+    @FXML protected void surrenderIt(ActionEvent event) {
         assert DebugWriter.write("Surrender");
         myGameController.surrender();
     }

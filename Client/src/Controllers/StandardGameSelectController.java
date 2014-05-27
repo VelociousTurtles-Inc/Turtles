@@ -1,9 +1,8 @@
-package Adapters;
+package Controllers;
 
 import Client.Interfaces.ThreeStringsGet;
-import Model.GameInfo;
 import Common.Interfaces.Event;
-import Adapters.Interfaces.GameSelectController;
+import Controllers.Interfaces.GameSelectController;
 import Client.Interfaces.GameSelectClient;
 import Main.Client;
 import Model.GameInfo;
@@ -16,7 +15,7 @@ import java.util.List;
 
 public class StandardGameSelectController implements GameSelectController, GameSelectClient {
 
-    private WaiterService waiterService;
+    private final WaiterService waiterService;
     private List<GameInfo> gameInfoList;
 
     private final List<Event> cancelEvents = new ArrayList<>();
@@ -31,7 +30,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void join(int gameID) throws RemoteException {
-        StandardGameWaiterController gameWaiterController = new StandardGameWaiterController(gameID, waiterService);
+        new StandardGameWaiterController(gameID, waiterService);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void create() {
-        StandardGameCreatorController gameCreatorController = new StandardGameCreatorController(waiterService);
+        new StandardGameCreatorController(waiterService);
     }
 
     @Override

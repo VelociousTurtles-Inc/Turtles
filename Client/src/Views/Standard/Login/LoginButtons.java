@@ -1,8 +1,7 @@
 package Views.Standard.Login;
 
-import Adapters.Interfaces.LoginController;
+import Controllers.Interfaces.LoginController;
 import Common.Interfaces.Event;
-import Adapters.StandardLoginController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
@@ -39,7 +38,7 @@ public class LoginButtons {
         return stage;
     }
 
-    public void submit(ActionEvent actionEvent) throws RemoteException {
+    public void submit(ActionEvent actionEvent) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

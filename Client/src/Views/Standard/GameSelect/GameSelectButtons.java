@@ -1,8 +1,8 @@
 package Views.Standard.GameSelect;
 
 import Common.Interfaces.Event;
-import Adapters.Interfaces.GameSelectController;
-import Adapters.SimpleGameInfo;
+import Controllers.Interfaces.GameSelectController;
+import Controllers.SimpleGameInfo;
 import Model.GameInfo;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -80,7 +80,6 @@ public class GameSelectButtons {
         numberColumn.setCellValueFactory(new PropertyValueFactory<SimpleGameInfo, String>("numberOfPlayers"));
 
         myTableList = new ArrayList<>();
-        myTableList.add(new SimpleGameInfo("nazwa1", "nazwa2", "nazwa3"));
 
         myObservableTableList = FXCollections.observableArrayList(myTableList);
 

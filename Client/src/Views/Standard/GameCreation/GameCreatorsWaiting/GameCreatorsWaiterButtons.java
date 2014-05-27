@@ -1,7 +1,7 @@
 package Views.Standard.GameCreation.GameCreatorsWaiting;
 
 import Common.Interfaces.Event;
-import Adapters.Interfaces.GameCreatorWaiterController;
+import Controllers.Interfaces.GameCreatorWaiterController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -19,7 +19,7 @@ public class GameCreatorsWaiterButtons {
     private String name;
     private int number;
 
-    public void setController(GameCreatorWaiterController myController) throws RemoteException {
+    public void setController(GameCreatorWaiterController myController) {
         this.controller = myController;
         this.controller.registerUpdateEvent(new Event() {
             @Override

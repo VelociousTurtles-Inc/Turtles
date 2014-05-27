@@ -67,7 +67,7 @@ public class SingleBackwardCard extends Card {
     }
 
     @Override
-    public String getShortDecription() {
+    public String getShortDescription() {
         return "Idź do tyłu";
     }
 

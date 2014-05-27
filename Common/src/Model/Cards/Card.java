@@ -47,7 +47,7 @@ public abstract class Card implements Serializable {
     public static List<Card> populate()
     {
         assert false;
-        return new ArrayList<Card>();
+        return new ArrayList<>();
     }
 
     public abstract void play(Board board);
@@ -59,10 +59,10 @@ public abstract class Card implements Serializable {
 
     @Override
     public String toString() {
-        return "Card : " + getShortDecription() + " [ " + Colors.asString(getColor()) + " ]";
+        return "Card : " + getShortDescription() + " [ " + Colors.asString(getColor()) + " ]";
     }
 
-    public String getShortDecription() {
+    public String getShortDescription() {
         return getClass().toString();
     }
 

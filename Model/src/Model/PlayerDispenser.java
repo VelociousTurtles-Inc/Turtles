@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class PlayerDispenser {
-    private Collection<Player> container;
+    private final Collection<Player> container;
 
     public PlayerDispenser() {
         container = new HashSet<>();

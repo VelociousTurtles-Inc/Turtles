@@ -1,8 +1,8 @@
-package Adapters.Interfaces;
+package Controllers.Interfaces;
 
 import java.rmi.RemoteException;
 
 public interface MenuController {
-    void startGame() throws RemoteException;
+    void startGame();
     void exitProgram();
 }

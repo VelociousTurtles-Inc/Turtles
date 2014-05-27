@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Turtle implements Serializable {
     private static final long serialVersionUID = 2763735491352166723L;
 
-    public int color;
+    public final int color;
     // Player ref goes here
     /*
         Backward Board reference

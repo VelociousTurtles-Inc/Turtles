@@ -11,8 +11,8 @@ import java.rmi.RemoteException;
  * Creates thread, which deletes zombie games
  */
 public class StandardGameWatchdog {
-    private ServerGameDispenser gameDispenser;
-    private Thread watchdogThread;
+    private final ServerGameDispenser gameDispenser;
+    private final Thread watchdogThread;
 
     private static final int WATCHDOG_TIMEOUT = 10000;
 

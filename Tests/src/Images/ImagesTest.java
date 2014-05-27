@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import junit.framework.TestCase;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 
 public class ImagesTest extends TestCase {
 

@@ -1,6 +1,6 @@
 package Views.Standard.GameCreation.GameCreatorsWaiting;
 
-import Adapters.Interfaces.GameCreatorWaiterController;
+import Controllers.Interfaces.GameCreatorWaiterController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 
 public class GameCreatorWaiterView {
-    GameCreatorWaiterController myController;
+    final GameCreatorWaiterController myController;
     GameCreatorsWaiterButtons myButtons;
 
     public GameCreatorWaiterView(GameCreatorWaiterController standardGameCreatorController) {

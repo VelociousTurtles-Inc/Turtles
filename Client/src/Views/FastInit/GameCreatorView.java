@@ -1,6 +1,6 @@
 package Views.FastInit;
 
-import Adapters.Interfaces.GameCreatorController;
+import Controllers.Interfaces.GameCreatorController;
 
 import java.util.Random;
 

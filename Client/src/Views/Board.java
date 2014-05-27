@@ -8,7 +8,8 @@ import java.util.List;
 
 public class Board implements Serializable {
 
-    public List<Point> positions = new ArrayList<Point>();
+    private static final long serialVersionUID = 7015181934501525828L;
+    public final List<Point> positions = new ArrayList<>();
     public int size, maxTurtles;
     public String name;
     //path to image should be here
@@ -22,7 +23,7 @@ public class Board implements Serializable {
         try {
             //TODO, if anyone wants to change anything here, please do it on working code and
             //make sure it still works after the change.
-            //InputStream fileIn = Board.class.getResourceAsStream("Resources/Boards/"+nname);
+            //InputStream fileIn = Board.class.getResourceAsStream("Resources/Boards/"+name);
             InputStream fileIn = new FileInputStream(System.getProperty("user.dir")+"/Client/src/Resources/Boards/"+boardName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             temp = (Board) in.readObject();

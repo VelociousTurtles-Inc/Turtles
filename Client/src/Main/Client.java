@@ -1,6 +1,6 @@
 package Main;
 
-import Adapters.StandardMenuController;
+import Controllers.StandardMenuController;
 import Utility.Scenario;
 import Scenarios.StandardScenario;
 import Utility.DebugWriter;
@@ -25,7 +25,7 @@ public class Client {
         Client.scenario = scenario;
 
         assert DebugWriter.write("Launching game", "host = " + host, "port = " + port);
-        StandardMenuController myMenuController = new StandardMenuController();
+        new StandardMenuController();
     }
 
     public static void main(String[] args) {

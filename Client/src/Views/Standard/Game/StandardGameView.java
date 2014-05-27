@@ -1,6 +1,6 @@
 package Views.Standard.Game;
 
-import Adapters.Interfaces.GameController;
+import Controllers.Interfaces.GameController;
 import Enums.Colors;
 import Common.Interfaces.Event;
 import Images.ImageContainer;
@@ -13,18 +13,14 @@ import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.awt.*;
-import java.awt.im.InputContext;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -35,12 +31,12 @@ public class StandardGameView {
     // cards -> slots
     private List<ImageView> slots = new ArrayList<>();
     private List<ImageView> turtles = new ArrayList<>();
-    private Board myBoard = BoardBootstrap.createSampleBoard();   //Board.readBoard("sampleBoard");
+    private final Board myBoard = BoardBootstrap.createSampleBoard();   //Board.readBoard("sampleBoard");
     private GameController gameController;
 
     private Stage stage;
 
-    private ImageContainer imageContainer = new ImageContainer(this.getClass().getClassLoader(), "Resources/Images/Cards");
+    private final ImageContainer imageContainer = new ImageContainer(this.getClass().getClassLoader(), "Resources/Images/Cards");
     private javafx.scene.control.Label winnerLabel;
     private Pane winnerPane;
 
@@ -109,13 +105,13 @@ public class StandardGameView {
         @Override
         public void call() {
             assert DebugWriter.write("Cards Updating");
-            final List<Card> cardInfos;
+            final List<Card> cardInfoList;
             try {
-                cardInfos = gameController.getCards();
+                cardInfoList = gameController.getCards();
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        updateCards(cardInfos);
+                        updateCards(cardInfoList);
                     }
                 });
             } catch (Exception e) {
@@ -185,7 +181,7 @@ public class StandardGameView {
         try {
             game = (Parent) myLoader.load((getClass().getResource("Game.fxml")).openStream());
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
 
         stage.setScene(new Scene(game));
