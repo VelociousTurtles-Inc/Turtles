@@ -125,7 +125,7 @@ public class StandardGameManager implements GameManager {
             status = "In preparation";
         }
         GameInfo myGameInfo = new GameInfo(name, status, String.valueOf(numberOfPlayers));
-        myGameInfo.setMyID(myId);
+        myGameInfo.setId(myId);
         return myGameInfo;
     }
 
@@ -170,10 +170,6 @@ public class StandardGameManager implements GameManager {
             myWaiter.closeMe();
         }
         gameDispenser.update();
-    }
-
-    public int getMyId() {
-        return myId;
     }
 
     public void update() throws RemoteException {
