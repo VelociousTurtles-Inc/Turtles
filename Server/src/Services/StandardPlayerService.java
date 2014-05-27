@@ -1,9 +1,10 @@
 package Services;
 
 import Client.Interfaces.GameClient;
+import Colors.Colors;
 import Model.Board.Board;
 import Model.Cards.Card;
-import Model.Utility.Utility;
+import Utility.Utility;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.PlayerService;
 import Server.Interfaces.ServerPlayerService;
@@ -175,5 +176,17 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
             }
         }
         return isZombie();
+    }
+
+    @Override
+    public void announceWinner(Colors winner) {
+        if (!isZombie()) {
+            try {
+                myClient.announceWinner(winner.toInteger());
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                setZombie();
+            }
+        }
     }
 }

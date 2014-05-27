@@ -5,8 +5,8 @@ import Client.Interfaces.GameWaiterClient;
 import Client.Interfaces.ThreeStringsGet;
 import Events.Event;
 import Main.Server;
-import Model.SimplestGameInfo;
-import Model.Utility.Utility;
+import Model.GameInfo;
+import Utility.Utility;
 import Server.Interfaces.GameDispenser;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.ServerGameDispenser;
@@ -153,16 +153,16 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
 
     @Override
     public void update() throws Exception {
-        List<SimplestGameInfo> myList = new LinkedList<>();
+        List<GameInfo> myList = new LinkedList<>();
         ThreeStringsGet myTSG = new ThreeStringsGet() {
-            List<SimplestGameInfo> list;
+            List<GameInfo> list;
             @Override
-            public void setList(List<SimplestGameInfo> list) throws Exception{
+            public void setList(List<GameInfo> list) throws Exception{
                 this.list = list;
             }
 
             @Override
-            public List<SimplestGameInfo> getList() throws Exception {
+            public List<GameInfo> getList() throws Exception {
                 return list;
             }
         };

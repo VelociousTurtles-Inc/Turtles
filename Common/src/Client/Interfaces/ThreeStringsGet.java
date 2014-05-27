@@ -1,6 +1,6 @@
 package Client.Interfaces;
 
-import Model.SimplestGameInfo;
+import Model.GameInfo;
 
 import java.rmi.Remote;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ThreeStringsGet extends Remote {
 
-    public void setList(List<SimplestGameInfo> list) throws Exception;
+    public void setList(List<GameInfo> list) throws Exception;
 
-    public List<SimplestGameInfo> getList() throws Exception;
+    public List<GameInfo> getList() throws Exception;
 }

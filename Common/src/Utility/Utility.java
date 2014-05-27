@@ -1,4 +1,4 @@
-package Model.Utility;
+package Utility;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

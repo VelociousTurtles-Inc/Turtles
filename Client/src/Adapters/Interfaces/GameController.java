@@ -1,6 +1,7 @@
 package Adapters.Interfaces;
 
 
+import Colors.Colors;
 import Events.Event;
 import Model.Cards.Card;
 import Server.Interfaces.PlayerService;
@@ -29,4 +30,8 @@ public interface GameController {
     boolean isLocked();
 
     void registerCloseEvent(Event closeEvent);
+
+    void registerWinnerUpdateEvent(Event winnerUpdateEvent);
+
+    Colors getWinner();
 }

@@ -1,6 +1,7 @@
 package Adapters;
 
 
+import Colors.Colors;
 import Events.Event;
 import Adapters.Interfaces.GameController;
 import Client.Interfaces.GameClient;
@@ -10,6 +11,7 @@ import Model.Cards.Card;
 import Model.Turtles.Turtle;
 import Server.Interfaces.PlayerService;
 import Utility.DebugWriter;
+import Utility.Utility;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     private final List<Event> boardUpdateEvents = new LinkedList<>();
     private final List<Event> cardsUpdateEvents = new LinkedList<>();
+    private final List<Event> winnerUpdateEvents = new LinkedList<>();
     private final List<Event> closeEvents = new LinkedList<>();
 
     private final List<Event> lockEvents = new LinkedList<>();
@@ -36,6 +39,7 @@ public class StandardGameController extends Thread implements GameController, Ga
     private final AtomicBoolean locked = new AtomicBoolean();
 
     List<Integer> playerHand;
+    private Colors winner;
 
     private void clearEvents() {
         synchronized (boardUpdateEvents) {
@@ -56,28 +60,6 @@ public class StandardGameController extends Thread implements GameController, Ga
         normalCardsMap = new HashMap<>();
 
         locked.set(true);
-
-        //WebServiceFeature[] enabledRequiredwsf = {new AddressingFeature(true, true)};
-
-        // TODO achieving gameStarter
-        //gameStarter = new ServicesTypes.GameService_Service().getGameServicePort();//new ServicesTypes.GameService_Service().getPort(GameStarter.class,enabledRequiredwsf);
-/*      Environment environment = new Environment();
-        Session session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
-
-        gameService = (GameStarter) session.receive();
-        normalCardsMap = gameService.getDeckMap(0);
-        =======
-        GameDispenser gameDispenser = (GameDispenser) session.receive();
-        Integer gameId = gameDispenser.createNewGame();
-        if (gameId == null) {
-            throw new NullPointerException();
-        }
-        gameService = gameDispenser.connectToGame(gameId);
-        gameService.registerClient(this);
-
-        for(CardInfoPair myPair : gameService.getDeckList()) {
-            normalCardsMap.put(myPair.getKey(), myPair.getValue());
-        }*/
     }
 
     @Override
@@ -262,5 +244,28 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public void ping() throws RemoteException {
+    }
+
+    @Override
+    public void registerWinnerUpdateEvent(Event winnerUpdateEvent) {
+        synchronized (winnerUpdateEvents) {
+            assert DebugWriter.write("Registering new Winner Update Event");
+            winnerUpdateEvents.add(winnerUpdateEvent);
+        }
+    }
+
+    @Override
+    public void announceWinner(Integer winner) throws RemoteException {
+        this.winner = Colors.asColor(winner);
+        synchronized (winnerUpdateEvents) {
+            for (Event event : winnerUpdateEvents) {
+                event.call();
+            }
+        }
+    }
+
+    @Override
+    public Colors getWinner() {
+        return winner;
     }
 }

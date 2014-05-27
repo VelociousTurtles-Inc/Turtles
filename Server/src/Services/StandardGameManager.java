@@ -7,8 +7,8 @@ import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Deck;
-import Model.SimplestGameInfo;
-import Model.Utility.Utility;
+import Model.GameInfo;
+import Utility.Utility;
 import Server.Interfaces.*;
 
 import java.rmi.RemoteException;
@@ -42,6 +42,7 @@ public class StandardGameManager implements GameManager {
     private final AtomicInteger zombiesCount = new AtomicInteger();
     private int gameId;
     private ServerGameDispenser gameDispenser;
+    private Colors winner;
 
     public StandardGameManager(String name, int gameId, ServerGameDispenser gameDispenser) {
         this.gameId = gameId;
@@ -64,14 +65,31 @@ public class StandardGameManager implements GameManager {
             myPlayer.update();
         }
         checkGameStatus();
-        nextTurn();
+        if (winner == null) {
+            nextTurn();
+        } else {
+            lockAll();
+        }
         return myDeck.getCard();
     }
 
     public void checkGameStatus() {
-        Colors winning = board.checkWins();
-        if (winning != null) {
-            // TODO update game status
+        winner = board.checkWins();
+        if (winner != null) {
+            lockAll();
+            announceWinner(winner);
+        }
+    }
+
+    public void announceWinner(Colors winner) {
+        for (ServerPlayerService playerService : playerServices) {
+            playerService.announceWinner(winner);
+        }
+    }
+
+    public void lockAll() {
+        for (ServerPlayerService playerService : playerServices) {
+            playerService.lock();
         }
     }
 
@@ -99,15 +117,15 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public SimplestGameInfo getGameInfo() {
-        String sstatus;
+    public GameInfo getGameInfo() {
+        String status;
         if(started.get() == true) {
-            sstatus = "Started";
+            status = "Started";
         }
         else {
-            sstatus = "In preparation";
+            status = "In preparation";
         }
-        SimplestGameInfo myGameInfo = new SimplestGameInfo(name, sstatus, String.valueOf(numberOfPlayers));
+        GameInfo myGameInfo = new GameInfo(name, status, String.valueOf(numberOfPlayers));
         myGameInfo.setMyID(myId);
         return myGameInfo;
     }

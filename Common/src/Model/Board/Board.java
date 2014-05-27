@@ -1,6 +1,7 @@
 package Model.Board;
 
 import Colors.Colors;
+import Utility.Utility;
 
 import java.io.Serializable;
 
@@ -22,8 +23,9 @@ public abstract class Board implements Serializable {
     public Colors checkWins() {
         System.out.println(getEndField());
         BoardGraph.Field endField = getEndField();
+        Utility.logInfo("Last field = " + endField);
         if (endField.turtles.size() > 0) {
-            return Colors.asColor(endField.turtles.get(endField.turtles.size() - 1));
+            return Colors.asColor(endField.turtles.get(endField.turtles.size() - 1).getColor());
         }
         return null;
     }

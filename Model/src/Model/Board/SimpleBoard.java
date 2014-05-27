@@ -2,7 +2,7 @@ package Model.Board;
 
 import Colors.Colors;
 import Model.Turtles.Turtle;
-import Model.Utility.Utility;
+import Utility.Utility;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
