@@ -67,7 +67,7 @@ public class GameSelectButtons {
                 List<SimpleGameInfo> myList = new LinkedList<>();
                 for (GameInfo simple : tmpList) {
                     SimpleGameInfo myInfo = new SimpleGameInfo(simple.getGameName(), simple.getGameStatus(), simple.getNumberOfPlayers());
-                    myInfo.setMyID(simple.getMyID());
+                    myInfo.setMyID(simple.getId());
                     myList.add(myInfo);
                 }
                 myObservableTableList = FXCollections.observableArrayList(myList);

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class GameInfo implements Serializable {
 
     private static final long serialVersionUID = -4605840894396370671L;
-    private int myID;
+    private int id;
         private String gameName;
         private String gameStatus;
         private String numberOfPlayers;
@@ -40,11 +40,11 @@ public class GameInfo implements Serializable {
             numberOfPlayers = fName;
         }
 
-    public int getMyID() {
-        return myID;
+    public int getId() {
+        return id;
     }
 
-    public void setMyID(int myID) {
-        this.myID = myID;
+    public void setId(int id) {
+        this.id = id;
     }
 }
