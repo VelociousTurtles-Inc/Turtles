@@ -12,6 +12,7 @@ import java.util.logging.Level;
  */
 public class SimpleBoard extends Board {
     private static final long serialVersionUID = -3932283805405624796L;
+    private BoardGraph.Field End;
 
     public SimpleBoard()
     {
@@ -39,7 +40,7 @@ public class SimpleBoard extends Board {
             f=s;
         }
 
-        BoardGraph.Field End = new BoardGraph.Field(BoardGraph.FieldType.FINAL);
+        End = new BoardGraph.Field(BoardGraph.FieldType.FINAL);
         f.successors.add(End);
 
         for (BoardGraph.Field field : graph) {
@@ -47,5 +48,8 @@ public class SimpleBoard extends Board {
         }
     }
 
-
+    @Override
+    BoardGraph.Field getEndField() {
+        return End;
+    }
 }

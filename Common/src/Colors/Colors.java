@@ -111,4 +111,13 @@ public enum Colors {
             return getAllColors().get(random.nextInt(getAllColors().size()));
         }
     }
+
+    @Override
+    public String toString() {
+        return asString(this);
+    }
+
+    public Integer toInteger() {
+        return asInteger(this);
+    }
 }

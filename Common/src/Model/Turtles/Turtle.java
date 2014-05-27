@@ -1,5 +1,6 @@
 package Model.Turtles;
 
+import Colors.Colors;
 import Model.Board.BoardGraph;
 
 import java.io.Serializable;
@@ -27,6 +28,6 @@ public class Turtle implements Serializable {
 
     @Override
     public String toString() {
-        return "Turtle " + getColor();
+        return "Turtle " + Colors.asString(getColor());
     }
 }

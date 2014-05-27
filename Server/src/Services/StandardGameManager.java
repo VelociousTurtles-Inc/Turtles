@@ -2,6 +2,7 @@ package Services;
 
 
 import Client.Interfaces.GameWaiterClient;
+import Colors.Colors;
 import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
@@ -62,8 +63,16 @@ public class StandardGameManager implements GameManager {
         for(ServerPlayerService myPlayer : playerServices) {
             myPlayer.update();
         }
+        checkGameStatus();
         nextTurn();
         return myDeck.getCard();
+    }
+
+    public void checkGameStatus() {
+        Colors winning = board.checkWins();
+        if (winning != null) {
+            // TODO update game status
+        }
     }
 
     @Override
