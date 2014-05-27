@@ -101,7 +101,7 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     }
 
     @Override
-    public String getGameName() throws RemoteException {
+    public String getGameName() {
         return gameName;
     }
 
