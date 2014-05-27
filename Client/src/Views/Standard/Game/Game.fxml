@@ -86,7 +86,7 @@
         </TextArea>
         <TextArea fx:id="InputTextArea" layoutX="951.0" layoutY="537.0" prefHeight="130.0" prefWidth="306.0">
         </TextArea>
-      <Button fx:id="SendText" layoutX="1062.0" layoutY="674.0" mnemonicParsing="false" onAction="#sentTextToServer" prefHeight="29.0" prefWidth="174.0" text="Send" />
+      <Button fx:id="SendText" layoutX="1062.0" layoutY="674.0" mnemonicParsing="false" onAction="#sendTextToServer" prefHeight="29.0" prefWidth="174.0" text="Send" />
       <Pane fx:id="winnerPane" layoutX="527.0" layoutY="260.0" prefHeight="179.0" prefWidth="395.0" style="-fx-background-color: rgba(255,255,100,0.8);" visible="false">
          <children>
             <Label layoutX="14.0" layoutY="107.0" prefHeight="57.0" prefWidth="184.0" text="Winns" textAlignment="RIGHT">
