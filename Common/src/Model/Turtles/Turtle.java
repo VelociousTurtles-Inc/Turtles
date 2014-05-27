@@ -5,9 +5,6 @@ import Model.Board.BoardGraph;
 
 import java.io.Serializable;
 
-/**
- * Created by Maciej on 2014-05-05.
- */
 public class Turtle implements Serializable {
     private static final long serialVersionUID = 2763735491352166723L;
 

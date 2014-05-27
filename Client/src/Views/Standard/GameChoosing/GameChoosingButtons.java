@@ -16,9 +16,6 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by michaziobro on 16.05.2014.
- */
 public class GameChoosingButtons {
 
     public TableColumn numberColumn;

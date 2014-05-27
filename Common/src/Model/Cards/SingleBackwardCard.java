@@ -1,6 +1,5 @@
 package Model.Cards;
 
-
 import Enums.Colors;
 import Model.Board.Board;
 import Model.Board.BoardGraph;

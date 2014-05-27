@@ -5,9 +5,6 @@ import Model.Turtles.Turtle;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- * Created by Maciej on 2014-05-05.
- */
 public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable {
     private static final long serialVersionUID = -2995046707046230025L;
 
@@ -18,7 +15,6 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable {
     public ArrayList<Field> getStarts() {
         return starts;
     }
-
 
     /**
      * Warning : only works for simple linear boards as for now (18 may 2014)

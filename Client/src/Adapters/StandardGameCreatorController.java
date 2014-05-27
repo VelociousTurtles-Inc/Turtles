@@ -9,9 +9,6 @@ import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by michaziobro on 17.05.2014.
- */
 public class StandardGameCreatorController implements GameCreatorController {
     WaiterService myDispenser;
 
@@ -43,6 +40,5 @@ public class StandardGameCreatorController implements GameCreatorController {
         new StandardGameCreatorWaiterController(name, myDispenser);
         closeIt();
     }
-
 
 }

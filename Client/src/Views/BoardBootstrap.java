@@ -1,8 +1,5 @@
 package Views;
 
-/**
- * Created by main on 5/10/14.
- */
 public class BoardBootstrap {
 
     public static Board createSampleBoard() {

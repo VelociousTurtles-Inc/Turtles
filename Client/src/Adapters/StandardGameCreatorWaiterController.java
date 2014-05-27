@@ -11,9 +11,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by michaziobro on 17.05.2014.
- */
 public class StandardGameCreatorWaiterController implements GameCreatorWaiterController, GameWaiterClient {
     WaiterService myDispenser;
     private int numberOfPlayers;

@@ -8,11 +8,7 @@ import javafx.stage.Stage;
 
 import java.rmi.RemoteException;
 
-/**
- * Created by michaziobro on 16.05.2014.
- */
 public class GameCreatorButtons {
-
 
     public TextField name;
     Stage myStage;

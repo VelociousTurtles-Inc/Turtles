@@ -3,9 +3,6 @@ package Main;
 import Scenarios.FastInitScenario;
 import Utility.DebugWriter;
 
-/**
- * Created by larhard on 20.05.14.
- */
 public class FastSingleClient {
 
     public static void main(String[] args) {

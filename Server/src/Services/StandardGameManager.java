@@ -1,7 +1,5 @@
 package Services;
 
-
-
 import Enums.Colors;
 import Model.Board.Board;
 import Model.Board.SimpleBoard;
@@ -18,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class StandardGameManager implements GameManager {
 

@@ -9,9 +9,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * Created by michaziobro on 16.05.2014.
- */
 public class GameChoosingView {
 
     GameSelectController myController;

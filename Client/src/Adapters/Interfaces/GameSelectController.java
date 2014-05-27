@@ -6,9 +6,6 @@ import Model.GameInfo;
 import java.rmi.RemoteException;
 import java.util.List;
 
-/**
- * Created by michaziobro on 16.05.2014.
- */
 public interface GameSelectController {
     public void join(int myID) throws RemoteException;
     public void cancel();

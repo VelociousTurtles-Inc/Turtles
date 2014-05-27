@@ -6,9 +6,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by main on 5/10/14.
- */
 public class Board implements Serializable {
 
     public List<Point> positions = new ArrayList<Point>();
@@ -16,10 +13,8 @@ public class Board implements Serializable {
     public String name;
     //path to image should be here
 
-
     public Board() {
     }
-
 
     public static Board readBoard(String boardName) {
         assert DebugWriter.write("Reading Board \"" + boardName + "\"");
@@ -42,7 +37,6 @@ public class Board implements Serializable {
         }
         return temp;
     }
-
 
     public void saveBoard() {
         assert DebugWriter.write("Saving Board \"" + name + "\"");

@@ -10,9 +10,6 @@ import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by michaziobro on 17.05.2014.
- */
 public interface GameManager extends Remote {
     // TODO server side GameManager interface
 

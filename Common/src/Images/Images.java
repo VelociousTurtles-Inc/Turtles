@@ -6,9 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by larhard on 17.05.14.
- */
 public class Images {
 
     /**

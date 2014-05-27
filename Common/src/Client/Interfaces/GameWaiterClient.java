@@ -5,9 +5,6 @@ import Server.Interfaces.PlayerService;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-/**
- * Created by michaziobro on 17.05.2014.
- */
 public interface GameWaiterClient extends Remote {
     void closeMe() throws RemoteException;
 

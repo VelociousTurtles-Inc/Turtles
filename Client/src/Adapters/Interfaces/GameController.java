@@ -1,6 +1,5 @@
 package Adapters.Interfaces;
 
-
 import Common.Interfaces.Event;
 import Enums.Colors;
 import Model.Cards.Card;
@@ -9,9 +8,6 @@ import Server.Interfaces.PlayerService;
 import java.rmi.RemoteException;
 import java.util.List;
 
-/**
- * Created by mz18 on 7/05/14.
- */
 public interface GameController {
     public void start(PlayerService myService) throws RemoteException;
 

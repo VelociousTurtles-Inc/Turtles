@@ -11,9 +11,6 @@ import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by michaziobro on 17.05.2014.
- */
 public class StandardGameWaiterController implements GameWaiterController, GameWaiterClient {
     private final List<Event> updateEvents = new LinkedList<>();
     private final List<Event> cancelEvents = new LinkedList<>();
@@ -107,6 +104,5 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     public String getGameName() throws RemoteException {
         return gameName;
     }
-
 
 }

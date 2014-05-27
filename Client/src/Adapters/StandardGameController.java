@@ -1,6 +1,5 @@
 package Adapters;
 
-
 import Common.Interfaces.Event;
 import Adapters.Interfaces.GameController;
 import Client.Interfaces.GameClient;
@@ -19,10 +18,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-/**
- * Created by larhard on 05.05.14.
- */
 
 public class StandardGameController extends Thread implements GameController, GameClient {
 
@@ -187,8 +182,6 @@ public class StandardGameController extends Thread implements GameController, Ga
         List<List<Integer>> result = new LinkedList<>();
         BoardGraph myBoardGraph = playerService.getGameBoard().graph;
 
-
-
         for(BoardGraph.Field f : myBoardGraph.starts) {
             LinkedList<Integer> turtlesIDs = new LinkedList<>();
             for (Turtle t : f.getTurtles())
@@ -290,7 +283,6 @@ public class StandardGameController extends Thread implements GameController, Ga
             }
         }
     }
-
 
     @Override
     public int getLastMoving() {

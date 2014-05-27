@@ -2,10 +2,6 @@ package Adapters;
 
 import javafx.beans.property.SimpleStringProperty;
 
-/**
- * Created by michaziobro on 16.05.2014.
- */
-
 public class SimpleGameInfo {
 
     private int myID;

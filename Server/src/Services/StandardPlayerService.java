@@ -73,9 +73,6 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
         }
     }
 
-
-
-
     @Override
     public List<Integer> getPlayerCards() {
         List<Integer> result = new LinkedList<>();
@@ -99,7 +96,6 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     public Board getGameBoard() throws RemoteException {
         return myManager.getBoard();
     }
-
 
     @Override
     public List<String> GetListOfPlayers() throws RemoteException {

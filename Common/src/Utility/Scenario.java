@@ -6,9 +6,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by larhard on 19.05.14.
- */
 public class Scenario {
     // TODO removing
     private Map<Class<?>, Entry> scenarioMap = new HashMap<>();

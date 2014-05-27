@@ -8,10 +8,6 @@ import Model.Cards.SingleForwardCard;
 
 import java.util.*;
 
-/**
- * Created by Maciej on 2014-05-05.
- */
-
 public class Deck implements IDeck {
 
     HashMap<Integer, Card> cardsMap;

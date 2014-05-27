@@ -1,8 +1,5 @@
 package Utility;
 
-/**
- * Created by larhard on 13.05.14.
- */
 public class DebugWriter {
     public static Boolean write(String message, Object... args){
         System.err.println(" ::: " + System.currentTimeMillis() + " : " + message);

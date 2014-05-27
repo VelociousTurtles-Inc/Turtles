@@ -11,9 +11,6 @@ import Server.Interfaces.WaiterService;
 
 import java.rmi.RemoteException;
 
-/**
- * Created by michaziobro on 26.05.2014.
- */
 public class StandardWaiterService implements WaiterService {
 
     private GameDispenser myDispenser;

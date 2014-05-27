@@ -7,9 +7,6 @@ import Utility.Utility;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-/**
- * Created by Maciej on 2014-05-05.
- */
 public class SimpleBoard extends Board {
     private static final long serialVersionUID = -3932283805405624796L;
     private BoardGraph.Field End;

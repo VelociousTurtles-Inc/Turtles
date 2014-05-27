@@ -47,7 +47,6 @@ public class StandardLoginController implements LoginClient, LoginController {
         gameEntry.newSelector(name, this);
     }
 
-
     @Override
     public void toGameSelect(WaiterService waiter) throws RemoteException {
         new StandardGameSelectController(waiter);

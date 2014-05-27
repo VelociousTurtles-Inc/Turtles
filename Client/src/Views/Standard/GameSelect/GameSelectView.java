@@ -10,9 +10,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-/**
- * Created by michaziobro on 16.05.2014.
- */
 public class GameSelectView {
 
     GameSelectController myController;
@@ -51,7 +48,6 @@ public class GameSelectView {
 
         myStage.setScene(new Scene(myParent));
         myStage.show();
-
 
     }
 }

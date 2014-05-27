@@ -3,9 +3,6 @@ package Main;
 import Scenarios.FastDoubleInitScenario;
 import Utility.DebugWriter;
 
-/**
- * Created by larhard on 20.05.14.
- */
 public class FastDoubleClient {
     public static void main(String[] args) {
         int port;

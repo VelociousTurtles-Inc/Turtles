@@ -12,9 +12,6 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
-/**
- * Created by mz18 on 8/05/14.
- */
 public class StandardMenuView {
 
     private StandardMenuButtons myMenuButtons;

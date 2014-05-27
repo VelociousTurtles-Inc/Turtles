@@ -4,9 +4,6 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Iterator;
 
-/**
- * Created by larhard on 17.05.14.
- */
 public class Range implements Iterable<Integer> {
     private final int min;
     private final int max;

@@ -10,9 +10,6 @@ import javafx.stage.Stage;
 
 import java.rmi.RemoteException;
 
-/**
- * Created by michaziobro on 26.05.2014.
- */
 public class LoginButtons {
     public TextField name;
     private Stage stage;
@@ -54,7 +51,6 @@ public class LoginButtons {
             }
         });
     }
-
 
     public void cancel(ActionEvent actionEvent) {
         myController.close();

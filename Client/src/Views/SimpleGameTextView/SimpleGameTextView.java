@@ -6,13 +6,9 @@ import Utility.DebugWriter;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by larhard on 06.05.14.
- */
 public class SimpleGameTextView  {
     //private GameAdapter adapter;
     private String[] args;
-
 
     private List<Integer> cards;
 

@@ -14,9 +14,6 @@ import java.rmi.RemoteException;
 import java.util.*;
 import java.util.logging.Level;
 
-/**
- * Created by larhard on 15.05.14.
- */
 public class StandardGameDispenser implements GameDispenser, ServerGameDispenser, GameEntry {
     private Map<Integer, GameManager> gameServices = new HashMap<>();
     private Set<StandardWaiterService> mySelectors = new HashSet<>();

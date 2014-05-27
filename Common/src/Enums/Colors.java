@@ -2,9 +2,6 @@ package Enums;
 
 import java.util.*;
 
-/**
- * Created by larhard on 17.05.14.
- */
 public enum Colors {
     NULL, RED, GREEN, YELLOW, BLUE, ORANGE;
 

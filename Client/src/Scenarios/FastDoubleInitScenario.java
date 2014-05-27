@@ -5,9 +5,6 @@ import Views.FastInit.RandomLoginView;
 import Views.Standard.Game.StandardGameView;
 import Views.Standard.Menu.StandardMenuView;
 
-/**
- * Created by larhard on 20.05.14.
- */
 public class FastDoubleInitScenario extends GUIScenario {
     public FastDoubleInitScenario() {
         add(MenuController.class, Views.DoubleFastInit.MenuView.class);

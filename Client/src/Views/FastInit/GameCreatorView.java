@@ -4,9 +4,6 @@ import Adapters.Interfaces.GameCreatorController;
 
 import java.util.Random;
 
-/**
- * Created by larhard on 20.05.14.
- */
 public class GameCreatorView {
     private static String lastGame;
     private static final Object lastGameSync = new Object();

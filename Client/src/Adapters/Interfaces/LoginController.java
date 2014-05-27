@@ -1,6 +1,5 @@
 package Adapters.Interfaces;
 
-
 import Common.Interfaces.Event;
 
 import java.io.IOException;

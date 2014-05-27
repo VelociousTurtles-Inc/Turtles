@@ -31,9 +31,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by mz18 on 8/05/14.
- */
 public class StandardGameView {
     // cards -> slots
     private List<ImageView> slots = new ArrayList<>();

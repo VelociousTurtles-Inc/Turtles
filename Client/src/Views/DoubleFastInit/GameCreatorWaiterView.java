@@ -4,9 +4,6 @@ import Adapters.Interfaces.GameCreatorWaiterController;
 
 import java.util.concurrent.Semaphore;
 
-/**
- * Created by larhard on 20.05.14.
- */
 public class GameCreatorWaiterView {
     public static Semaphore startSemaphore = new Semaphore(0);
     public static int gameID;

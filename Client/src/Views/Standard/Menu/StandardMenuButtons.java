@@ -6,10 +6,6 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-
-/**
- * Created by michaziobro on 05.05.2014.
- */
 public class StandardMenuButtons {
 
     private MenuController myMenuController;

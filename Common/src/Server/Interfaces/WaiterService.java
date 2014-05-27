@@ -7,7 +7,6 @@ import Client.Interfaces.ThreeStringsGet;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-
 public interface WaiterService extends Remote {
     // Methods for server
     void ping() throws RemoteException;

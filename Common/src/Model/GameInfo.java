@@ -2,9 +2,6 @@ package Model;
 
 import java.io.Serializable;
 
-/**
- * Created by michaziobro on 17.05.2014.
- */
 public class GameInfo implements Serializable {
 
     private static final long serialVersionUID = -4605840894396370671L;

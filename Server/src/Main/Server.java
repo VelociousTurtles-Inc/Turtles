@@ -12,9 +12,6 @@ import java.rmi.RemoteException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-/**
- * Created by larhard on 15.05.14.
- */
 public class Server {
     private static int port;
     public static Scenario scenario;

@@ -8,9 +8,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by larhard on 26.05.14.
- */
 public class ImageContainer {
     private Map<String, Image> imageMap = new HashMap<>();
     private ClassLoader classLoader;

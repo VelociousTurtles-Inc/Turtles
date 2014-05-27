@@ -2,9 +2,6 @@ package Model.Cards;
 
 import java.io.Serializable;
 
-/**
- * Created by larhard on 16.05.14.
- */
 public class PlayedCard implements Serializable {
     private static final long serialVersionUID = -2731730149930907988L;
 

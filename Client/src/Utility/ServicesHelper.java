@@ -1,10 +1,5 @@
 package Utility;
 
-
-/**
- * Created by mz18 on 12/05/14.
- */
-
 /*
     Commented out on 18 may 2014 by Szymon
         boardGraph implements iterable, why should we implement it
@@ -40,7 +35,6 @@ public class ServicesHelper {
                                 tmp.add(it);
                             }
                         }
-
 
                     }
 

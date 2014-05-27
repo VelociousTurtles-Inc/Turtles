@@ -20,9 +20,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/**
- * Created by mz18 on 8/05/14.
- */
 public class StandardGameButtons {
 
     public Button playItButton;

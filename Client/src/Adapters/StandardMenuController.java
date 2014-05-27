@@ -6,9 +6,6 @@ import Utility.DebugWriter;
 
 import java.rmi.RemoteException;
 
-/**
- * Created by mz18 on 8/05/14.
- */
 public class StandardMenuController implements MenuController {
 
     public StandardMenuController() {

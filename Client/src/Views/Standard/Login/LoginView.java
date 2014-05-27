@@ -11,9 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-/**
- * Created by michaziobro on 26.05.2014.
- */
 public class LoginView {
     LoginController myController;
     LoginButtons myButtons;

@@ -9,7 +9,6 @@ import java.rmi.RemoteException;
 
 /**
  * Creates thread, which deletes zombie games
- * Created by larhard on 25.05.14.
  */
 public class StandardGameWatchdog {
     private ServerGameDispenser gameDispenser;
