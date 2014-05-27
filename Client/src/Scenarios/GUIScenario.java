@@ -1,5 +1,6 @@
 package Scenarios;
 
+import Utility.Scenario;
 import Views.GUIApplication;
 
 import java.util.concurrent.Semaphore;

@@ -1,6 +1,7 @@
 package Adapters.Interfaces;
 
-import Events.Event;
+
+import Common.Interfaces.Event;
 
 /**
  * Created by larhard on 27.05.14.

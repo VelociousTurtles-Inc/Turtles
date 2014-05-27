@@ -1,0 +1,5 @@
+package Enums;
+
+public enum LoginResult {
+    SUCCESSFUL, LOGIN_PASSWORD_MISMATCH, SERVER_CONNECTION_FAULT
+}

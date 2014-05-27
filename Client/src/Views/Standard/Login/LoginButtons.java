@@ -1,8 +1,8 @@
 package Views.Standard.Login;
 
 import Adapters.Interfaces.LoginController;
+import Common.Interfaces.Event;
 import Adapters.StandardLoginController;
-import Events.Event;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;

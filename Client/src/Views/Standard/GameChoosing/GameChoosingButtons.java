@@ -1,6 +1,6 @@
 package Views.Standard.GameChoosing;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
 import Adapters.SimpleGameInfo;
 import javafx.application.Platform;

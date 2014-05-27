@@ -1,6 +1,6 @@
 package Server.Interfaces;
 
-import Events.Event;
+import Common.Interfaces.Event;
 
 import java.util.Collection;
 

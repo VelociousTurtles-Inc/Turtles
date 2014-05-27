@@ -1,6 +1,6 @@
 package GameWatchdogs;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Utility.Utility;
 import Server.Interfaces.ServerGameDispenser;
 import Server.Interfaces.GameManager;

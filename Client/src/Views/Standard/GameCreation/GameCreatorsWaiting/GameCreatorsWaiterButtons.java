@@ -1,6 +1,6 @@
 package Views.Standard.GameCreation.GameCreatorsWaiting;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameCreatorWaiterController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

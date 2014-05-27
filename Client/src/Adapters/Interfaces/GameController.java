@@ -1,8 +1,8 @@
 package Adapters.Interfaces;
 
 
-import Colors.Colors;
-import Events.Event;
+import Common.Interfaces.Event;
+import Enums.Colors;
 import Model.Cards.Card;
 import Server.Interfaces.PlayerService;
 

@@ -1,4 +1,4 @@
-package Colors;
+package Enums;
 
 import junit.framework.TestCase;
 
@@ -22,18 +22,18 @@ public class ColorsTest extends TestCase {
         for (Colors i : Colors.getAllColors()) {
             a.add(i);
         }
-        assertEquals("All Colors", allColors, a);
+        assertEquals("All Enums", allColors, a);
 
         a = new HashSet<>();
         for (String i : Colors.getAllStrings()) {
             a.add(Colors.asColor(i));
         }
-        assertEquals("Strings Colors", allColors, a);
+        assertEquals("Strings Enums", allColors, a);
 
         a = new HashSet<>();
         for (Integer i : Colors.getAllIntegers()) {
             a.add(Colors.asColor(i));
         }
-        assertEquals("Integer Colors", allColors, a);
+        assertEquals("Integer Enums", allColors, a);
     }
 }

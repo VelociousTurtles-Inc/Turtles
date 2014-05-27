@@ -2,6 +2,7 @@ package Scenarios;
 
 import GameWatchdogs.StandardGameWatchdog;
 import Server.Interfaces.ServerGameDispenser;
+import Utility.Scenario;
 
 /**
  * Created by larhard on 25.05.14.

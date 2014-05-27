@@ -1,14 +1,14 @@
 package Views.Standard.Game;
 
 import Adapters.Interfaces.GameController;
-import Colors.Colors;
-import Events.Event;
+import Enums.Colors;
+import Common.Interfaces.Event;
 import Images.ImageContainer;
 import Images.Images;
 import Model.Cards.Card;
 import Utility.DebugWriter;
+import Common.Interfaces.BoolRunnable;
 import Utility.Utility;
-import Utils.BoolRunnable;
 import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;

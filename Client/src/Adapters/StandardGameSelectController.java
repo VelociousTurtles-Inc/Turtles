@@ -1,9 +1,10 @@
 package Adapters;
 
-import Events.Event;
+import Client.Interfaces.ThreeStringsGet;
+import Model.GameInfo;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameSelectController;
 import Client.Interfaces.GameSelectClient;
-import Client.Interfaces.ThreeStringsGet;
 import Main.Client;
 import Model.GameInfo;
 import Server.Interfaces.WaiterService;
@@ -17,22 +18,22 @@ import java.util.List;
  */
 public class StandardGameSelectController implements GameSelectController, GameSelectClient {
 
-    private WaiterService myWaiter;
-    private List<GameInfo> simpleGameInfos;
+    private WaiterService waiterService;
+    private List<GameInfo> gameInfoList;
 
     private final List<Event> cancelEvents = new ArrayList<>();
     private final List<Event> updateEvents = new ArrayList<>();
 
     public StandardGameSelectController(WaiterService waiter) throws Exception {
-        simpleGameInfos = new LinkedList<>();
-        myWaiter = waiter;
-        myWaiter.setGameSelector(this);
+        gameInfoList = new LinkedList<>();
+        waiterService = waiter;
+        waiterService.setGameSelector(this);
         Client.scenario.invoke(GameSelectController.class, this);
     }
 
     @Override
     public void join(int gameID) throws Exception {
-        StandardGameWaiterController mySGWC = new StandardGameWaiterController(gameID, myWaiter);
+        StandardGameWaiterController gameWaiterController = new StandardGameWaiterController(gameID, waiterService);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void create() {
-        StandardGameCreatorController mySGCC = new StandardGameCreatorController(myWaiter);
+        StandardGameCreatorController gameCreatorController = new StandardGameCreatorController(waiterService);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void update(ThreeStringsGet updateGameInfo) throws Exception {
-        simpleGameInfos = updateGameInfo.getList();
+        gameInfoList = updateGameInfo.getList();
         synchronized (updateEvents) {
             for (Event e : updateEvents) {
                 e.call();
@@ -75,12 +76,12 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public List<GameInfo> getUpdateList() {
-        return simpleGameInfos;
+        return gameInfoList;
     }
 
     @Override
     public void initValues() throws Exception {
-        myWaiter.updateMe();
+        waiterService.updateMe();
     }
 
 }

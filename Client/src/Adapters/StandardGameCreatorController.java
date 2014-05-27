@@ -1,9 +1,8 @@
 package Adapters;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameCreatorController;
 import Main.Client;
-import Server.Interfaces.GameDispenser;
 import Server.Interfaces.WaiterService;
 
 import java.util.LinkedList;

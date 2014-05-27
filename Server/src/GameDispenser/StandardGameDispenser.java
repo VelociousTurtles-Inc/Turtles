@@ -1,12 +1,9 @@
 package GameDispenser;
 
 import Client.Interfaces.LoginClient;
-import Client.Interfaces.GameSelectClient;
-import Client.Interfaces.GameWaiterClient;
 import Client.Interfaces.ThreeStringsGet;
-import Events.Event;
-import Main.Server;
 import Model.GameInfo;
+import Common.Interfaces.Event;
 import Utility.Utility;
 import Server.Interfaces.*;
 import Services.StandardWaiterService;
@@ -19,7 +16,7 @@ import java.util.logging.Level;
  */
 public class StandardGameDispenser implements GameDispenser, ServerGameDispenser, GameEntry {
     private Map<Integer, GameManager> gameServices = new HashMap<>();
-    private Set<WaiterService> mySelecters = new HashSet<>();
+    private Set<StandardWaiterService> mySelectors = new HashSet<>();
 
     private int getEmptyId() {
         Random random = new Random();
@@ -32,7 +29,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     }
 
     public StandardGameDispenser() {
-        Server.scenario.invoke(ServerGameDispenser.class, this);
+        //Server.scenario.invoke(ServerGameDispenser.class, this);
     }
 
     @Override
@@ -77,7 +74,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
 /*
     @Override
     public void setGameSelector(GameSelectClient mySelector) throws Exception {
-        mySelecters.add(mySelector);
+        mySelectors.add(mySelector);
 
         // update list of game
         /*List<SimpliestGameInfo> myList = new LinkedList<>();
@@ -101,7 +98,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
         try {
             mySelector.update(myTSG);
         } catch (ClosedException e) {
-            mySelecters.remove(mySelector);
+            mySelectors.remove(mySelector);
         }
 
         // or just - but we don't need update all
@@ -115,7 +112,7 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
 
  /*   @Override
     public void unregisterGameSelector(GameSelectClient mySelector) throws Exception {
-        mySelecters.remove(mySelector);
+        mySelectors.remove(mySelector);
     }*/
 
     @Override
@@ -153,14 +150,12 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
     @Override
     public void update() throws Exception {
         List<GameInfo> myList = new LinkedList<>();
-        ThreeStringsGet myTSG = new ThreeStringsGet() {
-            List<GameInfo> list;
-            @Override
+        ThreeStringsGet myTSG = new ThreeStringsGet(){
+            private List<GameInfo> list;
             public void setList(List<GameInfo> list) throws Exception{
                 this.list = list;
             }
 
-            @Override
             public List<GameInfo> getList() throws Exception {
                 return list;
             }
@@ -170,16 +165,16 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
         }
         myTSG.setList(myList);
 
-        List<StandardWaiterService> closedSelecters = new ArrayList<>();
-        for(WaiterService mySel : mySelecters) {
+        List<StandardWaiterService> closedSelectors = new ArrayList<>();
+        for(StandardWaiterService mySel : mySelectors) {
             //try {
                 mySel.update(myTSG);
             //} catch (ClosedException e) {
-            //    closedSelecters.add(mySel);
+            //    closedSelectors.add(mySel);
             //}
         }
-        for (StandardWaiterService gameSelectClient : closedSelecters) {
-            mySelecters.remove(gameSelectClient);
+        for (StandardWaiterService gameSelectClient : closedSelectors) {
+            mySelectors.remove(gameSelectClient);
         }
     }
 
@@ -196,6 +191,6 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
 
     @Override
     public void newSelector(String name, LoginClient login) throws Exception {
-        mySelecters.add(new StandardWaiterService(name, login, this));
+        mySelectors.add(new StandardWaiterService(name, login, this));
     }
 }

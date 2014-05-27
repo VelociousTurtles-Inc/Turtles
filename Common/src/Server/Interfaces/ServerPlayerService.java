@@ -1,7 +1,8 @@
 package Server.Interfaces;
 
+import Enums.Colors;
+
 import java.rmi.RemoteException;
-import Colors.Colors;
 
 /**
  * Created by larhard on 24.05.14.

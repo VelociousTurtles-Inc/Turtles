@@ -1,7 +1,8 @@
 package Services;
 
 
-import Colors.Colors;
+
+import Enums.Colors;
 import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
@@ -18,10 +19,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Main model class for interacting with specific game.
- * For now there's only one game.
- */
 
 public class StandardGameManager implements GameManager {
 

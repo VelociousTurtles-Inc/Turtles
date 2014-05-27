@@ -1,10 +1,9 @@
 package Adapters;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameCreatorWaiterController;
 import Client.Interfaces.GameWaiterClient;
 import Main.Client;
-import Server.Interfaces.GameDispenser;
 import Server.Interfaces.PlayerService;
 import Server.Interfaces.WaiterService;
 

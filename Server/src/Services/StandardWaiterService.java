@@ -17,16 +17,16 @@ import java.rmi.RemoteException;
 public class StandardWaiterService implements WaiterService {
 
     private GameDispenser myDispenser;
-    private GameSelectClient mySelecter;
+    private GameSelectClient mySelector;
     private GameWaiterClient myWaiter;
     private int chosenGame;
     private String myName;
 
-    public StandardWaiterService(String name, LoginClient selecter, GameDispenser dispenser) throws Exception {
+    public StandardWaiterService(String name, LoginClient selector, GameDispenser dispenser) throws Exception {
         myDispenser = dispenser;
         myName = name;
 
-        selecter.toGameSelect(this);
+        selector.toGameSelect(this);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class StandardWaiterService implements WaiterService {
 
     @Override
     public void setGameSelector(GameSelectClient mySel) throws Exception {
-        mySelecter = mySel;
+        mySelector = mySel;
     }
 
     @Override
@@ -93,7 +93,7 @@ public class StandardWaiterService implements WaiterService {
     }
 
     public void update(ThreeStringsGet myTSG) throws Exception {
-        mySelecter.update(myTSG);
+        mySelector.update(myTSG);
     }
 
     @Override

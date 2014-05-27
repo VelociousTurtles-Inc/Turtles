@@ -1,10 +1,9 @@
 package Adapters;
 
-import Events.Event;
+import Common.Interfaces.Event;
 import Adapters.Interfaces.GameWaiterController;
 import Client.Interfaces.GameWaiterClient;
 import Main.Client;
-import Server.Interfaces.GameDispenser;
 import Server.Interfaces.PlayerService;
 import Server.Interfaces.WaiterService;
 
@@ -27,9 +26,10 @@ public class StandardGameWaiterController implements GameWaiterController, GameW
     public StandardGameWaiterController(int myID, WaiterService myGameDispenser) throws Exception {
         gameID = myID;
         this.myGameDispenser = myGameDispenser;
-        gameName = myGameDispenser.getGameName();
+
         myGameDispenser.connectToGame(myID, this);
         Client.scenario.invoke(GameWaiterController.class, this);
+        gameName = myGameDispenser.getGameName();
         update(myNumberOfPlayers);
     }
 
