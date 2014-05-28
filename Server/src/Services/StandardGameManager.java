@@ -3,6 +3,7 @@ package Services;
 import Chat.Message.Message;
 import Enums.Colors;
 import Model.Board.Board;
+import Model.Board.BoardGraph;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Deck;
@@ -65,8 +66,8 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public Board getBoard() throws RemoteException {
-        return board;
+    public BoardGraph getBoardGraph() throws RemoteException {
+        return board.graph;
     }
 
     @Override

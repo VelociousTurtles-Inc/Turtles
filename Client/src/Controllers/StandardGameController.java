@@ -192,7 +192,8 @@ public class StandardGameController extends Thread implements GameController, Ga
     public List<List<Integer>> getBoard() throws RemoteException {
 
         List<List<Integer>> result = new LinkedList<>();
-        BoardGraph myBoardGraph = playerService.getGameBoard().graph;
+
+        BoardGraph myBoardGraph = playerService.getGameBoardGraph();
 
         for(BoardGraph.Field f : myBoardGraph.starts) {
             LinkedList<Integer> turtlesIDs = new LinkedList<>();

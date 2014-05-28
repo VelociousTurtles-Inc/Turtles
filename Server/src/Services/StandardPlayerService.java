@@ -3,7 +3,7 @@ package Services;
 import Chat.Message.Message;
 import Client.Interfaces.GameClient;
 import Enums.Colors;
-import Model.Board.Board;
+import Model.Board.BoardGraph;
 import Model.Cards.Card;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.PlayerService;
@@ -109,8 +109,8 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     }
 
     @Override
-    public Board getGameBoard() throws RemoteException {
-        return myManager.getBoard();
+    public BoardGraph getGameBoardGraph() throws RemoteException {
+        return myManager.getBoardGraph();
     }
 
     @Override

@@ -2,6 +2,7 @@ package Server.Interfaces;
 
 import Chat.Message.Message;
 import Model.Board.Board;
+import Model.Board.BoardGraph;
 import Model.Cards.Card;
 import Model.GameInfo;
 
@@ -12,8 +13,6 @@ import java.util.Map;
 
 public interface GameManager extends Remote {
     // TODO server side GameManager interface
-
-    public Board getBoard() throws RemoteException;
 
     public void playCard(int cardID) throws RemoteException;
 
@@ -47,6 +46,8 @@ public interface GameManager extends Remote {
     String getChatLog() throws RemoteException;
 
     void addMessage(Message a) throws RemoteException;
+
+    BoardGraph getBoardGraph() throws RemoteException;
 
     void updateBoard() throws RemoteException;
 

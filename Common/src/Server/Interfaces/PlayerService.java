@@ -14,7 +14,7 @@ public interface PlayerService extends Remote {
     @Asynchronous
     void playCard(int cardID) throws RemoteException;
 
-    Board getGameBoard() throws RemoteException;
+    Model.Board.BoardGraph getGameBoardGraph() throws RemoteException;
 
     void setClient(GameClient myClient) throws RemoteException;
 
