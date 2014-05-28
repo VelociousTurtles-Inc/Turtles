@@ -238,7 +238,7 @@ public class StandardGameView {
 
         for (int i : Colors.getRealIntegers()) {
             try {
-                turtles.get(i).setImage(Images.load(this.getClass().getClassLoader(), "Resources/Images/Turtles/turtle" + Colors.asString(i) + ".png"));
+                turtles.get(i).setImage(Images.load(this.getClass().getClassLoader(), "Resources/Images/Turtles/new" + Colors.asString(i) + ".png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
