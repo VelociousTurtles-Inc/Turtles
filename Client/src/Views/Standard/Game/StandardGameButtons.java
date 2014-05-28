@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -93,7 +94,7 @@ public class StandardGameButtons {
         return turtles;
     }
 
-    private int chosenCard = 1;
+    private int chosenCard = 0;
     private final AtomicBoolean locked = new AtomicBoolean();
 
     public void init(final GameController myGameController) throws RemoteException {
@@ -169,36 +170,56 @@ public class StandardGameButtons {
 
     @FXML protected void playIt(ActionEvent event) {
         assert DebugWriter.write("Play Card " + chosenCard);
-        try {
-            //myGameController.playCard(chosenCard);
-            //
-            // MB: later we use chosenCard as number in list,
-            //     so we should decrease chosenCard by 1:
+        if (chosenCard > 0) {
+            try {
+                //myGameController.playCard(chosenCard);
+                //
+                // MB: later we use chosenCard as number in list,
+                //     so we should decrease chosenCard by 1:
 
-            myGameController.playCard(chosenCard-1);
-        } catch (Exception e) {
-            e.printStackTrace();
+                myGameController.playCard(chosenCard - 1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    private void resetButtonEffects() {
+        firstCard.setEffect(null);
+        secondCard.setEffect(null);
+        thirdCard.setEffect(null);
+        fourthCard.setEffect(null);
+        fifthCard.setEffect(null);
     }
 
     @FXML protected void chooseFirst(ActionEvent event) {
         assert DebugWriter.write("Chosed 1st Card");
+        resetButtonEffects();
+        firstCard.setEffect(new DropShadow());
         chosenCard = 1;
     }
     @FXML protected void chooseSecond(ActionEvent event) {
         assert DebugWriter.write("Chosed 2nd Card");
+        resetButtonEffects();
+        secondCard.setEffect(new DropShadow());
         chosenCard = 2;
     }
     @FXML protected void chooseThird(ActionEvent event) {
         assert DebugWriter.write("Chosed 3rd Card");
+        resetButtonEffects();
+        thirdCard.setEffect(new DropShadow());
         chosenCard = 3;
     }
     @FXML protected void chooseFourth(ActionEvent event) {
         assert DebugWriter.write("Chosed 4th Card");
+        resetButtonEffects();
+        fourthCard.setEffect(new DropShadow());
         chosenCard = 4;
     }
     @FXML protected void chooseFifth(ActionEvent event) {
         assert DebugWriter.write("Chosed 5th Card");
+        resetButtonEffects();
+        fifthCard.setEffect(new DropShadow());
         chosenCard = 5;
     }
 
