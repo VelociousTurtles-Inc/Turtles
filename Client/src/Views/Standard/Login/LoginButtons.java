@@ -34,6 +34,10 @@ public class LoginButtons {
 
             }
         });
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
 
         name.addEventFilter(KeyEvent.ANY, new EventHandler<KeyEvent>() {
             @Override
@@ -46,10 +50,13 @@ public class LoginButtons {
                 }
             }
         });
-    }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                name.requestFocus();
+            }
+        });
     }
 
     public Stage getStage() {

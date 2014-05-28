@@ -4,6 +4,7 @@ import Common.Interfaces.Event;
 import Controllers.Interfaces.GameCreatorWaiterController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -18,6 +19,8 @@ public class GameCreatorsWaiterButtons {
 
     private String name;
     private int number;
+
+    public Button startButton;
 
     public void setController(GameCreatorWaiterController myController) {
         this.controller = myController;
@@ -67,6 +70,13 @@ public class GameCreatorsWaiterButtons {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                startButton.requestFocus();
+            }
+        });
     }
 
     public void cancel(ActionEvent actionEvent) throws RemoteException {

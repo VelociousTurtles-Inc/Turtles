@@ -22,15 +22,6 @@ public class GameCreatorButtons {
 
     public void setStage(Stage stage) {
         myStage = stage;
-    }
-    public void setController(GameCreatorController myController) {
-        this.myController = myController;
-        this.myController.registerClosingEvent(new Event() {
-            @Override
-            public void call() {
-                myStage.close();
-            }
-        });
 
         name.addEventFilter(KeyEvent.ANY, new EventHandler<KeyEvent>() {
             @Override
@@ -45,6 +36,22 @@ public class GameCreatorButtons {
                     }
                     keyEvent.consume();
                 }
+            }
+        });
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                name.requestFocus();
+            }
+        });
+    }
+    public void setController(GameCreatorController myController) {
+        this.myController = myController;
+        this.myController.registerClosingEvent(new Event() {
+            @Override
+            public void call() {
+                myStage.close();
             }
         });
     }
