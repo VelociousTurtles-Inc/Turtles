@@ -1,6 +1,7 @@
 package Server.Interfaces;
 
 import Client.Interfaces.GameClient;
+import Enums.Colors;
 import Model.Board.Board;
 import Model.Cards.Card;
 import org.cojen.dirmi.Asynchronous;
@@ -23,6 +24,8 @@ public interface PlayerService extends Remote {
     Map<Integer,Card> getCardsMap() throws RemoteException;
 
     boolean isLocked() throws RemoteException;
+
+    Colors getTurtleColor() throws RemoteException;
 
     void leave() throws RemoteException;
 

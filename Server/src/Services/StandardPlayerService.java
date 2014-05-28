@@ -19,16 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class StandardPlayerService implements PlayerService, ServerPlayerService {
 
-    private final GameManager myManager;
+    private final GameManager manager;
     private GameClient myClient;
     private List<CardIDBox> myCards;
     private final AtomicBoolean locked = new AtomicBoolean();
     private final AtomicBoolean dead = new AtomicBoolean(false);
+    private final Colors turtleColor;
 
-    private final String myName;
+    private final String name;
 
     public String getName() {
-        return myName;
+        return name;
     }
 
     @Override
@@ -36,10 +37,11 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
         myClient.setPlayerOnMove(playerOnMove);
     }
 
-    public StandardPlayerService(GameManager myManager, String name) throws RemoteException {
-        this.myManager = myManager;
-        this.myName = name;
-        List<Integer> tmpList = myManager.getHand();
+    public StandardPlayerService(GameManager manager, String name, Colors turtleColor) throws RemoteException {
+        this.manager = manager;
+        this.name = name;
+        this.turtleColor = turtleColor;
+        List<Integer> tmpList = manager.getHand();
         myCards = new LinkedList<>();
         for(Integer i : tmpList) {
             myCards.add(new CardIDBox(i));
@@ -86,36 +88,42 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
 
     @Override
     public Map<Integer, Card> getCardsMap() throws RemoteException {
-        return myManager.getInGameCards();
+        return manager.getInGameCards();
     }
 
     @Override
     public void playCard(int cardNumber) throws RemoteException {
         if (!isLocked()) {
-            myManager.playCard(myCards.get(cardNumber).getCardID());
-            myCards.get(cardNumber).setCardID(myManager.getNextCard());
+            manager.playCard(myCards.get(cardNumber).getCardID());
+            myCards.get(cardNumber).setCardID(manager.getNextCard());
             updateCards();
         }
     }
 
     @Override
     public String chatText() throws RemoteException {
-        return myManager.getChatLog();
+        return manager.getChatLog();
     }
 
     @Override
     public void postMessage(String a) throws RemoteException {
-        myManager.addMessage(new Message(getName(), a, new Date()));
+        manager.addMessage(new Message(getName(), a, new Date()));
     }
 
     @Override
     public BoardGraph getGameBoardGraph() throws RemoteException {
-        return myManager.getBoardGraph();
+        return manager.getBoardGraph();
     }
 
     @Override
     public List<String> GetListOfPlayers() throws RemoteException {
-        return myManager.GetListOfPlayers();
+        return manager.GetListOfPlayers();
+    }
+
+    @Override
+    public Colors getTurtleColor() throws RemoteException
+    {
+        return turtleColor;
     }
 
     public void leave() throws RemoteException {
@@ -171,14 +179,14 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
 
     public void setZombie() {
         try {
-            myManager.addZombie();
+            manager.addZombie();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
         dead.set(true);
         if (!isLocked()) {
             try {
-                myManager.nextTurn();
+                manager.nextTurn();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }

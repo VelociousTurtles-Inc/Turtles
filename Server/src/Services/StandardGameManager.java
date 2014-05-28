@@ -189,9 +189,13 @@ public class StandardGameManager implements GameManager {
     public void startGame() throws RemoteException {
         myDeck = new Deck();
         board = new SimpleBoard();
-
+        List<Colors> list = Colors.getAllColors();
+        Collections.shuffle(list);
+        Iterator<Colors> it = list.iterator();
         for(int i = 0; i< gameWaiterClients.size(); i++) {
-            playerServices.add(new StandardPlayerService(this, gameWaiterClients.get(i).getName()));
+            if (!it.hasNext())throw new ArrayIndexOutOfBoundsException("Too little turtles");
+            Colors color = it.next();
+            playerServices.add(new StandardPlayerService(this, gameWaiterClients.get(i).getName(),color));
             gameWaiterClients.get(i).start(playerServices.get(i));
             playerServices.get(i).lock();
         }
