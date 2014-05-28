@@ -5,11 +5,14 @@ import Controllers.Interfaces.GameController;
 import Utility.DebugWriter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -38,11 +41,21 @@ public class StandardGameButtons {
     @FXML private ImageView fourthCardImage;
     @FXML private ImageView fifthCardImage;
 
-    @FXML private TextArea InputTextArea; //TODO
-    @FXML private TextArea OutputTextArea; //TODO
+    @FXML private TextArea InputTextArea = new TextArea();
+    @FXML private TextArea OutputTextArea = new TextArea();
 
     @FXML private Label winner;
     @FXML private Pane winnerPane;
+
+    @FXML protected String getInput() {
+        String temp = InputTextArea.getText();
+        InputTextArea.clear();
+        return temp;
+    }
+
+    public TextArea getOutputTextArea() {
+        return OutputTextArea;
+    }
 
     List<ImageView> getCardSlots() {
         List<ImageView> cards = new ArrayList<>();
@@ -107,6 +120,25 @@ public class StandardGameButtons {
                 });
             }
         });
+
+        InputTextArea.addEventFilter(KeyEvent.ANY, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    if(keyEvent.getEventType() == KeyEvent.KEY_PRESSED && keyEvent.isShiftDown()) {
+                        InputTextArea.appendText("\n");
+                    } else if(keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
+                        try {
+                            postMessage();
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    keyEvent.consume();
+                }
+            }
+        });
+
         playItButton.setDisable(myGameController.isLocked());
         List<String> players = myGameController.getPlayers();
         //myBox.getChildren().add(new Label("something"));
@@ -164,7 +196,13 @@ public class StandardGameButtons {
         chosenCard = 5;
     }
 
-    @FXML public void sendTextToServer(ActionEvent actionEvent) {
+    @FXML public void sendTextToServer(ActionEvent actionEvent) throws RemoteException {
+        assert DebugWriter.write("Message sent to server");
+        postMessage();
+    }
+
+    private void postMessage() throws RemoteException {
+        myGameController.postMessage(getInput());
     }
 
     public Pane getWinnerPane() {

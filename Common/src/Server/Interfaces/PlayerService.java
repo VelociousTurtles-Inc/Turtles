@@ -26,5 +26,9 @@ public interface PlayerService extends Remote {
 
     void leave() throws RemoteException;
 
+    void postMessage(String a) throws RemoteException;
+
+    String chatText() throws RemoteException;
+
     List<String> GetListOfPlayers() throws RemoteException;
 }

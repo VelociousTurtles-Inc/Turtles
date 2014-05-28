@@ -1,15 +1,17 @@
 package Services;
 
+import Chat.Message.Message;
 import Client.Interfaces.GameClient;
 import Enums.Colors;
 import Model.Board.Board;
 import Model.Cards.Card;
-import Utility.Utility;
 import Server.Interfaces.GameManager;
 import Server.Interfaces.PlayerService;
 import Server.Interfaces.ServerPlayerService;
+import Utility.Utility;
 
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -97,6 +99,16 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     }
 
     @Override
+    public String chatText() throws RemoteException {
+        return myManager.getChatLog();
+    }
+
+    @Override
+    public void postMessage(String a) throws RemoteException {
+        myManager.addMessage(new Message(getName(), a, new Date()));
+    }
+
+    @Override
     public Board getGameBoard() throws RemoteException {
         return myManager.getBoard();
     }
@@ -124,6 +136,15 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
                     e1.printStackTrace();
                 }
             }
+        }
+    }
+
+    @Override
+    public void updateChat(String a) {
+        try {
+            myClient.updateChat(a);
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
     }
 

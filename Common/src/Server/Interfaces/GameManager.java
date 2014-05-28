@@ -1,5 +1,6 @@
 package Server.Interfaces;
 
+import Chat.Message.Message;
 import Model.Board.Board;
 import Model.Cards.Card;
 import Model.GameInfo;
@@ -42,6 +43,14 @@ public interface GameManager extends Remote {
     void checkForZombies() throws RemoteException;
 
     void addZombie() throws RemoteException;
+
+    String getChatLog() throws RemoteException;
+
+    void addMessage(Message a) throws RemoteException;
+
+    void updateBoard() throws RemoteException;
+
+    void updateChat(String a) throws RemoteException;
 
     List<String> GetListOfPlayers() throws RemoteException;
 }

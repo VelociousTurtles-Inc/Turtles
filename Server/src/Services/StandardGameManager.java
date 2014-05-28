@@ -1,19 +1,20 @@
 package Services;
 
+import Chat.Message.Message;
 import Enums.Colors;
 import Model.Board.Board;
 import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Deck;
 import Model.GameInfo;
+import Server.Interfaces.GameManager;
+import Server.Interfaces.ServerGameDispenser;
+import Server.Interfaces.ServerPlayerService;
+import Server.Interfaces.WaiterService;
 import Utility.Utility;
-import Server.Interfaces.*;
 
 import java.rmi.RemoteException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -37,12 +38,30 @@ public class StandardGameManager implements GameManager {
     private final ServerGameDispenser gameDispenser;
     private Colors winner;
 
+    private List<Message> chatLog = new LinkedList<>();
+
     public StandardGameManager(String name, int gameId, ServerGameDispenser gameDispenser) {
         this.gameId = gameId;
         this.gameDispenser = gameDispenser;
         started.set(false);
         this.name = name;
         numberOfPlayers = 0;
+        chatLog.add(new Message("Host", "The game has began", new Date()));
+    }
+
+    @Override
+    public String getChatLog() {
+        StringBuilder A = new StringBuilder();
+        for(Message myMessage : chatLog)
+            A.append(myMessage.author + ": " + myMessage.text + "\n");
+        return A.toString();
+    }
+
+    public void addMessage(Message a) throws RemoteException {
+        chatLog.add(a);
+        for(ServerPlayerService myPlayer : playerServices) {
+            myPlayer.updateChat(getChatLog());
+        }
     }
 
     @Override
@@ -50,11 +69,20 @@ public class StandardGameManager implements GameManager {
         return board;
     }
 
+    @Override
     public void updateBoard() {
         for (ServerPlayerService myPlayer : playerServices) {
             myPlayer.updateBoard();
         }
     }
+
+    @Override
+    public void updateChat(String a) throws RemoteException {
+        for(ServerPlayerService myPlayer : playerServices) {
+            myPlayer.updateChat(a);
+        }
+    }
+
 
     @Override
     public void playCard(int cardID) throws RemoteException {
