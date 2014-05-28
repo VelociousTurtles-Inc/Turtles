@@ -25,7 +25,7 @@ public interface PlayerService extends Remote {
 
     boolean isLocked() throws RemoteException;
 
-    Colors getTurtleColor() throws RemoteException;
+    int getTurtleColor() throws RemoteException;
 
     void leave() throws RemoteException;
 

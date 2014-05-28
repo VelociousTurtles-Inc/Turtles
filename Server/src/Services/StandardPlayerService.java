@@ -121,9 +121,9 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     }
 
     @Override
-    public Colors getTurtleColor() throws RemoteException
+    public int getTurtleColor() throws RemoteException
     {
-        return turtleColor;
+        return turtleColor.toInteger();
     }
 
     public void leave() throws RemoteException {

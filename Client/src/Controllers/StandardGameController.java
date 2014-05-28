@@ -114,16 +114,10 @@ public class StandardGameController extends Thread implements GameController, Ga
         normalCardsMap = myService.getCardsMap();
         myService.setClient(this);
         Client.scenario.invoke(GameController.class, this);
-        //myService.lockMeOrNot();
     }
 
     @Override
     public void playCard(int card) throws RemoteException {
-        /*if (playerHand == null)getCards();
-        int cardID = playerHand.get(card-1);
-        playerService.playCard(cardID);
-        updateCards();
-        updateBoards();*/
         playerService.playCard(card);
     }
 
