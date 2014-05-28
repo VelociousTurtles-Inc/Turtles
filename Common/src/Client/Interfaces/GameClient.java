@@ -13,6 +13,9 @@ public interface GameClient extends Remote {
     void updateBoards() throws RemoteException;
 
     @Asynchronous
+    void updateChat(String a) throws RemoteException;
+
+    @Asynchronous
     void updateLock() throws RemoteException;
 
     @Asynchronous

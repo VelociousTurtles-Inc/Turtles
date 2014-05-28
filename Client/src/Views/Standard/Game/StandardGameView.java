@@ -16,6 +16,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -33,12 +34,36 @@ public class StandardGameView {
     private List<ImageView> turtles = new ArrayList<>();
     private final Board myBoard = BoardBootstrap.createSampleBoard();   //Board.readBoard("sampleBoard");
     private GameController gameController;
-
+    private TextArea chatText;
     private Stage stage;
 
     private final ImageContainer imageContainer = new ImageContainer(this.getClass().getClassLoader(), "Resources/Images/Cards");
     private javafx.scene.control.Label winnerLabel;
     private Pane winnerPane;
+
+    public void updateChat(String a) {
+        chatText.setText(a);
+        chatText.appendText(""); // To trigger some strange things under the hood of JavaFX
+        chatText.setScrollTop(Double.MAX_VALUE);
+    }
+
+    private class ChatUpdater implements Event {
+        @Override
+        public void call() {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    assert DebugWriter.write("Updating Chat");
+                    try {
+                       updateChat(gameController.getChatLog());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
+
 
     private void updateBoard(final List<List<Integer>> updateForBoard) {
         assert new BoolRunnable() {
@@ -154,6 +179,7 @@ public class StandardGameView {
         gameController.registerUpdateCardsEvent(new CardsUpdater());
         gameController.registerCloseEvent(new CloseEvent());
         gameController.registerWinnerUpdateEvent(new WinnerUpdateEvent());
+        gameController.registerChatUpdateEvent(new ChatUpdater());
     }
 
     private class WinnerUpdateEvent implements Event {
@@ -205,6 +231,7 @@ public class StandardGameView {
 
         turtles = myOwnGameButtons.getTurtles();
         slots = myOwnGameButtons.getCardSlots();
+        chatText = myOwnGameButtons.getOutputTextArea();
 
         winnerLabel = myOwnGameButtons.getWinnerLabel();
         winnerPane = myOwnGameButtons.getWinnerPane();

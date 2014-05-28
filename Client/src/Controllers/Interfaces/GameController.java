@@ -30,9 +30,13 @@ public interface GameController {
 
     void registerChangeMovingPlayerEvent(Event changeEvent);
     void registerWinnerUpdateEvent(Event winnerUpdateEvent);
+    void registerChatUpdateEvent(Event chatUpdateEvent);
 
     List<String> getPlayers() throws RemoteException;
     Colors getWinner();
+
+    String getChatLog() throws RemoteException;
+    void postMessage(String a) throws RemoteException;
 
     int getLastMoving();
 }

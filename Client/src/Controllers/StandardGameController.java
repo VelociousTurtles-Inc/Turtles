@@ -30,6 +30,7 @@ public class StandardGameController extends Thread implements GameController, Ga
     private final List<Event> changeEvents = new LinkedList<>();
 
     private final List<Event> lockEvents = new LinkedList<>();
+    private final List<Event> chatUpdateEvents = new LinkedList<>();
 
     private final AtomicBoolean locked = new AtomicBoolean();
 
@@ -56,6 +57,19 @@ public class StandardGameController extends Thread implements GameController, Ga
         normalCardsMap = new HashMap<>();
 
         locked.set(true);
+    }
+
+    public void updateChat(String a) {
+        synchronized (chatUpdateEvents) {
+            for (Event up : chatUpdateEvents) {
+                up.call();
+            }
+        }
+    }
+
+    @Override
+    public String getChatLog() throws RemoteException {
+        return playerService.chatText();
     }
 
     @Override
@@ -88,6 +102,11 @@ public class StandardGameController extends Thread implements GameController, Ga
 //        }
 //
 //    }
+
+    @Override
+    public void postMessage(String text) throws RemoteException {
+        playerService.postMessage(text);
+    }
 
     @Override
     public void start(PlayerService myService) throws RemoteException {
@@ -255,11 +274,17 @@ public class StandardGameController extends Thread implements GameController, Ga
         }
     }
 
-    
-
     @Override
     public void registerChangeMovingPlayerEvent(Event changeEvent) {
         changeEvents.add(changeEvent);
+    }
+
+    @Override
+    public void registerChatUpdateEvent(Event updateChatEvent) {
+        synchronized (chatUpdateEvents) {
+            assert DebugWriter.write("Registering new Chat Update Event");
+            chatUpdateEvents.add(updateChatEvent);
+        }
     }
 
     @Override
