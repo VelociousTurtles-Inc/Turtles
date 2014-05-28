@@ -14,8 +14,8 @@
                <TableColumn fx:id="numberColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="161.0" text="Number of players" />
            </columns>
        </TableView>
-       <Button layoutX="324.0" layoutY="259.0" mnemonicParsing="false" onAction="#join" prefHeight="29.0" prefWidth="89.0" text="Join" />
+       <Button defaultButton="true" layoutX="324.0" layoutY="259.0" mnemonicParsing="false" onAction="#join" prefHeight="29.0" prefWidth="89.0" text="Join" />
        <Button layoutX="226.0" layoutY="260.0" mnemonicParsing="false" onAction="#newGame" prefHeight="29.0" prefWidth="89.0" text="Create" />
-       <Button layoutX="14.0" layoutY="260.0" mnemonicParsing="false" onAction="#cancel" prefHeight="29.0" prefWidth="89.0" text="Cancel" />
+       <Button cancelButton="true" layoutX="14.0" layoutY="260.0" mnemonicParsing="false" onAction="#cancel" prefHeight="29.0" prefWidth="89.0" text="Cancel" />
    </children>
 </AnchorPane>

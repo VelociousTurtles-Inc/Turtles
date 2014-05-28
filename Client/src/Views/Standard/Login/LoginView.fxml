@@ -18,7 +18,7 @@
            </font>
        </Label>
        <TextField fx:id="name" layoutX="79.0" layoutY="21.0" prefWidth="182.000244140625" />
-       <Button fx:id="submitButton" layoutX="179.0" layoutY="60.0" mnemonicParsing="false" onAction="#submit" prefHeight="29.0" prefWidth="84.0" text="Submit" />
-       <Button layoutX="14.0" layoutY="60.0" mnemonicParsing="false" onAction="#cancel" prefHeight="29.0" prefWidth="84.0" text="Cancel" />
+       <Button fx:id="submitButton" defaultButton="true" layoutX="179.0" layoutY="60.0" mnemonicParsing="false" onAction="#submit" prefHeight="29.0" prefWidth="84.0" text="Submit" />
+       <Button cancelButton="true" layoutX="14.0" layoutY="60.0" mnemonicParsing="false" onAction="#cancel" prefHeight="29.0" prefWidth="84.0" text="Cancel" />
    </children>
 </AnchorPane>

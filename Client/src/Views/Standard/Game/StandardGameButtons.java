@@ -47,6 +47,12 @@ public class StandardGameButtons {
     @FXML private Label winner;
     @FXML private Pane winnerPane;
 
+    @FXML private Button firstCard;
+    @FXML private Button secondCard;
+    @FXML private Button thirdCard;
+    @FXML private Button fourthCard;
+    @FXML private Button fifthCard;
+
     @FXML protected String getInput() {
         String temp = InputTextArea.getText();
         InputTextArea.clear();
