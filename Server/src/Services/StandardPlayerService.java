@@ -28,6 +28,7 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
 
     private final String name;
 
+    @Override
     public String getName() {
         return name;
     }
@@ -94,7 +95,8 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     @Override
     public void playCard(int cardNumber) throws RemoteException {
         if (!isLocked()) {
-            manager.playCard(myCards.get(cardNumber).getCardID());
+            manager.playCard(myCards.get(cardNumber).getCardID(),this);
+
             myCards.get(cardNumber).setCardID(manager.getNextCard());
             updateCards();
         }
@@ -139,6 +141,7 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
             } catch (RemoteException e) {
                 Utility.logInfo("Assumed player is zombie => removing");
                 try {
+                    manager.addMessage(new Message("Host","Removing player "+name,new Date()));
                     leave();
                 } catch (RemoteException e1) {
                     e1.printStackTrace();

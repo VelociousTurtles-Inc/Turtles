@@ -73,6 +73,6 @@ public class SingleBackwardCard extends Card {
 
     @Override
     public String getDescription() {
-        return "Porusza żolwia we wskazanym kolorze o jedno pole do tyłu";
+        return "Porusza żolwia "+Colors.asColor(this.color).toString()+" o jedno pole do tyłu";
     }
 }

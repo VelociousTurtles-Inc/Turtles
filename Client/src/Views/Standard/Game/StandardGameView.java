@@ -190,7 +190,10 @@ public class StandardGameView {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    winnerLabel.setText(winner.toString());
+                    if (winner.equals(gameController.getTurtleColor()))
+                        winnerLabel.setText("YOU");
+                    else
+                        winnerLabel.setText(winner.toString());
                     winnerPane.setVisible(true);
                 }
             });

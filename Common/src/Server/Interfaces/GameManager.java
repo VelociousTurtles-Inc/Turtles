@@ -14,7 +14,7 @@ import java.util.Map;
 public interface GameManager extends Remote {
     // TODO server side GameManager interface
 
-    public void playCard(int cardID) throws RemoteException;
+    public void playCard(int cardID, ServerPlayerService player) throws RemoteException;
 
     int getNextCard() throws RemoteException;
 

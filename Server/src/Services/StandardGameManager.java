@@ -84,11 +84,13 @@ public class StandardGameManager implements GameManager {
 
 
     @Override
-    public void playCard(int cardID) throws RemoteException {
-        myDeck.getCardsMap().get(cardID).play(board);
+    public void playCard(int cardID, ServerPlayerService player) throws RemoteException {
+        Card card = myDeck.getCardsMap().get(cardID);
+        card.play(board);
         myDeck.returnCard(cardID);
         checkGameStatus();
         updateBoard();
+        addMessage(new Message("Host", "Player " + player.getName() + " zagrywa: " + card.getDescription(), new Date()));
         if (winner == null) {
             nextTurn();
         } else {

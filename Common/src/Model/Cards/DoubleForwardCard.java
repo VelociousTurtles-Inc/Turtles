@@ -75,6 +75,6 @@ public class DoubleForwardCard extends Card {
 
     @Override
     public String getDescription() {
-        return "Porusza żółwia we wskazanym kolorze o dwa pola do przodu";
+        return "Porusza żółwia "+Colors.asColor(this.color).toString()+" o dwa pola do przodu";
     }
 }
