@@ -1,6 +1,7 @@
 package Scenarios;
 
 import Controllers.Interfaces.*;
+import Views.Standard.FinalLogin.FinalLoginView;
 import Views.Standard.Game.StandardGameView;
 import Views.Standard.GameCreation.GameCreator.GameCreatorView;
 import Views.Standard.GameCreation.GameCreatorsWaiting.GameCreatorWaiterView;
@@ -17,6 +18,6 @@ public class StandardScenario extends GUIScenario {
         add(GameCreatorController.class, GameCreatorView.class);
         add(GameCreatorWaiterController.class, GameCreatorWaiterView.class);
         add(GameWaiterController.class, GameWaiterView.class);
-        add(LoginController.class, LoginView.class);
+        add(LoginController.class, FinalLoginView.class);
     }
 }

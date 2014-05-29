@@ -10,4 +10,6 @@ public interface LoginController {
     void close();
 
     boolean submit(String name);
+
+    boolean submit(String name, String host, int port);
 }
