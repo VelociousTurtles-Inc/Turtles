@@ -12,6 +12,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.rmi.RemoteException;
@@ -45,6 +48,24 @@ public class GameSelectButtons {
         SimpleGameInfo myInfo = (SimpleGameInfo) myTable.getSelectionModel().getSelectedItem();
         System.out.println(myInfo.getMyID());
         controller.join(myInfo.getMyID());
+    }
+
+    @FXML
+    public void mouseJoin(MouseEvent mouseEvent) throws RemoteException {
+        if (mouseEvent.getClickCount() > 1) {
+            SimpleGameInfo myInfo = (SimpleGameInfo) myTable.getSelectionModel().getSelectedItem();
+            System.out.println(myInfo.getMyID());
+            controller.join(myInfo.getMyID());
+        }
+    }
+
+    @FXML
+    public void keyJoin(KeyEvent keyEvent) throws RemoteException {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            SimpleGameInfo myInfo = (SimpleGameInfo) myTable.getSelectionModel().getSelectedItem();
+            System.out.println(myInfo.getMyID());
+            controller.join(myInfo.getMyID());
+        }
     }
 
     public void setController(final GameSelectController controller) throws RemoteException {

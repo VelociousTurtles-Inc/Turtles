@@ -53,13 +53,18 @@ public class StandardGameManager implements GameManager {
     @Override
     public String getChatLog() {
         StringBuilder A = new StringBuilder();
-        for(Message myMessage : chatLog)
+        for(Message myMessage : chatLog) {
             A.append(myMessage.author + ": " + myMessage.text + "\n");
+        }
         return A.toString();
     }
 
-    public void addMessage(Message a) throws RemoteException {
-        chatLog.add(a);
+    public void addMessage(Message message) throws RemoteException {
+        chatLog.add(message);
+        updateChat();
+    }
+
+    public void updateChat() throws RemoteException {
         for(ServerPlayerService myPlayer : playerServices) {
             myPlayer.updateChat(getChatLog());
         }
@@ -74,13 +79,6 @@ public class StandardGameManager implements GameManager {
     public void updateBoard() {
         for (ServerPlayerService myPlayer : playerServices) {
             myPlayer.updateBoard();
-        }
-    }
-
-    @Override
-    public void updateChat(String a) throws RemoteException {
-        for(ServerPlayerService myPlayer : playerServices) {
-            myPlayer.updateChat(a);
         }
     }
 

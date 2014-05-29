@@ -9,5 +9,5 @@ public interface LoginController {
 
     void close();
 
-    void submit(String name) throws IOException;
+    boolean submit(String name);
 }

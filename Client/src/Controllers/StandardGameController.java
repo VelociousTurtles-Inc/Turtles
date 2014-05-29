@@ -59,7 +59,7 @@ public class StandardGameController extends Thread implements GameController, Ga
         locked.set(true);
     }
 
-    public void updateChat(String a) {
+    public void updateChat(String message) {
         synchronized (chatUpdateEvents) {
             for (Event up : chatUpdateEvents) {
                 up.call();
@@ -280,6 +280,7 @@ public class StandardGameController extends Thread implements GameController, Ga
             assert DebugWriter.write("Registering new Chat Update Event");
             chatUpdateEvents.add(updateChatEvent);
         }
+        updateChatEvent.call();
     }
 
     @Override

@@ -45,13 +45,11 @@ public interface GameManager extends Remote {
 
     String getChatLog() throws RemoteException;
 
-    void addMessage(Message a) throws RemoteException;
+    void addMessage(Message message) throws RemoteException;
 
     BoardGraph getBoardGraph() throws RemoteException;
 
     void updateBoard() throws RemoteException;
-
-    void updateChat(String a) throws RemoteException;
 
     List<String> GetListOfPlayers() throws RemoteException;
 }

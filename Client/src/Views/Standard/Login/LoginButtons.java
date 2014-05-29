@@ -4,15 +4,21 @@ import Controllers.Interfaces.LoginController;
 import Common.Interfaces.Event;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 
 public class LoginButtons {
     public TextField name;
     private Stage stage;
     private LoginController myController;
+    public Button submitButton;
 
     public void setController(LoginController myController) {
         this.myController = myController;
@@ -32,6 +38,25 @@ public class LoginButtons {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+
+        name.addEventFilter(KeyEvent.ANY, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    if(keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
+                        submit(null);
+                    }
+                    keyEvent.consume();
+                }
+            }
+        });
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                name.requestFocus();
+            }
+        });
     }
 
     public Stage getStage() {
@@ -42,11 +67,22 @@ public class LoginButtons {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                try {
-                    myController.submit(name.getText());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                submitButton.setDisable(true);
+                submitButton.setText("Wait...");
+                new Thread () {
+                    @Override
+                    public void run() {
+                        if (!myController.submit(name.getText())) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    submitButton.setDisable(false);
+                                    submitButton.setText("Try again");
+                                }
+                            });
+                        }
+                    }
+                }.start();
             }
         });
     }
