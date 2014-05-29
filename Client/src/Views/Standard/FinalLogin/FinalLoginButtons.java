@@ -1,7 +1,7 @@
 package Views.Standard.FinalLogin;
 
-import Controllers.Interfaces.LoginController;
 import Common.Interfaces.Event;
+import Controllers.Interfaces.LoginController;
 import Main.Client;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -11,9 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.rmi.RemoteException;
 
 public class FinalLoginButtons {
     public TextField name;

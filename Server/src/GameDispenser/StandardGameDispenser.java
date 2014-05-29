@@ -2,12 +2,12 @@ package GameDispenser;
 
 import Client.Interfaces.LoginClient;
 import Client.Interfaces.ThreeStringsGet;
+import Common.Interfaces.Event;
 import Main.Server;
 import Model.GameInfo;
-import Common.Interfaces.Event;
-import Utility.Utility;
 import Server.Interfaces.*;
 import Services.StandardWaiterService;
+import Utility.Utility;
 import org.cojen.dirmi.ClosedException;
 
 import java.rmi.RemoteException;
@@ -127,7 +127,10 @@ public class StandardGameDispenser implements GameDispenser, ServerGameDispenser
             }
         };
         for(GameManager myGame : gameServices.values()) {
-             myList.add(myGame.getGameInfo());
+            //myList.add(myGame.getGameInfo());
+            if (!myGame.getGameInfo().getGameStatus().equals("Started")) {
+                myList.add(myGame.getGameInfo());
+            }
         }
         myTSG.setList(myList);
 

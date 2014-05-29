@@ -4,8 +4,6 @@ import Controllers.Interfaces.MenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-import java.io.IOException;
-
 public class StandardMenuButtons {
 
     private MenuController myMenuController;

@@ -5,7 +5,6 @@ import Controllers.Interfaces.GameController;
 import Enums.Colors;
 import Images.Images;
 import Utility.DebugWriter;
-import Utility.Utility;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,7 +20,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;

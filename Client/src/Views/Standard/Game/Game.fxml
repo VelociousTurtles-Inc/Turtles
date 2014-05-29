@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?scenebuilder-background-color 0x606060ff?>
-<?import java.lang.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.*?>
@@ -12,7 +9,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 <AnchorPane id="AnchorPane" depthTest="INHERIT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="false" pickOnBounds="true" prefHeight="716.0" prefWidth="1271.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Standard.Game.StandardGameButtons">
    <children>
        <ImageView id="parkietk1.jpg" cache="true" cacheHint="DEFAULT" disable="false" fitHeight="501.0" fitWidth="933.0" focusTraversable="false" layoutX="14.0" layoutY="14.0" mouseTransparent="false" preserveRatio="false">
@@ -20,7 +16,7 @@
                <InnerShadow />
            </effect>
        <image>
-           <Image url="@../../../Resources/Images/Boards/board.png" />
+           <Image url="@../../../Resources/Images/Boards/newBoard.jpg" />
        </image>
        </ImageView>
        <Button fx:id="playItButton" layoutX="825.0" layoutY="659.0" mnemonicParsing="false" onAction="#playIt" prefHeight="29.0" prefWidth="122.0" text="Use card" />

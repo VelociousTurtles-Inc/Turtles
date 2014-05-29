@@ -1,8 +1,8 @@
 package Controllers;
 
+import Client.Interfaces.GameClient;
 import Common.Interfaces.Event;
 import Controllers.Interfaces.GameController;
-import Client.Interfaces.GameClient;
 import Enums.Colors;
 import Main.Client;
 import Model.Board.BoardGraph;

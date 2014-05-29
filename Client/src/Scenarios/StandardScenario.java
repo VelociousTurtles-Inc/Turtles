@@ -7,7 +7,6 @@ import Views.Standard.GameCreation.GameCreator.GameCreatorView;
 import Views.Standard.GameCreation.GameCreatorsWaiting.GameCreatorWaiterView;
 import Views.Standard.GameCreation.GameWaiting.GameWaiterView;
 import Views.Standard.GameSelect.GameSelectView;
-import Views.Standard.Login.LoginView;
 import Views.Standard.Menu.StandardMenuView;
 
 /**

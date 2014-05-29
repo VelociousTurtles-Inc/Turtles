@@ -1,8 +1,8 @@
 package Controllers;
 
+import Client.Interfaces.GameWaiterClient;
 import Common.Interfaces.Event;
 import Controllers.Interfaces.GameCreatorWaiterController;
-import Client.Interfaces.GameWaiterClient;
 import Main.Client;
 import Server.Interfaces.PlayerService;
 import Server.Interfaces.WaiterService;

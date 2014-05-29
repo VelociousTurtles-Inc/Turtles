@@ -1,13 +1,13 @@
 package Views.Standard.Game;
 
+import Common.Interfaces.BoolRunnable;
+import Common.Interfaces.Event;
 import Controllers.Interfaces.GameController;
 import Enums.Colors;
-import Common.Interfaces.Event;
 import Images.ImageContainer;
 import Images.Images;
 import Model.Cards.Card;
 import Utility.DebugWriter;
-import Common.Interfaces.BoolRunnable;
 import Utility.Utility;
 import Views.Board;
 import Views.BoardBootstrap;
@@ -16,7 +16,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -186,7 +186,6 @@ public class StandardGameView {
         @Override
         public void call() {
             final Colors winner = gameController.getWinner();
-            Utility.logInfo("GV");
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {

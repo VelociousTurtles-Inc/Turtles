@@ -1,9 +1,9 @@
 package GameWatchdogs;
 
 import Common.Interfaces.Event;
-import Utility.Utility;
-import Server.Interfaces.ServerGameDispenser;
 import Server.Interfaces.GameManager;
+import Server.Interfaces.ServerGameDispenser;
+import Utility.Utility;
 
 import java.rmi.RemoteException;
 

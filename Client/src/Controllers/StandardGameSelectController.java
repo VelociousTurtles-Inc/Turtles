@@ -1,9 +1,9 @@
 package Controllers;
 
+import Client.Interfaces.GameSelectClient;
 import Client.Interfaces.ThreeStringsGet;
 import Common.Interfaces.Event;
 import Controllers.Interfaces.GameSelectController;
-import Client.Interfaces.GameSelectClient;
 import Main.Client;
 import Model.GameInfo;
 import Server.Interfaces.WaiterService;

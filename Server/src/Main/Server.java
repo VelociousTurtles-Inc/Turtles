@@ -1,10 +1,10 @@
 package Main;
 
 import GameDispenser.StandardGameDispenser;
-import Utility.Utility;
 import Model.PlayerDispenser;
-import Utility.Scenario;
 import Scenarios.StandardServerScenario;
+import Utility.Scenario;
+import Utility.Utility;
 import org.cojen.dirmi.Environment;
 
 import java.io.IOException;

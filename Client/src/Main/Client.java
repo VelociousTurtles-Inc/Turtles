@@ -1,9 +1,9 @@
 package Main;
 
 import Controllers.StandardMenuController;
-import Utility.Scenario;
 import Scenarios.StandardScenario;
 import Utility.DebugWriter;
+import Utility.Scenario;
 
 /**
  * standard scenario for local tests

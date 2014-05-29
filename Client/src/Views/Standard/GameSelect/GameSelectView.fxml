@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <AnchorPane id="AnchorPane" fx:id="gameChoosingWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Standard.GameSelect.GameSelectButtons">
    <children>
        <TableView fx:id="myTable" layoutX="14.0" layoutY="14.0" onKeyPressed="#keyJoin" onMouseClicked="#mouseJoin" prefHeight="229.0" prefWidth="399.0">

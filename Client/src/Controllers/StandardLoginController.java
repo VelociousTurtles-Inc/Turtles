@@ -1,14 +1,13 @@
 package Controllers;
 
-import Controllers.Interfaces.LoginController;
 import Client.Interfaces.LoginClient;
 import Common.Interfaces.Event;
+import Controllers.Interfaces.LoginController;
 import Main.Client;
 import Server.Interfaces.GameEntry;
 import Server.Interfaces.WaiterService;
 import Views.Standard.Login.LoginView;
 import org.cojen.dirmi.Environment;
-import org.cojen.dirmi.RemoteTimeoutException;
 import org.cojen.dirmi.Session;
 
 import java.io.IOException;

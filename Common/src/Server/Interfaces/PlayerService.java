@@ -1,8 +1,6 @@
 package Server.Interfaces;
 
 import Client.Interfaces.GameClient;
-import Enums.Colors;
-import Model.Board.Board;
 import Model.Cards.Card;
 import org.cojen.dirmi.Asynchronous;
 

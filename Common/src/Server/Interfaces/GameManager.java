@@ -1,7 +1,6 @@
 package Server.Interfaces;
 
 import Chat.Message.Message;
-import Model.Board.Board;
 import Model.Board.BoardGraph;
 import Model.Cards.Card;
 import Model.GameInfo;
