@@ -4,7 +4,7 @@ import GameDispenser.StandardGameDispenser;
 import Utility.Utility;
 import Model.PlayerDispenser;
 import Utility.Scenario;
-import Scenarios.StandardScenario;
+import Scenarios.StandardServerScenario;
 import org.cojen.dirmi.Environment;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class Server {
      * @throws InterruptedException
      */
     public static void main(String[] args) throws IOException, InterruptedException {
-        scenario = new StandardScenario();
+        scenario = new StandardServerScenario();
         port = args.length > 1 ? Integer.valueOf(args[0]) : 8080;
         Environment environment = null;
         StandardGameDispenser gameDispenser = null;

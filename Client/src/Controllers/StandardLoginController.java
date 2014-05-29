@@ -8,12 +8,14 @@ import Server.Interfaces.GameEntry;
 import Server.Interfaces.WaiterService;
 import Views.Standard.Login.LoginView;
 import org.cojen.dirmi.Environment;
+import org.cojen.dirmi.RemoteTimeoutException;
 import org.cojen.dirmi.Session;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class StandardLoginController implements LoginClient, LoginController {
 
@@ -38,11 +40,16 @@ public class StandardLoginController implements LoginClient, LoginController {
     }
     @Override
     public boolean submit(String name) {
+        return submit(name, Client.getHost(), Client.getPort());
+    }
+
+    @Override
+    public boolean submit(String name, String host, int port) {
         System.out.println("Submit with name: " + name);
         Environment environment = new Environment();
         Session session = null;
         try {
-            session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
+            session = environment.newSessionConnector(host, port).connect(10, TimeUnit.SECONDS);
 
             gameEntry = (GameEntry) session.receive();
 

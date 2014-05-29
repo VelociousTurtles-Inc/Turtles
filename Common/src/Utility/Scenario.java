@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Map from Controller class to list of it Views
+ */
 public class Scenario {
     // TODO removing
     private final Map<Class<?>, Entry> scenarioMap = new HashMap<>();
@@ -18,6 +21,9 @@ public class Scenario {
         }
     }
 
+    /**
+     * append View to the list for specific adapter
+     */
     public void add(Class<?> adapter, Class<?> view) {
         synchronized (scenarioMap) {
             if (!scenarioMap.containsKey(adapter)) {
@@ -27,6 +33,9 @@ public class Scenario {
         }
     }
 
+    /**
+     * @return list of Views for given adapter
+     */
     public Iterable<Class<?>> get(Class<?> adapter) {
         synchronized (scenarioMap) {
             if (scenarioMap.containsKey(adapter)) {
@@ -37,6 +46,9 @@ public class Scenario {
         }
     }
 
+    /**
+     * invokes all views for given adapterClass with one argument type adapterClass : adapter
+     */
     public void invoke(Class<?> adapterClass, Object adapter) {
         for (Class<?> view : get(adapterClass)) {
             try {

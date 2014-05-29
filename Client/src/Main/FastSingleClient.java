@@ -3,6 +3,9 @@ package Main;
 import Scenarios.FastInitScenario;
 import Utility.DebugWriter;
 
+/**
+ * initializes random game with random players
+ */
 public class FastSingleClient {
 
     public static void main(String[] args) {

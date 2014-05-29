@@ -5,6 +5,11 @@ import Views.FastInit.RandomLoginView;
 import Views.Standard.Game.StandardGameView;
 import Views.Standard.Menu.StandardMenuView;
 
+/**
+ * initializes random game with 2 random players
+ *
+ * bugs : start in MenuView does not work properly
+ */
 public class FastDoubleInitScenario extends GUIScenario {
     public FastDoubleInitScenario() {
         add(MenuController.class, Views.DoubleFastInit.MenuView.class);
