@@ -43,14 +43,15 @@ public class DoubleForwardCard extends Card {
             for (Iterator<Turtle> it = field.turtles.iterator(); it.hasNext();)
             {
                 Turtle turtle = it.next();
-                assert turtle.color != Colors.asInteger(Colors.NULL) : "Turtle colors are shifted";
-                if (turtle.color == color) {
+                assert turtle.getColor() != Colors.asInteger(Colors.NULL) : "Turtle colors are shifted";
+                if (turtle.getColor() == color) {
                     Random random = new Random();
-                    if (field.getSuccessors().size() < 1)throw new IllegalArgumentException("<"+(String.valueOf(field.getSuccessors().size()))+">");
+                    if (field.getSuccessors().size() < 1) break outer;
                     BoardGraph.Field target = field.getSuccessors().get(random.nextInt(field.getSuccessors().size()));
-                    if (target.getSuccessors().size() < 1)throw new IllegalArgumentException("<"+(String.valueOf(target.getSuccessors().size()))+">");
+                    if (target.getSuccessors().size() < 1) break outer;
                     target = target.getSuccessors().get(random.nextInt(target.getSuccessors().size()));
                     do {
+                        turtle.move(target);
                         target.turtles.add(turtle);
                         it.remove();
                         if (it.hasNext())turtle = it.next();
@@ -65,7 +66,7 @@ public class DoubleForwardCard extends Card {
 
     @Override
     public CardInfo getCardInfo() {
-        return new CardInfo("DoubleForwardCard",this.id,this.color);
+        return new CardInfo("DoubleForwardCard",this.id,this.getColor());
     }
 
     @Override
@@ -75,6 +76,6 @@ public class DoubleForwardCard extends Card {
 
     @Override
     public String getDescription() {
-        return "Porusza żółwia "+Colors.asColor(this.color).toString()+" o dwa pola do przodu";
+        return "Porusza żółwia "+Colors.asColor(this.getColor()).toString()+" o dwa pola do przodu";
     }
 }

@@ -8,12 +8,13 @@ import java.io.Serializable;
 public class Turtle implements Serializable {
     private static final long serialVersionUID = 2763735491352166723L;
 
-    public final int color;
+    private final int color;
+    private boolean moved = false;
     // Player ref goes here
     /*
         Backward Board reference
      */
-    BoardGraph.Field position;
+    private BoardGraph.Field position;
 
     public Turtle(int color) {
         this.color = color;
@@ -21,6 +22,19 @@ public class Turtle implements Serializable {
 
     public int getColor() {
         return color;
+    }
+
+    public void move(BoardGraph.Field position) {
+        moved = true;
+        this.position = position;
+    }
+
+    public BoardGraph.Field getPosition() {
+        return position;
+    }
+
+    public boolean isMoved() {
+        return moved;
     }
 
     @Override

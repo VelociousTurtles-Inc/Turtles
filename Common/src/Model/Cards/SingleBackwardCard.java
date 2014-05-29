@@ -43,12 +43,14 @@ public class SingleBackwardCard extends Card {
             for (Iterator<Turtle> it = field.turtles.iterator(); it.hasNext();)
             {
                 Turtle turtle = it.next();
-                assert turtle.color != Colors.asInteger(Colors.NULL) : "Turtle colors are shifted";
-                if (turtle.color == color) {
+                assert turtle.getColor() != Colors.asInteger(Colors.NULL) : "Turtle colors are shifted";
+                if (turtle.getColor() == color) {
                     Random random = new Random();
-                    if (field.getPredecessors().size() < 1)throw new IllegalArgumentException("<"+(String.valueOf(field.getPredecessors().size()))+">");
+                    if (field.getPredecessors().size() < 1) break outer;
                     BoardGraph.Field target = field.getPredecessors().get(random.nextInt(field.getPredecessors().size()));
+                    if (target.getType() == BoardGraph.FieldType.GRAVE && !turtle.isMoved()) break outer;
                     do {
+                        turtle.move(target);
                         target.turtles.add(turtle);
                         it.remove();
                         if (it.hasNext())turtle = it.next();
@@ -63,7 +65,7 @@ public class SingleBackwardCard extends Card {
 
     @Override
     public CardInfo getCardInfo() {
-        return new CardInfo("SingleBackwardCard",this.id,this.color);
+        return new CardInfo("SingleBackwardCard",this.id,this.getColor());
     }
 
     @Override
@@ -73,6 +75,6 @@ public class SingleBackwardCard extends Card {
 
     @Override
     public String getDescription() {
-        return "Porusza żolwia "+Colors.asColor(this.color).toString()+" o jedno pole do tyłu";
+        return "Porusza żolwia "+Colors.asColor(this.getColor()).toString()+" o jedno pole do tyłu";
     }
 }

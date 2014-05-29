@@ -44,11 +44,12 @@ public class SingleForwardCard extends Card {
             {
                 Turtle turtle = it.next();
                 Random random = new Random();
-                assert turtle.color != Colors.asInteger(Colors.NULL) : "Turtle colors are shifted";
-                if (turtle.color == color) {
-                    if (field.getSuccessors().size() < 1)throw new IllegalArgumentException("<"+(String.valueOf(field.getSuccessors().size()))+">");
+                assert turtle.getColor() != Colors.asInteger(Colors.NULL) : "Turtle colors are shifted";
+                if (turtle.getColor() == color) {
+                    if (field.getSuccessors().size() < 1) break outer;
                     BoardGraph.Field target = field.getSuccessors().get(random.nextInt(field.getSuccessors().size()));
                     do {
+                        turtle.move(target);
                         target.turtles.add(turtle);
                         it.remove();
                         if (it.hasNext())turtle = it.next();
@@ -63,7 +64,7 @@ public class SingleForwardCard extends Card {
 
     @Override
     public CardInfo getCardInfo() {
-        return new CardInfo("SingleForwardCard",this.id,this.color);
+        return new CardInfo("SingleForwardCard",this.id,this.getColor());
     }
 
     @Override
@@ -73,6 +74,6 @@ public class SingleForwardCard extends Card {
 
     @Override
     public String getDescription() {
-        return "Porusza żolwia "+Colors.asColor(this.color).toString()+" o jedno pole do przodu";
+        return "Porusza żolwia "+Colors.asColor(this.getColor()).toString()+" o jedno pole do przodu";
     }
 }

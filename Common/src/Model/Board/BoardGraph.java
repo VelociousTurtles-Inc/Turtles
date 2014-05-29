@@ -59,9 +59,9 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable {
         };
     }
 
-    enum FieldType
+    public enum FieldType
     {
-        FINAL, NORMAL
+        FINAL, NORMAL, GRAVE
     }
 
     public static class Field implements Serializable {
@@ -109,6 +109,10 @@ public class BoardGraph implements Iterable<BoardGraph.Field>, Serializable {
             }
             result.append("]");
             return result.toString();
+        }
+
+        public FieldType getType() {
+            return type;
         }
     }
 

@@ -24,7 +24,12 @@ public abstract class Board implements Serializable {
         if (endField.turtles.size() > 0) {
             return Colors.asColor(endField.turtles.get(endField.turtles.size() - 1).getColor());
         }
-        return null;
+        for (BoardGraph.Field field : graph) {
+            if (field.getType() != BoardGraph.FieldType.GRAVE && field.getTurtles().size() > 0) {
+                return null;
+            }
+        }
+        return Colors.NULL;
     }
 
     abstract BoardGraph.Field getEndField();

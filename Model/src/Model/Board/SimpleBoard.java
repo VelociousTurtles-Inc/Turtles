@@ -9,10 +9,12 @@ import java.util.logging.Level;
 
 public class SimpleBoard extends Board {
     private static final long serialVersionUID = -3932283805405624796L;
-    private final BoardGraph.Field End;
+    private final BoardGraph.Field end;
+    private final BoardGraph.Field grave;
 
     public SimpleBoard()
     {
+        grave = new BoardGraph.Field(BoardGraph.FieldType.GRAVE);
 
         BoardGraph.Field f = new BoardGraph.Field();
         graph.starts = new ArrayList<>();
@@ -28,6 +30,8 @@ public class SimpleBoard extends Board {
         for(BoardGraph.Field a : graph.starts) {
             a.successors.add(f);
             f.predecessors.add(a);
+
+            a.predecessors.add(grave);
         }
 
         for (int i = 0; i < 5; i++) {
@@ -37,8 +41,10 @@ public class SimpleBoard extends Board {
             f=s;
         }
 
-        End = new BoardGraph.Field(BoardGraph.FieldType.FINAL);
-        f.successors.add(End);
+        end = new BoardGraph.Field(BoardGraph.FieldType.FINAL);
+        f.successors.add(end);
+
+        end.successors.add(grave);
 
         for (BoardGraph.Field field : graph) {
             Utility.Debug.log(Level.INFO, "[BOARD CONSTRUCTOR DEBUG]graph>>" + graph.toString());
@@ -47,6 +53,6 @@ public class SimpleBoard extends Board {
 
     @Override
     BoardGraph.Field getEndField() {
-        return End;
+        return end;
     }
 }

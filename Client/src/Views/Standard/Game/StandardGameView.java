@@ -189,11 +189,15 @@ public class StandardGameView {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    if (winner.equals(gameController.getTurtleColor()))
+                    if (winner.equals(gameController.getTurtleColor())) {
                         winnerLabel.setText("YOU");
-                    else
+                    } else if (winner == Colors.NULL) {
+                        winnerLabel.setText("Grass");
+                    } else {
                         winnerLabel.setText(winner.toString());
+                    }
                     winnerPane.setVisible(true);
+                    winnerPane.toFront();
                 }
             });
         }
