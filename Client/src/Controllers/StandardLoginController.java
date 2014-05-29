@@ -37,14 +37,21 @@ public class StandardLoginController implements LoginClient, LoginController {
         }
     }
     @Override
-    public void submit(String name) throws IOException {
+    public boolean submit(String name) {
         System.out.println("Submit with name: " + name);
         Environment environment = new Environment();
-        Session session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
+        Session session = null;
+        try {
+            session = environment.newSessionConnector(Client.getHost(), Client.getPort()).connect();
 
-        gameEntry = (GameEntry) session.receive();
+            gameEntry = (GameEntry) session.receive();
 
-        gameEntry.newSelector(name, this);
+            gameEntry.newSelector(name, this);
+        } catch (IOException e) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
