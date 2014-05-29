@@ -11,6 +11,10 @@ import Views.Standard.GameSelect.GameSelectView;
 import Views.Standard.Login.LoginView;
 import Views.Standard.Menu.StandardMenuView;
 
+/**
+ * clone of StandardScenario without GUIApplication init
+ * required for the JavaFX deployment
+ */
 public class FinalScenario extends Scenario {
     public FinalScenario() {
         add(MenuController.class, StandardMenuView.class);

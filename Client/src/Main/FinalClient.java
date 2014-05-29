@@ -5,6 +5,9 @@ import Utility.DebugWriter;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Client class required for JavaFX deployment
+ */
 public class FinalClient extends Application {
 
     public static void main(String[] args) {
@@ -16,8 +19,6 @@ public class FinalClient extends Application {
         int port;
         String host;
 
-
-        // TODO entering other host and port
         host = "elgassia.tk";
         port = 8080;
 

@@ -5,14 +5,23 @@ import Utility.Scenario;
 import Scenarios.StandardScenario;
 import Utility.DebugWriter;
 
+/**
+ * standard scenario for local tests
+ */
 public class Client {
     private static int port;
     private static String host;
 
+    /**
+     * @return default host
+     */
     public static String getHost() {
         return host;
     }
 
+    /**
+     * @return default port
+     */
     public static int getPort() {
         return port;
     }

@@ -7,6 +7,9 @@ import java.util.concurrent.Semaphore;
 
 import static javafx.application.Application.launch;
 
+/**
+ * scenario which initializes Application on init
+ */
 public class GUIScenario extends Scenario {
     public static Semaphore guiSemaphore = new Semaphore(0);
 

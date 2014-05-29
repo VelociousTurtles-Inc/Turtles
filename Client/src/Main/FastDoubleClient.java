@@ -3,6 +3,11 @@ package Main;
 import Scenarios.FastDoubleInitScenario;
 import Utility.DebugWriter;
 
+/**
+ * initializes random game with 2 random players
+ *
+ * bugs : start in MenuView does not work properly
+ */
 public class FastDoubleClient {
     public static void main(String[] args) {
         int port;

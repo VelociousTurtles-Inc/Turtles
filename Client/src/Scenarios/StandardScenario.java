@@ -10,6 +10,9 @@ import Views.Standard.GameSelect.GameSelectView;
 import Views.Standard.Login.LoginView;
 import Views.Standard.Menu.StandardMenuView;
 
+/**
+ * standard scenario for local tests
+ */
 public class StandardScenario extends GUIScenario {
     public StandardScenario() {
         add(MenuController.class, StandardMenuView.class);
