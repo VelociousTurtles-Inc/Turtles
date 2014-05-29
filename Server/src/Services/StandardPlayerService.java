@@ -148,9 +148,9 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     }
 
     @Override
-    public void updateChat(String a) {
+    public void updateChat(String message) {
         try {
-            myClient.updateChat(a);
+            myClient.updateChat(message);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

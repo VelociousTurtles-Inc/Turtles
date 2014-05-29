@@ -41,26 +41,26 @@ public class StandardGameView {
     private javafx.scene.control.Label winnerLabel;
     private Pane winnerPane;
 
-    public void updateChat(String a) {
-        chatText.setText(a);
-        chatText.appendText(""); // To trigger some strange things under the hood of JavaFX
-        chatText.setScrollTop(Double.MAX_VALUE);
+    public void updateChat(final String message) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                chatText.setText(message);
+                chatText.appendText(""); // To trigger some strange things under the hood of JavaFX
+                chatText.setScrollTop(Double.MAX_VALUE);
+            }
+        });
     }
 
     private class ChatUpdater implements Event {
         @Override
         public void call() {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    assert DebugWriter.write("Updating Chat");
-                    try {
-                       updateChat(gameController.getChatLog());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+            assert DebugWriter.write("Updating Chat");
+            try {
+                updateChat(gameController.getChatLog());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
