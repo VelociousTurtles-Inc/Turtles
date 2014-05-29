@@ -2,7 +2,10 @@ package Views.Standard.Game;
 
 import Common.Interfaces.Event;
 import Controllers.Interfaces.GameController;
+import Enums.Colors;
+import Images.Images;
 import Utility.DebugWriter;
+import Utility.Utility;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,6 +21,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import javax.rmi.CORBA.Util;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -29,6 +34,8 @@ public class StandardGameButtons {
     public Button playItButton;
     public VBox myBox;
     private GameController myGameController;
+
+    @FXML private ImageView myTurtleColor;
 
     @FXML private ImageView firstTurtle;
     @FXML private ImageView secondTurtle;
@@ -127,14 +134,20 @@ public class StandardGameButtons {
                 });
             }
         });
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                setMyTurtleColor(myGameController.getTurtleColor());
+            }
+        });
 
         InputTextArea.addEventFilter(KeyEvent.ANY, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
-                    if(keyEvent.getEventType() == KeyEvent.KEY_PRESSED && keyEvent.isShiftDown()) {
+                    if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED && keyEvent.isShiftDown()) {
                         InputTextArea.appendText("\n");
-                    } else if(keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
+                    } else if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
                         try {
                             postMessage();
                         } catch (RemoteException e) {
@@ -238,5 +251,16 @@ public class StandardGameButtons {
 
     public Label getWinnerLabel() {
         return winner;
+    }
+
+    private void setMyTurtleColor(Colors color)
+    {
+        System.out.println("Resources/Images/Turtles/new" + Colors.asString(color) + ".png");
+        System.out.println(myTurtleColor);
+        try {
+            myTurtleColor.setImage(Images.load(this.getClass().getClassLoader(), "Resources/Images/Turtles/new" + Colors.asString(color) + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

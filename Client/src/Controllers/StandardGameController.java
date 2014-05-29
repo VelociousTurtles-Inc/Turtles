@@ -36,6 +36,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     List<Integer> playerHand;
     private int playerOnMove;
+    private Colors playerColor;
     private Colors winner;
 
     private void clearEvents() {
@@ -107,12 +108,18 @@ public class StandardGameController extends Thread implements GameController, Ga
     public void postMessage(String text) throws RemoteException {
         playerService.postMessage(text);
     }
+    @Override
+    public Colors getTurtleColor()
+    {
+        return playerColor;
+    }
 
     @Override
     public void start(PlayerService myService) throws RemoteException {
         playerService = myService;
         normalCardsMap = myService.getCardsMap();
         myService.setClient(this);
+        playerColor = Colors.asColor(playerService.getTurtleColor());
         Client.scenario.invoke(GameController.class, this);
     }
 

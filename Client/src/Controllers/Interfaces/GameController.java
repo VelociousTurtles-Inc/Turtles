@@ -9,6 +9,8 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public interface GameController {
+    Colors getTurtleColor();
+
     public void start(PlayerService myService) throws RemoteException;
 
     void playCard(int card) throws RemoteException;
