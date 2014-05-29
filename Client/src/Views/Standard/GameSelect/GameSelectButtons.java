@@ -51,7 +51,7 @@ public class GameSelectButtons {
     }
 
     @FXML
-    public void join(MouseEvent mouseEvent) throws RemoteException {
+    public void mouseJoin(MouseEvent mouseEvent) throws RemoteException {
         if (mouseEvent.getClickCount() > 1) {
             SimpleGameInfo myInfo = (SimpleGameInfo) myTable.getSelectionModel().getSelectedItem();
             System.out.println(myInfo.getMyID());
@@ -60,7 +60,7 @@ public class GameSelectButtons {
     }
 
     @FXML
-    public void join(KeyEvent keyEvent) throws RemoteException {
+    public void keyJoin(KeyEvent keyEvent) throws RemoteException {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             SimpleGameInfo myInfo = (SimpleGameInfo) myTable.getSelectionModel().getSelectedItem();
             System.out.println(myInfo.getMyID());
