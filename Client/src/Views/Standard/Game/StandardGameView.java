@@ -69,7 +69,7 @@ public class StandardGameView {
         assert new BoolRunnable() {
             @Override
             public boolean run() {
-                System.err.print("BoardUpdate : ");
+                /*System.err.print("BoardUpdate : ");
                 for (List<Integer> field : updateForBoard) {
                     System.err.print("[");
                     for (int i : field) {
@@ -77,7 +77,7 @@ public class StandardGameView {
                     }
                     System.err.print("], ");
                 }
-                System.err.println();
+                System.err.println();*/
                 return true;
             }
         }.run();

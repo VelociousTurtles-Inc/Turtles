@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -36,6 +37,9 @@ public class GameSelectButtons {
     private Stage myStage;
 
     @FXML
+    private Label playerNameLabel;
+
+    @FXML
     public void cancel(ActionEvent actionEvent) {
         controller.cancel();
     }
@@ -54,7 +58,7 @@ public class GameSelectButtons {
     public void mouseJoin(MouseEvent mouseEvent) throws RemoteException {
         if (mouseEvent.getClickCount() > 1) {
             SimpleGameInfo myInfo = (SimpleGameInfo) myTable.getSelectionModel().getSelectedItem();
-            System.out.println(myInfo.getMyID());
+            //System.out.println(myInfo.getMyID());
             controller.join(myInfo.getMyID());
         }
     }
@@ -106,6 +110,8 @@ public class GameSelectButtons {
 
         myTable.setItems(myObservableTableList);
         controller.initValues();
+
+        playerNameLabel.setText("Logged as "+controller.getPlayerName());
     }
 
     public void setStage(Stage myStage) {

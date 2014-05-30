@@ -13,6 +13,8 @@ public interface GameSelectController {
     public void registerClosingEvent(Event myClosingEvent);
     public void registerUpdateEvent(Event updateEvent);
 
+    String getPlayerName();
+
     List<GameInfo> getUpdateList();
 
     void initValues() throws RemoteException;
