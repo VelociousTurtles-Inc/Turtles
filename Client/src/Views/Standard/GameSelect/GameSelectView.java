@@ -49,5 +49,7 @@ public class GameSelectView {
         myStage.setScene(new Scene(myParent));
         myStage.show();
 
+
+
     }
 }

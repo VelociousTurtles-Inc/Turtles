@@ -20,6 +20,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     private final List<Event> cancelEvents = new ArrayList<>();
     private final List<Event> updateEvents = new ArrayList<>();
+    private String name = "Anonymous";
 
     public StandardGameSelectController(WaiterService waiter) throws RemoteException {
         gameInfoList = new LinkedList<>();
@@ -70,6 +71,11 @@ public class StandardGameSelectController implements GameSelectController, GameS
             }
         }
     }
+    @Override
+    public String getPlayerName()
+    {
+        return name;
+    }
 
     @Override
     public List<GameInfo> getUpdateList() {
@@ -78,6 +84,7 @@ public class StandardGameSelectController implements GameSelectController, GameS
 
     @Override
     public void initValues() throws RemoteException {
+        name = waiterService.getName();
         waiterService.updateMe();
     }
 

@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane id="AnchorPane" fx:id="gameChoosingWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Standard.GameSelect.GameSelectButtons">
+<AnchorPane id="AnchorPane" fx:id="gameChoosingWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="324.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Standard.GameSelect.GameSelectButtons">
    <children>
-       <TableView fx:id="myTable" layoutX="14.0" layoutY="14.0" onKeyPressed="#keyJoin" onMouseClicked="#mouseJoin" prefHeight="229.0" prefWidth="399.0">
+       <TableView fx:id="myTable" layoutX="14.0" layoutY="33.0" onKeyPressed="#keyJoin" onMouseClicked="#mouseJoin" prefHeight="229.0" prefWidth="399.0">
            <columns>
                <TableColumn fx:id="nameColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="124.0" text="Game name" />
                <TableColumn fx:id="statusColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="113.0" text="Status" />
                <TableColumn fx:id="numberColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="161.0" text="Number of players" />
            </columns>
        </TableView>
-       <Button cancelButton="true" layoutX="14.0" layoutY="260.0" mnemonicParsing="false" onAction="#cancel" prefHeight="29.0" prefWidth="89.0" text="Cancel" />
-       <Button layoutX="226.0" layoutY="260.0" mnemonicParsing="false" onAction="#newGame" prefHeight="29.0" prefWidth="89.0" text="Create" />
-       <Button defaultButton="true" layoutX="324.0" layoutY="259.0" mnemonicParsing="false" onAction="#join" prefHeight="29.0" prefWidth="89.0" text="Join" />
+       <Button cancelButton="true" layoutX="14.0" layoutY="275.0" mnemonicParsing="false" onAction="#cancel" prefHeight="29.0" prefWidth="89.0" text="Cancel" />
+       <Button layoutX="221.0" layoutY="274.0" mnemonicParsing="false" onAction="#newGame" prefHeight="29.0" prefWidth="89.0" text="Create" />
+       <Button defaultButton="true" layoutX="324.0" layoutY="275.0" mnemonicParsing="false" onAction="#join" prefHeight="29.0" prefWidth="89.0" text="Join" />
+      <Label fx:id="playerNameLabel" layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="207.0" text="Logged as" />
    </children>
 </AnchorPane>
