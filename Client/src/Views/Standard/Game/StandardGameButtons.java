@@ -47,8 +47,10 @@ public class StandardGameButtons {
     @FXML private ImageView fourthCardImage;
     @FXML private ImageView fifthCardImage;
 
-    @FXML private TextArea InputTextArea = new TextArea();
-    @FXML private TextArea OutputTextArea = new TextArea();
+    @FXML private TextArea inputChatArea;
+    @FXML private TextArea outputChatArea;
+    @FXML private Button sendChatButton;
+    private boolean sendButtonDisabled = true;
 
     @FXML private Label winner;
     @FXML private Pane winnerPane;
@@ -59,14 +61,14 @@ public class StandardGameButtons {
     @FXML private Button fourthCard;
     @FXML private Button fifthCard;
 
-    @FXML protected String getInput() {
-        String temp = InputTextArea.getText();
-        InputTextArea.clear();
+    @FXML protected String getChatInput() {
+        String temp = inputChatArea.getText();
+        inputChatArea.clear();
         return temp;
     }
 
-    public TextArea getOutputTextArea() {
-        return OutputTextArea;
+    public TextArea getOutputChatArea() {
+        return outputChatArea;
     }
 
     List<ImageView> getCardSlots() {
@@ -101,6 +103,18 @@ public class StandardGameButtons {
 
     private int chosenCard = 0;
     private final AtomicBoolean locked = new AtomicBoolean();
+
+    void checkSendability() {
+        if (inputChatArea.getText().isEmpty() != sendButtonDisabled) {
+            sendButtonDisabled = inputChatArea.getText().isEmpty();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    sendChatButton.setDisable(sendButtonDisabled);
+                }
+            });
+        }
+    }
 
     public void init(final GameController myGameController) throws RemoteException {
         this.myGameController = myGameController;
@@ -139,12 +153,12 @@ public class StandardGameButtons {
             }
         });
 
-        InputTextArea.addEventFilter(KeyEvent.ANY, new EventHandler<KeyEvent>() {
+        inputChatArea.addEventFilter(KeyEvent.ANY, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED && keyEvent.isShiftDown()) {
-                        InputTextArea.appendText("\n");
+                        inputChatArea.appendText("\n");
                     } else if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
                         try {
                             postMessage();
@@ -154,6 +168,7 @@ public class StandardGameButtons {
                     }
                     keyEvent.consume();
                 }
+                checkSendability();
             }
         });
 
@@ -240,7 +255,11 @@ public class StandardGameButtons {
     }
 
     private void postMessage() throws RemoteException {
-        myGameController.postMessage(getInput());
+        String message = getChatInput();
+        if (!message.isEmpty()) {
+            myGameController.postMessage(message);
+        }
+        checkSendability();
     }
 
     public Pane getWinnerPane() {

@@ -237,7 +237,7 @@ public class StandardGameView {
 
         turtles = myOwnGameButtons.getTurtles();
         slots = myOwnGameButtons.getCardSlots();
-        chatText = myOwnGameButtons.getOutputTextArea();
+        chatText = myOwnGameButtons.getOutputChatArea();
 
         winnerLabel = myOwnGameButtons.getWinnerLabel();
         winnerPane = myOwnGameButtons.getWinnerPane();
