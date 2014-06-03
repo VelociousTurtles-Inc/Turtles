@@ -86,11 +86,11 @@
               <Image fx:id="Card5" url="@../../../Resources/Images/Turtles/turtleNull.png" />
           </image>
        </ImageView>
-       <TextArea fx:id="OutputTextArea" editable="false" layoutX="951.0" layoutY="305.0" prefHeight="219.0" prefWidth="306.0" wrapText="true">
+       <TextArea fx:id="outputChatArea" editable="false" layoutX="951.0" layoutY="305.0" prefHeight="219.0" prefWidth="306.0" wrapText="true">
     </TextArea>
-       <TextArea fx:id="InputTextArea" layoutX="951.0" layoutY="537.0" prefHeight="130.0" prefWidth="306.0" promptText="Write some text here and press the 'Send' button or press &lt;Enter&gt; to post a message on the chat." wrapText="true">
+       <TextArea fx:id="inputChatArea" layoutX="951.0" layoutY="537.0" prefHeight="130.0" prefWidth="306.0" promptText="Write some text here and press the 'Send' button or press &lt;Enter&gt; to post a message on the chat." wrapText="true">
     </TextArea>
-       <Button fx:id="SendText" layoutX="1062.0" layoutY="674.0" mnemonicParsing="false" onAction="#sendTextToServer" prefHeight="29.0" prefWidth="174.0" text="Send" />
+       <Button fx:id="sendChatButton" layoutX="1062.0" layoutY="674.0" mnemonicParsing="false" onAction="#sendTextToServer" prefHeight="29.0" prefWidth="174.0" text="Send" disable="true"/>
        <VBox fx:id="myBox" layoutX="951.0" layoutY="14.0" prefHeight="276.0" prefWidth="306.0" />
       <ImageView fx:id="myTurtleColor" fitHeight="70.0" fitWidth="70.0" layoutX="35.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
           <image>

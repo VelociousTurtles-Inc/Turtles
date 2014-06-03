@@ -8,7 +8,6 @@ import Images.ImageContainer;
 import Images.Images;
 import Model.Cards.Card;
 import Utility.DebugWriter;
-import Utility.Utility;
 import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;
@@ -237,7 +236,7 @@ public class StandardGameView {
 
         turtles = myOwnGameButtons.getTurtles();
         slots = myOwnGameButtons.getCardSlots();
-        chatText = myOwnGameButtons.getOutputTextArea();
+        chatText = myOwnGameButtons.getOutputChatArea();
 
         winnerLabel = myOwnGameButtons.getWinnerLabel();
         winnerPane = myOwnGameButtons.getWinnerPane();
