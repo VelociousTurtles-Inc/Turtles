@@ -38,6 +38,15 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
         myClient.setPlayerOnMove(playerOnMove);
     }
 
+    @Override
+    public void setLastCard(String lastPlayed) throws RemoteException {
+        try {
+            myClient.setLastCard(lastPlayed);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
     public StandardPlayerService(GameManager manager, String name, Colors turtleColor) throws RemoteException {
         this.manager = manager;
         this.name = name;

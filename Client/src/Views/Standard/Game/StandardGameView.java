@@ -8,7 +8,6 @@ import Images.ImageContainer;
 import Images.Images;
 import Model.Cards.Card;
 import Utility.DebugWriter;
-import Utility.Utility;
 import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;
@@ -233,7 +232,7 @@ public class StandardGameView {
         stage.show();
 
         StandardGameButtons myOwnGameButtons = myLoader.getController();
-        myOwnGameButtons.init(gameController);
+        myOwnGameButtons.init(gameController, imageContainer);
 
         turtles = myOwnGameButtons.getTurtles();
         slots = myOwnGameButtons.getCardSlots();

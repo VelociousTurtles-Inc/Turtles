@@ -87,6 +87,13 @@ public class StandardGameManager implements GameManager {
     public void playCard(int cardID, ServerPlayerService player) throws RemoteException {
         Card card = myDeck.getCardsMap().get(cardID);
         card.play(board);
+
+        String lastPlayed = card.getImageName();
+
+        for(ServerPlayerService myPlayer : playerServices) {
+            myPlayer.setLastCard(lastPlayed);
+        }
+
         myDeck.returnCard(cardID);
         checkGameStatus();
         updateBoard();

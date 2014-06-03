@@ -3,8 +3,10 @@ package Views.Standard.Game;
 import Common.Interfaces.Event;
 import Controllers.Interfaces.GameController;
 import Enums.Colors;
+import Images.ImageContainer;
 import Images.Images;
 import Utility.DebugWriter;
+import Views.Standard.PlayerNode.PlayerNodeControl;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +20,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -58,6 +59,7 @@ public class StandardGameButtons {
     @FXML private Button thirdCard;
     @FXML private Button fourthCard;
     @FXML private Button fifthCard;
+    private ImageContainer imgContainer;
 
     @FXML protected String getInput() {
         String temp = InputTextArea.getText();
@@ -82,7 +84,7 @@ public class StandardGameButtons {
         return cards;
     }
 
-    final List<Label> myPlayers = new LinkedList<>();
+    final List<PlayerNodeControl> myPlayers = new LinkedList<>();
 
     private int lastMoving = 0;
 
@@ -102,8 +104,9 @@ public class StandardGameButtons {
     private int chosenCard = 0;
     private final AtomicBoolean locked = new AtomicBoolean();
 
-    public void init(final GameController myGameController) throws RemoteException {
+    public void init(final GameController myGameController, final ImageContainer imgContainer) throws RemoteException {
         this.myGameController = myGameController;
+        this.imgContainer = imgContainer;
 
         myGameController.registerLockingEvent(new Event() {
             @Override
@@ -125,9 +128,14 @@ public class StandardGameButtons {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        myPlayers.get(lastMoving).setTextFill(Color.BLACK);
+                        myPlayers.get(lastMoving).setNotOnMove();
+                        try {
+                            myPlayers.get(lastMoving).setLastPlayedCard(imgContainer.get(myGameController.getLastCard()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         lastMoving = myGameController.getLastMoving();
-                        myPlayers.get(lastMoving).setTextFill(Color.GREEN);
+                        myPlayers.get(lastMoving).setOnMove();
                     }
                 });
             }
@@ -161,9 +169,9 @@ public class StandardGameButtons {
         List<String> players = myGameController.getPlayers();
         //myBox.getChildren().add(new Label("something"));
         for(final String player : players) {
-            myPlayers.add(new Label(player));
+            myPlayers.add(new PlayerNodeControl(player));
         }
-        for(final Label wow : myPlayers) {
+        for(final PlayerNodeControl wow : myPlayers) {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -171,7 +179,7 @@ public class StandardGameButtons {
                 }
             });
         }
-        myPlayers.get(0).setTextFill(Color.GREEN);
+        myPlayers.get(0).setOnMove();
     }
 
     @FXML protected void surrenderIt(ActionEvent event) {

@@ -29,4 +29,7 @@ public interface GameClient extends Remote {
     void setPlayerOnMove(int playerOnMove) throws RemoteException;
     @Asynchronous
     void announceWinner(Integer winner) throws RemoteException;
+
+    @Asynchronous
+    void setLastCard(String lastCard) throws RemoteException;
 }
