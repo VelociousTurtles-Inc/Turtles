@@ -17,7 +17,7 @@
 <Font size="17.0" />
 </font></Label><ImageView fx:id="lastPlayedCard" fitHeight="49.0" fitWidth="50.0" layoutX="192.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
 <image>
-<Image url="@../../../Resources/Images/Cards/DoubleForwardCardGreen.png" />
+<Image url="@../../../Resources/Images/Cards/NullCard.png" />
 </image></ImageView>
 </children>
 </fx:root>

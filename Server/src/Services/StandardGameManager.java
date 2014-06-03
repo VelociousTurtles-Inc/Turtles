@@ -93,7 +93,6 @@ public class StandardGameManager implements GameManager {
         myDeck.returnCard(cardID);
         checkGameStatus();
         updateBoard();
-        addMessage(new Message("Host", "Player " + player.getName() + " zagrywa: " + card.getDescription(), new Date()));
         if (winner == null) {
             nextTurn();
         } else {
