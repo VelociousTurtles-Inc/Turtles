@@ -43,4 +43,6 @@ public interface GameController {
     void postMessage(String a) throws RemoteException;
 
     int getLastMoving();
+
+    String getLastCard();
 }

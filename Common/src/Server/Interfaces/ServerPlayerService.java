@@ -23,4 +23,6 @@ public interface ServerPlayerService {
     void announceWinner(Colors winner);
 
     void setPlayerOnMove(int playerOnMove) throws RemoteException;
+
+    void setLastCard(String lastPlayed) throws RemoteException;
 }

@@ -41,6 +41,7 @@ public class StandardGameController extends Thread implements GameController, Ga
     private LinkedList<Message> chatMessages = new LinkedList<>();
     private Colors playerColor;
     private Colors winner;
+    private String lastCard;
 
     private void clearEvents() {
         synchronized (boardUpdateEvents) {
@@ -320,6 +321,17 @@ public class StandardGameController extends Thread implements GameController, Ga
     public int getLastMoving() {
         return playerOnMove;
     }
+
+    @Override
+    public void setLastCard(String lastCard) throws RemoteException {
+        this.lastCard = lastCard;
+    }
+
+    @Override
+    public String getLastCard() {
+        return lastCard;
+    }
+
     @Override
     public Colors getWinner() {
         return winner;

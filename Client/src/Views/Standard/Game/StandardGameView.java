@@ -233,7 +233,7 @@ public class StandardGameView {
         stage.show();
 
         StandardGameButtons myOwnGameButtons = myLoader.getController();
-        myOwnGameButtons.init(gameController);
+        myOwnGameButtons.init(gameController, imageContainer);
 
         turtles = myOwnGameButtons.getTurtles();
         slots = myOwnGameButtons.getCardSlots();
