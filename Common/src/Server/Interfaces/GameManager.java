@@ -42,7 +42,7 @@ public interface GameManager extends Remote {
 
     void addZombie() throws RemoteException;
 
-    String getChatLog() throws RemoteException;
+    List<Message> getChat() throws RemoteException;
 
     void addMessage(Message message) throws RemoteException;
 

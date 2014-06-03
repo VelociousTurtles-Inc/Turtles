@@ -17,7 +17,7 @@ public interface ServerPlayerService {
 
     boolean isZombie();
 
-    void updateChat(String a) throws RemoteException;
+    void updateChat() throws RemoteException;
 
     String getName();
     void announceWinner(Colors winner);

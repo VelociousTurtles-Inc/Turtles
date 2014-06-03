@@ -1,5 +1,6 @@
 package Controllers.Interfaces;
 
+import Chat.Message.NoSuchMessageException;
 import Common.Interfaces.Event;
 import Enums.Colors;
 import Model.Cards.Card;
@@ -38,6 +39,7 @@ public interface GameController {
     Colors getWinner();
 
     String getChatLog() throws RemoteException;
+    void getChatChanges() throws RemoteException, NoSuchMessageException;
     void postMessage(String a) throws RemoteException;
 
     int getLastMoving();

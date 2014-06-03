@@ -1,5 +1,7 @@
 package Controllers;
 
+import Chat.Message.Message;
+import Chat.Message.NoSuchMessageException;
 import Client.Interfaces.GameClient;
 import Common.Interfaces.Event;
 import Controllers.Interfaces.GameController;
@@ -36,6 +38,7 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     List<Integer> playerHand;
     private int playerOnMove;
+    private LinkedList<Message> chatMessages = new LinkedList<>();
     private Colors playerColor;
     private Colors winner;
 
@@ -60,7 +63,7 @@ public class StandardGameController extends Thread implements GameController, Ga
         locked.set(true);
     }
 
-    public void updateChat(String message) {
+    public void updateChat() {
         synchronized (chatUpdateEvents) {
             for (Event up : chatUpdateEvents) {
                 up.call();
@@ -70,7 +73,15 @@ public class StandardGameController extends Thread implements GameController, Ga
 
     @Override
     public String getChatLog() throws RemoteException {
-        return playerService.chatText();
+        return Message.MessagesToText(chatMessages);
+    }
+
+    @Override
+    public void getChatChanges() throws RemoteException, NoSuchMessageException {
+        if(chatMessages.size() == 0)
+            chatMessages = playerService.newChatMessages(0);
+        else
+            chatMessages.addAll(playerService.newChatMessages(chatMessages.get(chatMessages.size()-1).id));
     }
 
     @Override

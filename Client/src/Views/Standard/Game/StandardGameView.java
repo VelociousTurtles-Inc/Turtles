@@ -8,7 +8,6 @@ import Images.ImageContainer;
 import Images.Images;
 import Model.Cards.Card;
 import Utility.DebugWriter;
-import Utility.Utility;
 import Views.Board;
 import Views.BoardBootstrap;
 import javafx.application.Platform;
@@ -57,6 +56,7 @@ public class StandardGameView {
         public void call() {
             assert DebugWriter.write("Updating Chat");
             try {
+                gameController.getChatChanges();
                 updateChat(gameController.getChatLog());
             } catch (Exception e) {
                 e.printStackTrace();

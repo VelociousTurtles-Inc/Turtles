@@ -1,6 +1,7 @@
 package Services;
 
 import Chat.Message.Message;
+import Chat.Message.NoSuchMessageException;
 import Client.Interfaces.GameClient;
 import Enums.Colors;
 import Model.Board.BoardGraph;
@@ -103,8 +104,16 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     }
 
     @Override
-    public String chatText() throws RemoteException {
-        return manager.getChatLog();
+    public LinkedList<Message> newChatMessages(int lastMessageId) throws RemoteException, NoSuchMessageException {
+        LinkedList<Message> temp = new LinkedList<>(manager.getChat());
+        if(lastMessageId == 0)
+            return temp;
+        else {
+            for(int i = 0; i < temp.size(); i++)
+                if(temp.get(i).id == lastMessageId)
+                    return new LinkedList<>(temp.subList(i+1, temp.size()));
+            throw new NoSuchMessageException();
+        }
     }
 
     @Override
@@ -151,9 +160,9 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     }
 
     @Override
-    public void updateChat(String message) {
+    public void updateChat() {
         try {
-            myClient.updateChat(message);
+            myClient.updateChat();
         } catch (RemoteException e) {
             e.printStackTrace();
         }

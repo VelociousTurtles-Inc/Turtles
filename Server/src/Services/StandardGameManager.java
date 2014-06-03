@@ -39,7 +39,7 @@ public class StandardGameManager implements GameManager {
     private final ServerGameDispenser gameDispenser;
     private Colors winner;
 
-    private List<Message> chatLog = new LinkedList<>();
+    private final List<Message> chatLog = new LinkedList<>();
 
     public StandardGameManager(String name, int gameId, ServerGameDispenser gameDispenser) {
         this.gameId = gameId;
@@ -51,12 +51,8 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public String getChatLog() {
-        StringBuilder A = new StringBuilder();
-        for(Message myMessage : chatLog) {
-            A.append(myMessage.author + ": " + myMessage.text + "\n");
-        }
-        return A.toString();
+    public List<Message> getChat() {
+        return chatLog;
     }
 
     public void addMessage(Message message) throws RemoteException {
@@ -66,7 +62,7 @@ public class StandardGameManager implements GameManager {
 
     public void updateChat() throws RemoteException {
         for(ServerPlayerService myPlayer : playerServices) {
-            myPlayer.updateChat(getChatLog());
+            myPlayer.updateChat();
         }
     }
 
