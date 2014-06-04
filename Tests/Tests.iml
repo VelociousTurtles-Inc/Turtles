@@ -6,11 +6,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Client" />
-    <orderEntry type="module" module-name="Common" />
-    <orderEntry type="module" module-name="Model" />
-    <orderEntry type="module" module-name="Server" />
     <orderEntry type="library" name="DiRMI" level="project" />
     <orderEntry type="module-library" scope="TEST">
       <library>
@@ -21,7 +16,10 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="lib" level="application" />
+    <orderEntry type="module" module-name="Client" />
+    <orderEntry type="module" module-name="Common" />
+    <orderEntry type="module" module-name="Server" />
+    <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
 

@@ -8,10 +8,7 @@ import Model.Board.SimpleBoard;
 import Model.Cards.Card;
 import Model.Deck;
 import Model.GameInfo;
-import Server.Interfaces.GameManager;
-import Server.Interfaces.ServerGameDispenser;
-import Server.Interfaces.ServerPlayerService;
-import Server.Interfaces.WaiterService;
+import Server.Interfaces.*;
 import Utility.Utility;
 
 import java.rmi.RemoteException;
@@ -110,6 +107,7 @@ public class StandardGameManager implements GameManager {
         if (winner != null) {
             lockAll();
             announceWinner(winner);
+            announceTurtleColors();
         }
     }
 
@@ -292,5 +290,17 @@ public class StandardGameManager implements GameManager {
             System.out.println(player.getName());
         }
         return result;
+    }
+
+    @Override
+    public void announceTurtleColors() {
+        for (StandardPlayerService playerService : playerServices)
+        {
+            try {
+                addMessage(new Message("host", playerService.getName()+ " grał żółwiem - "+ Colors.asString(playerService.getTurtleColor()),new Date()));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

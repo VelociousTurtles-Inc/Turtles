@@ -30,7 +30,7 @@ public class StandardPlayerService implements PlayerService, ServerPlayerService
     private final String name;
 
     @Override
-    public String getName() {
+    public String getName(){
         return name;
     }
 
