@@ -280,8 +280,8 @@ public class StandardGameButtons {
 
     private void setMyTurtleColor(Colors color)
     {
-        DebugWriter.write("Resources/Images/Turtles/new" + Colors.asString(color) + ".png");
-        DebugWriter.write(myTurtleColor.toString());
+        assert DebugWriter.write("Resources/Images/Turtles/new" + Colors.asString(color) + ".png");
+        assert DebugWriter.write(myTurtleColor.toString());
         try {
             myTurtleColor.setImage(Images.load(this.getClass().getClassLoader(), "Resources/Images/Turtles/new" + Colors.asString(color) + ".png"));
         } catch (IOException e) {

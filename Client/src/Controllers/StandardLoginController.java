@@ -45,7 +45,7 @@ public class StandardLoginController implements LoginClient, LoginController {
 
     @Override
     public boolean submit(String name, String host, int port) {
-        DebugWriter.write("Submit with name: " + name);
+        assert DebugWriter.write("Submit with name: " + name);
         Environment environment = new Environment();
         Session session = null;
         try {
