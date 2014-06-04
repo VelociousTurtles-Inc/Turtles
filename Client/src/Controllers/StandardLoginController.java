@@ -6,6 +6,7 @@ import Controllers.Interfaces.LoginController;
 import Main.Client;
 import Server.Interfaces.GameEntry;
 import Server.Interfaces.WaiterService;
+import Utility.DebugWriter;
 import Views.Standard.Login.LoginView;
 import org.cojen.dirmi.Environment;
 import org.cojen.dirmi.Session;
@@ -44,7 +45,7 @@ public class StandardLoginController implements LoginClient, LoginController {
 
     @Override
     public boolean submit(String name, String host, int port) {
-        System.out.println("Submit with name: " + name);
+        DebugWriter.write("Submit with name: " + name);
         Environment environment = new Environment();
         Session session = null;
         try {

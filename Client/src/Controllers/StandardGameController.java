@@ -143,7 +143,7 @@ public class StandardGameController extends Thread implements GameController, Ga
     @Override
     public void surrender() {
         // TODO: implement
-        System.out.println("I surrendered!");
+        DebugWriter.write("I surrendered!");
         try {
             leave();
         } catch (Exception e) {
