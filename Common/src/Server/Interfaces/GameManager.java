@@ -52,5 +52,5 @@ public interface GameManager extends Remote {
 
     List<String> GetListOfPlayers() throws RemoteException;
 
-    void announceTurtleColors();
+    void announceTurtleColors() throws RemoteException;
 }

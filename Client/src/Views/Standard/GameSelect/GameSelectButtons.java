@@ -4,6 +4,7 @@ import Common.Interfaces.Event;
 import Controllers.Interfaces.GameSelectController;
 import Controllers.SimpleGameInfo;
 import Model.GameInfo;
+import Utility.DebugWriter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,7 +59,7 @@ public class GameSelectButtons {
     public void mouseJoin(MouseEvent mouseEvent) throws RemoteException {
         if (mouseEvent.getClickCount() > 1) {
             SimpleGameInfo myInfo = (SimpleGameInfo) myTable.getSelectionModel().getSelectedItem();
-            //System.out.println(myInfo.getMyID());
+            assert DebugWriter.write(String.valueOf(myInfo.getMyID()));
             controller.join(myInfo.getMyID());
         }
     }

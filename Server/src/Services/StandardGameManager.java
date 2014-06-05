@@ -107,7 +107,11 @@ public class StandardGameManager implements GameManager {
         if (winner != null) {
             lockAll();
             announceWinner(winner);
-            announceTurtleColors();
+            try {
+                announceTurtleColors();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -293,14 +297,10 @@ public class StandardGameManager implements GameManager {
     }
 
     @Override
-    public void announceTurtleColors() {
+    public void announceTurtleColors() throws RemoteException{
         for (StandardPlayerService playerService : playerServices)
         {
-            try {
-                addMessage(new Message("host", playerService.getName()+ " grał żółwiem - "+ Colors.asString(playerService.getTurtleColor()),new Date()));
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+            addMessage(new Message("host", playerService.getName()+ " grał żółwiem - "+ Colors.asString(playerService.getTurtleColor()),new Date()));
         }
     }
 }
